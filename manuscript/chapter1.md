@@ -24,24 +24,24 @@ React possiede uno snello API, un fantastico ecosistema e una grande community. 
 
 ### Esercizi
 
-* read about [why I moved from Angular to React](https://www.robinwieruch.de/reasons-why-i-moved-from-angular-to-react/)
-* read about [React's flexible ecosystem](https://www.robinwieruch.de/essential-react-libraries-framework/)
+* leggi [perché sono passato da Angular a React](https://www.robinwieruch.de/reasons-why-i-moved-from-angular-to-react/)
+* leggi [L'ecosistema flessibile di React](https://www.robinwieruch.de/essential-react-libraries-framework/)
 
-## Requirements
+## Requisiti
 
-If you are coming from a different SPA framework or library, you should already be familiar with the basics of web development. If you have just started in web development, you should feel comfortable with HTML, CSS and JavaScript ES5 to learn React. The book will smoothly transition to JavaScript ES6 and beyond. I encourage you to join the official [Slack Group](https://slack-the-road-to-learn-react.wieruch.com/) for the book to get help or to help others.
+Se hai già usato SPA framework, avrai familiarità con questi concetti base dello sviluppo web. Se hai appena iniziato, invece, dovresti sentirti almeno a tuo agio con HTML, CSS e JavaScript ES5 per apprendere React. Il libro rappresenta un ottimo strumento per passare a JavaScript ES6 e oltre. Invito sempre tutti ad unirsi al [Gruppo ufficiale Slack](https://slack-the-road-to-learn-react.wieruch.com/) del libro per avere aiuto ed aiutare gli altri.
 
-### Editor and Terminal
+### Editor e Terminale
 
-What about the development environment? You will need a running editor or IDE and terminal (command line tool). You can [follow my setup guide](https://www.robinwieruch.de/developer-setup/). It is adjusted for MacOS users, but you can substitute most of the tools for other operating system. There is a ton of articles out there that will show you how to setup a web development environment in a more elaborated way for your OS.
+Come la mettiamo con l'ambiente di sviluppo? Avrai bisogno di un editor o IDE e di un terminale (la riga di comando). Puoi dare un'occhiata alla mia [guida di setup](https://www.robinwieruch.de/developer-setup/). E' illustrata per gli utenti MacOS, ma molti dei tool sono adatti per altri sistemi operativi. Ci sono migliaia di articoli che mostrano come impostare l'ambiente di sviluppo nel migliore dei modi.
 
-Optionally, you can use git and GitHub on your own, while conducting the exercises in the book, to keep your projects and the progress in repositories on GitHub. There exists a [little guide](https://www.robinwieruch.de/git-essential-commands/) on how to use these tools. But once again, it is not mandatory for the book and can be overwhelming when learning everything from scratch. So you can skip it if you are a newcomer in web development to focus on the essential parts taught in this book.
+In alternativa puoi usare git e GitHub mentre fai gli esercizi di questo libro, per tenere traccia dei progressi nelle repository di GitHub. C'è anche una [piccola guida](https://www.robinwieruch.de/git-essential-commands/) su come usare questi tool. Ma ancora una volta, queste attività non sono obbligatorie per seguire questo libro perché imparerai ogni cosa da zero. Dunque puoi saltare questa parte se sei un beginner nello sviluppo web per focalizzarti sulle parti essenziali illustrate in questo testo.
 
-### Node and NPM
+### Node e NPM
 
-Last but not least, you will need an installation of [node and npm](https://nodejs.org/en/). Both are used to manage libraries you will need along the way. In this book, you will install external node packages via npm (node package manager). These node packages can be libraries or whole frameworks.
+Ultimo, ma non per importanza: avrai bisogno di un'installazione di [node e npm](https://nodejs.org/en/). Entrambi saranno usati per gestire le librerie di cui avrai bisogno nel tuo percorso. In questo libro installerai i package esterni node via npm (node package manager). Questi package node possono essere librerie o interi framework.
 
-You can verify your versions of node and npm on the command line. If you don't get any output in the terminal, you need to install node and npm first. These are only my versions during the time writing this book:
+Puoi verificare le tue versioni di node e npm attraverso riga di comando. Se il terminale non ti restituisce nulla, allora devi installare node e npm prima. Queste sono le mie versioni mentre ti scrivo questo libro:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
@@ -51,67 +51,67 @@ npm --version
 *v5.5.1
 ~~~~~~~~
 
-## node and npm
+## node e npm
 
-This chapter gives you a little crash course in node and npm. It is not exhaustive, but you will get all the necessary tools. If you are familiar with both of them, you can skip the chapter.
+Questo capitolo vuole essere un piccolo crash course in node e npm. Non è esaustivo, ma ti aiuterà a prendere dimestichezza con concetti chiave. Se hai familiarità con entrambi i concetti, puoi tranquillamente saltare questo capitolo.
 
-The **node package manager** (npm) allows you to install external **node packages** from the command line. These packages can be a set of utility functions, libraries or whole frameworks. They are the dependencies of your application. You can either install these packages to your global node package folder or to your local project folder.
+Il **node package manager** (npm) ti permette di installare **package node** esterni attraverso la riga di comando. Questi package possono essere un set di metodi, librerie o framework interi. Sono le dipendenze delle tue applicazioni. Puoi installarli entrambi nella tua cartella globale dove risiederanno tutti i pacchetti node oppure nella tua cartella locale.
 
-Global node packages are accessible from everywhere in the terminal and you have to install them only once to your global directory. You can install a global package by typing in your terminal:
+Se installi tutto in modo "global" i pacchetti saranno utilizzabili ovunque dal terminale e dovrai installarli solo una volta nella tua directory globale. Per installare i package globalmente digita nel tuo terminale:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm install -g <package>
 ~~~~~~~~
 
-The `-g` flag tells npm to install the package globally. Local packages are used in your application. For instance, React as a library will be a local package which can be required in your application for usage. You can install it via the terminal by typing:
+La `-g` dice a npm di installare il package globalmente. I package locali sono usati nella tua applicazione. Per esempio, React come libreria sarà un package locale che può essere utilizzato nella tua applicazione. Puoi installarlo via terminale digitando:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm install <package>
 ~~~~~~~~
 
-In the case of React it would be:
+Per React dovrai scrivere:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm install react
 ~~~~~~~~
 
-The installed package will automatically appear in a folder called *node_modules/* and will be listed in the *package.json* file next to your other dependencies.
+I package installati appariranno automaticamente nella cartella chiamata *node_modules/* e saranno elencati nel file *package.json* insieme alle relative dipendenze.
 
-But how to initialize the *node_modules/* folder and the *package.json* file for your project in the first place? There is a npm command to initialize a npm project and thus a *package.json* file. Only when you have that file, you can install new local packages via npm.
+Ma come inizializzare la cartella *node_modules/* e il file *package.json* per il tuo progetto? C'è un comando npm utile per l'inizializzazione attraverso il file *package.json*. Solo quando avrai quel file, puoi installare nuovi package locali via npm.
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm init -y
 ~~~~~~~~
 
-The `-y` flag is a shortcut to initialize all the defaults in your *package.json*. If you don't use the flag, you have to decide how to configure the file. After initializing your npm project you are good to install new packages via `npm install <package>`.
+La lettera `-y` è uno shortcut per inizializzare tutti i default nel tuo file *package.json*. Se non usi questa istruzione, dovrai occuparti della configurazione del file. Dopo l'inizializzazione del tuo progetto npm sei pronto per installare nuovi package attraverso `npm install <package>`.
 
-One more word about the *package.json*. The file enables you to share your project with other developers without sharing all the node packages. The file has all the references of node packages used in your project. These packages are called dependencies. Everyone can copy your project without the dependencies. The dependencies are references in the *package.json*. Someone who copies your project can simply install all packages by using `npm install` on the command line. The `npm install` script takes all the dependencies listed in the *package.json* file and installs them in the *node_modules/* folder.
+Ancora una parola sul file *package.json*. Questo file ti permette di condividere il tuo progetto con altri sviluppatori senza condividere tutto il package node. Il file, infatti, ha tutte le referenze dei package node usati nel progetto. Questi package sono chiamati dipendenze. Chiunque può copiare il tuo progetto senza le dipendenze. Queste, infatti, sono referenziate nel file *package.json*. Chi vuol copiare il tuo progetto deve semplicemente installare tutti i package usando il comando `npm install` via riga di comando. Lo script `npm install` recupera tutte le dipendenze elencate nel file *package.json* e le installa nella cartella *node_modules/*.
 
-I want to cover one more npm command:
+Vorrei parlare di un altro comando npm:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm install --save-dev <package>
 ~~~~~~~~
 
-The `--save-dev` flag indicates that the node package is only used in the development environment. It will not be used in production when you deploy your application on a server. What kind of node package could that be? Imagine you want to test your application with the help of a node package. You need to install that package via npm, but want to exclude it from your production environment. Testing should only happen during the development process but not when your application is already running in production. There you don't want to test your application anymore. It should be tested already and work out of the box for your users. That's only one use case where you would want to use the `--save-dev` flag.
+L'istruzione `--save-dev` indica che il package node è solo usato per l'ambiente di sviluppo. Non sarà usato in produzione quando effettui il deploy dell'applicazione sul server. Che tipo di package node potrebbe essere? Immagina che tu voglia testare la tua applicazione con l'aiuto di un package node. Avrai la necessità di installare quel package via npm, ma vuoi escluderlo dal tuo ambiente di produzione. Il testing dovrebbe essere utile durante il processo di sviluppo ma non quando la tua applicazione è già in produzione. In questo caso non puoi più testare la tua applicazione. Dovrebbe essere testata e funzionare per i tuoi utenti. Quello è l'unico caso d'uso in cui dovresti usare l'istruzione  `--save-dev`.
 
-You will encounter more npm commands on your way. But these will be sufficient for now.
+Ti capiterà di utilizzare diversi comandi npm lungo il tuo percorso di lavoro o di studio. Ma questi sono sufficienti per adesso.
 
 ### Exercises:
 
-* setup a throw away npm project
-  * create a new folder with `mkdir <folder_name>`
-  * navigate into the folder with `cd <folder_name>`
-  * execute `npm init -y` or `npm init`
-  * install a local package like React with `npm install react`
-  * have a look into the *package.json* file and the *node_modules/* folder
-  * find out on your own how to uninstall the *react* node package again
-* read more about [npm](https://docs.npmjs.com/)
+* predisponi un progetto di lancio attraverso npm
+  * crea una nuova cartella con  `mkdir <folder_name>`
+  * vai nella cartella con  `cd <folder_name>`
+  * esegui `npm init -y` oppure `npm init`
+  * installa un package localmente come React attraverso `npm install react`
+  * dai un'occhiata nel file *package.json* e nella cartella *node_modules/*
+  * scopri da solo come disinstallare il package *react*
+* dai un'occhiata a [npm](https://docs.npmjs.com/)
 
 ## Installation
 
