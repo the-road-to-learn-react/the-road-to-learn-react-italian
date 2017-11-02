@@ -100,26 +100,27 @@ npm install --save-dev <package>
 
 L'istruzione `--save-dev` indica che il package node è solo usato per l'ambiente di sviluppo. Non sarà usato in produzione quando effettui il deploy dell'applicazione sul server. Che tipo di package node potrebbe essere? Immagina che tu voglia testare la tua applicazione con l'aiuto di un package node. Avrai la necessità di installare quel package via npm, ma vuoi escluderlo dal tuo ambiente di produzione. Il testing dovrebbe essere utile durante il processo di sviluppo ma non quando la tua applicazione è già in produzione. In questo caso non puoi più testare la tua applicazione. Dovrebbe essere testata e funzionare per i tuoi utenti. Quello è l'unico caso d'uso in cui dovresti usare l'istruzione  `--save-dev`.
 
-Ti capiterà di utilizzare diversi comandi npm lungo il tuo percorso di lavoro o di studio. Ma questi sono sufficienti per adesso.
+Ti capiterà di utilizzare diversi comandi npm lungo il tuo percorso di lavoro o di studio. 
+Ma questi sono sufficienti per adesso.
 
 ### Exercises:
 
-* predisponi un progetto di lancio attraverso npm
+  * predisponi un progetto di lancio attraverso npm
   * crea una nuova cartella con  `mkdir <folder_name>`
   * vai nella cartella con  `cd <folder_name>`
   * esegui `npm init -y` oppure `npm init`
   * installa un package localmente come React attraverso `npm install react`
   * dai un'occhiata nel file *package.json* e nella cartella *node_modules/*
   * scopri da solo come disinstallare il package *react*
-* dai un'occhiata a [npm](https://docs.npmjs.com/)
+  * dai un'occhiata a [npm](https://docs.npmjs.com/)
 
-## Installation
+## Installazione
 
-There are multiple approaches to get started with a React application.
+Sono diversi gli approcci per iniziare una applicazione React.
 
-The first one is to use a CDN. That may sound more complicated than it is. A CDN is a [content delivery network](https://en.wikipedia.org/wiki/Content_delivery_network). Several companies have CDNs that host files publicly for people to consume them. These files can be libraries like React, because after all the bundled React library is only a *react.js* JavaScript file. It can be hosted somewhere and you can require it in your application.
+La prima è usare CDN. Potrebbe sembrare più complicato di quello che realmente è. CDN è l'acronimo di [content delivery network](https://en.wikipedia.org/wiki/Content_delivery_network). Sono numerose le aziende che utilizzano CDN per rilasciare pubblicamente i propri file e permettere agli utenti di utilizzarli. Questi file possono essere librerie come React, perché in effetti React è solo un file *react.js*. Può quindi essere ospitato su qualunque server.
 
-How to use a CDN to get started in React? You can inline the `<script>` tag in your HTML that points to a CDN url. To get started in React you need two files (libraries): *react* and *react-dom*.
+Come usare un CDN per iniziare a lavorare con React? Attraverso un tag `<script>` inline nella tua pagina HTML che punta all'url CDN. Per iniziare a lavorare con React hai bisogno di ude file (librerie): *react* e *react-dom*.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -127,37 +128,37 @@ How to use a CDN to get started in React? You can inline the `<script>` tag in y
 <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
 ~~~~~~~~
 
-But why should you use a CDN when you have npm to install node packages such as React?
+Ma perché dovresti usare un CDN quando hai a disposizione una installazione attraverso npm?
 
-When your application has a *package.json* file, you can install *react* and *react-dom* from the command line. The requirement is that the folder is initialized as npm project by using `npm init -y` with a *package.json* file. You can install multiple node packages in one line with npm.
+Se la tua applicazione ha un file *package.json*, puoi installare *react* e *react-dom* da riga di comando. Il requisito fondamentale è che la cartella debba essere inizializzata come progetto npm utilizzando il comando `npm init -y` con all'interno il file *package.json*. E' possibile installare diversi pacchetti node tutti in una linea attraverso npm.
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm install react react-dom
 ~~~~~~~~
 
-That approach is often used to add React to an existing application that is managed with npm.
+Questo approccio è quello più usato per aggiungere React ad una applicazione esistente gestita attraverso npm.
 
-Unfortunately that's not everything. You would have to deal with [Babel](http://babeljs.io/) to make your application aware of JSX (the React syntax) and JavaScript ES6. Babel transpiles your code so that browsers can interpret JavaScript ES6 and JSX. Not all browsers are capable of interpreting the syntax. The setup includes a lot of configuration and tooling. It can be overwhelming for React newcomers to bother with all the configuration.
+Sfortunatamente non è tutto. Dovresti utilizzare [Babel](http://babeljs.io/) per rendere la tua applicazione idonea a JSX (cioè, la sintassi utilizzata da React) e a JavaScript ES6. Babel compila il tuo codice in modo tale che il browser può interpretare JavaScript ES6 e JSX. Non tutti i browser sono capaci di interpretare la sintassi. Il setup include una serie di configurazioni e di strumenti. Può essere frustrante per chi utilizza per la prima volta React preoccuparsi di tutta la configurazione.
 
-Because of this reason, Facebook introduced *create-react-app* as a zero-configuration React solution. The next chapter will show you how to setup your application by using this bootstrapping tool.
+Proprio per questo motivo Facebook intrudusse *create-react-app* come step iniziale per imparare a configurare React. Il capitolo successivo ti mostrerà come fare il setup della tua applicazione utilizzando il tool di bootstrapping.
 
-### Exercises:
+### Esercizi:
 
-* read more about [React installations](https://facebook.github.io/react/docs/installation.html)
+* dai un'occhiata alle [installazioni di React](https://facebook.github.io/react/docs/installation.html)
 
 ## Zero-Configuration Setup
 
-In the Road to learn React, you will use [create-react-app](https://github.com/facebookincubator/create-react-app) to bootstrap your application. It's an opinionated yet zero-configuration starter kit for React introduced by Facebook in 2016. People would [recommend it to beginners by 96%](https://twitter.com/dan_abramov/status/806985854099062785). In *create-react-app* the tooling and configuration evolve in the background while the focus is on the application implementation.
+Nel tuo cammino per imparare React, userai [create-react-app](https://github.com/facebookincubator/create-react-app) per far partire la tua applicazione. E' uno starter kit con zero-configurazione per iniziare con React, introdotto da Facebook nel 2016. C'è chi (96%) lo [raccomanda ai principianti](https://twitter.com/dan_abramov/status/806985854099062785). All'interno di *create-react-app* tutto ciò che è configurazione procede in background mentre il focus resta sull'implementazione dell'applicazione.
 
-To get started, you will have to install the package to your global node packages. After that, you always have it available on the command line to bootstrap new React applications.
+Per iniziare, devi installare il package globalmente. Dopo aver fatto ciò, avrai sempre a disposizione con riga di comando la possibilità di creare nuove applicazioni React.
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm install -g create-react-app
 ~~~~~~~~
 
-You can check the version of *create-react-app* to verify a successful installation on your command line:
+Controlla la versione di *create-react-app* da riga di comando:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
@@ -165,7 +166,8 @@ create-react-app --version
 *v1.4.1
 ~~~~~~~~
 
-Now you can bootstrap your first React application. We call it *hackernews*, but you can choose a different name. The bootstrapping takes a couple of seconds. Afterward, simply navigate into the folder:
+
+Adesso puoi far partire la tua prima applicazione React. La chiameremo *hackernews*, ma puoi dargli un nome diverso. L'installazione richiede un paio di secondi. Dopo questo step, vai all'interno della cartella:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
@@ -173,7 +175,7 @@ create-react-app hackernews
 cd hackernews
 ~~~~~~~~
 
-Now you can open the application in your editor. The following folder structure, or a variation of it depending on the *create-react-app* version, should be presented to you:
+Adesso puoi aprire l'applicazione nel tuo editor. La seguente struttura di cartelle, o una sua variante dipende dalla versione di *create-react-app* che scaricherai:
 
 {title="Folder Structure",lang="text"}
 ~~~~~~~~
@@ -194,7 +196,7 @@ hackernews/
     logo.svg
 ~~~~~~~~
 
-A short break down of the folder and files. It is fine if you don't understand all of them in the beginning.
+Diamo un'occhiata alle cartelle e ai file. E' un passo essenziale per comprendere React.
 
 * **README.md:** The .md extension indicates that the file is a markdown file. Markdown is used as a lightweight markup language with plain text formatting syntax. Many source code projects come with a *README.md* file to give you initial instructions about the project. When pushing your project to a platform such as GitHub eventually, the *README.md* file will show its content prominently when you access the repository. Because you have used *create-react-app*, your *README.md* should be the same as shown in the official [create-react-app GitHub repository](https://github.com/facebookincubator/create-react-app).
 
