@@ -103,7 +103,7 @@ L'istruzione `--save-dev` indica che il package node è solo usato per l'ambient
 Ti capiterà di utilizzare diversi comandi npm lungo il tuo percorso di lavoro o di studio. 
 Ma questi sono sufficienti per adesso.
 
-### Exercises:
+### Esercizi:
 
   * predisponi un progetto di lancio attraverso npm
   * crea una nuova cartella con  `mkdir <folder_name>`
@@ -198,21 +198,21 @@ hackernews/
 
 Diamo un'occhiata alle cartelle e ai file. E' un passo essenziale per comprendere React.
 
-* **README.md:** The .md extension indicates that the file is a markdown file. Markdown is used as a lightweight markup language with plain text formatting syntax. Many source code projects come with a *README.md* file to give you initial instructions about the project. When pushing your project to a platform such as GitHub eventually, the *README.md* file will show its content prominently when you access the repository. Because you have used *create-react-app*, your *README.md* should be the same as shown in the official [create-react-app GitHub repository](https://github.com/facebookincubator/create-react-app).
+* **README.md:** L'estensione .md indica che il file è in markdown. Markdown è un linguaggio di markup molto snello utilizzato per formattare il testo. La maggior parte dei progetti ha al suo interno un file *README.md* con le istruzioni iniziali. Quando fai un *push* su piattaforme come GitHub, il file *README.md* mostrerà il contenuto del progetto a chiunque avrà accesso ail tuo repository. Siccome hai usato *create-react-app*, il tuo file *README.md* dovrebbe essere il medesimo usato sul [repository ufficiale di create-react-app](https://github.com/facebookincubator/create-react-app).
 
-* **node_modules/:** The folder has all the node packages that were and are installed via npm. Since you have used *create-react-app*, there should be already a couple of node modules installed for you. Usually you will never touch this folder, but only install and uninstall node packages with npm from the command line.
+* **node_modules/:** All'interno di questa cartella troverai tutti i package node che sono stati installati via npm. Dal momento in cui hai usato *create-react-app*, troverai un paio di moduli node installati. Di solito questa è una cartella da non toccare, utile solo per installare e disinstallare package node via riga di comando (con npm).
 
-* **package.json:** The file shows you a list of node package dependencies and other project configuration.
+* **package.json:** Questo file mostra una lista di dipendenze dei package node e altre configurazioni legate al progetto.
 
-* **.gitignore:** The file indicates all files and folders that shouldn't be added to your remote git repository when using git. They should only live in your local project. The *node_modules/* folder is such a use case. It is sufficient to share the *package.json* file with your peers to enable them to install all dependencies on their own without sharing the whole dependency folder.
+* **.gitignore:** Il file elenca tutti i file e cartelle che non dovranno essere aggiunti al repository remoto se usi git. Saranno solo presenti nel tuo progetto locale. La cartella *node_modules/* ne è un esempio. E' sufficiente condividere ilfile *package.json* con i tuoi collaboratori per permettere loro di installare tutte le dipendenze sui loro progetti locali senza condividere la cartella stessa.
 
-* **public/:** The folder holds all your files when building your project for production. Eventually all your written code in the *src/* folder will be bundled into a couple of files when building your project and placed in the public folder.
+* **public/:** La cartella contiene tutti i file per lavorare al tuo progetto in produzione. Di solito tutto il codice scritto lo troverai nella cartella *src/* e sarà raggruppato in un paio di file quando costruisci il tuo progetto e lo organizzi in questa cartella *public*.
 
-After all, you don't need to touch the mentioned files and folders. In the beginning everything you need is located in the *src/* folder. The main focus lies on the *src/App.js* file to implement React components. It will be used to implement your application, but later you might want to split up your components into multiple files whereas each file maintains one or a few components on its own.
+In effetti, non hai bisogno di toccare i file e le cartelle menzionate. All'inizo qualsiasi cosa di cui tu abbia bisogno è presente all'interno della cartella *src/*. Il focus è nel file *src/App.js* per implementare i componenti React. Saranno usati per implementare la tua applicazione, ma più in laà potresti aver bisogno di dividere i tuoi componenti in file diversi dove ogni file mantiene uno o più componenti.
 
-Additionally, you will find a *src/App.test.js* file for your tests and a *src/index.js* as entry point to the React world. You will get to know both files in a later chapter. In addition, there is a *src/index.css* and a *src/App.css* file to style your general application and your components. They all come with default style when you open them.
+In più, utilizzerai il file *src/App.test.js* per i tuoi test e il file *src/index.js* come entry point al mondo React. Comprenderai entrambi i file più in là. Inoltre, c'è il file *src/index.css* e *src/App.css* per gestire lo stile della tua applicazione e dei tuoi componenti. Al loro interno troverai già delle regole di default.
 
-The *create-react-app* application is a npm project. You can use npm to install and uninstall node packages to your project. Additionally it comes with the following npm scripts for your command line:
+L'applicazione *create-react-app* è un progetto npm. Puoi dunque usare npm per installare e disinstallare i package node nel tuo progetto. La riga di comando è la seguente:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
@@ -226,20 +226,21 @@ npm test
 npm run build
 ~~~~~~~~
 
-The scripts are defined in your *package.json*. Your boilerplate React application is bootstrapped now. The exciting part comes in the exercises to finally run your bootstrapped application in the browser.
 
-### Exercises:
+Gli script sono definiti nel file *package.json* La tua applicazione base di React è pronta. La parte eccitante arriverà negli esercizi da testare nel tuo browser.
 
-* `npm start` your application and visit the application in your browser
-* run the interactive `npm test` script
-* check the content of your *public/* folder, run the `npm run build` script and verify that files were added to the folder (you can remove these files again, but they don't do any harm)
-* make yourself familiar with the folder structure
-* make yourself familiar with the content of the files
-* read more about [the npm scripts and create-react-app](https://github.com/facebookincubator/create-react-app)
+### Esercizi:
 
-## Introduction to JSX
+* `npm start` per avviare la tua apllicazione e vederla nel browser
+* avvia lo script interattivo `npm test`
+* dai un'occhiata al contenuto nella cartella *public/*, lancia il comando `npm run build` e verifica che i file siano stati aggiunti alla cartella (puoi anche rimuovere questi file, ma non è necessario)
+* prendi dimestichezza con la struttura della cartella
+* prendi dimenstichezza con il contenuto dei file
+* approfondisci i comandi [npm e create-react-app](https://github.com/facebookincubator/create-react-app)
 
-Now you will get to know JSX. It is the syntax in React. As mentioned before, *create-react-app* has already bootstrapped a boilerplate application for you. All files come with default implementations. Let's dive into the source code. The only file you will touch in the beginning will be the *src/App.js* file.
+## Introduzione a JSX
+
+Adesso ti toccherà sapere di più su JSX. E' la sintassi che troveremo in React. Come menzionato prima, *create-react-app* ha già di partenza una applicazione pronta per te. Tutti i file sono utili per una implementazione di default. Entriamo nel codice sorgente. L'unico file che toccherai all'inizio sarà *src/App.js*.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -266,15 +267,16 @@ class App extends Component {
 export default App;
 ~~~~~~~~
 
-Don't let yourself get confused by the import/export statements and class declaration. These features are already JavaScript ES6. We will revisit those in a later chapter.
+Non lasciarti confondere dalle dichiarazioni import/export e dalle classi. Queste caratteristiche sono già presenti in JavaScript ES6. Gli daremo un'occhiata più tardi.
 
-In the file you have an **React ES6 class component** with the name App. It is a component declaration. Basically after you have declared a component, you can use it as element everywhere in your application. It will produce an **instance** of your **component** or in other words: the component gets instantiated.
+Nel file avrai un **React ES6 class component** come nome dell'App. E' una dichiarazione di un componente. Di base una volta che hai dichiarato un componente, puoi usarlo ovunque nell'applicazione. Produrrà una **istanza** del tuo **componente** o in altre parole: il componente verrà istanziato.
 
-The **element** it returns is specified in the `render()` method. Elements are what components are made of. It is useful to understand the differences between component, instance and element.
+L'**element** viene specificato nel metodo `render()`. Gli elementi sono prodotti dai componenti. E' utile comprendere le differenze tra componenti, istanze ed elementi.
 
-Pretty soon, you will see where the App component is instantiated. Otherwise you wouldn't see the rendered output in the browser, would you? The App component is only the declaration, but not the usage. You would instantiate the component somewhere in your JSX with `<App />`.
+Molto presto, vedrai dove la componente App è istanziata. Altrimenti non riusciresti a vedere l'output renderizzato nel browser. La componente App è solo la dichiarazione, non il suo utilizzo. Devi istanziare il componente in qualche punto nel suto JSX con `<App />`.
 
-The content in the render block looks pretty similar to HTML, but it's JSX. JSX allows you to mix HTML and JavaScript. It's powerful yet confusing when you are used to separate your HTML and JavaScript. That's why a good starting point is to use basic HTML in your JSX. In the beginning, remove all the distracting content in the file.
+Il contenuto nel blocco renderizzato è molto simile ad HTML, ma è in JSX.
+JSX ti permette di mixare HTML e JavaScript. E' potente ma può confondere quando sei abituato a separare il tuo contenuto HTML dal JavaScript. Ecco perché è una buona idea usare HTML base nel tuo JSX. All'inizio, rimuovi tutti i contenuti che distraggono.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -294,7 +296,7 @@ class App extends Component {
 export default App;
 ~~~~~~~~
 
-Now, you only return HTML in your `render()` method without JavaScript. Let's define the "Welcome to the Road to learn React" as a variable. A variable can be used in your JSX by using curly braces.
+Adesso restituisci solo HTML nel tuo metodo `render()` senza JavaScript. Definiamo il "Welcome to the Road to learn React" come variabile. Una variabile può essere usata nel tuo JSX usando le parentesi graffe.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -319,23 +321,24 @@ class App extends Component {
 export default App;
 ~~~~~~~~
 
-It should work when you start your application on the command line with `npm start` again.
 
-Additionally you might have noticed the `className` attribute. It reflects the standard `class` attribute in HTML. Because of technical reasons, JSX had to replace a handful of internal HTML attributes. You can find all of the [supported HTML attributes in the React documentation](https://facebook.github.io/react/docs/dom-elements.html). They all follow the camelCase convention. On your way to learn React, you will come across some more JSX specific attributes.
+Dovrebbe funzionare non appena lanci da riga di comando l'istruzione `npm start`. 
 
-### Exercises:
+In più dovresti dare un'occhiata all'attributo `className`. Riflette l'attributo standard `class` nell'HTML. Per ragioni tecniche, JSX doveva sostituire una serie di attributi HTML. Maggiori approfondimenti circa [gli attributi HTML supportati li trovi nella documentazione React](https://facebook.github.io/react/docs/dom-elements.html). La convenzione usata è *camelCase*. Nel tuo percorso di apprendimento di React, dovrai tenere in considrazione alcuni attributi specifici JSX.
 
-* define more variables and render them in your JSX
-  * use a complex object to represent an user with a first name and last name
-  * render the user properties in your JSX
-* read more about [JSX](https://facebook.github.io/react/docs/introducing-jsx.html)
-* read more about [React components, elements and instances](https://facebook.github.io/react/blog/2015/12/18/react-components-elements-and-instances.html)
+### Esercizi:
 
-## ES6 const and let
+* definisci una serie di variabili e renderizzali nel tuo JSX
+  * usa un oggetto complesso per rappresentare un utente con un nome e cognome
+  * renderizza le proprietà dell'utente nel tuo JSX
+* approfondisci di più su [JSX](https://facebook.github.io/react/docs/introducing-jsx.html)
+* approfondisci di più sui [componenti React, elementi e istanze](https://facebook.github.io/react/blog/2015/12/18/react-components-elements-and-instances.html)
 
-I guess you noticed that we declared the variable `helloWorld` with a `var` statement. JavaScript ES6 comes with two more options to declare your variables: `const` and `let`. In JavaScript ES6, you will rarely find `var` anymore.
+## ES6 const e let
 
-A variable declared with `const` cannot be re-assigned or re-declared. It cannot get mutated (changed, modified). You embrace immutable data structures by using it. Once the data structure is defined, you cannot change it.
+Sono sicuro che tu abbia notato che abbiamo dichiarato la variabile `helloWorld` con una dichiarazione `var`. JavaScript ES6 ha due opzioni in più per dichiarare le tue variabili: `const` e `let`. In JavaScript ES6, raramente troverai l'istruzione `var`.
+
+Una variabile dichiarata con `const` non può essere riassegnata o dichiarata nuovamente. Non può mutare (cambiare, essere modificata). Puoi concepire strutture dati immutabili in questo modo. Una volta che la struttura dei dati è definita, non puoi cambiarla.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -344,7 +347,8 @@ const helloWorld = 'Welcome to the Road to learn React';
 helloWorld = 'Bye Bye React';
 ~~~~~~~~
 
-A variable declared with `let` can get mutated.
+
+Una variabile dichiarata con `let` puoi cambiarla.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -353,9 +357,9 @@ let helloWorld = 'Welcome to the Road to learn React';
 helloWorld = 'Bye Bye React';
 ~~~~~~~~
 
-You would use it when you would need to re-assign a variable.
+Dovresti usare quando devi riassegnare una variabile.
 
-However, you have to be careful with `const`. A variable declared with `const` cannot get modified. But when the variable is an array or object, the value it holds can get updated. The value it holds is not immutable.
+Ad ogni modo, fai attenzione con `const`. Una variabile dichiarata con `const` non può essere modificata. Ma quando la variabile è un array o un oggetto, il valore può essere aggiornato. Il valore non è immutabile.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -366,11 +370,12 @@ const helloWorld = {
 helloWorld.text = 'Bye Bye React';
 ~~~~~~~~
 
-But when to use each declaration? There are different opinions about the usage. I suggest using `const` whenever you can. It indicates that you want to keep your data structure immutable even though values in objects and arrays can get modified. If you want to modify your variable, you can use `let`.
 
-Immutability is embraced in React and its ecosystem. That's why `const` should be your default choice when you define a variable. Still, in complex objects the values within can get modified. Be careful about this behavior.
+Ma quando usare una delle due dichiarazioni? Ci sono differenti opinioni a riguardo. Suggerisco di usare `const` ogni volta che puoi. E' indicata quando vuoi mantenere la tua struttura dati immutabile anche se i valori in oggetti o array possono essere modificati. Se vuoi modificare la tua variabile, puoi usare `let`.
 
-In your application, you should use `const` over `var`.
+L'immutabilità è concepita in React e nel suo ecosistema. Ecco perché `const` dovrebbe essere la scelta di default quando definisci una variabile. Ancora, negli oggetti complessi i valori all'interno possono essere modificati. Fa attenzione a questo comportamento.
+
+Nella tua applicazione dovresti usare `const` al posto di `var`.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -393,17 +398,17 @@ class App extends Component {
 export default App;
 ~~~~~~~~
 
-### Exercises:
+### Esercizi:
 
-* read more about [ES6 const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)
-* read more about [ES6 let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)
-* research more about immutable data structures
-  * why do they make sense in programming in general
-  * why are they used in React and its ecosystem
+* dai un'occhiata all'istruzione [ES6 const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)
+* dai un'occhiata all'istruzione [ES6 let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)
+* cerca ulteriori strutture dati immutabili
+  * perchè hanno un senso nella programmazione in generale
+  * perché sono usate in React e nel suo ecosistema
 
 ## ReactDOM
 
-Before you continue with the App component, you might want to see where it is used. It is located in your entry point to the React world: the *src/index.js* file.
+Prima di continuare con la tua App component, avrai voglia di vedere dove è usata. E' localizzata nel tuo entry point: il file *src/index.js*.
 
 {title="src/index.js",lang=javascript}
 ~~~~~~~~
@@ -418,11 +423,13 @@ ReactDOM.render(
 );
 ~~~~~~~~
 
-Basically `ReactDOM.render()` uses a DOM node in your HTML to replace it with your JSX. That's how you can easily integrate React in every foreign application. It is not forbidden to use `ReactDOM.render()` multiple times across your application. You can use it at multiple places to bootstrap simple JSX syntax, a React component, multiple React components or a whole application. But in plain React application you will only use it once to bootstrap your whole component tree.
 
-`ReactDOM.render()` expects two arguments. The first argument is JSX that gets rendered. The second argument specifies the place where the React application hooks into your HTML. It expects an element with an `id='root'`. You can open your *public/index.html* file to find the id attribute.
+Di base `ReactDOM.render()` usa un nodo DOM nel tuo HTML per sostituirlo con JSX. Ecco perché puoi integrare facilmente React in qualsiasi applicazione esterna. Non è vietato usare `ReactDOM.render()` diverse volte nella tua applicazione. Puoi usarlo in differenti punti per impostare una semplice sintassi JSX, un component React, multipli componenti React o una intera applicazione. Ma in una applicazione React lo userai solo una volta per impostare il tuo intero "albero" di componenti.
 
-In the implementation `ReactDOM.render()` already takes your App component. However, it would be fine to pass simpler JSX as long as it is JSX. It doesn't have to be an instantiation of a component.
+`ReactDOM.render()` accetta due argomenti. Il primo argomento è JSX che attiva la renderizzazione. Il secondo argomento specifica il posto dove l'applicazione React interviene nel tuo HTML. Accetta un elemento con un `id='root'`. Puoi aprire il tuo file *public/index.html* per trovare l'attributo id.
+
+Nell'implementazione `ReactDOM.render()` gestisce già la tua App component. 
+Ad ogni modo, è utile passare il più semplice JSX dal momento che è un JSX. Non ha bisogno di istanziare un componente.
 
 {title="Code Playground",lang=javascript}
 ~~~~~~~~
@@ -432,18 +439,18 @@ ReactDOM.render(
 );
 ~~~~~~~~
 
-### Exercises:
+### Esercizi:
 
-* open the *public/index.html* to see where the React applications hooks into your HTML
-* read more about [rendering elements in React](https://facebook.github.io/react/docs/rendering-elements.html)
+* apri *public/index.html* per vedere dove le applicazioni React impattano sul tuo HTML
+*  approfondisci il [rendering degli elementi in React](https://facebook.github.io/react/docs/rendering-elements.html)
 
 ## Hot Module Replacement
 
-There is one thing that you can do in the *src/index.js* file to improve your development experience as a developer. But it is optional and shouldn't overwhelm you in the beginning when learning React.
+C'è una cosa che puoi fare nel file *src/index.js* per migliorare la tua esperienza di sviluppo. Ma è opzionale e non dovresti abusarne all'inizio dell'apprendimento di React.
 
-In *create-react-app* it is already an advantage that the browser automatically refreshes the page when you change your source code. Try it by changing the `helloWorld` variable in your *src/App.js* file. The browser should refresh the page. But there is a better way of doing it.
+In *create-react-app* è già un vantaggio che il browser automaticamente effettua il refresh della pagina quando cambia il tuo codice sorgente. Prova a cambiare la variabile `helloWorld` nel tuo file *src/App.js*. Il browser dovrebbe fare il refresh della pagina. Ma c'è un modo migliore per fare questo.
 
-Hot Module Replacement (HMR) is a tool to reload your application in the browser. The browser doesn't perform a page refresh. You can easily activate it in *create-react-app*. In your *src/index.js*, your entry point to React, you have to add one little configuration.
+L'Hot Module Replacement (HMR) è un tool per ricaricare la tua applicazione nel browser. Il browser non si occupa del refresh della pagina. Invece l'HMR la puoi facilmente attivare in *create-react-app*. Nel tuo file *src/index.js*, devi aggiungere qualche riga di configurazione.
 
 {title="src/index.js",lang=javascript}
 ~~~~~~~~
@@ -464,24 +471,24 @@ if (module.hot) {
 # leanpub-end-insert
 ~~~~~~~~
 
-That's it. Try again to change the `helloWorld` variable in your *src/App.js* file. The browser shouldn't perform a page refresh, but the application reloads and shows the correct output. HMR comes with multiple advantages:
+Ecco fatto. Prova ancora una volta a cambiare la variabile `helloWorld` nel tuo file *src/App.js*. Il browser non ricarica la pagina, ma l'applicazione ricarica e mostra il corretto output. HMR ha diversi vantaggi:
 
-Imagine you are debugging your code with `console.log()` statements. These statements will stay in your developer console, even though you change your code, because the browser doesn't refresh the page anymore. That can be convenient for debugging purposes.
+Immagina di essere alle prese con il debugging del tuo codice e stai utilizzando `console.log()`. Queste dichiarazioni restano nella tua developer console, anche quando cambi il tuo codice, perché il browser non fa il refresh della pagina. Una situazione molto conveniente per il debugging.
 
-In a growing application a page refresh delays your productivity. You have to wait until the page loads. A page reload can take several seconds in a large application. HMR takes away this disadvantage.
+In una applicazione complessa il refresh di una pagina rallenta la tua produttività. Devi attendere fino a quando la pagina non ricaricata. Una pagina in ricaricamento può richiedere diversi secondi in una applicazione complessa. HMR azzera questi svantaggi.
 
-The biggest benefit is that you can keep the application state with HMR. Imagine you have a dialog in your application with multiple steps and you are at step 3. Basically it is a wizard. Without HMR you would change the source code and your browser refreshes the page. You would have to open the dialog again and would have to navigate from step 1 to step 3. With HMR your dialog stays open at step 3. It keeps the application state even though the source code changes. The application itself reloads, but not the page.
+Il più grande beneficio è che puoi mantenere lo stato dell'applicazione con HMR. Immagina di avere un dialogo nella tua applicazione con differenti step e sei al terzo step. Di solito è un wizard. Senza HMR quando cambi il tuo codice, il tuo browser ricarica la pagina e dovrai ripartire dallo step 1 per arrivare allo step 3. Con HMR resti allo step 3. Mantiene lo stato dell'applicazione anche se il codice sorgente cambia. L'applicazione stessa si ricarica, non la pagina.
 
-### Exercises:
+### Esercizi:
 
-* change your *src/App.js* source code a few times to see HMR in action
-* watch the first 10 minutes of [Live React: Hot Reloading with Time Travel](https://www.youtube.com/watch?v=xsSnOQynTHs) by Dan Abramov
+* cambia il tuo codice sorgente in *src/App.js* un po' di volte per vedere HMR in azione
+* dai un'occhiata ai primi 10 minuti d [Live React: Hot Reloading with Time Travel](https://www.youtube.com/watch?v=xsSnOQynTHs) di Dan Abramov
 
 ## Complex JavaScript in JSX
 
-Let's get back to your App component. So far you rendered some primitive variables in your JSX. Now you will start to render a list of items. The list will be sample data in the beginning, but later you will fetch the data from an external [API](https://www.robinwieruch.de/what-is-an-api-javascript/). That will be far more exciting.
+Torniamo alla nostra applicazione. Finora renderizzavi le variabili primitive nel tuo JSX. Adesso inizierai a renderizzare una lista di item. La lista sarà composta da semplici dati all'inizio, ma più tardi recupererai i dati da un'[API esterna](https://www.robinwieruch.de/what-is-an-api-javascript/). Questo sarà molto più divertente.
 
-First you have to define the list of items.
+Prima di tutto definiamo la lista di item.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -514,9 +521,9 @@ class App extends Component {
 }
 ~~~~~~~~
 
-The sample data will reflect the data we will fetch later on from the API. An item in the list has a title, an url and an author. Additionally it comes with an identifier, points (which indicate how popular an article is) and a count of comments.
+I dati semplici saranno simili ai dati che andremo a recuperare più tardi attraverso l'API. Un item nella lista ha un titolo, un url e un autore. In più avrà un identificativo, punteggio (che indicherà la popolarità dell'articolo) e un conteggio dei commenti.
 
-Now you can use the built-in JavaScript `map` functionality in your JSX. It enables you to iterate over your list of items to display them. Again you will use curly braces to encapsulate the JavaScript expression in your JSX.
+Adesso puoi usare il metodo built-in di JavaScript `map` nel tuo JSX. Ti permette di ciclare la tua lista per mostrare gli item. Inoltre utilizzerai le parentesi graffe per incapsulare l'espressione JavaScript nel tuo JSX.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -537,9 +544,9 @@ class App extends Component {
 export default App;
 ~~~~~~~~
 
-Using JavaScript in HTML is pretty powerful in JSX. Usually you might have used `map` to convert one list of items to another list of items. This time you use `map` to convert a list of items to HTML elements.
+Usare JavaScript nell'HTML è molto più efficace nel JSX. Di solito dovresti usare `map` per convertire una lista di item in un'altra lista di item. Questa volta usa `map` per convertire una lista di item in elementi HTML.
 
-So far, only the `title` will be displayed for each item. Let's display some more of the item properties.
+Per adesso solo il `title` sarà mostrato per ogni item. Mostriamo qualcosa in più delle proprietà dell'item.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -569,9 +576,9 @@ class App extends Component {
 export default App;
 ~~~~~~~~
 
-You can see how the map function is simply inlined in your JSX. Each item property is displayed in a `<span>` tag. Moreover the url property of the item is used in the `href` attribute of the anchor tag.
+Puoi notare come il metodo `map` è semplicemente *inlined* nel tuo JSX. Ogni proprietà dell'item è mostrata in un tag `<span>`. Inoltre la proprietà url dell'item è usata nell'attributo `href` dell'anchor tag.
 
-React will do all the work for you and display each item. But you should add one helper for React to embrace its full potential and improve its performance. You have to assign a key attribute to each list element. That way React is able to identify added, changed and removed items when the list changes. The sample list items come with an identifier already.
+React farà tutto il lavoro per te e mostrerà ogni item. Ma puoi aggiungere un helper per React per racchiudere la sua potenzialità e migliorare la sua performance. Devi assegnare un attributo chiave ad ogni elemento della lista. In questo modo React sarà in grado di identificare gli item aggiunti, modificati e rimossi quando la lista cambia. La lista semplice degli item ha già un identificativo.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -591,7 +598,7 @@ React will do all the work for you and display each item. But you should add one
 })}
 ~~~~~~~~
 
-You should make sure that the key attribute is a stable identifier. Don't make the mistake of using index of the item in the array. The array index isn't stable at all. For instance, when the list changes its order, React will have a hard time identifying the items properly.
+Dovresti assicurarti che l'attributo chiave sia un identificativo stabile. Non fare l'errore di usare index dell'item nell'array. L'index dell'array non è stabile dopo tutto. Per esempio, quando la lista cambia il suo ordine, React avrà difficoltà a identificare gli item in maniera corretta.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -605,17 +612,17 @@ You should make sure that the key attribute is a stable identifier. Don't make t
 })}
 ~~~~~~~~
 
-You are displaying both list items now. You can start your app, open your browser and see both items of the list displayed.
+Stai mostrando entrambe le liste adesso. Puoi avviare la tua app, aprire il tuo browser e vedere entrambi gli item della lista.
 
-### Exercises:
+### Esercizi:
 
-* read more about [React lists and keys](https://facebook.github.io/react/docs/lists-and-keys.html)
-* recap the [standard built-in array functionalities in JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
-* use more JavaScript expressions on your own in JSX
+* Approfondisci sulle [liste React e le chiavi](https://facebook.github.io/react/docs/lists-and-keys.html)
+* fai un ripasso degli [array built-in di JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+* utilizza più espressioni JavaScript sul tuo stesso JSX
 
 ## ES6 Arrow Functions
 
-JavaScript ES6 introduced arrow functions. An arrow function expression is shorter than a function expression.
+JavaScript ES6 introdusse i metodi arrow. Un metodo arrow è più breve di una classico metodo.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -626,9 +633,9 @@ function () { ... }
 () => { ... }
 ~~~~~~~~
 
-But you have to be aware of its functionalities. One of them is a different behavior with the `this` object. A function expression always defines its own `this` object. Arrow function expressions still have the `this` object of the enclosing context. Don't get confused when using `this` in an arrow function.
+Ma devi comprendere bene le sue caratteristiche. Una di esse è il differente comportamento dell'oggetto `this`. Un metodo classico definisce sempre il suo oggetto `this`. Un metodo arrow ha l'oggetto `this` nel suo contesto chiuso. Non confondere quando utilizzi `this`  nel metodo arrow.
 
-There is another valuable fact about arrow functions regarding the parenthesis. You can remove the parenthesis when the function gets only one argument, but have to keep them when it gets multiple arguments.
+C'è un'altra questione che riguarda i metodi arrow. E riguarda le parentesi. Puoi rimuovere le parentesi quando il metodo restituisce solo un argomento, ma devi tenerle quando nel restituisce più di uno.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -645,7 +652,7 @@ item, key => { ... }
 (item, key) => { ... }
 ~~~~~~~~
 
-However, let's have a look at the `map` function. You can write it more concisely with an ES6 arrow function.
+Dunque diamo un'occhiata al metodo `map`. Puoi scriverlo in maniera più concisa con un metodo arrow ES6.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
