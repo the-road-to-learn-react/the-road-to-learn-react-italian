@@ -672,7 +672,7 @@ Dunque diamo un'occhiata al metodo `map`. Puoi scriverlo in maniera più concisa
 })}
 ~~~~~~~~
 
-Additionally, you can remove the *block body*, meaning the curly braces, of the ES6 arrow function. In a *concise body* an implicit return is attached. Thus you can remove the return statement. That will happen more often in the book, so be sure to understand the difference between a block body and a concise body when using arrow functions.
+In più, puoi rimuovere il *block body*, cioè le parentesi graffe del metodo arrow ES6. In un *concise body* un implicito return è incluso. Quindi puoi rimuovere l'istruzione return. Questo accadrà diverse volte nel libro, quindi assicurati di comprendere la differenza tra un *block body* e un *concise body* quando usi i metodi arrow.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -692,19 +692,19 @@ Additionally, you can remove the *block body*, meaning the curly braces, of the 
 # leanpub-end-insert
 ~~~~~~~~
 
-Your JSX looks more concise and readable now. It omits the function statement, the curly braces and the return statement. Instead a developer can focus on the implementation details.
+Il tuo JSX sembra più conciso e leggibile adesso. E stata omessa l'istruzione *function*, le parentesi graffe e il l'istruzione *return*. Perché uno sviluppatore deve concentrarsi sull'implementazione dei dettagli.
 
-### Exercises:
+### Esercizi:
 
-* read more about [ES6 arrow functions](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+* dai un'occhiata ai [metodi arrow ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 
-## ES6 Classes
+## Le classi ES6
 
-JavaScript ES6 introduced classes. A class is commonly used in object-oriented programming languages. JavaScript was and is very flexible in its programming paradigms. You can do functional programming and object-oriented programming side by side for their particular use cases.
+JavaScript ES6 introdusse le classi. Una classe è comunemente usata nella programmazione object-oriented (orientata agli oggetti). JavaScript era ed è molto flessibile nei suoi paradigmi di programmazione. Puoi lavorare con la programmazione funzionale e object-oriented a seconda dei casi.
 
-Even though React embraces functional programming, for instance with immutable data structures, classes are used to declare components. They are called ES6 class components. React mixes the good parts of both programming paradigms.
+Anche se React predilige la programmazione funzionale, per esempio con le strutture dati immutabili, le classi sono usate per dichiarare i componenti. Sono chiamate ES6 *class components*. React miscela le parti buone di entrambi i paradigmi.
 
-Let's consider the following Developer class to examine a JavaScript ES6 class without thinking about a component.
+Consideriamo la segunete classe per esaminare una classe JavaScript ES6 senza pensare ad un componente.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -720,11 +720,12 @@ class Developer {
 }
 ~~~~~~~~
 
-A class has a constructor to make it instantiable. The constructor can take arguments to assign it to the class instance. Additionally a class can define functions. Because the function is associated with a class, it is called a method. Often it is referenced as a class method.
 
-The Developer class is only the class declaration. You can create multiple instances of the class by invoking it. It is similar to the ES6 class component, that has a declaration, but you have to use it somewhere else to instantiate it.
+Una classe ha un costruttore per renderla istanziabile. Il costruttore può prendere argomenti per assegnarli alla classe istanziata. Inoltre una classe può avere al suo interno metodi. 
 
-Let's see how you can instantiate the class and how you can use its methods.
+La classe Developer è solo una dichiarazione di classe. Puoi creare multiple istanze della classe invocandola. E' simile alla *class component*, che ha una dichiarazione, ma puoi usarla ovunque.
+
+Vediamo come puoi istanziare la classe e come usare i suoi methodi.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -733,7 +734,7 @@ console.log(robin.getName());
 // output: Robin Wieruch
 ~~~~~~~~
 
-React uses JavaScript ES6 classes for ES6 class components. You already used one ES6 class component.
+React usa le classi JavaScript ES6 per le *class component*. Eccone una.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -748,37 +749,37 @@ class App extends Component {
 }
 ~~~~~~~~
 
-The App class extends from `Component`. Basically you declare the App component, but it extends from another component. What does extend mean? In object-oriented programming you have the principle of inheritance. It is used to pass over functionalities from one class to another class.
+La classe App estende `Component`. Di base dichiari il component App, ma è l'estensione di un altro componente. Cosa significa estendere? Nella programmazione object-oriented affronterai il principio dell'ereditarietà. E' usata per passare funzionalità da una classe ad un'altra.
 
-The App class extends functionality from the Component class. To be more specific, it inherits functionalities from the Component class. The Component class is used to extend a basic ES6 class to a ES6 component class. It has all the functionalities that a component in React needs to have. The render method is one of these functionalities that you have already used. You will learn about other component class methods later on.
+La classe App estende le funzionalità da una classe Component. Per essere più specifico, eredità le funzionalità della classe Component. La classe Component è usata per estendere una classe basic ES6 in una *component class* ES6. Ha anche tutte le funzionalità che un component React deve avere. Il metodo render è una di queste funzionalità che tu già usi. Imparerai altro sui metodi delle *class component* più tardi.
 
-The `Component` class encapsulates all the implementation details of a React component. It enables developers to use classes as components in React.
+La classe `Component` incapsula tutti i dettagli di implementazione di un componente React. Permette agli sviluppatori di usare classi come componenti in React.
 
-The methods a React `Component` exposes is the public interface. One of these methods has to be overridden, the others don't need to be overridden. You will learn about the latter ones when the book arrives at lifecycle methods in a later chapter. The `render()` method has to be overridden, because it defines the output of a React `Component`. It has to be defined.
+I metodi che espone un `Component` React sono rappresentati da un'interfaccia pubblica. Uno di questi metodi è sovrascritto, gli altri non hanno bisogno di essere sovrascritti. Imparerai questi ultimi quando il libro parlerà del ciclo di vita dei metodi in un capitolo. Il metodo `render()` sarà sovrascritto, perché definisce l'output di un `Component` React. 
 
-Now you know the basics around JavaScript ES6 classes and how they are used in React to extend them to components. You will learn more about the Component methods when the book describes React lifecycle methods.
+Adesso sei a conoscenza delle classi JavaScript ES6 e come sono utilizzate all'interno di React per estenderle ai componenti. 
 
-### Exercises:
+### Esercizi:
 
-* read more about [ES6 classes](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes)
+* dai un'occhiata alle [classi ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes)
 
 {pagebreak}
 
-You have learned to bootstrap your own React application! Let's recap the last chapters:
+Devi padroneggiare le basi di una applicazione React! Riassumiamo l'ultimo capitolo:
 
 * React
-  * create-react-app bootstraps a React application
-  * JSX mixes up HTML and JavaScript to define the output of React components in their render methods
-  * components, instances and elements are different things in React
-  * `ReactDOM.render()` is an entry point for a React application to hook React into the DOM
-  * built-in JavaScript functionalities can be used in JSX
-    * map can be used to render a list of items as HTML elements
+  * fai partire una applicazione React create-react-app
+  * JSX miscela HTML e JavaScript per definire l'output dei componenti React nei loro metodi render
+  * componenti, istanze ed elementi sono cose differenti in React
+  * `ReactDOM.render()` è un entry point per un'applicazione React per agganciare React al DOM
+  * le funzionalità built-in di JavaScript possono essere usate nel JSX
+    * map può essere usato per renderizzare una lista di item come elementi HTML
 * ES6
-  * variable declarations with `const` and `let` can be used for specific use cases
-    * use const over let in React applications
-  * arrow functions can be used to keep your functions concise
-  * classes are used to define components in React by extending them
+  * le variabili `const` e `let` possono essere utilizzate per casi d'uso specifici
+    * usa *const* al posto di *let* nelle applicazioni React
+  *  i metodi arrow possono essere usati per tenere le tue funzioni concise
+  *  le classi sono usate per definire i componenti in React estendendoli
 
-It makes sense to take a break at this point. Internalize the learnings and apply them on your own. You can experiment with the source code you have written so far.
+Ha senso prendere una pausa in questo momento. Ripassa con la mente quanto hai appreso. Puoi sperimentare con il codice sorgente scritto.
 
-You can find the source code in the [official repository](https://github.com/rwieruch/hackernews-client/tree/4.1).
+Puoi trovare il codice sorgente nel [repository ufficiale](https://github.com/rwieruch/hackernews-client/tree/4.1).
