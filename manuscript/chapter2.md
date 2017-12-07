@@ -1,12 +1,12 @@
-# Basics in React
+# Le Basi in React
 
-The chapter will guide you through the basics of React. It covers state and interactions in components, because static components are a bit dull, aren't they? Additionally, you will learn about the different ways to declare a component and how to keep components composable and reusable. Be prepared to breathe life into your components.
+Questo capitolo ti guiderà attraverso le basi di React. Parleremo dello stato e delle interazioni con i componenti, perché i componenti statici sono un po' ostici, non è vero? Inoltre, imparerai differenti modi per dichiarare un componente e le tecniche per mantenere i componenti componibili e riutilizzabili. Fai un bel respiro ed entra nel mondo dei componenti.
 
 ## Internal Component State
 
-Internal component state, also known as local state, allows you to save, modify and delete properties that are stored in your component. The ES6 class component can use a constructor to initialize internal component state later on. The constructor is called only once when the component initializes.
+Gli internal component state, anche conosciuti come local state, ti permettono di salvare, modificare e cancellare le proprietà che sono memorizzate nel tuo componente. La class component ES6 può usare un costruttore per inizializzare gli internal component state in un secondo momento. Il costruttore è chiamato solo una volta quando il componente è inizializzato.
 
-Let's introduce a class constructor.
+Introduciamo una class constructor.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -23,11 +23,12 @@ class App extends Component {
 }
 ~~~~~~~~
 
-When having a constructor in your ES6 class component, it is mandatory to call `super();` because the App component is a subclass of `Component`. Hence the `extends Component` in your App component declaration. You will learn more about ES6 class components later on.
 
-You can call `super(props);` as well. It sets `this.props` in your constructor in case you want to access them in the constructor. Otherwise, when accessing `this.props` in your constructor, they would be `undefined`. You will learn more about the props of a React component later on.
+Quando abbiamo a che fare con un costruttore nella tua class component ES6, non abbiamo altro che un mandatario che chiameremo `super();` perché l'App component è una subclasse di `Component`. Ecco perché hai letto `extends Component` nella tua App component. Apprenderai di più su questo concetto più tardi.
 
-Now, in your case, the initial state in your component should be the sample list of items.
+Puoi anche chiamarla `super(props);`. Imposta `this.props` nel tuo costruttore nel caso tu voglia avere accesso ad essi nel tuo costruttore. Altrimenti, quando accedi a `this.props` nel tuo costruttore, riceveresti `undefined`. Anche questo argomento verrà ripreso più in là.
+
+Adesso, ritornando all'esempio, lo stato iniziale nel tuo componente dovrebbe essere la lista di item qui sotto.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -60,7 +61,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-The state is bound to the class by using the `this` object. Thus you can access the local state in your whole component. For instance, it can be used in the `render()` method. Previously you have mapped a static list of items in your `render()` method that was defined outside of your component. Now you are about to use the list from your local state in your component.
+Lo stato è legato alla classe attraverso l'utilizzo dell'oggetto `this`. In questo modo puoi accedere al local state nel tuo intero componente. Per esempio, può essere usato nel metodo `render()`. Precedentemente hai mappato una lista statica di item nel tuo metodo `render()` che è stato definito fuori dal tuo componente. Adesso devi usare la lista dal tuo local state nel tuo componente.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -89,20 +90,20 @@ class App extends Component {
 }
 ~~~~~~~~
 
-The list is part of the component now. It resides in the internal component state. You could add items, change items or remove items in and from your list. Every time you change your component state, the `render()` method of your component will run again. That's how you can simply change your internal component state and be sure that the component re-renders and displays the correct data that comes from the local state.
+La lista è parte del componente adesso. Risiede nell'internal component state. Puoi aggiungere item, cambiare item o rimuovere item all'interno e dalla tua lista. Ogni volta che cambi il tuo component state, il metodo `render()` del tuo componente si avvierà di nuovo. E' in questo modo che puoi semplicemente cambiare il tuo internal component state ed essere sicuro che il componente effettuerà nuovamente il rendering e mostrerà i dati corretti che arrivano dal local state.
 
-But be careful. Don't mutate the state directly. You have to use a method called `setState()` to modify your state. You will get to know it in a following chapter.
+Fa attenzione. Non mutare lo stato direttamente. Devi usare un metodo chiamato `setState()` per modificare il tuo stato. Ne parleremo nel prossimo capitolo.
 
-### Exercises:
+### Esercizi:
 
-* experiment with the local state
-  * define more initial state in the constructor
-  * use and access the state in your `render()` method
-* read more about [the ES6 class constructor](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes#Constructor)
+* sperimenta il local state
+  * definisci più state iniziali nel tuo costruttore
+  * utilizza e accedi al tuo stato nel metodo `render()`
+* maggiori info su [the ES6 class constructor](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes#Constructor)
 
 ## ES6 Object Initializer
 
-In JavaScript ES6, you can use a shorthand property syntax to initialize your objects more concisely. Imagine the following object initialization:
+In JavaScript ES6 puoi utilizzare una sintassi short per inizializzare i tuoi oggetti in modo più consio. Dai un'occhiata alla seguente inizializzazione di oggetti:
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -113,7 +114,7 @@ const user = {
 };
 ~~~~~~~~
 
-When the property name in your object is the same as your variable name, you can do the following:
+Quando il property name nel tuo oggetto ha lo stesso nome della variabile, puoi scriverlo in questo modo:
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -124,7 +125,7 @@ const user = {
 };
 ~~~~~~~~
 
-In your application, you can do the same. The list variable name and the state property name share the same name.
+Nella tua applicazione, puoi fare lo stesso. Il nome della variabile list e il suo state property name condividono lo stesso nome.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -139,7 +140,7 @@ this.state = {
 };
 ~~~~~~~~
 
-Another neat helper are shorthand method names. In JavaScript ES6, you can initialize methods in an object more concisely.
+Un altro piccolo suggerimento per i nomi abbreviati. In JavaScript ES6, puoi inizializzare i metodi nell'oggetto in modo più conciso.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -158,7 +159,7 @@ const userService = {
 };
 ~~~~~~~~
 
-Last but not least, you are allowed to use computed property names in JavaScript ES6.
+Ultimo, ma non ultimo, puoi permetterti di usare il computed property name in JavaScript ES6.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -174,12 +175,12 @@ const user = {
 };
 ~~~~~~~~
 
-Perhaps computed property names make no sense for you yet. Why should you need them? In a later chapter, you will come to a point where you can use them to allocate values by key in a dynamic way in an object. It's neat to generate lookup tables in JavaScript.
+Forse i computed property name non hanno molto senso ancora. Perché dovresti averne bisogno? Nell'ultimo capitolo ti mostrerò come utilizzarli per allocare valori per chiave in un modo dinamico nell'oggetto. C'è un modo pulito per generare tabelle di ricerca in JavaScript.
 
-### Exercises:
+### Esercizi:
 
-* experiment with ES6 object initializer
-* read more about [ES6 object initializer](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer)
+* sperimenta l'inizializzazione degli oggetti in ES6
+* approfondisci l'argomento su [ES6 object initializer](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer)
 
 ## Unidirectional Data Flow
 
