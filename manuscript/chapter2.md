@@ -182,11 +182,11 @@ Forse i computed property name non hanno molto senso ancora. Perché dovresti av
 * sperimenta l'inizializzazione degli oggetti in ES6
 * approfondisci l'argomento su [ES6 object initializer](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer)
 
-## Unidirectional Data Flow
+## Flusso unidirezionale dei dati
 
-Now you have some internal state in your App component. However, you have not manipulated the local state yet. The state is static and thus is the component. A good way to experience state manipulation is to have some component interaction.
+Mettiamo il caso che tu abbia alcuni internal state nel componente della tua App. Non hai ancora manipolato i local state. Un ottimo sistema per manipolare lo state è avere interazione con i componenti.
 
-Let's add a button for each item in the displayed list. The button says "Dismiss" and is going to remove the item from the list. It could be useful eventually when you only want to keep a list of unread items and dismiss the items that you are not interested in.
+Aggiungiamo un bottone per ogni item nella lista mostrata. Il bottone dice "Dismiss" e ha il compito di rimuovere l'item dalla lista. Potrebbe essere utile eventualmente quando vuoi tenere una lista di item non letti e cancellare quelli a cui non sei interessato.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -223,11 +223,11 @@ class App extends Component {
 }
 ~~~~~~~~
 
-The `onDismiss()` class method is not defined yet. We will do it in a moment, but for now the focus should be on the `onClick` handler of the button element. As you can see, the `onDismiss()` method in the `onClick` handler is enclosed by another function. It is an arrow function. That way, you can sneak in the `objectID` property of the `item` object to identify the item that will be dismissed. An alternative way would be to define the function outside of the `onClick` handler and only pass the defined function to the handler. A later chapter will explain the topic of handlers in elements in more detail.
+Il metodo della classe `onDismiss()` non è definito ancora. Lo faremo tra un momento, ma per adesso il focus dovrebbe essere sull'handler `onClick` dell'elemento del bottone. Come puoi vedere, il metodo `onDismiss()` nell'handler `onClick` è racchiuso all'interno di un'altra funzione. E' un'arrow function. Puoi controllare nella proprietà `objectID` dell'oggetto `item` per identificare l'item che sarà cancellato. Un modo alternativo potrebbe essere quello di definire la funzione fuori dall'handler `onClick` e passare solo la funzione definita all'handler. In un capitolo successivo spiegheremo l'argomento degli handler negli elementi con maggiore dettaglio.
 
-Did you notice the multilines for the button element? Note that elements with multiple attributes get messy as one line at some point. That's why the button element is used with multilines and indentations to keep it readable. But it is not mandatory. It is only a code style recommendation that I highly recommend.
+Hai notato le diverse linee nell'elemento button? Questo per rendere più leggibile tutte le istruzioni. Non è obbligatorio. E' solo una raccomandazione di stile che suggerisco caldamente.
 
-Now you have to implement the `onDismiss()` functionality. It takes an id to identify the item to dismiss. The function is bound to the class and thus becomes a class method. That's why you access it with `this.onDismiss()` and not `onDismiss()`. The `this` object is your class instance. In order to define the `onDismiss()` as class method, you have to bind it in the constructor. Bindings will be explained in another chapter later on.
+Adesso sei in grado di implementare la funzionalità `onDismiss()`. Ci vuole un id per identificare l'item da rimuovere. La funzione è vincolata alla classe e diventa un metodo della classe. Ecco perché accedi con `this.onDismiss()` e non con `onDismiss()`. L'oggetto `this` è l'istanza della tua classe. Per definire `onDismiss()` come metodo di classe, devi vincolarlo al costruttore. I vincoli saranno illustrati in un altro capitolo.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -251,7 +251,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-In the next step, you have to define its functionality, the business logic, in your class. Class methods can be defined the following way.
+Nel prossimo step, dovrai definire le funzionalità, la logica di business, presente nella tua classe. I metodi della classe possono essere definiti nel modo seguente.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -279,9 +279,10 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Now you are able to define what happens inside of the class method. Basically you want to remove the item identified by the id from the list and store an updated list to your local state. Afterward, the updated list will be used in the re-running `render()` method to display it. The removed item shouldn't appear anymore.
 
-You can remove an item from a list by using the JavaScript built-in filter functionality. The filter function takes a function as input. The function has access to each value in the list, because it iterates over the list. That way, you can evaluate each item in the list based on a filter condition. If the evaluation for an item is true, the item stays in the list. Otherwise it will be filtered from the list. Additionally, it is good to know that the function returns a new list and doesn't mutate the old list. It supports the convention in React of having immutable data structures.
+Adesso sei pronto per definire cosa accade all'interno dei metodi. Di base devi rimuovere l'item identificato con l'ID dalla lista e salvare una lista aggiornata al tuo local state. In seguito, la lista aggiornata sarà utilizzata per far ripartire il metodo `render()` che la mostrerà. L'item rimosso non dovrebbe apparire più.
+
+Puoi rimuovere un item da una lista utilizzando una funzionalità built-in di JavaScript. Il filtro prende una funzione come input. La funzione ha accesso ad ogni valore nella lista, perché itera la lista. In questo modo puoi valutare ogni item nella lista basato sulla condizione dettata dal filtro. Le la valutazione di un item è vera, l'item resta nella lista. Altrimenti sarà filtrato dalla lista. Inoltre è bene sapere che la funzione restituisce una nuova lista e non muta la vecchia lista. Supporta la convenzione in React di avere i dati struttura immutabili.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -294,7 +295,7 @@ onDismiss(id) {
 }
 ~~~~~~~~
 
-In the next step, you can extract the function and pass it to the filter function.
+Nel prossimo step, puoi estrarre la funzione e passarla al filtro funzione.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -309,7 +310,7 @@ onDismiss(id) {
 }
 ~~~~~~~~
 
-In addition, you can do it more concisely by using a JavaScript ES6 arrow function again.
+Inoltre puoi renderlo più conciso utilizzando l'arrow function di JavaScript ES6.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -321,7 +322,7 @@ onDismiss(id) {
 }
 ~~~~~~~~
 
-You could even inline it again, like you did in the `onClick` handler of the button, but it might get less readable.
+Puoi anche utilizzare l'inline mode, come hai fatto con l'handler `onClick` del bottone, ma risulterebbe meno leggibile.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -332,7 +333,7 @@ onDismiss(id) {
 }
 ~~~~~~~~
 
-The list removes the clicked item now. However the state isn't updated yet. Therefore you can finally use the `setState()` class method to update the list in the internal component state.
+La lista rimuove l'item cliccato adesso. Comunque lo state non è aggiornato ancora. Quindi puoi finalmente usare il metodo della classe `setState()` per aggiornare la lista nell'internal component state.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -345,17 +346,17 @@ onDismiss(id) {
 }
 ~~~~~~~~
 
-Now run again your application and try the "Dismiss" button. It should work. What you experience now is the **unidirectional data flow** in React. You trigger an action in your view with `onClick()`, a function or class method modifies the internal component state and the `render()` method of the component runs again to update the view.
+Avvia ancora una volta la tua applicazione e prova il bottone "Dismiss". Dovrebbe funzionare. Adesso hai acquisito le competenze per comprendere l'**unidirectional data flow** di React. Inneschi un'azione nella tua view con `onClick()`, una funzione o un metodo della classe modifica l'internal component state e il metodo `render()` del componente avvia ancora una volta l'aggiornamento della view.
 
-![Internal state update with unidirectional data flow](images/set-state-to-render-unidirectional.png)
+![Internal state update con unidirectional data flow](images/set-state-to-render-unidirectional.png)
 
-### Exercises:
+### Esercizi:
 
-* read more about [the state and lifecycle in React](https://facebook.github.io/react/docs/state-and-lifecycle.html)
+* approfondisci [lo state e il ciclo di vista in React](https://facebook.github.io/react/docs/state-and-lifecycle.html)
 
-## Bindings
+## Bindings (vincoli)
 
-It is important to learn about bindings in JavaScript classes when using React ES6 class components. In the previous chapter, you have bound your class method `onDismiss()` in the constructor.
+E' importante comprendere i vincoli nelle classi JavaScript quando si usano i component class in React ES6. Nel precedente capitolo, hai vincolato il tuo metodo di classe `onDismiss()` all'interno del costruttore.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -374,7 +375,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Why would you do that in the first place? The binding step is necessary, because class methods don't automatically bind `this` to the class instance. Let's demonstrate it with the help of the following ES6 class component.
+Perché devi metterlo in quel posto? Lo step per il binding è necessario, perché i metodi della classe non si vincolano automaticamente al `this` dell'istanza della classe. Te lo dimostro con l'aiuto della seguente class component ES6:
 
 {title="Code Playground",lang=javascript}
 ~~~~~~~~
@@ -396,9 +397,9 @@ class ExplainBindingsComponent extends Component {
 }
 ~~~~~~~~
 
-The component renders just fine, but when you click the button, you will get `undefined` in your developer console log. That's a main source of bugs when using React, because if you want to access `this.state` in your class method, it cannot be retrieved because `this` is `undefined`. So in order to make `this` accessible in your class methods, you have to bind the class methods to `this`.
+Il componente renderizza bene, ma quando clicchi sul bottone, ti verrà restituito un `undefined` nel console log. Questa è una grande sorgente di errori in React, perché se vuoi accedere a `this.state` nel tuo metodo di classe, non può  essere recuperato perché `this` è `undefined`. Dunque per rendere accessibile `this` nei tuoi metodi di classe, devi vincolare i metodi di classe al `this`.
 
-In the following class component the class method is properly bound in the class constructor.
+Nel seguente class component il metodo della classe è correttamente vincolato nel costruttore.
 
 {title="Code Playground",lang=javascript}
 ~~~~~~~~
@@ -428,9 +429,10 @@ class ExplainBindingsComponent extends Component {
 }
 ~~~~~~~~
 
-When trying the button again, the `this` object, to be more specific the class instance, should be defined and you would be able to access `this.state`, or as you will later learn `this.props`, now.
 
-The class method binding can happen somewhere else too. For instance, it can happen in the `render()` class method.
+Questa volta quando proverai a premere il bottone, l'oggetto `this`, per essere più chiari l'istanza della classe, dovrebbe essere definita e tu dovresti accedere a `this.state`, oppure come più tardi imparerai `this.props`.
+
+Il binding del metodo della classe può essere usato ovunque. Per esempio, può essere usato nel metodo della classe `render()`.
 
 {title="Code Playground",lang=javascript}
 ~~~~~~~~
@@ -454,9 +456,9 @@ class ExplainBindingsComponent extends Component {
 }
 ~~~~~~~~
 
-But you should avoid it, because it would bind the class method every time when the `render()` method runs. Basically it runs every time your component updates which leads to performance implications. When binding the class method in the constructor, you bind it only once in the beginning when the component is instantiated. That's a better approach to do it.
+Ma ti consiglio di evitarlo, perché vincolerebbe il metodo di classe ogni volta che il metodo `render()` è richiamato. Di base si avvierebbe ogni volta che il tuo componente si aggiorna. Quando fai il binding del metodo della classe nel costruttore, lo vincoli una sola volta all'inizio quando il componente è istanziato. Questo è il miglior approccio per farlo.
 
-Another thing people sometimes come up with is defining the business logic of their class methods in the constructor.
+Un altro argomento è definire la logica di business dei loro metodi di classe nel costruttore.
 
 {title="Code Playground",lang=javascript}
 ~~~~~~~~
@@ -484,7 +486,7 @@ class ExplainBindingsComponent extends Component {
 }
 ~~~~~~~~
 
-You should avoid it too, because it will clutter your constructor over time. The constructor is only there to instantiate your class with all its properties. That's why the business logic of class methods should be defined outside of the constructor.
+Evita anche questo modo di scrivere codice, perché intaserà il tuo costruttore in breve tempo. Il costruttore serve solo ad istanziare la tua classe con tutte le sue proprietà. Ecco perché la logica di business dei metodi di classe dovrebbe essere definite fuori dal costruttore.
 
 {title="Code Playground",lang=javascript}
 ~~~~~~~~
@@ -508,7 +510,7 @@ class ExplainBindingsComponent extends Component {
 }
 ~~~~~~~~
 
-Last but not least, it is worth to mention that class methods can be autobound automatically without binding them explicitly by using JavaScript ES6 arrow functions.
+Ultimo, ma non ultimo vale la pena menzionare che i metodi di classe possono essere autovincolati automaticamente senza il binding utilizzando le arrow function di JavaScript ES6.
 
 {title="Code Playground",lang=javascript}
 ~~~~~~~~
@@ -530,11 +532,11 @@ class ExplainBindingsComponent extends Component {
 }
 ~~~~~~~~
 
-If the repetitive binding in the constructor annoys you, you can go ahead with this approach instead. The official React documentation sticks to the class method bindings in the constructor. That's why the book will stick to those as well.
+Se ripetere continuamente il binding nel tuo costruttore ti annoia, puoi andare avanti con questo approccio. La documentazione ufficiale di React suggerisce il metodo di classe vincolato nel costruttore. Ecco perché questo libro farà lo stesso.
 
-### Exercises:
+### Esercizi:
 
-* try the different approaches of bindings and console log the `this` object
+* prova i differenti approcci di binding ed effettual il console log dell'oggetto `this`
 
 ## Event Handler
 
