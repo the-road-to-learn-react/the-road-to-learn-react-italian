@@ -540,7 +540,7 @@ Se ripetere continuamente il binding nel tuo costruttore ti annoia, puoi andare 
 
 ## Event Handler
 
-The chapter should give you a deeper understanding of event handlers in elements. In your application, you are using the following button element to dismiss an item from the list.
+Il capitolo dovrebbe darti una comprensione approfondita degli event handler negli elementi. Nella tua applicazione, stai usando il seguente elemento bottone per cancellare un item dalla lista.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -556,7 +556,8 @@ The chapter should give you a deeper understanding of event handlers in elements
 ...
 ~~~~~~~~
 
-That's already a complex use case, because you have to pass a value to the class method and thus you have to wrap it into another (arrow) function. So basically, it has to be a function that is passed to the event handler. The following code wouldn't work, because the class method would be executed immediately when you open the application in the browser.
+
+Questo è un caso d'uso complesso, perché devi passare un valore al metodo di classe e quindi devi racchiuderlo in un'altra arrow function. Dunque di base deve essere una funzione che è passata ad un event handler. Il seguente codice non dovrebbe funzionare, perché il metodo di classe dovrebbe essere eseguito immediatamente tutte le volte in cui apri l'applicazione nel browser.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
