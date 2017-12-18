@@ -573,9 +573,9 @@ Questo è un caso d'uso complesso, perché devi passare un valore al metodo di c
 ...
 ~~~~~~~~
 
-When using `onClick={doSomething()}`, the `doSomething()` function would execute immediately when you open the application in your browser. The expression in the handler is evaluated. Since the returned value of the function isn't a function anymore, nothing would happen when you click the button. But when using `onClick={doSomething}` whereas `doSomething` is a function, it would be executed when clicking the button. The same rules apply for the `onDismiss()` class method that is used in your application.
+Quando si usa `onClick={doSomething()}`, la funzione `doSomething()` dovrebbe innescarsi immediatamente quando si apre l'applicazione nel browser. L'espressione nell'handler è presa in considerazione. Dal momento in cui il valore restituito della funzione non è più una funzione, niente accadrà quando cliccherai sul bottone. Ma quando userai `onClick={doSomething}` nel momento in cui `doSomething` è una funzione, sarà eseguito quando si cliccherà sul bottone. Le stesse regole saranno applicate per il metodo di classe `onDismiss()` che è utilizzato nella tua applicazione.
 
-However, using `onClick={this.onDismiss}` wouldn't suffice, because somehow the `item.objectID` property needs to be passed to the class method to identify the item that is going to be dismissed. That's why it can be wrapped into another function to sneak in the property. The concept is called higher order functions in JavaScript and will be explained briefly later on.
+Dunque, l'utilizzo di `onClick={this.onDismiss}` non sarebbe sufficiente, perché in qualche modo la proprietà `item.objectID` ha bisogno di essere passata al metodo di classe per identificare l'item che sta per essere cancellato. Ecco perché deve essere racchiuso in un'altra funzione di nascosto nella proprietà. Il concetto è chiamato higher order function in JavaScript e sarà spiegato a breve.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -591,7 +591,7 @@ However, using `onClick={this.onDismiss}` wouldn't suffice, because somehow the 
 ...
 ~~~~~~~~
 
-A workaround would be to define the wrapping function somewhere outside and only pass the defined function to the handler. Since it needs access to the individual item, it has to live in the inside of the map function block.
+Un workaround sarebbe definire la funzione che funge da involucro da qualche parte fuori e passare solo la funzione definita all'handler. Dal momento in cui ha bisogno di accedere all'item individuale, deve vivere all'interno della map function block.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -636,7 +636,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-After all, it has to be a function that is passed to the element's handler. As an example, try this code instead:
+Dopo tutto, deve essere una funzione che è passata all'handler dell'elemento. Come esempio, prova questo codice:
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -667,7 +667,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-It will run when you open the application in the browser but not when you click the button. Whereas the following code would only run when you click the button. It is a function that is executed when you trigger the handler.
+Partirà quando aprirai l'applicazione nel browser ma non quando cliccherai sul bottone. Mentre il seguente codice partirà solo quando cliccherai sul bottone. E' una funzione che è eseguita quando inneschi l'handler.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -687,7 +687,7 @@ It will run when you open the application in the browser but not when you click 
 ...
 ~~~~~~~~
 
-In order to keep it concise, you can transform it into a JavaScript ES6 arrow function again. That's what we did with the `onDismiss()` class method too.
+Per mantenerlo conciso, puoi trasformarlo in un JavaScript ES6 arrow function. 
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -705,7 +705,7 @@ In order to keep it concise, you can transform it into a JavaScript ES6 arrow fu
 ...
 ~~~~~~~~
 
-Often newcomers to React have difficulties with the topic of using functions in event handlers. That's why I tried to explain it in more detail here. In the end, you should end up with the following code in your button to have a concisely inlined JavaScript ES6 arrow function that has access to the `objectID` property of the `item` object.
+Spesso chi è alle prime armi con React ha difficoltà con l'argomento legato all'utilizzo delle funzioni negli event handler. Ecco perché ho provato a spiegarlo con più dettagli. Alla fine, dovresti terminare con il seguente codice nel tuo bottone per avere una JavaScript ES6 arrow function che ha accesso alla proprietà `objectID` dell'oggetto `item`.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -736,11 +736,11 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Another performance relevant topic, that is often mentioned, are the implications of using arrow functions in event handlers. For instance, the `onClick` handler for the `onDismiss()` method is wrapping the method in another arrow function to be able to pass the item identifier. So every time the `render()` method runs, the handler instantiates the higher order arrow function. It *can* have an impact on your application performance, but in most cases you will not notice it. Imagine you have a huge table of data with 1000 items and each row or column has such an arrow function in an event handler. Then it is worth to think about the performance implications and therefore you could implement a dedicated Button component to bind the method in the constructor. But before that happens it is premature optimization. It is more valuable to focus on learning React itself.
+Un altro argomento utile per le performance, che è spesso menzionato, riguarda le implicazioni dell'utilizzo delle arrow function negli event handler. Per esempio, l'handler `onClick` per il metodo `onDismiss()` racchiude il metodo in un altra arrow function per essere adatta a passare l'item identifier. Quindi ogni volta che il metodo `rendere()` si innesca, l'handler istanzia l'higher order arrow function. Questo processo *può* avere un impatto sulla performance della tua applicazione, ma nella maggior parte dei casi non lo noterai. Immagina di avere una grande tabella di dati con 1000 item e ogni riga o colonna gestiscono una arrow function in un event handler. In questo caso sarebbe giusto pensare alle implicazioni sulla performance e quindi dovresti implementare un componente Button dedicato per vincolare il metodo al costruttore. Ma prima che ciò accada è prematuro ottimizzare. E' meglio focalizzarsi su React.
 
-### Exercises:
+### Esercizi:
 
-* try the different approaches of using functions in the `onClick` handler of your button
+* cerca i differenti approcci sull'utilizzo delle funzioni nell'handler `onClick` del tuo bottone.
 
 ## Interactions with Forms and Events
 
