@@ -742,11 +742,11 @@ Un altro argomento utile per le performance, che è spesso menzionato, riguarda 
 
 * cerca i differenti approcci sull'utilizzo delle funzioni nell'handler `onClick` del tuo bottone.
 
-## Interactions with Forms and Events
+## Interazione con Form ed Eventi
 
-Let's add another interaction for the application to experience forms and events in React. The interaction is a search functionality. The input of the search field should be used to filter your list temporary based on the title property of an item.
+Aggiungiammo un'altra interazione per la nostra applicazione dedicandoci ai Form ed Eventi in React. L'interazione riguarderà un motore di ricerca. L'input del campo di ricerca dovrebbe essere utilizzato per filtrare temporaneamente la tua lista basata sulla proprietà titolo di un item.
 
-In the first step, you are going to define a form with an input field in your JSX.
+Nel primo step, dovrai definire un form con un campo input nel tuo JSX.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -771,9 +771,9 @@ class App extends Component {
 }
 ~~~~~~~~
 
-In the following scenario you will type into the input field and filter the list temporarily by the search term that is used in the input field. To be able to filter the list based on the value of the input field, you need to store the value of the input field in your local state. But how do you access the value? You can use **synthetic events** in React to access the event payload.
+Nel seguente scenario scriverai qualcosa nel tuo campo e filtrerai la lista attraverso il termine di ricerca che è stato scritto nel campo. Per abilitare il filtro attraverso il campo di ricerca, avrai bisogno di salvare il valore del campo nel tuo local state. Ma come avrai accesso al valore? Puoi usare i **synthetic event**. 
 
-Let's define a `onChange` handler for the input field.
+Definiamo un handler `onChange` per il campo input.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -799,7 +799,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-The function is bound to the component and thus a class method again. You have to bind and define the method.
+La funzione è vincolata al componente e poi ad un metodo di classe. Devi vincolare e definire il metodo.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -828,7 +828,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-When using a handler in your element, you get access to the synthetic React event in your callback function's signature.
+Quando utilizzi un handler nel tuo elemento, hai accesso al synthetic event di React nella tua callback.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -846,7 +846,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-The event has the value of the input field in its target object. Hence you are able to update the local state with the search term by using `this.setState()` again.
+L'evento ha il valore del campo input nel suo oggetto. Quindi tu avrai la possibilità di aggiornare il local state con il termine di ricerca utilizzando `this.setState()`.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -864,7 +864,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Additionally, you shouldn't forget to define the initial state for the `searchTerm` property in the constructor. The input field should be empty in the beginning and thus the value should be an empty string.
+Inoltre, non dovresti dimenticare di definire l'initial state per la proprietà `searchTerm` nel costruttore. Il campo input dovrebbe essere vuoto all'inizio e quindi il valore dovrebbe essere una stringa vuota.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -888,11 +888,11 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Now you store the input value to your internal component state every time the value in the input field changes.
+Adesso il valore viene intercettato ogni volta che il valore nel campo input cambia.
 
-A brief note about updating the local state in a React component. It would be fair to assume that when updating the `searchTerm` with `this.setState()` the list needs to be passed as well to preserve it. But that isn't the case. React's `this.setState()` is a shallow merge. It preserves the sibling properties in the state object when updating one sole property in it. Thus the list state, even though you have already dismissed an item from it, would stay the same when updating the `searchTerm` property.
+Qualche considerazione sull'aggiornamento del local state nel componente React. Sarebbe giusto che quando si aggiorna il `searchTerm` con `this.setState()` la lista debba essere passata per preservarla. Ma non è questo il caso. `this.setState()` preserva la proprietà dei fratelli nello state object quando si aggiorna una sola proprietà di esso. In questo modo la list state, anche se hai già disattivato un item, resterà la stessa quando aggiorni la proprietà `searchTerm`.
 
-Let's get back to your application. The list isn't filtered yet based on the input field value that is stored in the local state. Basically you have to filter the list temporarily based on the `searchTerm`. You have everything you need to filter it. So how to filter it temporarily now? In your `render()` method, before you map over the list, you can apply a filter on it. The filter would only evaluate if the `searchTerm` matches title property of the item. You have already used the built-in JavaScript filter functionality, so let's do it again. You can sneak in the filter function before the map function, because the filter function returns a new array and thus the map function can be used on it in such a convenient way.
+Torniamo alla nostra applicazione. La lista non è filtrata sulla base del valore del campo input che è salvato nel local state. Di base devi filtrare la lista temporaneamente basata su `searchTerm`. Hai tutto ciò che occorre per filtrare la lista. Come filtrare la lista adesso? Nel tuo metodo `render()`, prima che tu effettui la mappatura sulla lista, puoi applicare un filtro. Il filtro dovrebbe solo valutare se `searchTerm` associa la proprietà title dell'item. Hai già utilizzato la funzionalità built-in di JavaScript a proposito dei filtri, dunque usiamola ancora. La funzione filter restituisce un nuovo array e quindi la funzione map può essere utilizzata in modo corretto.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -920,11 +920,11 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Let's approach the filter function in a different way this time. We want to define the filter argument, the function that is passed to the filter function, outside of the ES6 class component. There we don't have access to the state of the component and thus we have no access to the `searchTerm` property to evaluate the filter condition. We have to pass the `searchTerm` to the filter function and have to return a new function to evaluate the condition. That's called a higher order function.
+Approcciamo alla funzione filter in un modo diverso questa volta. Vogliamo definire l'argomento filter fuori dalla classe component ES6. Lì non abbiamo accesso allo state del componente e quindi non abbiamo accesso alla proprietà `searchTerm` per valutare la condizione del filtro. Dobbiamo passare `searchTerm` alla funzione filter e ricevere una nuova funzione per valutare la condizione. Questo processo è chiamato higher order function.
 
-Normally I wouldn't mention higher order functions, but in a React book it makes total sense. It makes sense to know about higher order functions, because React deals with a concept called higher order components. You will get to know the concept later in the book. Now again, let's focus on the filter functionality.
+Di solito non avrei menzionato gli higher order functions, ma nel libro React ha senso. Ha senso conoscere le higher order functions perché React tratta un concetto chiamato higher order component. Ne parleremo poi. Adesso focalizziamoci sulla funzionalità filter.
 
-First, you have to define the higher order function outside of your App component.
+Prima di tutto, devi definire l'higher order function fuori dal tuo componente.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -943,7 +943,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-The function takes the `searchTerm` and returns another function, because after all the filter function takes a function as its input. The returned function has access to the item object because it is the function that is passed to the filter function. In addition, the returned function will be used to filter the list based on the condition defined in the function. Let's define the condition.
+La funzione prende `searchTerm` e restituisce un'altra funzione, perché dopo tutto la funzione filter prende una funzione come suo input. La funzione restituita ha accesso all'item perché è la funzione che è passata alla funzione filter. Inoltre la funzione restituita sarà utilizzata per filtrare la lista basata sulla condizione definita nella funzione. Definiamo la condizione.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -962,9 +962,9 @@ class App extends Component {
 }
 ~~~~~~~~
 
-The condition says that you match the incoming `searchTerm` pattern with the title property of the item from your list. You can do that with the built-in `includes` JavaScript functionality. Only when the pattern matches, you return true and the item stays in the list. When the pattern doesn't match the item is removed from the list. But be careful with pattern matching: You shouldn't forget to lower case both strings. Otherwise there will be mismatches between a search term 'redux' and an item title 'Redux'. Since we are working on a immutable list and return a new list by using the filter function, the original list in the local state isn't modified at all.
+La condizione dice che puoi associare il pattern in entrata `searchTerm` con la proprietà title dell'item dalla tua lista. Puoi fare questo con la funzionalità built-in `includes` (JavaScript). Solo quando il pattern è associato, restituisci true e l'item resterà nella lista. Quando il pattern non è associato l'item sarà rimosso dalla lista. Ma fa attenzione all'associazione del pattern: non dimenticare il lower case per entrambe le stringhe. Altrimenti potrebbero esserci problemi tra una ricerca di 'redux' e un title dell'item chiamato 'Redux'. Siccome stiamo lavorando su una lista immutabile e sulla restituzione di una nuova lista con l'utilizzo della funzione filter, la lista originale nel local state non sarà modificata.
 
-One thing is left to mention: We cheated a bit by using the built-in includes JavaScript functionality. It is already an ES6 feature. How would that look like in JavaScript ES5? You would use the `indexOf()` function to get the index of the item in the list. When the item is in the list, `indexOf()` will return its index in the array.
+Ancora una cosa: abbiamo imbrogliato un po utilizzando la funzionalità built-in includes di JavaScript. E' già una feature ES6. Come si lavora nel caso di JavaScript ES5? Dovresti usare la funzione `indexOf()` per recuperare l'indice dell'item nella lista. Quando l'item è nella lista, `indexOf()` restituirà il suo indice nell'array.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -975,7 +975,7 @@ string.indexOf(pattern) !== -1
 string.includes(pattern)
 ~~~~~~~~
 
-Another neat refactoring can be done with an ES6 arrow function again. It makes the function more concise:
+Un altro po' di refactoring può essere fatto con le arrow function ES6. Per rendere il tutto più conciso:
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -991,9 +991,11 @@ const isSearched = searchTerm => item =>
   item.title.toLowerCase().includes(searchTerm.toLowerCase());
 ~~~~~~~~
 
-One could argue which function is more readable. Personally I prefer the second one. The React ecosystem uses a lot of functional programming concepts. It happens often that you will use a function which returns a function (higher order functions). In JavaScript ES6, you can express these more concisely with arrow functions.
 
-Last but not least, you have to use the defined `isSearched()` function to filter your list. You pass it the `searchTerm` property from your local state, it returns the filter input function, and filters your list based on the filter condition. Afterward it maps over the filtered list to display an element for each list item.
+Qualcuno potrebbe argomentare che la funzione è più leggibile. Personalmente preferisco il secondo tipo. L'ecosistema React utilizza un sacco di concetti di programmazione funzionale. Accadrà spesso che utilizzerai una funzione che restituisce una funzione (higher order functions). In JavaScript ES6, puoi esprimere queste cose in modo più conciso con le arrow function.
+
+
+Ultimo, ma non ultimo puoi usare la funzione `isSearched()` per filtrare la tua lista. Passi la proprietà `searchTerm` dal tuo local state, restituisce la funzione e filtra la tua lista basata sulla condizione filter. Poi mappa sulla lista filtrata per mostrare un elemento di ogni item della lista.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1021,12 +1023,12 @@ class App extends Component {
 }
 ~~~~~~~~
 
-The search functionality should work now. Try it yourself in the browser.
+La funzionalità di ricerca dovrebbe funzionare ora. Provala nel browser.
 
-### Exercises:
+### Esercizi:
 
-* read more about [React events](https://facebook.github.io/react/docs/handling-events.html)
-* read more about [higher order functions](https://en.wikipedia.org/wiki/Higher-order_function)
+* approfondisci sugli [eventi React](https://facebook.github.io/react/docs/handling-events.html)
+* approfondisci sugli [higher order functions](https://en.wikipedia.org/wiki/Higher-order_function)
 
 ## ES6 Destructuring
 
