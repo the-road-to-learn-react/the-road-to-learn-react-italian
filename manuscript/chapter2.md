@@ -1030,9 +1030,9 @@ La funzionalità di ricerca dovrebbe funzionare ora. Provala nel browser.
 * approfondisci sugli [eventi React](https://facebook.github.io/react/docs/handling-events.html)
 * approfondisci sugli [higher order functions](https://en.wikipedia.org/wiki/Higher-order_function)
 
-## ES6 Destructuring
+## ES6 Destrutturato
 
-There is a way in JavaScript ES6 for an easier access to properties in objects and arrays. It's called destructuring. Compare the following snippet in JavaScript ES5 and ES6.
+C'è un'alternativa in JavaScript ES6 che permette di accedere con più facilità alle proprietà negli oggetti e negli array. E' chiamata destrutturazione. Paragona il seguente snippet come viene gestito in ES5 e ES6.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -1055,7 +1055,7 @@ console.log(firstname + ' ' + lastname);
 // output: Robin Wieruch
 ~~~~~~~~
 
-While you have to add an extra line each time you want to access an object property in JavaScript ES5, you can do it in one line in JavaScript ES6. A best practice for readability is to use multilines when you destructure an object into multiple properties.
+Mentre ti tocca aggiungere una linea extra ogni volta che vuoi accedere alla proprietà di un oggetto in JavaScript ES5, puoi farlo in una linea in JavaScript ES6. Una best practice che aumenta la leggibilità è utilizzare più linee quando destrutturi un oggetto in proprietà multiple.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -1065,7 +1065,7 @@ const {
 } = user;
 ~~~~~~~~
 
-The same goes for arrays. You can destructure them too. Again, multilines will keep your code scannable and readable.
+Stesso discorso vale per gli array. Puoi destrutturarli allo stesso modo. Le linee multiple aiuteranno il tuo codice ad essere più manutenibile e leggibile.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -1080,7 +1080,7 @@ console.log(userOne, userTwo, userThree);
 // output: Robin Andrew Dan
 ~~~~~~~~
 
-Perhaps you have noticed that the local state object in the App component can get destructured the same way. You can shorten the filter and map line of code.
+Forse avrai notato che l'oggetto local state nel componente App può essere destrutturato allo stesso modo. Puoi accorciare il filtro e mappare la linea del codice.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1100,7 +1100,7 @@ Perhaps you have noticed that the local state object in the App component can ge
     );
 ~~~~~~~~
 
-You can do it the ES5 or ES6 way:
+Ecco come fare in ES5 e ES6:
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -1112,21 +1112,21 @@ var list = this.state.list;
 const { searchTerm, list } = this.state;
 ~~~~~~~~
 
-But since the book uses JavaScript ES6 most of the time, you should stick to it.
+Dal momento in cui questo libro utilizza la sintassi JavaScript ES6, ti consiglio di approfondire l'argomento.
 
-### Exercises:
+### Esercizi:
 
-* read more about [ES6 destructuring](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+* approfondisci [la destrutturazione ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 
-## Controlled Components
+## Componenti controllati
 
-You already learned about the unidirectional data flow in React. The same law applies for the input field, which updates the local state with the `searchTerm` in order to filter the list. When the state changes, the `render()` method runs again and uses the recent `searchTerm` from the local state to apply the filter condition.
+Hai già affrontato il flusso di dati unidirezionali in React. La stessa legge si applica per i campi input, che aggiornano il local state con `searchTerm` per filtrare la lista. Quando lo state cambia, il metodo `render()` riparte e utilizza `searchTerm` dal local state per applicare il filtro.
 
-But didn't we forget something in the input element? A HTML input tag comes with a `value` attribute. The value attribute usually has the value that is shown in the input field. In this case it would be the `searchTerm` property. However, it seems like we don't need that in React.
+Ma non abbiamo dimenticato qualcosa nell'elemento input? Un input tag HTML ha un attributo `value`. L'attributo `value` di solito ha un valore che è mostrato nel campo input. In questo caso sarebbe la proprietà `searchTerm`. Comunque, sembra che non ne abbiamo bisogno in React.
 
-That's wrong. Form elements such as `<input>`, `<textarea>` and `<select>` hold their own state in plain HTML. They modify the value internally once someone changes it from the outside. In React that's called an **uncontrolled component**, because it handles its own state. In React, you should make sure to make those elements **controlled components**.
+Sbagliato. Gli elementi del form come `<input>` `<textarea>` e `<select>` mantengono il loro stato in plain HTML. Modificano il loro valore internamente nel momento in cui qualcuno li cambia dall'esterno. In React questo è chiamato come **componente incontrollato** perché gestisce il suo stesso state. In React, dovresti assicurarti di utilizzare i **componenti controllati**.
 
-How should you do that? You only have to set the value attribute of the input field. The value is already saved in the `searchTerm` state property. So why not access it from there?
+Come fare? Devi solo impostare il value del campo input. Il value è già salvato nella proprietà state `searchTerm`. Dunque perché non accedere da lì?
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1154,19 +1154,20 @@ class App extends Component {
 }
 ~~~~~~~~
 
-That's it. The unidirectional data flow loop for the input field is self-contained now. The internal component state is the single source of truth for the input field.
 
-The whole internal state management and unidirectional data flow might be new to you. But once you are used to it, it will be your natural flow to implement things in React. In general, React brought a novel pattern with the unidirectional data flow to the world of single page applications. It is adopted by several frameworks and libraries by now.
+Ecco. Il ciclo di flusso dati unidirezionale per il campo input è autosufficiente adesso. L'internal component state è la singola sorgente di verità del campo input.
 
-### Exercises:
+L'intera gestione dell'internal state e il flusso dati unidirezionali dovrebbe essere un argomento nuovo per te. Ma appena lo utilizzerai, sarà un processo naturale per implementare le attività in React. In generale, React ha portato la novità del flusso di dati unidirezionali nelle applicazioni single page. E' adottato da tantissimi framework e libreria oggi.
 
-* read more about [React forms](https://facebook.github.io/react/docs/forms.html)
+### Esercizi:
 
-## Split Up Components
+* approfondisci i [form in React](https://facebook.github.io/react/docs/forms.html)
 
-You have one large App component now. It keeps growing and can become confusing eventually. You can start to split it up into chunks of smaller components.
+## Dividere i componenti
 
-Let's start to use a component for the search input and a component for the list of items.
+Sei alle prese con un'applicazione grande in questo momento. Tenderà ad aumentare e può generare ulteriore confusione. Puoi iniziare a dividerla in componenti più piccoli.
+
+Iniziamo ad utilizzare un componente per l'input di ricerca e un componente per la lista di item.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1188,7 +1189,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-You can pass those components properties which they can use themselves. In the case of the App component it needs to pass the properties managed in the local state and its class methods.
+Puoi passare queste proprietà dei componenti che possono essere usate anche da sole. Nel caso della nostra applicazione c'è bisogno di passare le proprietà gestite nel local state e nei suoi metodi di classe.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1217,9 +1218,9 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Now you can define the components next to your App component. Those components will be ES6 class components as well. They render the same elements like before.
+Adesso puoi definire i componenti nella tua applicazione. Questi componenti saranno componenti di classe ES6. Renderizzeranno gli stessi elementi come al solito.
 
-The first one is the Search component.
+Il primo è il componente Search.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1245,7 +1246,8 @@ class Search extends Component {
 # leanpub-end-insert
 ~~~~~~~~
 
-The second one is the Table component.
+
+Il secondo è il componente Table.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1282,14 +1284,15 @@ class Table extends Component {
 # leanpub-end-insert
 ~~~~~~~~
 
-Now you have three ES6 class components. Perhaps you have noticed the `props` object that is accessible via the class instance by using `this`. The props, short form for properties, have all the values you have passed to the components when you used them in your App component. That way, components can pass properties down the component tree.
 
-By extracting those components from the App component, you would be able to reuse them somewhere else. Since components get there values by using the props object, you can pass every time different props to your components when you use them somewhere else. These components became reusable.
+Adesso hai tre classi di componenti ES6. Forse avrai notato l'oggetto `props` che è accessibile attraverso l'istanza della classe utilizzando `this`. I props, piccoli moduli per le proprietà, hanno tutti i valori che hai passato ai componenti quando li utilizzavi nella tua App. In questo modo, i componenti possono passare le proprietà lungo l'albero del componente.
 
-### Exercises:
+Estraeondo questi componenti dall'App, avrai la possibilità di riutilizzarli altrove. Dal momento in cui i componenti ricevono i valori utilizzando l'oggetto props, puoi passare ogni volta differenti props ai tuoi componenti quando li utilizzi per qualcos'altro. Questi componenti diventano riutilizzabili.
 
-* figure out further components that you could split up as you have done with the Search and Table components
-  * but don't do it now, otherwise you will run into conflicts in the next chapters
+### Esercizi:
+
+* risolvi ulteriroi componenti che puoi dividere come hai fatto con i componenti Search e Table.
+    * ma non farlo adesso, altimenti ti troverai in una serie di conflitti presenti nei prossimi capitoli
 
 ## Composable Components
 
