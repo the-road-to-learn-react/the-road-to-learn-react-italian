@@ -1294,9 +1294,9 @@ Estraeondo questi componenti dall'App, avrai la possibilità di riutilizzarli al
 * risolvi ulteriroi componenti che puoi dividere come hai fatto con i componenti Search e Table.
     * ma non farlo adesso, altimenti ti troverai in una serie di conflitti presenti nei prossimi capitoli
 
-## Composable Components
+## Componenti componibilit
 
-There is one more little property which is accessible in the props object: the `children` prop. You can use it to pass elements to your components from above, which are unknown to the component itself, but make it possible to compose components into each other. Let's see how this looks like when you only pass a text (string) as a child to the Search component.
+C'è più di una piccola proprietà che è accessibile nei props object: il prop `children`. Puoi utilizzarlo per passare elementi ai tuoi componenti da sopra, che sono sconosciuti al componente stesso, ma permetti la creazione di componenti annidati. Vediamo cosa accade quando passi solo una stringa di testo come `child` al componente "Search".
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1327,7 +1327,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Now the Search component can destructure the children property from the props object. Then it can specify where the children should be displayed.
+Adesso il componente Search può destrutturare le proprietà `children` dai props object. Quindi può specificare dove i `children` saranno mostrati.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1351,17 +1351,17 @@ class Search extends Component {
 }
 ~~~~~~~~
 
-The "Search" text should be visible next to your input field now. When you use the Search component somewhere else, you can choose a different text if you like. After all, it is not only text that you can pass as children. You can pass an element and element trees (which can be encapsulated by components again) as children. The children property makes it possible to weave components into each other.
+Il testo "Search" dovrebbe essere visibile nel tuo campo input adesso. Quando utilizzi il componente "Search" da qualche parte, puoi scegliere un testo differente se ti va. Dopo tutto, non passerai solo il testo come `children`. Puoi passare un elemento o alberi di elementi (che saranno incapsulati dai componenti) come `children`. La proprietà `children` rende possibile intreccare componenti all'interno di altri.
 
-### Exercises:
+### Esercizi:
 
-* read more about [the composition model of React](https://facebook.github.io/react/docs/composition-vs-inheritance.html)
+* approfondisci il [model di composizione di React](https://facebook.github.io/react/docs/composition-vs-inheritance.html)
 
-## Reusable Components
+## Componenti riusabili
 
-Reusable and composable components empower you to come up with capable component hierarchies. They are the foundation of React's view layer. The last chapters mentioned the term reusability. You can reuse the Table and Search components by now. Even the App component is reusable, because you could instantiate it somewhere else again.
+I componenti riusabili e componibili ti autorizzano a gestire le gerarchie del componente. Rappresentano il fondamento del view layer in React. Nell'ultimo capitolo si è parlato del termine riutilizzabilità. Puoi riutilizzare i componenti Table e Search. Anche il componente App è riutilizzabile, perché puoi istanziarlo ovunque.
 
-Let's define one more reusable component, a Button component, which gets reused more often eventually.
+Definiamo un ulteriore componente riutilizzabile, un componente Button, che può essere riutilizzato spesso, in effetti.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1386,9 +1386,9 @@ class Button extends Component {
 }
 ~~~~~~~~
 
-It might seem redundant to declare such a component. You will use a `Button` component instead of a `button` element. It only spares the `type="button"`. Except for the type attribute you have to define everything else when you want to use the Button component. But you have to think about the long term investment here. Imagine you have several buttons in your application, but want to change an attribute, style or behavior for the button. Without the component you would have to refactor every button. Instead the Button component ensures to have only one single source of truth. One Button to refactor all buttons at once. One Button to rule them all.
+Potrebbe sembrare ridondante dichiarare ancora una volta un componente. Userai un componente `Button` invece di un elemento `button`. Si risparmi solo `type="button"`. Ad eccezione del tipo di attributo devi definire qualcos'altro quando vuoi utilizzare il componente Button. Ma devi pensare a lungo termine. Immagina di avere diversi bottoni nella tua applicazione, ma vuoi cambiarne un attributo, stile o comportamento. Senza un componente dovresti occuparti del refactoring di ogni bottone. Invece il componente Button ti garantisce  di avere solo una singola sorgente di verità. Un componente Button per il refactoring di tutti i bottoni in una volta. Un Bottone regola tutto.
 
-Since you already have a button element, you can use the Button component instead. It omits the type attribute, because the Button component specifies it.
+Dal momento in cui hai già un elemento button, devi utilizzare il componente Button. Omette l'attributo type, perché il componente Button lo specifica.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1420,9 +1420,9 @@ class Table extends Component {
 }
 ~~~~~~~~
 
-The Button component expects a `className` property in the props. The `className` attribute is another React derivate for the HTML attribute class. But we didn't pass any `className` when the Button was used. In the code it should be more explicit in the Button component that the `className` is optional.
+Il componente Button si aspetta una proprietà `className` nei props. L'attributo `className` è un altro derivato React per l'atributo HTML class. Ma non abbiamo passato alcun `className` quando il Button è stato ustao. Nel codice dovrebbe essere più esplicito nel componente Button che `className` è opzionale. 
 
-Therefore, you can use the default parameter which is a JavaScript ES6 feature.
+Perciò, puoi utilizzare il paramentro di default che è una feature di JavaScript ES6.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1441,25 +1441,25 @@ class Button extends Component {
 }
 ~~~~~~~~
 
-Now, whenever there is no `className` property specified when using the Button component, the value will be an empty string instead of `undefined`.
+Adesso, ogni volta che non è specificata la proprietà `className` quando si utilizza il componente Button, il valore sarà una stringa vuota invece di`undefined`.
 
-### Exercises:
+### Esercizi:
 
-* read more about [ES6 default parameters](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Default_parameters)
+* approfondisci sui [parametri di default ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Default_parameters)
 
-## Component Declarations
+## Dichiarazioni dei componenti
 
-By now you have four ES6 class components. But you can do better. Let me introduce functional stateless components as alternative for ES6 class components. Before you will refactor your components, let's introduce the different types of components in React.
+Da adesso hai quattro classi di componenti ES6. Ma puoi fare di meglio. Permettimi di introdurre i componenti functional stateless come alternativa ai componenti ES6. Prima che tu faccia il refactoring dei tuoi componenti, ti introdurrò a queste differenti tipologie di componenti in React.
 
-* **Functional Stateless Components:** These components are functions which get an input and return an output. The input are the props. The output is a component instance thus plain JSX. So far it is quite similar to an ES6 class component. However, functional stateless components are functions (functional) and they have no local state (stateless). You cannot access or update the state with `this.state` or `this.setState()` because there is no `this` object. Additionally, they have no lifecycle methods. You didn't learn about lifecycle methods yet, but you already used two: `constructor()` and `render()`. Whereas the constructor runs only once in the lifetime of a component, the `render()` class method runs once in the beginning and every time the component updates. Keep in mind that functional stateless component have no lifecycle methods, when you arrive at the lifecycle methods chapter later on.
+* **Componenti Functional Stateless:** Questi componenti sono funzioni che recuperano un input e restituiscono un output. L'input è rappresentato dai props. L'output è una istanza del componente in JSX plain. Finora è abbastanza simile ad una classe di componente ES6. Però, i componenti functional stateless sono funzioni (funzionali) e non hanno local state (stateless). Non puoi accedere o aggiornare lo state con `this.state` o `this.setState()` perché non esiste un oggetto `this`. Inoltre, non hanno metodi lifecycle. Non hai imparato nulla a proposito dei metodi lifecycle, ma ne utilizzi già due: `constructor()` e `render()`. Mentre il costruttore si avvia una sola volta durante il lifetime di un componente, il metodo di classe `render()` si avvia una sola volta all'inizio e ogni volta che il componente si aggiorna. Tieni a mente che il componente function stateless non ha metodi lifecyle, quando te ne occuperai nei capitoli successivi.
 
-* **ES6 Class Components:** You already used this type of component declaration in your four components. In the class definition, they extend from the React component. The `extend` hooks all the lifecycle methods, available in the React component API, to the component. That way you were able to use the `render()` class method. Additionally, you can store and manipulate state in ES6 class components by using `this.state` and `this.setState()`.
+* **ES6 Class Components:** Hai già utilizzato questo tipo di componente nei tuoi quattro componenti. Nella definizione di classe, estendono il componente React. `extend` si aggancia a tutti i metodi lifecycle disponibili nel componente API di React. Inoltre puoi salvare e manipolare lo state in nei componenti di classe ES6 utilizzando `this.state` e `this.setState()`.
 
-* **React.createClass:** The component declaration was used in older versions of React and still in JavaScript ES5 React applications. But [Facebook declared it as deprecated](https://facebook.github.io/react/blog/2015/03/10/react-v0.13.html) in favor of JavaScript ES6. They even added a [deprecation warning in version 15.5](https://facebook.github.io/react/blog/2017/04/07/react-v15.5.0.html). You will not use it in the book.
+* **React.createClass:** La dichiarazione del componente era utilizzata in vecchie versioni di React ed è ancora presente nelle applicazioni React in JavaScript ES5. Ma [Facebook li considera deprecati](https://facebook.github.io/react/blog/2015/03/10/react-v0.13.html), favorendo JavaScript ES6. Se ne parla anche in un [warning nella versione 15.5](https://facebook.github.io/react/blog/2017/04/07/react-v15.5.0.html). Non si utilizzeranno in questo libro.
 
-So basically there are only two component declarations left. But when to use functional stateless components over ES6 class components? A rule of thumb is to use functional stateless components when you don't need local state or component lifecycle methods. Usually you start to implement your components as functional stateless components. Once you need access to the state or lifecycle methods, you have to refactor it to an ES6 class component. In our application, we started the other way around for the sake of learning React.
+Quindi restano solo due dichiarazioni di componenti. Ma quando utilizzare i componenti functional stateless al posto dei componenti di classe ES6? Una regola è quella di utilizzare i componenti functional stateless quando non hai bisogno di local state o metodi lifecycle. Di solito inizi ad implementare i tuoi componenti come functional stateless. Nel momento in cui hai bisogno di accedere allo state o ai metodi lifecycle, ti occuperai del refactoring e lo trasformerai in componente di classe ES6. Nella nostra applicazione, abbiamo iniziato nell'altro modo per comprendere meglio React.
 
-Let's get back to your application. The App component uses internal state. That's why it has to stay as an ES6 class component. But the other three of your ES6 class components are stateless. They don't need access to `this.state` or `this.setState()`. Even more, they have no lifecycle methods. Let's refactor together the Search component to a stateless functional component. The Table and Button component refactoring will remain as your exercise.
+Torniamo sulla nostra applicazione. Il componente App utilizza l'internal state. Ecco perché deve restare come componente di classe ES6. Ma gli altri tre dei tuoi componenti di classe sono stateless. Non hanno bisogno di accedere a `this.state` o `this.setState()`. Ancora, non hanno metodi lifecycle. Facciamo il refactoring insieme del componente Search e transformiamolo in un componente stateless functional. Il refactoring dei componenti Table e Button saranno il tuo esercizio.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1479,7 +1479,7 @@ function Search(props) {
 # leanpub-end-insert
 ~~~~~~~~
 
-That's basically it. The props are accessible in the function signature and the return value is JSX. But you can do more code wise in a functional stateless component. You already know the ES6 destructuring. The best practice is to use it in the function signature to destructure the props.
+I props sono accessibili nella funzione e il valore restituito compare nel JSX. Ma puoi fare di più in un componente functional stateless. Sei già a conoscenza della destrutturazione in ES6. La migliore pratica è utilizzarla nella funzione per destrutturare i props.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1498,7 +1498,7 @@ function Search({ value, onChange, children }) {
 }
 ~~~~~~~~
 
-But it can get better. You know already that ES6 arrow functions allow you to keep your functions concise. You can remove the block body of the function. In a concise body an implicit return is attached thus you can remove the return statement. Since your functional stateless component is a function, you can keep it concise as well.
+Possiamo fare ancora di più. Sei a conoscenza delle arrow function che ti permettono di avere il codice più conciso. Puoi rimuovere il corpo della funzione. 
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1514,7 +1514,7 @@ const Search = ({ value, onChange, children }) =>
 # leanpub-end-insert
 ~~~~~~~~
 
-The last step was especially useful to enforce only to have props as input and JSX as output. Nothing in between. Still, you could *do something* in between by using a block body in your ES6 arrow function.
+L'ultimo step è stato particolarmente utile per applicare i props come input e JSX come output. Niente in mezzo. Ancora, puoi *fare qualcosa* tra di loro utilizzando un body block nell'arrow function di ES6.
 
 {title="Code Playground",lang=javascript}
 ~~~~~~~~
@@ -1534,14 +1534,14 @@ const Search = ({ value, onChange, children }) => {
 }
 ~~~~~~~~
 
-But you don't need it for now. That's why you can keep the previous version without the block body. When using block bodies, people often tend to do too many things in the function. By leaving the block body out, you can focus on the input and output of your function.
+Ma non ne hai bisogno per adesso. Ecco perché puoi mantenere la precedente versione senza il block body. Quando si utilizzano i block body, la gente tende spesso a fare troppe cose nella funzione. Lascia il block body fuori, focalizzati sull'input e sull'output della tua funzione.
 
-Now you have one lightweight functional stateless component. Once you would need access to its internal component state or lifecycle methods, you would refactor it to an ES6 class component. In addition you saw how JavaScript ES6 can be used in React components to make them more concise and elegant.
+Adesso hai un componente functional stateless leggero. Nel momento in cui dovessi avere accesso al suo internal component state o ai metodi lifecycle, dovresti effettuare un refactoring e trasformare tutto in un componente di classe ES6. Inoltre hai visto come JavaScript ES6 può essere utilizzato nei componenti React per renderli più concisi ed eleganti.
 
-### Exercises:
+### Esercizi:
 
-* refactor the Table and Button component to stateless functional components
-* read more about [ES6 class components and functional stateless components](https://facebook.github.io/react/docs/components-and-props.html)
+* fai il refactoring dei componenti Table e Button e trasformali in componenti functional stateless
+* approfondisci le [componenti di classe ES6 e componenti functional stateless](https://facebook.github.io/react/docs/components-and-props.html)
 
 ## Styling Components
 
