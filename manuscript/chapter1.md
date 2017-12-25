@@ -187,6 +187,7 @@ hackernews/
   public/
     favicon.ico
     index.html
+    manifest.json
   src/
     App.css
     App.js
@@ -194,6 +195,7 @@ hackernews/
     index.css
     index.js
     logo.svg
+    registerServiceWorker.js
 ~~~~~~~~
 
 Diamo un'occhiata alle cartelle e ai file. E' un passo essenziale per comprendere React.
@@ -207,6 +209,8 @@ Diamo un'occhiata alle cartelle e ai file. E' un passo essenziale per comprender
 * **.gitignore:** Il file elenca tutti i file e cartelle che non dovranno essere aggiunti al repository remoto se usi git. Saranno solo presenti nel tuo progetto locale. La cartella *node_modules/* ne è un esempio. E' sufficiente condividere ilfile *package.json* con i tuoi collaboratori per permettere loro di installare tutte le dipendenze sui loro progetti locali senza condividere la cartella stessa.
 
 * **public/:** La cartella contiene tutti i file per lavorare al tuo progetto in produzione. Di solito tutto il codice scritto lo troverai nella cartella *src/* e sarà raggruppato in un paio di file quando costruisci il tuo progetto e lo organizzi in questa cartella *public*.
+
+* **manifest.json** e **registerServiceWorker.js:** non preoccuparti di questi file, non ne avremo bisogno nel progetto.
 
 In effetti, non hai bisogno di toccare i file e le cartelle menzionate. All'inizo qualsiasi cosa di cui tu abbia bisogno è presente all'interno della cartella *src/*. Il focus è nel file *src/App.js* per implementare i componenti React. Saranno usati per implementare la tua applicazione, ma più in laà potresti aver bisogno di dividere i tuoi componenti in file diversi dove ogni file mantiene uno o più componenti.
 
@@ -231,9 +235,10 @@ Gli script sono definiti nel file *package.json* La tua applicazione base di Rea
 
 ### Esercizi:
 
-* `npm start` per avviare la tua apllicazione e vederla nel browser
+* `npm start` per avviare la tua apllicazione e vederla nel browser (puoi uscire con il comando Control + C)
 * avvia lo script interattivo `npm test`
-* dai un'occhiata al contenuto nella cartella *public/*, lancia il comando `npm run build` e verifica che i file siano stati aggiunti alla cartella (puoi anche rimuovere questi file, ma non è necessario)
+* avvia `npm run build` e controlla che la cartella *build/* sia stata aggiunta al tuo progetto (puoi rimuoverla poi; fa attenzione però perché la cartella sarà utilizzata più tardi per il [deploy](https://www.robinwieruch.de/deploy-applications-digital-ocean/))
+)
 * prendi dimestichezza con la struttura della cartella
 * prendi dimenstichezza con il contenuto dei file
 * approfondisci i comandi [npm e create-react-app](https://github.com/facebookincubator/create-react-app)

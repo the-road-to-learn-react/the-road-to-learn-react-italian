@@ -1543,11 +1543,9 @@ Adesso hai un componente functional stateless leggero. Nel momento in cui dovess
 * fai il refactoring dei componenti Table e Button e trasformali in componenti functional stateless
 * approfondisci le [componenti di classe ES6 e componenti functional stateless](https://facebook.github.io/react/docs/components-and-props.html)
 
-## Styling Components
+## Decorare con stile i componenti
 
-Let's add some basic styling to your application and components. You can reuse the *src/App.css* and *src/index.css* files. These files should already be in your project since you have bootstrapped it with *create-react-app*. They should be imported in your *src/App.js* and *src/index.js* files too. I prepared some CSS which you can simply copy and paste to these files, but feel free to use your own style at this point.
-
-First, styling for your overall application.
+Aggiungiamo un po' di stile alla tua applicazione e ai tuoi componenti. Puoi riutilizzare i file *src/App.css* e *src/index.css*. Questi file dovrebbero essere già presenti nel tuo progetto sin dall'inizio con *create-react-app*. Ho preparato alcuni CSS che puoi semplicemente copiare ed incollare, ma sentiti libero di utilizzare il tuo stile personale a questo punto.
 
 {title="src/index.css",lang="css"}
 ~~~~~~~~
@@ -1597,7 +1595,7 @@ button:hover {
 }
 ~~~~~~~~
 
-Second, styling for your components in the App file.
+In seconda battuta, un po' di stile per i tuoi componenti
 
 {title="src/App.css",lang="css"}
 ~~~~~~~~
@@ -1666,9 +1664,9 @@ Second, styling for your components in the App file.
 }
 ~~~~~~~~
 
-Now you can use the style in some of your components. Don't forget to use React `className` instead of `class` as HTML attribute.
+Adesso puoi utilizzare lo stile in alcuni dei tuoi componenti. Non dimenticare di utilizzare `className` invece di `class` come attributo HTML.
 
-First, apply it in your App ES6 class component.
+Prima di tutto applica tutto nella tua classe App.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1705,7 +1703,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Second, apply it in your Table functional stateless component.
+Poi nella componente functional stateless Table.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1742,9 +1740,10 @@ const Table = ({ list, pattern, onDismiss }) =>
 # leanpub-end-insert
 ~~~~~~~~
 
-Now you have styled your application and components with basic CSS. It should look quite decent. As you know, JSX mixes up HTML and JavaScript. Now one could argue to add CSS in the mix as well. That's called inline style. You can define JavaScript objects and pass them to the style attribute of an element.
+Adesso che hai dato stile alla tua applicazione e ai tuoi componenti con CSS dovrebbe sembrare tutto più decente. Come già sai, JSX miscela HTML e JavaScript. Nessuno ha intenzione di aggiungere CSS al mix. Puoi invece definire oggetti JavaScript e passarli all'attributo style di un elemento.
 
-Let's keep the Table column width flexible by using inline style.
+Diamo un'ampiezza flessibile alla colonna Table usando la tecnica dell'inline style.
+
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1779,7 +1778,7 @@ const Table = ({ list, pattern, onDismiss }) =>
   </div>
 ~~~~~~~~
 
-The style is inlined now. You could define the style objects outside of your elements to make it cleaner.
+Lo style è inline adesso. Puoi definire l'oggetto style fuori dai tuoi elementi per renderli più puliti e leggibili.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -1796,35 +1795,35 @@ const smallColumn = {
 };
 ~~~~~~~~
 
-After that you would use them in your columns: `<span style={smallColumn}>`.
+Dopo aver fatto questo puoi utilizzarli nelle tue colonne `<span style={smallColumn}>`.
 
-In general, you will find different opinions and solutions for style in React. You used pure CSS and inline style now. That's sufficient to get started.
+In genelera, troverai differenti opinioni e soluzioni a riguardo circa lo stile in React. Hai usato CSS puro e l'inline style. E' sufficiente per iniziare.
 
-I don't want to be opinionated here, but I want to leave you some more options. You can read about them and apply them on your own. But if you are new to React, I would recommend to stick to pure CSS and inline style for now.
+Non voglio darti un'idea predominante, ma mi piace lasciarti alcune opzioni. Puoi dare un'occhiata e applicare queste opzioni in autonomia. Ma se sei nuovo in React, ti raccomando l'inline style per adesso.
 
 * [styled-components](https://github.com/styled-components/styled-components)
 * [CSS Modules](https://github.com/css-modules/css-modules)
 
 {pagebreak}
 
-You have learned the basics to write your own React application! Let's recap the last chapters:
+Hai appreso le basi per scrivere la tua applicazione React! Facciamo un riassuno:
 
-* React
-  * use `this.state` and `setState()` to manage your internal component state
-  * pass functions or class methods to your element handler
-  * use forms and events in React to add interactions
-  * unidirectional data flow is an important concept in React
-  * embrace controlled components
-  * compose components with children and reusable components
-  * usage and implementation of ES6 class components and functional stateless components
-  * approaches to style your components
+* React 
+  * utilizza `this.state` e `setState()` per gestire il tuo internal component state
+  * passa le funzioni o i metodi di classe al tuo element handler
+  * utilizza form ed eventi in React per aggiungere interazione
+  * il flusso di dati unidirezionali è un importante concetto in React
+  * sfrutta i componenti controllati
+  * componi componenti con i children e componenti riutilizzabili
+  * utilizza e implementa componenti di classe ES6 e componenti functional stateless
+  * dai uno stile ai tuoi componenti
 * ES6
-  * functions that are bound to a class are class methods
-  * destructuring of objects and arrays
-  * default parameters
+  * le funzioni che sono vincolate ad una classe sono metodi di classe
+  * destrutturazione di oggetti e di array
+  * parametri di default 
 * General
   * higher order functions
 
-Again it makes sense to take a break. Internalize the learnings and apply them on your own. You can experiment with the source code you have written so far. Additionally you can read more in the official [documentation](https://facebook.github.io/react/docs/installation.html).
+Adesso ha un senso fare un break. Internalizza l'apprendimento e applicalo ai tuoi progetti. Puoi verificare il codice sorgente scritto un po' di tempo fa. Inoltre puoi dare un'occhiata alla documentazione [ufficiale](https://facebook.github.io/react/docs/installation.html).
 
-You can find the source code in the [official repository](https://github.com/rwieruch/hackernews-client/tree/4.2).
+Puoi dare un'occhiata al codice sorgente nel [repository ufficiale](https://github.com/rwieruch/hackernews-client/tree/4.2).
