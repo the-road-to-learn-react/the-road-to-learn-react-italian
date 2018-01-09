@@ -1,33 +1,35 @@
-# Getting Real with an API
+# In pratica con le API
 
-Now it's time to get real with an API, because it can get boring to deal with sample data.
+Adesso è il momento di entrare nel mondo reale con le API, perché a lungo andare può risultare noioso utilizzare dati di esempio
 
-If you are not familiar with APIs, I encourage you [to read my journey where I got to know APIs](https://www.robinwieruch.de/what-is-an-api-javascript/).
+Se non hai dimestichezza con le API, ti suggerisco di [leggere il mio viaggio di apprendimento delle API](https://www.robinwieruch.de/what-is-an-api-javascript/).
 
-Do you know the [Hacker News](https://news.ycombinator.com/) platform? It's a great news aggregator about tech topics. In this book, you will use the Hacker News API to fetch trending stories from the platform. There is a [basic](https://github.com/HackerNews/API) and [search](https://hn.algolia.com/api) API to get data from the platform. The latter one makes sense in the case of this application in order to search stories on Hacker News. You can visit the API specification to get an understanding of the data structure.
+Conosci la piattaforma [Hacker News](https://news.ycombinator.com/)? E' un aggregatore di notizie sul mondo tech. In questo libro, utilizzerai le API di Hacker News per recuperare le storie trend dalla piattaforma. Ci occuperemo di una versione API [basic](https://github.com/HackerNews/API) e del [search](https://hn.algolia.com/api) per recuperare dati dalla piattaforma. L'ultimo è utile nel caso l'applicazione abbia la necessità di cercare su Hacker News. Puoi visitare le specifiche API per avere una maggiore comprensione della struttura dati.
 
 ## Lifecycle Methods
 
-You will need to know about React lifecycle methods before you can start to fetch data in your components by using an API. These methods are a hook into the lifecycle of a React component. They can be used in ES6 class components, but not in functional stateless components.
+Devi comprendere il ciclo di vita dei metodi di React prima di iniziare a recuperare dati nei tuoi componenti utilizzando le API. Questi metodi possono essere utilizzati nei componenti di classe ES6, ma non nei componenti functional stateless.
 
-Do you remember when a previous chapter taught you about JavaScript ES6 classes and how they are used in React? Apart from the `render()` method, there are several methods that can be overridden in a React ES6 class component. All of these are the lifecycle methods. Let's dive into them:
+Ti ricordi quando nel precedente capitolo ti ho parlato delle classi JavaScript ES6 e di come vengono utilizzate in React? Mettendo da parte il metodo `render()`, ci sono diversi metodi che possono essere sovrascritti in un componente di classe React ES6. Sono questi i lifecycle methods. Vediamo di approfondire:
 
-You already know two lifecycle methods that can be used in an ES6 class component: `constructor()` and `render()`.
+già conosci due lifecycle methods che possono essere utilizzati in un componente di classe ES6: `constructor()` e `render()`.
 
-The constructor is only called when an instance of the component is created and inserted in the DOM. The component gets instantiated. That process is called mounting of the component.
+Il costruttore è solo chiamato quando un'istanza del componente è creata ed inserita nel DOM. Il componente sarà istanziato. Quel processo è chiamato mounting del componente.
 
-The `render()` method is called during the mount process too, but also when the component updates. Each time when the state or the props of a component change, the `render()` method of the component is called.
+Il metodo `render()` è chiamato durante il mounting process, ma anche quando il componente si aggiorna. Ogni volta che lo stato o le proprietà di un componente cambiano, il metodo `render()` del componente è richiamato.
 
-Now you know more about the two lifecycle methods and when they are called. You already used them as well. But there are more of them.
+Adesso sai di più su questi due lifecycle methods e quando sono richiamati.
+Puoi già utilizzarli. Ma c'è qualcos'altro.
 
-The mounting of a component has two more lifecycle methods: `componentWillMount()` and `componentDidMount()`. The constructor is called first, `componentWillMount()` gets called before the `render()` method and `componentDidMount()` is called after the `render()` method.
+Il mounting di un componente ha due ulteriori lifecycle methods: `componentWillMount()` e `componentDidMount()`. Il costruttore è chiamato per primo, `componentWillMount()` è chiamato prima del metodo `render()` e `componentDidMount()` è chiamato dopo il metodo `render()`.
 
-Overall the mounting process has 4 lifecycle methods. They are invoked in the following order:
+In totale il processo di mounting ha quattro lifecycle methods. Sono invocati nel seguente ordine:
 
 * constructor()
 * componentWillMount()
 * render()
 * componentDidMount()
+
 
 But what about the update lifecycle of a component that happens when the state or the props change? Overall it has 5 lifecycle methods in the following order:
 
