@@ -30,8 +30,7 @@ In totale il processo di mounting ha quattro lifecycle methods. Sono invocati ne
 * render()
 * componentDidMount()
 
-
-But what about the update lifecycle of a component that happens when the state or the props change? Overall it has 5 lifecycle methods in the following order:
+Ma cosa accade ad un componente quando lo stato o i props cambiano? In totale ci sono 5 lifecycle methods nel seguente ordine:
 
 * componentWillReceiveProps()
 * shouldComponentUpdate()
@@ -39,39 +38,40 @@ But what about the update lifecycle of a component that happens when the state o
 * render()
 * componentDidUpdate()
 
-Last but not least there is the unmounting lifecycle. It has only one lifecycle method: `componentWillUnmount()`.
 
-After all, you don't need to know all of these lifecycle methods from the beginning. It can be intimidating yet you will not use all of them. Even in a larger React application you will only use a few of them apart from the `constructor()` and the `render()` method. Still, it is good to know that each lifecycle method can be used for specific use cases:
+Ultimo, ma non per importanza il metodo `componentWillUnmount()`.
 
-* **constructor(props)** - It is called when the component gets initialized. You can set an initial component state and bind class methods during that lifecycle method.
+In effetti non hai bisogno di comprendere tutti questi lifecycle methods all'inizio del tuo percorso di apprendimento. Anche nel caso di applicazioni complesse ne userai solo una parte oltre ai metodi `constructor()` e `render()`. Ad ogni modo è bene comprenderne il loro utilizzo:
 
-* **componentWillMount()** - It is called before the `render()` lifecycle method. That's why it could be used to set internal component state, because it will not trigger a second rendering of the component. Generally it is recommended to use the `constructor()` to set the initial state.
+* **constructor(props)** - E' richiamato quando il componente viene inizializzato. Puoi assegnare uno stato iniziale e vincolarlo ai metodi di classe durante quel lifecycle method.
 
-* **render()** - The lifecycle method is mandatory and returns the elements as an output of the component. The method should be pure and therefore shouldn't modify the component state. It gets an input as props and state and returns an element.
+* **componentWillMount()** - E' richiamato prima del metodo `render()`. Ecco perché può essere utilizzato per impostare l'internal component state, perché non innesca un secondo rendering del componente. In genere è raccomandato l'utilizzo di `constructor()` per impostare lo stato iniziale.
 
-* **componentDidMount()** - It is called only once when the component mounted. That's the perfect time to do an asynchronous request to fetch data from an API. The fetched data would get stored in the internal component state to display it in the `render()` lifecycle method.
+* **render()** - Questo lifecycle method è obbligatorio e restituisce gli elementi come output del componente. Il metodo dovrebbe essere puro e dunque non modificherebbe lo stato del componente. Richiede un input come props e state e restituisce un elemento.
 
-* **componentWillReceiveProps(nextProps)** - The lifecycle method is called during an update lifecycle. As input you get the next props. You can diff the next props with the previous props, by using `this.props`, to apply a different behavior based on the diff. Additionally, you can set state based on the next props.
+* **componentDidMount()** - E' richiamato solo quando il componente è inizializzato. E' questo il momento perfetto per una richiesta asincrona che recuperi dati da un'API. I dati recuperati dovrebbero essere salvati in un internal component state per mostrarli con il metodo ` render()`.
 
-* **shouldComponentUpdate(nextProps, nextState)** - It is always called when the component updates due to state or props changes. You will use it in mature React applications for performance optimizations. Depending on a boolean that you return from this lifecycle method, the component and all its children will render or will not render on an update lifecycle. You can prevent the render lifecycle method of a component.
+* **componentWillReceiveProps(nextProps)** - E' richiamato quando c'è un aggiornamento del lifecycle. Come input gli darai le props successive. Puoi differenziare le precedenti props dalle successive utilizzando `this.props`, per avere un differente comportamento basato sulla differenza. Inoltre, puoi impostare lo state derivato dai props successivi.
 
-* **componentWillUpdate(nextProps, nextState)** - The lifecycle method is immediately invoked before the `render()` method. You already have the next props and next state at your disposal. You can use the method as last opportunity to perform preparations before the render method gets executed. Note that you cannot trigger `setState()` anymore. If you want to compute state based on the next props, you have to use `componentWillReceiveProps()`.
+* **shouldComponentUpdate(nextProps, nextState)** - E' sempre richiamato quando il componente si aggiorna a seguito di un cambiamento di state o props. E' da prendere in considerazione per le applicazioni mature, complesse. Utile per ottimizzare le performance. A seguito di un valore booleano restituito avrai la possibilità di renderizzare o meno un eventuale aggiornamento di un lifecycle. Puoi, quindi, prevenire il rendering di un lifecycle method di un componente.
 
-* **componentDidUpdate(prevProps, prevState)** - The lifecycle method is immediately invoked after the `render()` method. You can use it as opportunity to perform DOM operations or to perform further asynchronous requests.
+* **componentWillUpdate(nextProps, nextState)** - Il lifecycle metodo è immediatamente invocato prima del metodo `render()`. Hai già a disposizione i successivi props e state. Puoi utilizzare il metodo come ultima opportunità per ottimizzare la preparazione prima che il metodo di renderizzazione venga eseguito. E' bene precisare che non puoi più innescare `setSate()`. Se vuoi calcolare lo state basato sulle props successive, devi utilizzare `componentWillReceiveProps()`.
 
-* **componentWillUnmount()** - It is called before you destroy your component. You can use the lifecycle method to perform any clean up tasks.
+* **componentDidUpdate(prevProps, prevState)** - Il lifecycle method è invocato subito dopo il metodo ´render()`. Un'ottima opportunità per svolgere operazioni DOM o ulteriori richieste asincrone.
 
-The `constructor()` and `render()` lifecycle methods are already used by you. These are the commonly used lifecycle methods for ES6 class components. Actually the `render()` method is required, otherwise you wouldn't return a component instance.
+* **componentWillUnmount()** - E' richiamato prima che tu distrugga il tuo componente. Puoi utilizzare il lifecycle method per svolgere qualsiasi azione di pulizia dei task.
 
-There is one more lifecycle method: `componentDidCatch(error, info)`. It was introduced in [React 16](https://www.robinwieruch.de/what-is-new-in-react-16/) and is used to catch errors in components. For instance, displaying the sample list in your application works just fine. But there could be a case when the list in the local state is set to `null` by accident (e.g. when fetching the list from an external API, but the request failed and you set the local state of the list to null). Afterward, it wouldn't be possible to filter and map the list anymore, because it is `null` and not an empty list. The component would be broken and the whole application would fail. Now, by using `componentDidCatch()`, you can catch the error, store it in your local state, and show an optional message to your application user that an error has happened.
+I lifecycle method `constructor()` e `render()` sono già stati utilizzati da te. Sono i più comuni nell'ambito delle componenti di classe ES6. In effetti il metodo `render()` è richiesto, altrimenti non è possibile restiture un'istanza del componente.
 
-### Exercises:
+C'è un altro lifecycle method: `componentDidCatch(error, info)`. E' stato introdotto in [React 16](https://www.robinwieruch.de/what-is-new-in-react-16/) ed è utilizzato per gestire gli errori nei componenti. Per esempio, mostrare una semplice lista nella tua applicazione è molto facile. Ma potrebbe esserci un caso in cui la lista all'interno di un local state è impostata a `null` accidentalmente (es. quando si recupera una lista da una chiamata esterna API, ma la richieste fallisce e tu imposti il local state della lista a null). In seguito, non sarebbe possibile filtrare e mappare la lista, perché è `null` e non è una lista vuota. Il componente restituirebbe errore e l'intera applicazione fallirebbe. Adesso con l'utilizzo di `componentDidCatch()` puoi gestire l'errore, salvarlo nel tuo local state, e mostrarlo (opzionalmente) come messaggio nella tua applicazione.
 
-* read more about [lifecycle methods in React](https://facebook.github.io/react/docs/react-component.html)
-* read more about [the state related to lifecycle methods in React](https://facebook.github.io/react/docs/state-and-lifecycle.html)
-* read more about [error handling in components](https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html)
+### Esercizi:
 
-## Fetching Data
+* approfondisci [lifecycle methods in React](https://facebook.github.io/react/docs/react-component.html)
+* approfondisci [lo state relazionato ai lifecycle methods in React](https://facebook.github.io/react/docs/state-and-lifecycle.html)
+* approfondisci [la gestione degli errori nei componenti](https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html)
+
+## Recupero dei dati
 
 Now you are prepared to fetch data from the Hacker News API. There was one lifecycle method mentioned that can be used to fetch data: `componentDidMount()`. You will use the native fetch API in JavaScript to perform the request.
 
