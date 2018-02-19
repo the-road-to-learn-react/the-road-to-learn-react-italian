@@ -1,22 +1,22 @@
-# Code Organization and Testing
+# Organizzazione del codice e testing
 
-The chapter will focus on important topics to keep your code maintainable in a scaling application. You will learn about code organization to embrace best practices when structuring your folders and files. Another aspect you will learn is testing, which is important to keep your code robust. The whole chapter will take a step back from the practical application and explain a couple of these topics for you.
+Il capitolo tratta temi importanti per mantenere il codice manutenibile in applicazioni che tendono a crescere. Imparerai ad organizzare il codice seguendo le best practice per quanto riguarda l'organizzazione di file e cartelle. Un altro tema che imparerai è il testing, che è importante per mantenere il codice robusto. Il capitolo farà un passo indietro sull'applicazione pratica e ti spiegherà alcune tematiche importanti.
 
-## ES6 Modules: Import and Export
+## Moduli in ES6: import ed export
 
-In JavaScript ES6 you can import and export functionalities from modules. These functionalities can be functions, classes, components, constants and others. Basically everything that you can assign to a variable. The modules can be single files or whole folders with one index file as entry point.
+In JavaScript ES6 puoi importare ed esportare funzionalità da moduli. Queste funzionalità possono essere funzioni, classi, componenti, costanti e altro. Praticamente qualsiasi cosa puoi assegnare ad una variabile. I moduli possono essere singoli file o intere cartelle che utilizzano un file "index" come entry point.
 
-In the beginning of the book, after you have bootstrapped your application with *create-react-app*, you already had several `import` and `export` statements across your initial files. Now it is the appropriate time to explain these.
+All'inizio del libro, dopo che hai impostato la tua applicazione con *create-react-app*, ti sei già imbatutto, nei primi file, in istruzioni di import ed export. Ora è il momento giusto per spiegarli.
 
-The `import` and `export` statements help you to share code across multiple files. Before there were already several solutions for this in the JavaScript environment. It was a mess, because you would want to follow one standardized way rather than having several approaches for the same thing. Now it is a native behavior since JavaScript ES6.
+Le istruzioni di `import` ed `export` ti aiutano a condividere il codice in diversi file. Prima c'erano più soluzioni a questo problema nell'ecosistema JavaScript ed era confusionario, perché sarebbe preferibile un solo metodo, standardizzato, piuttosto che varie soluzioni allo stesso problema. Adesso c'è un metodo nativo da JavaScript ES6.
 
-Additionally these statements embrace code splitting. You distribute your code across multiple files to keep it reusable and maintainable. The former is true because you can import the piece of code in multiple files. The latter is true because you have one single source where you maintain the piece of code.
+Inoltre queste istruzioni incoraggiano la modularizzazione del codice. Distribuisci il codice in diversi file per mantenerlo riusabile e manutenibile. Riusabile perché puoi importarlo in vari pezzi di codice, manutenibile perché ogni singolo modulo risiede in un singolo posto (un file o una cartella).
 
-Last but not least, it helps you to think about code encapsulation. Not every functionality needs to get exported from a file. Some of these functionalities should only be used in the file where they have been defined. The exports of a file are basically the public API to the file. Only the exported functionalities are available to be reused somewhere else. It follows the best practice of encapsulation.
+Inoltre, ti aiuta a pensare al raggio di azione del codice. Non ogni funzionalità necessita di essere esportata da un file. Alcune di queste potrebbe essere usate solo nel file dove sono definite. Gli export in un file sono praticamente l'interfaccia publica (API) del file verso l'esterno. Solo le funzionalità esportate sono rese disponibili all'esterno per essere riutilizzate. Questo segue i principi dell'incapsulamento del codice.
 
-But let's get practical. How do these `import` and `export` statements work? The following examples showcase the statements by sharing one or multiple variables across two files. In the end, the approach can scale to multiple files and could share more than simple variables.
+Venendo alla parte pratica. Come funzionano le istruzioni di `import` ed `export`? Gli esempi che seguono mostrano queste funzionalità condividendo una o più variabili tra diversi file. Lo stesso approccio potrà essere utilizzato su più file per condividere più che semplici variabili.
 
-You can export one or multiple variables. It is called a named export.
+Puoi esportare una o più variabili. E' chiamato export nominativo (named export).
 
 {title="Code Playground: file1.js",lang="javascript"}
 ~~~~~~~~
@@ -26,7 +26,7 @@ const lastname = 'wieruch';
 export { firstname, lastname };
 ~~~~~~~~
 
-And import them in another file with a relative path to the first file.
+E importarle in un altro file con path relativo al primo file.
 
 {title="Code Playground: file2.js",lang="javascript"}
 ~~~~~~~~
@@ -36,7 +36,7 @@ console.log(firstname);
 // output: robin
 ~~~~~~~~
 
-You can also import all exported variables from another file as one object.
+Puoi anche importare tutte le variabili esportate da un altro fle come un unico oggetto.
 
 {title="Code Playground: file2.js",lang="javascript"}
 ~~~~~~~~
@@ -46,7 +46,7 @@ console.log(person.firstname);
 // output: robin
 ~~~~~~~~
 
-Imports can have an alias. It can happen that you import functionalities from multiple files that have the same named export. That's why you can use an alias.
+Gli import possono avere un alias. Può succedere che si importino funzionalità da diversi file che abbiano lo stesso nome, a questo servono gli alias.
 
 {title="Code Playground: file2.js",lang="javascript"}
 ~~~~~~~~
@@ -56,11 +56,11 @@ console.log(foo);
 // output: robin
 ~~~~~~~~
 
-Last but not least there exists the `default` statement. It can be used for a few use cases:
+Un'altra possibilità è l'istruzione `default`. Può essere usata in alcuni scenari:
 
-* to export and import a single functionality
-* to highlight the main functionality of the exported API of a module
-* to have a fallback import functionality
+* per esportare o importare una singola funzionalità
+* per evidenziare la funzionalità più importante di un modulo o API
+* per avere un import di fallback
 
 {title="Code Playground: file1.js",lang="javascript"}
 ~~~~~~~~
@@ -72,7 +72,7 @@ const robin = {
 export default robin;
 ~~~~~~~~
 
-You can leave out the curly braces for the import to import the default export.
+Si possono omettere le parentesi graffe per importare le funzionalità esportare come default.
 
 {title="Code Playground: file2.js",lang="javascript"}
 ~~~~~~~~
@@ -82,7 +82,7 @@ console.log(developer);
 // output: { firstname: 'robin', lastname: 'wieruch' }
 ~~~~~~~~
 
-Furthermore, the import name can differ from the exported default name. You can also use it in conjunction with the named export and import statements.
+Inoltre, il nome importato può essere diverso dal nome di default esportato. Ed è anche possibile usarlo insieme a degli import ed export nominativi.
 
 {title="Code Playground: file1.js",lang="javascript"}
 ~~~~~~~~
@@ -112,7 +112,7 @@ console.log(firstname, lastname);
 // output: robin wieruch
 ~~~~~~~~
 
-In named exports you can spare additional lines and export the variables directly.
+Gli export nominativi è possibile suddividerli su più righe e anche esportare le variabili direttamente.
 
 {title="Code Playground: file1.js",lang="javascript"}
 ~~~~~~~~
@@ -120,20 +120,20 @@ export const firstname = 'robin';
 export const lastname = 'wieruch';
 ~~~~~~~~
 
-These are the main functionalities for ES6 modules. They help you to organize your code, to maintain your code and to design reusable module APIs. You can also export and import functionalities to test them. You will do that in one of the following chapters.
+Queste sono le funzionalità principali dei moduli in ES6. Sono utili ad organizzare il codice, a manutenerlo e a progettare moduli riusabili (API). Puoi anche importare o esportare funzionalità a scopo di test ed è quello che faremo in uno dei prossimi capitoli.
 
-### Exercises:
+### Esercizi:
 
-* read more about [ES6 import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
-* read more about [ES6 export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
+* leggi di più su [import ES6](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+* leggi di più su [export ES6](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
 
-## Code Organization with ES6 Modules
+## Organizzazione del codice con moduli ES6
 
-You might wonder: Why didn't we follow the best practices of code splitting for the *src/App.js* file? In the file we already have multiple components which could be defined in their own files/folders (modules). For the sake of learning React, it is practical to keep these things at one place. But once your React application grows, you should consider to split up these components into multiple modules. Only that way your application scales.
+Potresti chiederti: perché non abbiamo seguito le best practice di suddivisione del codice in moduli per il file *src/App.js*? In quel file avevamo più componenti che potevano essere definiti in rispettivi file e cartelle (moduli). allo scopo di imparare React è più pratico tenere tutto in un'unica vista ma una volta che la tua applicazione cresce, dovresti considerare di dividere i componenti in diversi moduli. Solo in quel modo è possibile scalare l'applicazione.
 
-In the following, I will propose several module structures you *could* apply. I would recommend to apply them as an exercise at the end of the book. To keep the book itself simple, I will not perform the code splitting and will continue the following chapters with the *src/App.js* file.
+A seguire, proporrò diverse strutture di moduli che *potresti* applicare. Consiglierei di provarli come esercizio alla fine del libro. Per mantenere il libro semplice non eseguirò la suddivisione del codice in moduli ma continuerò nei prossimi capitoli ad avere tutto il codice nel file *src/App.js*.
 
-One possible module structure could be:
+Una possibile struttura dei moduli potrebbe essere:
 
 {title="Folder Structure",lang="text"}
 ~~~~~~~~
@@ -154,7 +154,7 @@ src/
   Search.css
 ~~~~~~~~
 
-It separates the components into their own files, but it doesn't look too promising. You can see a lot of naming duplications and only the file extension differs. Another module structure could be:
+Separa i componenti in rispettivi file ma non sembra molto promettente. C'è molta duplicazione nel naming e differenza solo nelle estensioni dei file. Un altro modo potrebbe essere:
 
 {title="Folder Structure",lang="text"}
 ~~~~~~~~
@@ -179,9 +179,9 @@ src/
     index.css
 ~~~~~~~~
 
-It looks cleaner than before. The index naming of a file describes it as an entry point file to the folder. It is just a common naming convention, but you can use your own naming as well. In this module structure, a component is defined by its component declaration in the JavasScript file, but also by its style and tests.
+E' più chiara della precedente. I file index sono entry point delle rispettive cartelle (moduli). E' solo naming convention, puoi usare il nome che preferisci. In questa struttura dei moduli un componente è definito nel suo file JavaScript ma ha anche i rispettivi file per lo stile e per i test.
 
-Another step could be extracting the constant variables from the App component. These constants were used to compose the Hacker News API URL.
+Un altro passo potrebbe essere quello di estrarre le variabili costanti dal component App. Queste costanti erano usate per comporre la URL dell'API di Hacker News.
 
 {title="Folder Structure",lang="text"}
 ~~~~~~~~
@@ -204,7 +204,7 @@ src/
     ...
 ~~~~~~~~
 
-Naturally the modules would split up into *src/constants/* and *src/components/*. Now the *src/constants/index.js* file could look like the following:
+Si ottiene una divisione naturale dei moduli tra *src/constants/* e *src/components/*. Ora il file *src/constants/index.js* potrebbe essere qualcosa del genere:
 
 {title="Code Playground: src/constants/index.js",lang="javascript"}
 ~~~~~~~~
@@ -217,7 +217,7 @@ export const PARAM_PAGE = 'page=';
 export const PARAM_HPP = 'hitsPerPage=';
 ~~~~~~~~
 
-The *App/index.js* file could import these variables in order to use them.
+Il file *App/index.js* potrebbe importare queste variabili per utilizzarle.
 
 {title="Code Playground: src/components/App/index.js",lang=javascript}
 ~~~~~~~~
@@ -234,7 +234,7 @@ import {
 ...
 ~~~~~~~~
 
-When you use the *index.js* naming convention, you can omit the filename from the relative path.
+Quando usi la naming convention di *index.js*, puoi omettere il nome del file dal path relativo.
 
 {title="Code Playground: src/components/App/index.js",lang=javascript}
 ~~~~~~~~
@@ -253,7 +253,7 @@ import {
 ...
 ~~~~~~~~
 
-But what's behind the *index.js* file naming? The convention was introduced in the node.js world. The index file is the entry point to a module. It describes the public API to the module. External modules are only allowed to use the *index.js* file to import shared code from the module. Consider the following made up module structure to demonstrate it:
+Cosa c'è dietro il naming *index.js*? La convenzione arriva dal mondo node.js. Il file index è l'entry point del modulo e descrive la sua API pubblica. I moduli esterni sono tenuti ad usare solo il file *index.js* per importare codice. Considera la seguente struttura di moduli come dimostrazione:
 
 {title="Folder Structure",lang="text"}
 ~~~~~~~~
@@ -268,7 +268,7 @@ src/
     CancelButton.js
 ~~~~~~~~
 
-The *Buttons/* folder has multiple button components defined in its distinct files. Each file can `export default` the specific component making it available to *Buttons/index.js*. The *Buttons/index.js* file imports all different button representations and exports them as public module API.
+La cartella *Buttons/* ha diversi componenti bottone in file distinti. Ogni file può esportare con `export default` il proprio componente rendendolo disponibile a *Buttons/index.js*. Il file *Buttons/index.js* importa tutti i diversi tipi di bottone e gli esporta come API pubblica del modulo *Buttons*.
 
 {title="Code Playground: src/Buttons/index.js",lang="javascript"}
 ~~~~~~~~
@@ -283,7 +283,7 @@ export {
 };
 ~~~~~~~~
 
-Now the *src/App/index.js* can import the buttons from the public module API located in the *index.js* file.
+Ora il file *src/App/index.js* può importare i bottoni dall'API pubblica del modulo definita nel file *index.js*.
 
 {title="Code Playground: src/App/index.js",lang=javascript}
 ~~~~~~~~
@@ -294,7 +294,7 @@ import {
 } from '../Buttons';
 ~~~~~~~~
 
-By going with this constraint, it would be a bad practice to reach into other files than the *index.js* in the module. It would break the rules of encapsulation.
+Seguendo questa convenzione sarebbe una bad practice raggiungere un altro file oltre all'*index.js* in un modulo. Violerebbe le regole di incapsulamento del codice.
 
 {title="Code Playground: src/App/index.js",lang=javascript}
 ~~~~~~~~
@@ -302,25 +302,25 @@ By going with this constraint, it would be a bad practice to reach into other fi
 import SubmitButton from '../Buttons/SubmitButton';
 ~~~~~~~~
 
-Now you know how you could refactor your source code in modules with the constraints of encapsulation. As I said, for the sake of keeping the book simple I will not apply these changes. But you should do the refactoring when you finished reading the book.
+Ora sai come rifattorizzare il tuo codice in moduli seguendo le regole dell'incapsulamento. Come già detto, per mantenere il libro semplice non applicherò quanto mostrato ma tu dovresti farlo quando finisci di leggere il libro.
 
-### Exercises:
+### Esercizi:
 
-* refactor your *src/App.js* file into multiple component modules when you finished the book
+* rifattorizza il tuo file *src/App.js* in componenti in file distinti quando finirai il libro
 
-## Snapshot Tests with Jest
+## Snapshot Tests con Jest
 
-The book will not dive deeply into the topic of testing, but it shouldn't be unmentioned. Testing your code in programming is essential and should be seen as mandatory. You want to keep the quality of your code high and an assurance that everything works.
+Il libro non tratterà a fondo l'argomento testing, ma non dovrebbe rimanere tralasciato. Testare il codice nella programmazione è essenziale e dovrebbe essere visto come obbligatorio. Vogliamo mantenere la qualità del codice alta e assicurarci che tutto funzioni.
 
-Perhaps you have heard about the testing pyramid. There are end-to-end tests, integration tests and unit tests. If you are not familiar with those, the book gives you a quick and basic overview. A unit test is used to test an isolated and small block of code. It can be a single function that is tested by an unit test. However, sometimes the units work well in isolation yet don't work in combination with other units. They need to be tested as a group as units. That's where integration tests can help out by covering whether units work well together. Last but not least, an end-to-end test is the simulation of a real user scenario. It could be an automated setup in a browser simulating the login flow of an user in a web application. While unit tests are fast and easy to write and to maintain, end-to-end tests are the opposite of this spectrum.
+Potresti aver sentito parlare della piramide del testing. Ci sono i test codsiddetti "end-to-end", gli integration test e gli unit test. Se non hai famigliarità con l'argomento, il libro ti darà una rapida panoramica. Uno unit test è usato per testare un frammento di codice isolato. Potrebbe essere una singola funzione ad essere testata da uno unit test. Gli uni test funzionano bene in isolamento che in combinazione con altre unità. Tendono ad essere testati come gruppi di unità. Qui è dove i test d'integeazione trovano la loro utilità, assicurando che le unità di lavoro funzionino bene insieme. Infine, i test end-to-end sono una simulazione di uno scenario reale che potrebbe eseguire un utente. Per esempio un'esecuzione autiomatica di una simulazione nel browser di un utente che intergisce con il sistema di login di un'applicazione web. Mentre gli unit test sono veloci e facili da scrivere e mantenere, i test end-to-end sono l'esatto opposto.
 
-How many tests do I need of each type? You want to have many unit tests to cover your isolated functions. After that, you can have several integration tests to cover that the most important functions work in combination as expected. Last but not least, you might want to have only a few end-to-end tests to simulate critical scenarios in your web application. That's it for the general excursion in the world of testing.
+Di quanti test per ogni tipo ho bisogno? Solitamente si vuole avere molti unit test per coprire le funzioni in modo isolato. Dopodiché, potremmo avere diversi test d'integrazione per assicurarsi che le più importanti funzioni funzionino come ci aspettiamo quando messe insieme. Infine, potremmo avere giusto alcuni test end-to-end per simulare gli scenari critici dell'applicazione. Questo è quanto per quanto riguarda le tipologie di test generali.
 
-So how do you apply this knowledge in testing your React application? The foundation for testing in React are component tests which can be generalized as unit tests and a part of it as snapshot tests. You will conduct unit tests for your components in the next chapter by using a library called Enzyme. In this chapter, you will focus on another kind of tests: snapshot tests. That's were Jest comes into play.
+Quindi, come applichiamo questo conoscenze del testing alla nostra applicazione React? Le basi del testing in React sono i test dei componenti che può essere generalizzato come unit testing e una parte di essi come snapshot test. Applicherai lo unit testing sui tuoi componenti nel prossimo capitolo usando una libreria chiamata Enzyme. In questo capitolo, invece, ci concentreremo su un altro tipo di test: gli snapshot test. Qui è dove entra in gioco Jest.
 
-[Jest](https://facebook.github.io/jest/) is a JavaScript testing framework that is used at Facebook. In the React community, it is used for React component tests. Fortunately *create-react-app* already comes with Jest, so you don't need to worry about setting it up.
+[Jest](https://facebook.github.io/jest/) è un framework di testing JavaScript che è usato in Facebook. Nella comunità React è usato per testare i componenti React. Fortunatamente *create-react-app* contiene già Jest, quindi non dobbiamo preoccuparci di installarlo e configurarlo.
 
-Let's start to test your first components. Before you can do that, you have to export the components, which you are going to test, from your *src/App.js* file. Afterward you can test them in a different file. You have learned about this in the code organization chapter.
+Iniziamo a testare i tuoi primi componenti. Prima di tutto però, è necessario esportare i componenti che vogliamo testare, dal tuo file *src/App.js*. A questo punto, è possibile testarli in un altro file. Dovresti aver imparato questi concetti nel capitolo sull'organizzazione del codice.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -343,7 +343,7 @@ export {
 # leanpub-end-insert
 ~~~~~~~~
 
-In your *App.test.js* file, you will find a first test that came with *create-react-app*. It verifies that the App component would render without any errors.
+Nel file *App.test.js* troverai un primo test generato da *create-react-app*. Semplicemente verifica che il component App venga renderizzato senza nessun errore.
 
 {title="src/App.test.js",lang=javascript}
 ~~~~~~~~
@@ -357,32 +357,32 @@ it('renders without crashing', () => {
 });
 ~~~~~~~~
 
-The "it"-block describes one test case. It comes with a test description and when you test it, it can either succeed or fail. Furthermore, you could wrap it into a "describe"-block that defines your test suit. A test suit could include a bunch of the "it"-blocks for one specific component. You will see those "describe"-blocks later on. Both blocks are used to separated and organize your test cases.
+Il blocco "it" descrive un caso di test. E' composto da una descrizione del test e quando eseguito può finire con successo o fallire. Inoltre, è possible raggruppare i test in un blocco "describe", che definisce una suit di test. Una suit di test include una serie di blocchi "it" per uno specifico componente. Vedrai questi blocchi "describe" più avanti. Entrambi i blocchi sono usati per separare ed organizzare i casi di test.
 
-You can run your test cases by using the interactive *create-react-app* test script on the command line. You will get the output for all test cases on your command line interface.
+Puoi eseguire i test interattivamente usando lo script `test` di *create-react-app* dalla riga di comando. L'output sarà composto dall'output di tutti i casi di test nel tuo terminale.
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm test
 ~~~~~~~~
 
-**Note:** If errors show up when you run the single test for the App component for the first time, it could be because of the unsupported fetch method that is used in `fetchSearchTopStories()` which is triggered in `componentDidMount()`. You can make it work by following these two steps:
+**Nota:** If visualizzi degli errori quando esrgui il singolo test per il componente App la prima volta, potrebbe essere perché il metodo fetch in `fetchSearchTopStories()` che è chiamato dentro `componentDidMount()` non è supportato. Puoi farlo funzionare seguendo questi due passaggi:
 
-* On the command line, install the following package: `npm install isomorphic-fetch`
-* Include it in your *App.js* file: `import fetch from 'isomorphic-fetch';`
+* Nella riga di comando, installa questo pacchetto:: `npm install isomorphic-fetch`
+* Includilo nel tuo file *App.js*: `import fetch from 'isomorphic-fetch';`
 
-Now Jest enables you to write snapshot tests. These tests make a snapshot of your rendered component and run this snapshot against future snapshots. When a future snapshot changes, you will get notified in the test. You can either accept the snapshot change, because you changed the component implementation on purpose, or deny the change and investigate for the error. It complements unit tests very well, because you only test the diffs of the rendered output. It doesn't add big maintenance costs, because you can simply accept changed snapshots when you changed something on purpose for the rendered output in your component.
+Ora Jest dovrebbe permetterti di scrivere snapshot test. Questi test generano una snaphot del componente renderizzato e confrontano questa snapshot con future snapshot. Quando una futura snaposhet cambierà, verrai notificato dal test. A questo punto puoi accettare il fatto che la snaphot è cambiata, magari perché hai cambiato l'implementazione del componente di proposito, o rifiutare la modifica e investigare le cause dell'errore. Questo si coniuga molto bene con gli unit test, perché testa solo le differenze degli output renderizzati, non aggiunge grossi costi di maintenance, perché puoi semplicemente accettare i cambiamenti delle snaphot quando cambi qualcosa di proposito nell'output del tuo componente.
 
-Jest stores the snapshots in a folder. Only that way it can validate the diff against a future snapshot. Additionally, the snapshots can be shared across teams by having them in one folder.
+Jest salva le snaphot in una cartella. Grazie a questo può validare le differenze rispetto a future snaphot. Inoltre, le snapshot possono essere facilmente essere condivise tra team avendole in una sola cartella.
 
-Before writing your first snapshot test with Jest, you have to install an utility library.
+Prima di scrivere il tuo primo snaphot test con Jest, devi installare un pacchetto di utility.
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm install --save-dev react-test-renderer
 ~~~~~~~~
 
-Now you can extend the App component test with your first snapshot test. First, import the new functionality from the node package and wrap your previous "it"-block for the App component into a descriptive "describe"-block. In this case, the test suit is only for the App component.
+Ora puoi estendere i test del tuo componente App con il tuo primo snaphot test. Prima cosa, importiamo le nuove funzionalità dal pacchetto e inseriamo il precedente blocco "it" per il componente App in un descrittivo blocco "describe". In questo caso la suit di test è solo per il componente App.
 
 {title="src/App.test.js",lang=javascript}
 ~~~~~~~~
@@ -407,7 +407,7 @@ describe('App', () => {
 # leanpub-end-insert
 ~~~~~~~~
 
-Now you can implement your first snapshot test by using a "test"-block.
+Ora puoi implementare il tuo primo snaphot test usando un blocco "test".
 
 {title="src/App.test.js",lang=javascript}
 ~~~~~~~~
@@ -436,11 +436,11 @@ describe('App', () => {
 });
 ~~~~~~~~
 
-Run your tests again and see how the tests either succeed or fail. They should succeed. Once you change the output of the render block in your App component, the snapshot test should fail. Then you can decide to update the snapshot or investigate in your App component.
+Esegui di nuovo i test e guarda se passano o falliscono. Dovrebbe passare. Se cambi l'output del metodo render nel tuo componente App, lo snaphot test dovrebbe fallire. A quel punto puoi decidere se aggiornare la snaphot o investigare il codice del tuo componente.
 
-Basically the `renderer.create()` function creates a snapshot of your App component. It renders it virtually and stores the DOM into a snapshot. Afterward, the snapshot is expected to match the previous snapshot from when you ran your snapshot tests the last time. This way, you can assure that your DOM stays the same and doesn't change anything by accident.
+Praticamente la chiamata a funzione `renderer.create()` crea una snapshot per il tuo componente App. Lo renderizza virtualmente e salva il DOM dentro una snaphot. Dopodiché, si aspetta che la snaphot sia uguale a quella generata in precedenza. In questo modo puoi assicurarti che il DOM rimango lo stesso e non cambi per sbaglio.
 
-Let's add more tests for our independent components. First, the Search component:
+Aggiungiamo altri test per i nostri componenti indipendenti. Primo, il componente Search:
 
 {title="src/App.test.js",lang=javascript}
 ~~~~~~~~
@@ -473,9 +473,9 @@ describe('Search', () => {
 # leanpub-end-insert
 ~~~~~~~~
 
-The Search component has two tests similar to the App component. The first test simply renders the Search component to the DOM and verifies that there is no error during the rendering process. If there would be an error, the test would break even though there isn't any assertion (e.g. expect, match, equal) in the test block. The second snapshot test is used to store a snapshot of the rendered component and to run it against a previous snapshot. It fails when the snapshot has changed.
+Il componente Search ha due test simili al componente App. Il primo test semplicemente renderizza il componente Search nel DOM e verifica che non ci sono errori durante il processo di rendering. Se ci fosse un errore, il test fallirebbe anche se non ci sono assertion (esempio: expect, match, equal) nel blocco di test. Il secondo test, quello di snaphot, è utilizzato per salvare una snaphot del componente renderizzato ed eseguirlo confrontandolo con la snaphot precedente. Fallisce se la snaphot è cambiata.
 
-Second, you can test the Button component whereas the same test rules as in the Search component apply.
+Secondo, puoi testare il componente Button dove le regole di testing applicate sono le stesse del componente Search.
 
 {title="src/App.test.js",lang=javascript}
 ~~~~~~~~
@@ -506,7 +506,7 @@ describe('Button', () => {
 # leanpub-end-insert
 ~~~~~~~~
 
-Last but not least, the Table component that you can pass a bunch of initial props to render it with a sample list.
+Infine, il componente Table al quale puoi passare alcune props per renderizzarlo con una lista di esempio.
 
 {title="src/App.test.js",lang=javascript}
 ~~~~~~~~
@@ -544,27 +544,27 @@ describe('Table', () => {
 # leanpub-end-insert
 ~~~~~~~~
 
-Snapshot tests usually stay pretty basic. You only want to cover that the component doesn't change its output. Once it changes the output, you have to decide if you accept the changes. Otherwise you have to fix the component when the output is not the desired output.
+Gli snaphot test solitamente sono piuttosto semplici. Il senso è quello di assicurarsi che l'output del componente non cambi. Se cambia, devi decidere se accettare i cambiamenti. Altrimenti devi aggiustare il componente affinché il suo output non sia quello che ti aspetti.
 
-### Exercises:
+### Esercizi:
 
-* see how a snapshot test fails once you change your component's return value in the `render()` method
-  * either accept or deny the snapshot change
-* keep your snapshots tests up to date when the implementation of components change in next chapters
-* read more about [Jest in React](https://facebook.github.io/jest/docs/tutorial-react.html)
+* guarda come lo snaphot test fallisce se cambi il valore di ritorno del metodo `render()` del tuo commponente
+  * accetta o rifiuta i cambiamenti della snapshot
+* mantini i tuoi snaphot test aggiornati quando l'implementazione dei componenti cambierà nei prossimi capitoli
+* leggi di più su [Jest in React](https://facebook.github.io/jest/docs/tutorial-react.html)
 
-## Unit Tests with Enzyme
+## Unit test con Enzyme
 
-[Enzyme](https://github.com/airbnb/enzyme) is a testing utility by Airbnb to assert, manipulate and traverse your React components. You can use it to conduct unit tests to complement your snapshot tests in React.
+[Enzyme](https://github.com/airbnb/enzyme) è una utility di test sviluppata da Airbnb per fare asserzioni, manipolare e navigare sui tuoi componenti React. Puoi usarla per condurre unit test da affiancare agli snaphot test in React.
 
-Let's see how you can use enzyme. First you have to install it since it doesn't come by default with *create-react-app*. It comes also with an extension to use it in React.
+Vediamo come si usa enzyme. Prima di tutto devi installarlo, perché non è installato di default con *create-react-app*. E' distriubuito con un'estensione per usarlo con React.
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm install --save-dev enzyme react-addons-test-utils enzyme-adapter-react-16
 ~~~~~~~~
 
-Second, you need to include it in your test setup and initialize its Adapter for using it in React.
+Secondo, devi incuderlo nel setup dei tuoi test e inizializzare il suo Adapter per usarlo in React.
 
 {title="src/App.test.js",lang=javascript}
 ~~~~~~~~
@@ -582,7 +582,7 @@ Enzyme.configure({ adapter: new Adapter() });
 # leanpub-end-insert
 ~~~~~~~~
 
-Now you can write your first unit test in the Table "describe"-block. You will use `shallow()` to render your component and assert that the Table has two items, because you pass it two list items. The assertion simply checks if the element has two elements with the class `table-row`.
+Ora puoi scrivere il tuo primo uni test nel blocco "describe" di Table. Userai `shallow()` per renderizzare il tuo componente e asserire che ha due oggi, perché passeremo una lista di due elementi. L'assertion semplicemente controlla che l'elemento ha due elementi con classe `table-row`.
 
 {title="src/App.test.js",lang=javascript}
 ~~~~~~~~
@@ -621,39 +621,39 @@ describe('Table', () => {
 });
 ~~~~~~~~
 
-Shallow renders the component without its child components. That way, you can make the test very dedicated to one component.
+Shallow renderizza il componente senza i componenti figli. In questo modo puoi mantenere il focus del test su un componente.
 
-Enzyme has overall three rendering mechanisms in its API. You already know `shallow()`, but there also exist `mount()` and `render()`. Both instantiate instances of the parent component and all child components. Additionally `mount()` gives you access to the component lifecycle methods. But when to use which render mechanism? Here some rules of thumb:
+Enzyme ha in totale tre meccanismi di rendering nella sua API. Conosci già `shallow()`, ma esistono anche `mount()` e `render()`. Entrambi istanzione instanze del componente padre e di tutti i componenti figli. Inoltre `mount()` ti dà accesso ai metodi di lifecycle del componente. Ma quando usare ogni meccanismo di rendering? Ecco alcuni spunti:
 
-* Always begin with a shallow test
-* If `componentDidMount()` or `componentDidUpdate()` should be tested, use `mount()`
-* If you want to test component lifecycle and children behavior, use `mount()`
-* If you want to test a component's children rendering with less overhead than `mount()` and you are not interested in lifecycle methods, use `render()`
+* Inizia sempre con uno shallow test
+* Se `componentDidMount()` o `componentDidUpdate()` necessitano di essere testate usa `mount()`
+* Se vuoi testare i metodi di lifecycle del componente e dei suoi figli usa `mount()`
+* Se vuoi testare il rendering dei figli del componente con meno overhead che con `mount()` e non sei interessato ai metodi di lifecycle usa `render()`
 
-You could continue to unit test your components. But make sure to keep the tests simple and maintainable. Otherwise you will have to refactor them once you change your components. That's why Facebook introduced snapshot tests with Jest in the first place.
+Potresti continuare facendo unit test sui tuoi componenti ma ricorda di mantenere i test semplici e manutenibili, altrimenti dovrai rifatorizzarli ogni volta che cambi i tuoi componenti, ed ecco perché Facebook ha introdotto gli snaphot test con Jest.
 
-### Exercises:
+### Esercizi:
 
-* write a unit test with Enzyme for your Button component
-* keep your unit tests up to date during the following chapters
-* read more about [enzyme and its rendering API](https://github.com/airbnb/enzyme)
+* Scrivi uno unit test con Enzyme per il tuo componente Button
+* Mantieni i tuoi unit test aggiornati durante i prossimi capitoli
+* Leggi di più su [enzyme e le sue API di rendering](https://github.com/airbnb/enzyme)
 
-## Component Interface with PropTypes
+## L'interfaccia dei componenti con PropTypes
 
-You may know [TypeScript](https://www.typescriptlang.org/) or [Flow](https://flowtype.org/) to introduce a type interface to JavaScript. A typed language is less error prone, because the code gets validated based on its program text. Editors and other utilities can catch these errors before the program runs. It makes your program more robust.
+Potresti essere a conoscenza di [TypeScript](https://www.typescriptlang.org/) o [Flow](https://flowtype.org/) per aggiungere un controllo sui tipi in JavaScript. Un linguaggio tipizzato è meno soggetto ad errori perché il codice viene validato in base al codice del programma. Editor di testo ed altre utility possono segnalare questi errori prima che il programma venga eseguito e questo rendere il tuo programma più robusto.
 
-In the book, you will not introduce Flow or TypeScript, but another neat way to check your types in components. React comes with a built-in type checker to prevent bugs. You can use PropTypes to describe your component interface. All the props that get passed from a parent component to a child component get validated based on the PropTypes interface assigned to the child component.
+In questo non introdurremo Flow o TypeScript ma un'altra efficace alternativa per controllare i tipi di dato dei tuoi componenti. React contiene di default un modo per controllare i tipi di dato e prevenire errori. Puoi usare PropTypes per descrivere l'interfaccia dei tuoi componenti. Tutte le props che vengono passate da un componente padre a un componente figlio possono essere validate assegnando delle specifiche PropTypes al componente figlio.
 
-The chapter will show you how you can make all your components type safe with PropTypes. I will omit the changes for the following chapters, because they add unnecessary code refactorings. But you should keep and update them along the way to keep your components interface type safe.
+Questo capitolo ti mostrerà come rendere tutti i tuoi componenti sicuri con PropTypes. Non riporterò queste modifiche nei capitoli successivi perché richiederebbero dei refactoring non necessari al codice ma tu dovresti applicarle e mantenerle aggiornate nel corso del libro per mantenere l'interfaccia dei tuoi componenti type safe.
 
-First, you have to install a separate package for React.
+Prima cosa, è necessario installare un pacchetto per React.
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm install prop-types
 ~~~~~~~~
 
-Now, you can import the PropTypes.
+Ora è possibile importare le funzionalità di PropTypes.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -662,7 +662,7 @@ import PropTypes from 'prop-types';
 # leanpub-end-insert
 ~~~~~~~~
 
-Let's start to assign a props interface to the components:
+Iniziamo ad assegnare un'interfaccia alle props dei componenti:
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -684,7 +684,7 @@ Button.propTypes = {
 # leanpub-end-insert
 ~~~~~~~~
 
-Basically that's it. You take every argument from the function signature and assign a PropType to it. The basic PropTypes for primitives and complex objects are:
+Tutto qui. Prendi ogni proprietà in input al componente e le assegni un PropType. I PropTypes di base per i tipi primitivi e gli oggetti più complessi sono:
 
 * PropTypes.array
 * PropTypes.bool
@@ -693,14 +693,14 @@ Basically that's it. You take every argument from the function signature and ass
 * PropTypes.object
 * PropTypes.string
 
-Additionally you have two more PropTypes to define a renderable fragment (node), e.g. a string, and a React element:
+Inoltre abbiamo altri due PropTypes per definire frammenti renderizzabili (nodi), ad esempio una stringa, e un elemento React:
 
 * PropTypes.node
 * PropTypes.element
 
-You already used the `node` PropType for the Button component. Overall there are more PropType definitions that you can read up in the official React documentation.
+Abbiamo già usato il PropType `node` per il componente Button. In generale ci sono altre definizioni di PropType di cui puoi leggere sulla documentazione ufficiale di React.
 
-At the moment all of the defined PropTypes for the Button are optional. The parameters can be null or undefined. But for several props you want to enforce that they are defined. You can make it a requirement that these props are passed to the component.
+Al momento tutte le PropTypes che abbiamo definito per Button sono opzionali. I parametri possono essere null o undefined. Ma in molti casi si vuole ottenere che queste proprietà siano definite. Puoi rendere un requisito che queste props siano passate al componente.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -715,7 +715,7 @@ Button.propTypes = {
 };
 ~~~~~~~~
 
-The `className` is not required, because it can default to an empty string. Next you will define a PropType interface for the Table component:
+L'attributo `className` non è obbligatorio perché ha un default come stringa vuota. Di seguito definiamo un'interfaccia PropType per il componente Table:
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -727,7 +727,7 @@ Table.propTypes = {
 # leanpub-end-insert
 ~~~~~~~~
 
-You can define the content of an array PropType more explicit:
+Puoi anche definire più nel dettaglio il contenuto di un array:
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -745,9 +745,9 @@ Table.propTypes = {
 };
 ~~~~~~~~
 
-Only the `objectID` is required, because you know that some of your code depends on it. The other properties are only displayed, thus they are not necessarily required. Moreover you cannot be sure that the Hacker News API has always a defined property for each object in the array.
+Solo `objectID` è obbligatorio, perché sai che parte del tuo codice dipende da quello, le altre proprietà sono solo visualizzate, quindi non devono essere necessariamente obbligatorie. Inoltre non puoi essere certo che l'API di Hacker News ha sempre una proprietà definita per ogni oggetto nell'array.
 
-That's it for PropTypes. But there is one more aspect. You can define default props in your component. Let's take again the Button component. The `className` property has an ES6 default parameter in the component signature.
+Questo è quanto per quanto riguarda PropTypes ma c'è un altro aspetto. Puoi definire props di default nel tuo componente. Prendiamo di nuovo il componente Button. La proprietà `className` è un parametro che ha un default (ES6) nella firma del componente.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -759,7 +759,7 @@ const Button = ({
   ...
 ~~~~~~~~
 
-You could replace it with the internal React default prop:
+Possiamo sostituirlo assegnando un default con PropTypes:
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -785,27 +785,27 @@ Button.defaultProps = {
 # leanpub-end-insert
 ~~~~~~~~
 
-Same as the ES6 default parameter, the default prop ensures that the property is set to a default value when the parent component didn't specify it. The PropType type check happens after the default prop is evaluated.
+Stessa cosa del parametro di default in ES6, la default prop assicura che alla proprietà venga assegnato il valore di default se il componente padre non lo specifica. Il controllo di tipo di PropTypes avviene dopo che il default prop è eseguito.
 
-If you run your tests again, you might see PropType errors for your components on your command line. It can happen because you didn't define all props for your components in the tests that are defined as required in your PropType definition. The tests themselves all pass correctly though. You can pass all required props to avoid these errors.
+Se esegui ancora i tuoi test, potresti notare errori PropTypes sui tuoi componenti nel terminale. Può succedere perché non hai rispettato tutte le definizioni PropTypes nei test dei tuoi componenti. I test passano tutti correttamente comunque. Puoi passare tutte le props obbligatorio per non vedere questi errori.
 
-### Exercises:
+### Esercizi:
 
-* define the PropType interface for the Search component
-* add and update the PropType interfaces when you add and update components in the next chapters
-* read more about [React PropTypes](https://facebook.github.io/react/docs/typechecking-with-proptypes.html)
+* definire l'interfaccia PropType per il componente Search
+* aggiungere e modificare interfacce PropTypes quando aggiungi o modifichi componenti nei prossimi capitoli
+* leggi di più su [React PropTypes](https://facebook.github.io/react/docs/typechecking-with-proptypes.html)
 
 {pagebreak}
 
-You have learned how to organize your code and how to test it! Let's recap the last chapters:
+Hai imparato come organizzare il codice e come testarlo! Ricapitoliamo gli ultimi capitoli:
 
 * React
-  * PropTypes let you define type checks for components
-  * Jest allows you to write snapshot tests for your components
-  * Enzyme allows you to write unit tests for your components
+  * PropTypes ti permette di definire i tipi di dato dell'interfaccia dei tuoi componenti
+  * Jest ti permette di scrivere snapshot test per i tuoi componenti
+  * Enzyme ti permette di scrivere unit test per i tuoi componenti
 * ES6
-  * import and export statements help you to organize your code
-* General
-  * code organization allows you to scale your application with best practices
+  * le istruzioni di import ed export ti aiutano ad organizzare il codice
+* Generale
+  * l'organizzazione del codice ti permette di scalare la tua applicazione seguendo delle best practice
 
-You can find the source code in the [official repository](https://github.com/rwieruch/hackernews-client/tree/4.4).
+Puoi trovare il codice sorgente nel [repository ufficiale](https://github.com/rwieruch/hackernews-client/tree/4.4).
