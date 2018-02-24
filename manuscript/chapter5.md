@@ -1,20 +1,20 @@
-# Advanced React Components
+# Componenti React avanzati
 
-The chapter will focus on the implementation of advanced React components. You will learn about higher order components and how to implement them. In addition you will dive into more advanced topics in React and implement complex interactions with it.
+Questo capitolo si concentra sull'implementazione di componenti React avanzati. Imparerai cosa sono i componenti di ordine superiore (higher order components, anche abbreviato HOC) e come implementarli. Inoltre ci immergeremo in argomenti avanzati di React e implementeremo interazioni complesse tra le parti.
 
-## Ref a DOM Element
+## Ref su un elemento del DOM
 
-Sometimes you need to interact with your DOM nodes in React. The `ref` attribute gives you access to a node in your elements. Usually that is an anti pattern in React, because you should use its declarative way of doing things and its unidirectional data flow. You have learned about it when you have introduced your first search input field. But there are certain cases where you need access to the DOM node. The official documentation mentions three use cases:
+A volte hai bisogno di interagire con i nodi del DOM in React. L'attributo `ref` ti dà accesso ai nodi dei tuoi elementi. Di solito questo è considerato un anti pattern in React perché dovresti usare il suo modo dichiarativo e il passaggio unidirezionale dei dati per fare le cose. Hai imparato queste cose quando abbiamo introdotto il tuo primo campo di ricerca. Ma ci sono certi casi dove hai bisogno di avere accesso al nodo del DOM. La documentazione ufficiale cita tre casi:
 
-* to use the DOM API (focus, media playback etc.)
-* to invoke imperative DOM node animations
-* to integrate with third-party library that needs the DOM node (e.g. [D3.js](https://d3js.org/))
+* per usare l'API del DOM (focus, riproduzione di media ecc.)
+* per innescare animazioni del DOM
+* per integrarsi con librerie di terze parti che hanno bisogno di nodi del DOM (esempio [D3.js](https://d3js.org/))
 
-Let's do it by example with the Search component. When the application renders the first time, the input field should be focused. That's one use case where you would need access to the DOM API. This chapter will show you how it works, but since it is not very useful for the application itself, we will omit the changes after the chapter. You can keep it for your own application though.
+Facciamo un esempio con il componente Search. QUando l'applicazione viene renderizzata la prima volta, il campo di input dovrebbe avere il focus. Questo è un caso d'uso dove avresti bisogno di accedere all'API del DOM. Questo capitolo ti mostrerà come funziona, ma siccome non è molto utile nel complesso dell'applicazione, ometteremo queste modifiche nei capitoli seguenti. Puoi mantenerli comunque nella tua applicazione.
 
-In general, you can use the `ref` attribute in both functional stateless components and ES6 class components. In the example of the focus use case, you will need a lifecycle method. That's why the approach is first showcased by using the `ref` attribute with an ES6 class component.
+In generale, puoi usare l'attributo `ref` sia in componenti funzionali privi di stato sia in componenti realizzati con classi ES6. Nell'esempio del focus avremo bisogno di un metodo di lifecycle, per questo l'approccio di questo primo caso è realizzato usando l'attributo `ref` con un componente che è una classe ES6.
 
-The initial step is to refactor the functional stateless component to an ES6 class component.
+Il primo passaggio è refattorizzare il componente funzionale stateless in un componente tramite class ES6.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -47,7 +47,7 @@ class Search extends Component {
 # leanpub-end-insert
 ~~~~~~~~
 
-The `this` object of an ES6 class component helps us to reference the DOM node with the `ref` attribute.
+L'oggetto `this` di un componente in una classe ES6 ci aiuta a referenziare un nodo del DOM con l'attributo `ref`.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -79,7 +79,7 @@ class Search extends Component {
 }
 ~~~~~~~~
 
-Now you can focus the input field when the component mounted by using the `this` object, the appropriate lifecycle method, and the DOM API.
+Ora possiamo dare il focus al campo di testo quando il componente è inserito nel DOM usando l'oggetto `this`, il metodo di lifecycle appropriato, e le API del DOM.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -115,9 +115,9 @@ class Search extends Component {
 }
 ~~~~~~~~
 
-The input field should be focused when the application renders. That's it basically for using the `ref` attribute.
+Il campo di testo dovrebbe ora avere il focus quando l'applicazione viene renderizzata. Questo è praticamente tutto per quanto riguarda l'attributo `ref`.
 
-But how would you get access to the `ref` in a functional stateless component without the `this` object? The following functional stateless component demonstrates it.
+Ma come possiamo accedere a `ref` in un componente funzionale stateless considerata l'assenza dell'oggetto `this`? Il seguente componente privo di stato lo ne è un esempio.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -148,16 +148,16 @@ const Search = ({
 }
 ~~~~~~~~
 
-Now you would be able to access the input DOM element. In the example of the focus use case it wouldn't help you, because you have no lifecycle method in a functional stateless component to trigger the focus. But in the future you might come across other use cases where it can make sense to use a functional stateless component with the `ref` attribute.
+Ora dovresti essere in grado di accedere all'elemento di input del dom. Nell'esempio del caso d'uso del focus questo non ti avrebbe aiutato, considerata l'assenza, nei componenti stateless, di metodi di lifecycle per effettuare il trigger del focus. Ma in futuro potresti imbatterti in altri casi dove ha senso usare un componente funzionale stateless con l'attribute `ref`.
 
-### Exercises
+### Esercizi
 
-* read more about [the ref attribute in general in React](https://facebook.github.io/react/docs/refs-and-the-dom.html)
-* read more about [the usage of the ref attribute in React](https://www.robinwieruch.de/react-ref-attribute-dom-node/)
+* leggi di più su [l'attributo ref in generale in React](https://facebook.github.io/react/docs/refs-and-the-dom.html)
+* leggi di più su [l'utilizzo dell'attributo ref in React](https://www.robinwieruch.de/react-ref-attribute-dom-node/)
 
-## Loading ...
+## Caricamento ...
 
-Now let's get back to the application. You might want to show a loading indicator when you submit a search request to the Hacker News API. The request is asynchronous and you should show your user some feedback that something is about to happen. Let's define a reusable Loading component in your *src/App.js* file.
+Ora torniamo alla nostra applicazione. Potresti voler aggiungere un indicatore di caricamento quando viene eseguita una richiesta di ricerca alle API di Hacker News. La richiesta è asincrona e dovrebbe dare all'utente un feedback del fatto che qualcosa sta accadendo. Definiamo un componente Loading riusabile in un file *src/App.js*.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -165,7 +165,7 @@ const Loading = () =>
   <div>Loading ...</div>
 ~~~~~~~~
 
-Now you will need a property to store the loading state. Based on the loading state you can decide to show the Loading component later on.
+Ora avremo bisogno di una proprietà per salvare lo stato del caricamento. In base al caricamento nello stato possiamo decidere di mostrare il componente Loading.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -192,9 +192,9 @@ class App extends Component {
 }
 ~~~~~~~~
 
-The initial value of that `isLoading` property is false. You don't load anything before the App component is mounted.
+Il valore iniziale della proprietà `isLoading` è false. Non vogliamo caricare niente prima che il componente App è eseguito.
 
-When you make the request, you set a loading state to true. Eventually the request will succeed and you can set the loading state to false.
+Quando la richiesta è eseguita, possiamo settare la proprietà a true. Quando la richiesta andrà a buon fine possiamo settare la proprietà nuovamente a false.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -232,7 +232,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-In the last step, you will use the Loading component in your App. A conditional rendering based on the loading state will decide whether you show a Loading component or the Button component. The latter one is your button to fetch more data.
+In quest'ultimo passaggio useremo il componente Loading nel nostro componente App. Un controllo è eseguito prima di decidere se mostrare il componente Loading o il componente Button (conditional rendering). Quest'ultimo è il bottone che permette di recuperare più dati.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -273,13 +273,13 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Initially the Loading component will show up when you start your application, because you make a request on `componentDidMount()`. There is no Table component, because the list is empty. When the response returns from the Hacker News API, the result is shown, the loading state is set to false and the Loading component disappears. Instead, the "More" button to fetch more data appears. Once you fetch more data, the button will disappear again and the Loading component will show up.
+Inizialmente il componente Loading sarà mostrato quando eseguiremo la nostra applicazione perché eseguiamo la nostra richiesta nel metodo `componentDidMount()`. Non c'è il componente Table, perché la lista di risulta è ancora vuota. Quando riceviamo la risposta dall'API di Hacker News, il risultato viene mostrato, la proprietà `isLoading` è settata a false e il componente Loading scompare. Di conseguenza il bottone "More" per caricare più dati compare. Se viene eseguita una richiesta per caricare più dati, il bottone scompare nuovamente e il componente Loading è mostrato.
 
-### Exercises:
+### Esercizi:
 
-* use a library such as [Font Awesome](http://fontawesome.io/) to show a loading icon instead of the "Loading ..." text
+* utilizza una libreria come [Font Awesome](http://fontawesome.io/) per mostrare un'icona di caricamento invece del testo "Loading ..."
 
-## Higher Order Components
+## Componenti di ordine superiore (HOC)
 
 Higher order components (HOC) are an advanced concept in React. HOCs are an equivalent to higher order functions. They take any input - most of the time a component, but also optional arguments - and return a component as output. The returned component is an enhanced version of the input component and can be used in your JSX.
 
