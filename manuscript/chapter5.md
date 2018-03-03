@@ -281,11 +281,11 @@ Inizialmente il componente Loading sarà mostrato quando eseguiremo la nostra ap
 
 ## Componenti di ordine superiore (HOC)
 
-Higher order components (HOC) are an advanced concept in React. HOCs are an equivalent to higher order functions. They take any input - most of the time a component, but also optional arguments - and return a component as output. The returned component is an enhanced version of the input component and can be used in your JSX.
+I componenti di ordine superiore (higher order components, HOC) sono un concetto avanzato di React. Gli HOC sono un equivalente delle funzioni di ordine superiore. Prendono dell'input - la maggior parte delle volte un componente, ma anche parametri opzionali - e restituiscono un componente come output. Il componente restituito è una versione con più funzionalità del componente in input e può essere usato nel tuo JSX.
 
-HOCs are used for different use cases. They can prepare properties, manage state or alter the representation of a component. One use case could be to use a HOC as a helper for a conditional rendering. Imagine you have a List component that renders a list of items or nothing, because the list is empty or null. The HOC could shield away that the list would render nothing when there is no list. On the other hand, the plain List component doesn't need to bother anymore about an non existent list. It only cares about rendering the list.
+Gli HOC hanno diversi casi d'uso. Possono prepare delle proprietà, gestire lo stato o alterare la rappresentazione di un componente. Un caso d'uso potrebbe essere quello di usare un HOC come helper per del conditional rendering. Immagina di avere un componente List che renderizza una lista di oggetti o niente, perché la lista è vuota o null. Il HOC può occuparsi del caso in cui la lista non renderizzerebbe niente perché non presente. Dopotutto, il semplice componente List non dovrebbe occuparsi anche del caso in cui la lista non è presente. Così si preoccupa solo di renerizzare la lista.
 
-Let's do a simple HOC which takes a component as input and returns a component. You can place it in your *src/App.js* file.
+Implementiamo un semplice HOC che prendere in input un componente e restituisce un altro componente. Puoi metterlo nel file *src/App.js*.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -296,7 +296,7 @@ function withFoo(Component) {
 }
 ~~~~~~~~
 
-One neat convention is to prefix the naming of a HOC with `with`. Since you are using JavaScript ES6, you can express the HOC more concisely with an ES6 arrow function.
+Una convenzione diffusa è quella di mettere un prefisso `with` al nome dell'HOC. Siccome stai usando JavaScript ES6, puoi implementare lo stesso HOC in modo più conciso con una arrow function in ES6.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -304,7 +304,7 @@ const withFoo = (Component) => (props) =>
   <Component { ...props } />
 ~~~~~~~~
 
-In the example, the input component would stay the same as the output component. Nothing happens. It renders the same component instance and passes all of the props to the output component. But that's useless. Let's enhance the output component. The output component should show the Loading component, when the loading state is true, otherwise it should show the input component. A conditional rendering is a great use case for a HOC.
+Nell'esempio, il componente di input resta uguale al componente di output. Non succede niente di interessante. Renderizza l'istanza dello stesso componente e passa tutte le props al componente in output. Ma questo è inutile. Aggiungiamo delle funzionalità al componente di output. Il componente di output dovrebbe mostrare il componente Loading, quando la property loading è true, altrimenti mostrare il componente in input. Un conditional rendering è un'ottima use case per un HOC.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -316,9 +316,9 @@ const withLoading = (Component) => (props) =>
 # leanpub-end-insert
 ~~~~~~~~
 
-Based on the loading property you can apply a conditional rendering. The function will return the Loading component or the input component.
+In base alla proprietà loading possiamo applicare il conditional rendering. La funzione restituirà il componente Loading o il componente in input.
 
-In general it can be very efficient to spread an object, like the props object in the previous example, as input for a component. See the difference in the following code snippet.
+In generale può essere molto efficiente fare lo spread di un oggetto, come le proprietà dell'oggetto nell'esempio precedente, come input di un componente. Guardiamo la differenza con il seguente frammento di codice.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -330,7 +330,7 @@ const { foo, bar } = props;
 <SomeComponent { ...props } />
 ~~~~~~~~
 
-There is one little thing that you should avoid. You pass all the props including the `isLoading` property, by spreading the object, into the input component. However, the input component may not care about the `isLoading` property. You can use the ES6 rest destructuring to avoid it.
+C'è un piccolo dettaglio che possiamo evitare. Abbiamo passato tutte le proprietà inclusa la proprietà `isLoading`, facendo lo spread dell'oggetto, dentro al componente di input. Tuttavia, al componente di input potrebbe non interessare più la proprietà `isLoading`. Possiamo usare il rest destructuring per evitarlo.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -342,9 +342,9 @@ const withLoading = (Component) => ({ isLoading, ...rest }) =>
 # leanpub-end-insert
 ~~~~~~~~
 
-It takes one property out of the object, but keeps the remaining object. It works with multiple properties as well. You might have already read about it in the [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
+Estrae una proprietà dall'oggetto ma mantiene il resto dell'oggetto. Funziona anche con proprietà multiple. Potresti aver già letto a riguardo nel [compito sul destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
 
-Now you can use the HOC in your JSX. An use case in the application could be to show either the "More" button or the Loading component. The Loading component is already encapsulated in the HOC, but an input component is missing. In the use case of showing a Button component or a Loading component, the Button is the input component of the HOC. The enhanced output component is a ButtonWithLoading component.
+Ora puoi usare l'HOC nel tuo JSX. Un altro caso d'uso nella nostra applicazione potrebbe essere quello di mostrare il bottone "More" o il componente Loading. Il componente Loading è già incapsulato in un HOC ma un componente di input non c'è. Nell'esempio di mostrare un componente Button o un componente Loading, il Button è il componente in input all'HOC. Il componente in output, arricchito di funzionalità, è il componente ButtonWithLoading.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -370,7 +370,7 @@ const ButtonWithLoading = withLoading(Button);
 # leanpub-end-insert
 ~~~~~~~~
 
-Everything is defined now. As a last step, you have to use the ButtonWithLoading component, which receives the loading state as an additional property. While the HOC consumes the loading property, all other props get passed to the Button component.
+Tutto è definito ora. Come ultimo passaggio dobbiamo utilizzare il componente ButtonWithLoading, che riceve la proprietà loading come proprietà addizionale. Mentre il HOC fa uso della proprietà loading, tutte le altre proprietà vengono passate al componente Button.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -398,7 +398,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-When you run your tests again, you will notice that your snapshot test for the App component fails. The diff might look like the following on the command line:
+Se esegui nuovamente i test, noterai che lo snapshot test per il componente App fallisce. La differenza potrebbe apparire la seguente nel terminale:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
@@ -414,31 +414,32 @@ When you run your tests again, you will notice that your snapshot test for the A
 +    </div>
 ~~~~~~~~
 
-You can either fix the component now, when you think there is something wrong about it, or can accept the new snapshot of it. Because you introduced the Loading component in this chapter, you can accept the altered snapshot test on the command line in the interactive test.
+Puoi o sistmare subito il componente, quando pensi che c'è qualcosa di sbagliato, o accettare la sua nuova snapshot generata. Poiché abbiamo introdotto il componente Loading in questo capitolo, potresti accettare le modifiche alla snapshot nella riga di comando del test interattivo.
 
-Higher order components are an advanced technique in React. They have multiple purposes like improved reusability of components, greater abstraction, composability of components and manipulations of props, state and view. Don't worry if you don't understand them immediately. It takes time to get used to them.
+I componenti di ordine superiore sono una tecnica avanzata in React. Hanno molti scopi come migliorare la reusabilità dei componenti, migliorare le astrazioni, l'interazione tra i componenti e la manipolazione di proprietà, stato e viste. Non preoccuparti se non li capisci immediatamente, richiedono tempo per assimilarli.
 
-I encourage you to read the [gentle introduction to higher order components](https://www.robinwieruch.de/gentle-introduction-higher-order-components/). It gives you another approach to learn them, shows you an elegant way to use them a functional programming way and solves specifically the problem of conditional rendering with higher order components.
+Ti invito a leggere [gentle introduction to higher order components](https://www.robinwieruch.de/gentle-introduction-higher-order-components/). Ti offre un altro approccio per impararli, mostra un modo elegante per usarli nella programmazione funzionale e risolve specificatamente il problema del conditional rendering con componenti di ordine superiore.
 
-### Exercises:
+### Esercizi:
 
-* read [a gentle introduction to higher order components](https://www.robinwieruch.de/gentle-introduction-higher-order-components/)
-* experiment with the HOC you have created
-* think about a use case where another HOC would make sense
-  * implement the HOC, if there is a use case
+* leggi [a gentle introduction to higher order components](https://www.robinwieruch.de/gentle-introduction-higher-order-components/)
+* sperimenta con gli HOC che hai creato
+* pensa a un altro caso in cui un HOC avrebbe senso
+  * implementa il HOC, se hai trovato un caso
 
-## Advanced Sorting
+## Ordinamento avanzato
 
-You have already implemented a client- and server-side search interaction. Since you have a Table component, it would make sense to enhance the Table with advanced interactions. What about introducing a sort functionality for each column by using the column headers of the Table?
+Hai già implementato un'interazione tra client e server. Siccome hai un componente Table, avrebbe senso arricchire il componente Table con interazioni avanzate. E se introducessimo una funzionalità di ordinamento su ogni colonna, usando gli header di colonna di Table?
 
-It would be possible to write your own sort function, but personally I prefer to use a utility library for such cases. [Lodash](https://lodash.com/) is one of these utility libraries, but you can use whatever library suits you. Let's install Lodash and use it for the sort functionality.
+Sarebbe possibile scrivere la propria funzione di ordinamento ma personalmente preferisco usare una libreria per questi casi.
+[Lodash](https://lodash.com/) è una di queste librerie di utilità ma puoi usare quella che preferisci. Installiamo lodash e usiamola per la funzionalità di ordinamento.
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm install lodash
 ~~~~~~~~
 
-Now you can import the sort functionality of Lodash in your *src/App.js* file.
+Ora puoi importare la funzionalità di ordinamento di Lodash nel tuo file *src/App.js*.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -450,7 +451,7 @@ import { sortBy } from 'lodash';
 import './App.css';
 ~~~~~~~~
 
-You have several columns in your Table. There are title, author, comments and points columns. You can define sort functions whereas each function takes a list and returns a list of items sorted by a specific property. Additionally, you will need one default sort function which doesn't sort but only returns the unsorted list. That will be your initial state.
+Abbiamo diverse colonne in Table. Ci sono le colonne titolo, autore, commenti e punti. Possiamo definire funzioni di ordinamento dove ogni funzione prendere una lista e restituisce una lista di oggetti ordinati per quella specifica proprietà. Inoltre, avremo bisogno di una funzione di ordinamento di default, che non ordina niente ma restituisce la lista non ordinata. Quello sarà il nostro stato iniziale.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -472,11 +473,11 @@ class App extends Component {
 ...
 ~~~~~~~~
 
-You can see that two of the sort functions return a reversed list. That's because you want to see the items with the highest comments and points rather than to see the items with the lowest counts when you sort the list for the first time.
+Puoi vedere come due delle funzioni di ordinamento restituisco una lista al contrario. Questo perché vogliamo vedere gli oggetti con più commenti e più punti in alto, piuttosto che quelli con i valori più bassi, quando ordiniamo la lista per la prima volta.
 
-The `SORTS` object allows you to reference any sort function now.
+L'oggetto `SORTS` ci permette ora di referenziare ogni funzione di ordinamento.
 
-Again your App component is responsible for storing the state of the sort. The initial state will be the initial default sort function, which doesn't sort at all and returns the input list as output.
+Di nuovo il componente App è responsabile per mantenere lo stato dell'ordinamento. Lo stato inziale sarà la funzione di ordinamento di default, che non ordina gli elementi e restituisce la lista in input come output.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -492,9 +493,9 @@ this.state = {
 };
 ~~~~~~~~
 
-Once you choose a different `sortKey`, let's say the `AUTHOR` key, you will sort the list with the appropriate sort function from the `SORTS` object.
+Ogni volta che una diversa `sortKey` è scelta, diciamo la chiave `AUTHOR`, ordineremo la lista con la funzione di ordinamento dell'oggetto `SORTS` appropriata.
 
-Now you can define a new class method in your App component that simply sets a `sortKey` to your local component state. Afterward, the `sortKey` can be used to retrieve the sorting function to apply it on your list.
+Ora possiamo definire un nuovo metodo di classe nel nostro componente App che semplicemente setta una `sortKey` nello stato locale del componente. Dopodiché, la `sortKey` può essere usata per recuperare la funzione di ordinamento da applicare alla lista.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -526,7 +527,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-The next step is to pass the method and `sortKey` to your Table component.
+Il prossimo passaggio è quello di passare il metodo e la `sortKey` al componente Table.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -566,7 +567,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-The Table component is responsible for sorting the list. It takes one of the `SORT` functions by `sortKey` and passes the list as input. Afterward it keeps mapping over the sorted list.
+Il componente Table è responsabile dell'ordinamento della lista. Prende una delle funzioni dell'oggetto `SORT` passando la `sortKey` e passa la lista come input. A questo punto procede con il map sulla lista ordinata.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -589,7 +590,7 @@ const Table = ({
   </div>
 ~~~~~~~~
 
-In theory the list would get sorted by one of the functions. But the default sort is set to `NONE`, so nothing is sorted yet. So far, no one executes the `onSort()` method to change the `sortKey`. Let's extend the Table with a row of column headers that use Sort components in columns to sort each column.
+In teoria la lista sarebbe ordinata da una delle funzione di ordinamente ma il l'ordinamento di default è settato a `NONE` quindi non è stato ancora applicato nessun ordinamento, fin qui nessuno ha eseguito il metodo `onSort()` per cambiare la `sortKey`. Estendiamo il componente Table con una riga contenente gli header delle colonne utilizzando i componente Sort nelle colonne per ordinare ogni singola colonna.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -645,7 +646,7 @@ const Table = ({
   </div>
 ~~~~~~~~
 
-Each Sort component gets a specific `sortKey` and the general `onSort()` function. Internally it calls the method with the `sortKey` to set the specific key.
+Ogni componente Sort richiede una specifica `sortKey` e la funzione generale `onSort()`. Internamente chiamere il metodo con la `sortKey` per impostare la chiave specifica.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -655,9 +656,9 @@ const Sort = ({ sortKey, onSort, children }) =>
   </Button>
 ~~~~~~~~
 
-As you can see, the Sort component reuses your common Button component. On a button click each individual passed `sortKey` will get set by the `onSort()` method. Now you should be able to sort the list when you click on the column headers.
+Come puoi vedere, il componente Sort riusa il nostro comune componente Button. Al click di un bottone verrà settata la `sortKey` dal metodo `onSort()`. Ora dovremmo essere in grado di ordinare la lista quando avviene un click su un header di colonna.
 
-There is one minor improvement for an improved look. So far, the button in a column header looks a bit silly. Let's give the button in the Sort component a proper `className`.
+Possiamo effettuare un piccolo miglioramento all'aspetto della UI. Assegnamo al bottone nel componente Sort un `className`.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -672,7 +673,7 @@ const Sort = ({ sortKey, onSort, children }) =>
   </Button>
 ~~~~~~~~
 
-It should look nice now. The next goal would be to implement a reverse sort as well. The list should get reverse sorted once you click a Sort component twice. First, you need to define the reverse state with a boolean. The sort can be either reversed or non reversed.
+Dovrebbe avere un aspetto migliore adesso. Il prossimo obiettivo potrebbe essere quello di implementare anche l'ordinamento inverso. La lista dovrebbe essere ordinata al contrario quando un componente Sort è cliccato due volte. Prima cosa, abbiamo bisogno di definire una proprietà booleana nello stato. L'ordinamento può essere al contrario o no.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -689,7 +690,7 @@ this.state = {
 };
 ~~~~~~~~
 
-Now in your sort method, you can evaluate if the list is reverse sorted. It is reverse if the `sortKey` in the state is the same as the incoming `sortKey` and the reverse state is not already set to true.
+Ora nel metodo di ordinamento, possiamo verificare e impostare se la lista richiede un ordinamento inverso. Si tratta di un ordinamento inverso se la `sortKey` nello stato è la stessa di quella scelta e la proprietà di reverse non è stata già settata a true.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -701,7 +702,7 @@ onSort(sortKey) {
 }
 ~~~~~~~~
 
-Again you can pass the reverse prop to your Table component.
+Passiamo anche la proprietà che specifica se l'ordinamento è inverso al componente Table.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -743,7 +744,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-The Table has to have an arrow function block body to compute the data now.
+Adesso è necessario che Table faccia uso di un arrow function per eseguire l'operazione sui dati.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -778,11 +779,11 @@ const Table = ({
 # leanpub-end-insert
 ~~~~~~~~
 
-The reverse sort should work now.
+L'ordinamento inverso dovrebbe funzionare ora.
 
-Last but not least, you have to deal with one open question for the sake of an improved user experience. Can a user distinguish which column is actively sorted? So far, it is not possible. Let's give the user a visual feedback.
+A questo punto è bene porsi una domanda nel nome di una migliore user experience. Può un utente distinguere quale colonna è correntemente ordinata? Per ora non è possibile. Diamo all'utente un feedback visuale.
 
-Each Sort component gets its specific `sortKey` already. It could be used to identify the activated sort. You can pass the `sortKey` from the internal component state as active sort key to your Sort component.
+Ogni componente Sort prendere già una specifica `sortKey`. Potrebbe essere usata come modo per identificare l'ordinamento selezionato. Possiamo passare la `sortKey` dallo stato del componente al componente Sort come chiave attiva di ordinamento.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -857,7 +858,7 @@ const Table = ({
 }
 ~~~~~~~~
 
-Now in your Sort component, you know based on the `sortKey` and `activeSortKey` whether the sort is active. Give your Sort component an extra `className` attribute, in case it is sorted, to give the user a visual feedback.
+Ora nel componente Sort basandoci sulla `sortKey` e su `activeSortKey` sappiamo se l'ordinamento è quello attivo correntemente. Diamo al componente Sort un attributo `className` extra, in caso sia quello ordinato, per dare all'utente un feedback visivo.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -886,14 +887,14 @@ const Sort = ({
 # leanpub-end-insert
 ~~~~~~~~
 
-The way to define the `sortClass` is a bit clumsy, isn't it? There is a neat little library to get rid of this. First you have to install it.
+Il modo per definire il `className` è un po' articolato, vero? C'è una piccola libreria che fa esattamento qeusto. Per prima cosa installiamola.
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm install classnames
 ~~~~~~~~
 
-And second you have to import it on top of your *src/App.js* file.
+Seconda cosa importiamola all'inizio del file *src/App.js*.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -906,7 +907,7 @@ import classNames from 'classnames';
 import './App.css';
 ~~~~~~~~
 
-Now you can use it to define your component `className` with conditional classes.
+Ora possiamo usarla per definire il `className` del componente con classi condizionali.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -936,7 +937,7 @@ const Sort = ({
 }
 ~~~~~~~~
 
-Again, when you run your tests, you should see failing snapshot tests but also failing unit tests for the Table component. Since you changed again your component representations, you can accept the snapshot tests. But you have to fix the unit test. In your *src/App.test.js* file, you need to provide a `sortKey` and the `isSortReverse` boolean for the Table component.
+Se eseguiamo i nostri test dovremmo vedere i test di snapshot fallire così come gli unit test del componente Table. Siccome abbiamo modifica la rappresentazione dei nostri componenti possiamo accettare la nuova snapshot, ma dobbiamo correggere gli unit test. Nel file *src/App.test.js* dobbiamo fornire una `sortKey` e il booleano `isSortReverse` per il componente Table.
 
 {title="src/App.test.js",lang=javascript}
 ~~~~~~~~
@@ -960,26 +961,26 @@ describe('Table', () => {
 });
 ~~~~~~~~
 
-Once again you might need to accept the failing snapshot tests for your Table component, because you provided extended props for the Table component.
+Ancora una volta potrebbe essere necessario accettare le snapshot dei test che falliscono per il componente Table, perché abbiamo previsto nuove proprietà.
 
-Finally your advanced sort interaction is complete now.
+Finalmente il nostro sistema di ordinamento avanzato è completo.
 
-### Exercises:
+### Esercizi:
 
-* use a library like [Font Awesome](http://fontawesome.io/) to indicate the (reverse) sort
-  * it could be an arrow up or arrow down icon next to each Sort header
-* read more about the [classnames library](https://github.com/JedWatson/classnames)
+* usa una libreria tipo [Font Awesome](http://fontawesome.io/) per indicare l'ordinamento inverso
+  * potrebbe essere una freccia verso l'alto o verso il basso vicino ad ogni header in Sort
+* leggi di più sulla [libreria classnames](https://github.com/JedWatson/classnames)
 
 {pagebreak}
 
-You have learned advanced component techniques in React! Let's recap the last chapters:
+Hai imparato tecniche avanzate di gestione dei componenti React! Ricapitoliamo gli ultimi capitoli:
 
 * React
-  * the ref attribute to reference DOM nodes
-  * higher order components are a common way to build advanced components
-  * implementation of advanced interactions in React
-  * conditional classNames with a neat helper library
+  * l'attributo ref per riferirsi a nodi del DOM
+  * componenti di ordine superiore come modo per costruire componenti avanzati
+  * implementazione di interazioni avanzate in React
+  * nomi di classi CSS condizioni con l'aiuto di una piccola libreria
 * ES6
-  * rest destructuring to split up objects and arrays
+  * rest destructuring per estrarre valori da oggetti ed array
 
-You can find the source code in the [official repository](https://github.com/rwieruch/hackernews-client/tree/4.5).
+Trovi i codici sorgenti nel [repository ufficiale](https://github.com/rwieruch/hackernews-client/tree/4.5).
