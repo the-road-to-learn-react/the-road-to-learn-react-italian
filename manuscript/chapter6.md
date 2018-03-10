@@ -1,16 +1,16 @@
-# State Management in React and beyond
+# Gestione dello stato in React e alternative
 
-You have already learned the basics of state management in React in the previous chapters. This chapter digs a bit deeper into the topic. You will learn best practices, how to apply them and why you could consider using a third-party state management library.
+Hai già imparato le basi della gestione dello stato in React nei capitoli precedenti. Questo capitolo approfondisce l'argomento. Imparerai le best practice, come applicarle e perché potresti considerare di usare una libreria di terze parti per la gestione dello stato.
 
-## Lifting State
+## Spostare lo stato (lifting state)
 
-Only the App component is a stateful ES6 component in your application. It handles a lot of application state and logic in its class methods. Maybe you have noticed that you pass a lot of properties to your Table component. Most of these props are only used in the Table component. In conclusion one could argue that it makes no sense that the App component knows about them.
+Solo il component App è un componente ES6 contenente dello stato nella nostra applicazione. Gestisce molto dello stato dell'applicazione e della logica nei suoi metodi di classe. Forse hai notato che passiamo molte proprietà al componente Table. Molte di queste proprietà sono usato esclusivamente nel componente Table. In conclusione si potrebbe discutere sul senso che il componente App conosca queste proprietà.
 
-The whole sort functionality is only used in the Table component. You could move it into the Table component, because the App component doesn't need to know about it at all. The process of refactoring substate from one component to another is known as *lifting state*. In your case, you want to move state that isn't used in the App component into the Table component. The state moves down from parent to child component.
+L'intera funzionalità di ordinamento è usata solo nel componente Table. Si potrebbe spostare nel componente Table, perché il componente App non ha bisogno affatto di conoscerne il funzionamento. Il processo di refactoring parti di stato da un componente ad un altro è conosciuto come *lifting state*. Nel nostro caso, vogliamo spostare lo stato che non è utilizzato nel componente App al componente Table. Quindi spostarlo dal padre al componente figlio.
 
-In order to deal with state and class methods in the Table component, it has to become an ES6 class component. The refactoring from functional stateless component to ES6 class component is straight forward.
+Per contenere dello stato e metodi di classe il componente Table deve diventare un componente implementato con una classe ES6. Il refactoring da componente funzionale privo di stato a componente classe ES6 è piuttosto semplice.
 
-Your Table component as a functional stateless component:
+Il nostro componente Table come componente funzionale privo di stato:
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -32,7 +32,7 @@ const Table = ({
 }
 ~~~~~~~~
 
-Your Table component as an ES6 class component:
+Il componente Table come classe ES6:
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -60,7 +60,7 @@ class Table extends Component {
 # leanpub-end-insert
 ~~~~~~~~
 
-Since you want to deal with state and methods in your component, you have to add a constructor and initial state.
+Dal momento che vogliamo gestire lo stato e aggiungere metodi al nostro componente, dobbiamo aggiungere un costruttore e uno stato iniziale.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -79,7 +79,7 @@ class Table extends Component {
 }
 ~~~~~~~~
 
-Now you can move state and class methods regarding the sort functionality from your App component down to your Table component.
+Ora possiamo spostare lo stato e i metodi riguardanti la funzionalità di ordinamento dal componente App giù al componente Table.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -110,7 +110,7 @@ class Table extends Component {
 }
 ~~~~~~~~
 
-Don't forget to remove the moved state and `onSort()` class method from your App component.
+Non dimenticarti di rimuovere la parte di stato spostata e il metodo `onSort()` dal tuo componente App.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -140,7 +140,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Additionally, you can make the Table component API more lightweight. Remove the props that are passed to it from the App component, because they are handled internally in the Table component now.
+Inoltre, possiamo rendere l'API del componente Table più leggera. Rimuoviamo le proprietà che gli sono passate dal componente App, perché adesso sono gestite internamente dal componente Table stesso.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -177,7 +177,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Now in your Table component you can use the internal `onSort()` method and the internal Table state.
+Ora nel componente Table possiamo usare il metodo `onSort()` interno e lo stato interno.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -263,14 +263,14 @@ class Table extends Component {
 }
 ~~~~~~~~
 
-Your application should still work. But you made a crucial refactoring. You moved functionality and state closer into another component. Other components got more lightweight again. Additionally the component API of the Table got more lightweight because it deals internally with the sort functionality.
+La nostra applicazione dovrebbe funzionare ancora. Ma abbiamo applicato un refactoring cruciale. Abbiamo spostato funzionalità e parti di stato più vicini ad un componente che ne ha bisogno. Altri componenti sono stati resi più leggeri. L'API del componente Table è stata resa molto più snella perché adesso sfrutta la funzionalità di ordinamento interna al componente.
 
-The process of lifting state can go the other way as well: from child to parent component. It is called as lifting state up. Imagine you were dealing with internal state in a child component. Now you want to fulfill a requirement to show the state in your parent component as well. You would have to lift up the state to your parent component. But it goes even further. Imagine you want to show the state in a sibling component of your child component. Again you would have to lift the state up to your parent component. The parent component deals with the internal state, but exposes it to both child components.
+Il processo di spostare lo stato può prendere anche la via opposta, cioè dal figlio al componente padre. Immagina di avere a che fare con lo stato interno di un componente figlio e viene fatta una richiesta di mostrare parti di quello stato anche nel componente padre. In quel caso dovresti portare lo stato più in altro nella gerarchia al componente padre. Ma c'è altro. Immagina di voler mostrare quello stato a componenti fratelli del componente figlio. Di nuovo abbiamo la necessità di spostare lo stato più in alto ad un componente padre. Il componente padre si occuperà di gestire lo stato internamente e di esporlo ad entrambi i figli.
 
-### Exercises:
+### Esercizi:
 
-* read more about [lifting state in React](https://facebook.github.io/react/docs/lifting-state-up.html)
-* read more about lifting state in [learn React before using Redux](https://www.robinwieruch.de/learn-react-before-using-redux/)
+* leggi di più su [spostare lo stato in React](https://facebook.github.io/react/docs/lifting-state-up.html)
+* leggi di più su spostare lo stato in [imparare React prima di usare Redux](https://www.robinwieruch.de/learn-react-before-using-redux/)
 
 ## Revisited: setState()
 
