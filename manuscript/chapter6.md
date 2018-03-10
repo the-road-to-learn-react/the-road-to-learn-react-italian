@@ -272,16 +272,16 @@ Il processo di spostare lo stato può prendere anche la via opposta, cioè dal f
 * leggi di più su [spostare lo stato in React](https://facebook.github.io/react/docs/lifting-state-up.html)
 * leggi di più su spostare lo stato in [imparare React prima di usare Redux](https://www.robinwieruch.de/learn-react-before-using-redux/)
 
-## Revisited: setState()
+## Approfondimento setState()
 
-So far, you have used React `setState()` to manage your internal component state. You can pass an object to the function where you can update partially the internal state.
+Finora abbiamo usato il metodo `setState()` di React per gestire lo stato interno di un componente, passando un oggetto alla funzione aggiornando parzialmente (o completamente, in base all'oggetto passato) lo stato interno.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
 this.setState({ foo: bar });
 ~~~~~~~~
 
-But `setState()` doesn't take only an object. In its second version, you can pass a function to update the state.
+Ma `setState()` non prendere in input necessariamente un oggetto. Nella sua seconda versione possiamo passare una funzione per aggiornare lo stato.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -290,9 +290,9 @@ this.setState((prevState, props) => {
 });
 ~~~~~~~~
 
-Why should you want to do that? There is one crucial use case where it makes sense to use a function over an object. It is when you update the state depending on the previous state or props. If you don't use a function, the internal state management can cause bugs.
+Perché dovresti farlo? C'è un caso d'uso cruciale dove ha senso usare una funzione piuttosto che un oggetto. Cioè quando l'aggiornamento di stato dipende dal precedente stato o dalle props. Se in questi casi non usi una funzione, la gestione dello stato interno può causare bug.
 
-But why does it cause bugs to use an object over a function when the update depends on the previous state or props? The React `setState()` method is asynchronous. React batches `setState()` calls and executes them eventually. It can happen that the previous state or props changed in between when you would rely on it in your `setState()` call.
+Ma perché causerebbe errori l'uso di un oggetto al posto di una funzione quando l'aggiornamento dipende dallo stato precedente o da props? Il metodo `setState()` di React è asincrono. React raggruppa chiamate a `setState()` e le esegue ad un certo punto. Può succedere che lo stato precedente o che le props siano cambiate da quando avresti contato sul loro valore nella chiamata a `setState()`.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -301,9 +301,9 @@ const { barCount } = this.props;
 this.setState({ count: fooCount + barCount });
 ~~~~~~~~
 
-Imagine that `fooCount` and `barCount`, thus the state or the props, change somewhere else asynchronously when you call `setState()`. In a growing application, you have more than one 'setState()' call across your application. Since `setState()` executes asynchronously, you could rely in the example on stale values.
+Immagina che `fooCount` e `barCount`, o lo stato o le pros, cambino da qualche altra parte, in modo asincrono, al momento della chiamata a `setState()`. In un'applicazione di discrete dimensioni, potresti avere più di una chiamata a `setState()` all'interno della tua applicazione. Siccome `setState()` viene eseguita in modo asincrono, potresti fare affidamento su dati ormai vecchi.
 
-With the function approach, the function in `setState()` is a callback that operates on the state and props at the time of executing the callback function. Even though `setState()` is asynchronous, with a function it takes the state and props at the time when it is executed.
+Con l'altro approccio, la funzione passata a `setState()` è una callback che lavora sui dati dello stato e delle props, al momento dell'esecuzione della funzione di callback. Anche se `setState()` è una chiamata asincrona, con la funzione come parametro prende lo stato e le props nel momento in cui viene eseguita.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -314,9 +314,9 @@ this.setState((prevState, props) => {
 });
 ~~~~~~~~
 
-Now, lets get back to your code to fix this behavior. Together we will fix it for one place where `setState()` is used and relies on the state or props. Afterward, you are able to fix it at other places too.
+Ora, torniamo al codice per aggiustare questo comportamento. Insieme modificheremo un posto dove `setState()` è chiamato e fa affidamento sui valori dello stato o delle props, dopodiché sarai in grado di sistemare lo stesso problema laddove dovesse essere necessario.
 
-The `setSearchTopStories()` method relies on the previous state and thus is a perfect example to use a function over an object in `setState()`. Right now, it looks like the following code snippet.
+Il metodo `setSearchTopStories()` conta sullo stato precedente ed è quindi un perfetto esempio dove usare una funzione piuttosto che un oggetto in una chiamata a `setState()`. Per ora, il suo codice è quello che segue.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -343,7 +343,7 @@ setSearchTopStories(result) {
 }
 ~~~~~~~~
 
-You extract values from the state, but update the state depending on the previous state asynchronously. Now you can use the functional approach to prevent bugs because of a stale state.
+Estraiamo valori dallo stato ma aggiorniamo lo affidandoci ai valori dello stato precedente in modo asincrono. Ora possiamo usare l'approccio con funzione per prevenire bug da dati non aggiornati.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -358,7 +358,7 @@ setSearchTopStories(result) {
 }
 ~~~~~~~~
 
-You can move the whole block that you have already implemented into the function. You only have to exchange that you operate on the `prevState` rather than `this.state`.
+Possiamo spostare l'intero blocco che abbiamo già implementato dentro alla funzione di callback. Dobbiamo solo cambiare il fatto che operiamo sul `prevState`, lo stato precedente, piuttosto che da quello attuale, `this.state`.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -390,7 +390,7 @@ setSearchTopStories(result) {
 }
 ~~~~~~~~
 
-That will fix the issue with a stale state. There is one more improvement. Since it is a function, you can extract the function for an improved readability. That's one more advantage to use a function over an object. The function can live outside of the component. But you have to use a higher order function to pass the result to it. After all, you want to update the state based on the fetched result from the API.
+Questo aggiusta il problema di aggiornamento con dati non aggiornati. Possiamo fare un ulteriore miglioramento. Siccome è una funzione, possiamo estrarla per migliorare la leggibilità. Questo è un altro vantaggio nell'usare una funzione piuttosto che un oggetto. La funzione può vivere fuori dal componente ma dobbiamo usare una funzione di ordine superiore per passargli il risultato.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -400,7 +400,7 @@ setSearchTopStories(result) {
 }
 ~~~~~~~~
 
-The `updateSearchTopStoriesState()` function has to return a function. It is a higher order function. You can define this higher order function outside of your App component. Note how the function signature changes slightly now.
+La funzione `updateSearchTopStoriesState()` deve restituire una funzione. E' una funzione di ordine superiore. Possiamo definirla fuori dal componente App. Nota come la firma della funzione cambia leggermente adesso.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -432,39 +432,39 @@ class App extends Component {
 }
 ~~~~~~~~
 
-That's it. The function over an object approach in `setState()` fixes potential bugs yet increases readability and maintainability of your code. Furthermore, it becomes testable outside of the App component. You could export it and write a test for it as exercise.
+Questo è quanto. L'approccio con funzione piuttosto che un oggetto in input al metodo `setState()` evita il verificarsi di eventuali bug e migliore la leggibilità e la manutenibilità del codice. Inoltre diventa testabile fuori dal componente App. Potresti esportarla e scrivere un test per testarla come esercizio.
 
-### Exercise:
+### Esercizi:
 
-* read more about [React using state correctly](https://facebook.github.io/react/docs/state-and-lifecycle.html#using-state-correctly)
-* refactor all `setState()` methods to use a function
-  * but only when it makes sense, because it relies on props or state
-* run your tests again and verify that everything is up to date
+* leggi di più su [React e l'utilizzo corretto dello stato](https://facebook.github.io/react/docs/state-and-lifecycle.html#using-state-correctly)
+* rifattorizza tutti i metodi `setState()` usando una funzione come parametro
+  * ma solo quando ha senso, cioè quando l'aggiornamento conta sullo stato precedente o sulle props
+* esegui ancora i test e verifica che tutto sia aggiornato
 
-## Taming the State
+## Domare lo stato
 
-The previous chapters have shown you that state management can be a crucial topic in larger applications. In general, not only React but a lot of SPA frameworks struggle with it. Applications got more complex in the recent years. One big challenge in web applications nowadays is to tame and control the state.
+I capitoli precedenti hanno mostrato come gestire lo stato può essere un argomento cruciale in applicazioni di grandi dimensioni. In generale, non solo React ma anche gli altri framework per creare SPA (single page application) hanno difficoltà su questo argomento. Le applicazioni stanno diventando molto più complesse in questi ultimi anni. Una grande sfida per le web applications in questi giorni è come domare e controllare lo stato in grosse applicazioni.
 
-Compared to other solutions, React already made a big step forward. The unidirectional data flow and a simple API to manage state in a component are indispensable. These concepts make it easier to reason about your state and your state changes. It makes it easier to reason about it on a component level and to a certain degree on a application level.
+In confronto ad altre soluzioni, React ha già fatto un grande passo avanti. Il fluire dei dati in modo unidirezionale e una semplice API per gestire lo stato in un componente sono indispensabili. Questi concetti rendono più semplice ragionare sullo stato e sui suoi aggiornamenti. Rende più facile ragionare a riguardo a livello di componente e fino ad un certo punto anche a livello applicativo.
 
-In a growing application, it gets harder to reason about state changes. You can introduce bugs by operating on stale state when using an object over a function in `setState()`. You have to lift state around to share necessary or hide unnecessary state across components. It can happen that a component needs to lift up state, because its sibling component depends on it. Perhaps the component is far away in the component tree and thus you have to share the state across the whole component tree. In conclusion components get involved to a greater extent in state management. But after all, the main responsibility of components should be representing the UI, shouldn't it?
+In un'applicazione che tende a crescere, diventa difficile ragionare sui cambiamenti di stato. E' più facile introdurre bug da operazioni su dati non aggiornati quando si usa un oggetto piuttosto che una funzione nelle chiamate a `setState()`. Ed è necessario spostare lo stato in giro per condividere parti di stato comuni o nascondere parti di stato non necessarie tra componenti. Può succedere che un componente ha bisogno di spostare lo stato al padre, perché i componenti fratelli dipendono da quello stato. Magari il componente è lontano nell'albero dei componenti e quindi è necessario condividere lo stato attraverso l'intero sottoalbero di componenti. In conclusione i componenti vengono coinvolti maggiormente nella gestione dello stato. Ma dopotutto, la principale responsabilità dei componenti, dovrebbe essere quella di rappresentare la UI, no?
 
-Because of all these reasons, there exist standalone solutions to take care of the state management. These solutions are not only used in React. However, that's what makes the React ecosystem such a powerful place. You can use different solutions to solve your problems. To address the problem of scaling state management, you might have heard of the libraries [Redux](http://redux.js.org/docs/introduction/) or [MobX](https://mobx.js.org/). You can use either of these solutions in a React application. They come with extensions, [react-redux](https://github.com/reactjs/react-redux) and [mobx-react](https://github.com/mobxjs/mobx-react), to integrate them into the React view layer.
+Per tutte queste ragioni, esistono soluzioni standalone che si preoccupano della gestione dello stato, e non sono limitate a React. Tuttavia, questo è quello che rende così potente l'ecosistema React. Possiamo usare differenti soluzioni per risolvere i nostri problemi. Per risolvere il problema della gestione dello stato in modo scalabile, potresti aver sentito parlare di alcune librerie tipo [Redux](http://redux.js.org/docs/introduction/) o [MobX](https://mobx.js.org/). Puoi usare una di queste soluzioni in un'applicazione React. Esistono estensioni, [react-redux](https://github.com/reactjs/react-redux) e [mobx-react](https://github.com/mobxjs/mobx-react) che permettono loro l'integrazione con le viste di React.
 
-Redux and MobX are outside of the scope of this book. When you have finished the book, you will get guidance on how you can continue to learn React and its ecosystem. One learning path could be to learn Redux. Before you dive into the topic of external state management, I can recommend to read this [article](https://www.robinwieruch.de/redux-mobx-confusion/). It aims to give you a better understanding of how to learn external state management.
+Redux e MobX sono esclusi dalla portata di questo libro. Alla fine di questo libro, riceverai consigli su come continuare a imparare circa React e il suo ecosistema. Una possibilità è quella di imparare Redux. Prima di buttarti nell'approfondimento dell'argomento delle soluzioni di gestione di stato di terze parti, ti invito a leggere questo [articolo](https://www.robinwieruch.de/redux-mobx-confusion/), che mira a darti una maggiore comprensione di come imparare la gestione di stato con soluzioni di terze parti.
 
-### Exercises:
+### Esercizi:
 
-* read more about [external state management and how to learn it](https://www.robinwieruch.de/redux-mobx-confusion/)
-* check out my second ebook about [state management in React](https://roadtoreact.com/)
+* leggi di più su [gestione dello stato esterna a React e come impararla](https://www.robinwieruch.de/redux-mobx-confusion/)
+* dai un'occhiata al mio secondo libro sulla [gestione dello stato in React](https://roadtoreact.com/)
 
 {pagebreak}
 
-You have learned advanced state management in React! Let's recap the last chapters:
+Hai imparato tecniche di gestione dello stato avanzate in React! Ricapitoliamo quando visto negli ultimi capitoli:
 
 * React
-  * lift state management up and down to suitable components
-  * setState can use a function to prevent stale state bugs
-  * existing external solutions that help you to tame the state
+  * spostare la gestione dello stato più in alto e più in basso ai componenti più indicati
+  * setState può prendere in input una funzione per prevenire bug da dati non aggiornati
+  * soluzioni esterne esistenti che aiutano a domare lo stato
 
-You can find the source code in the [official repository](https://github.com/rwieruch/hackernews-client/tree/4.6).
+Puoi trovare il codice sorgente nel [repository ufficiale](https://github.com/rwieruch/hackernews-client/tree/4.6).
