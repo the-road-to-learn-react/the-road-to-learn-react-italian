@@ -1,31 +1,31 @@
-# Final Steps to Production
+# Ultimi passaggi verso la produzione
 
-The last chapters will show you how to deploy your application to production. You will use the free hosting service Heroku. On the way to deploy your application, you will learn more about *create-react-app*.
+Gli ultimi capitoli mostreranno come effettuare il deploy della tua applicazione. Useremo il servizio di hosting gratuito Heroku. Durante questa fase imparerai di più su *create-react-app*.
 
 ## Eject
 
-The following step and knowledge is **not necessary** to deploy your application to production. Still, I want to explain it to you. *create-react-app* comes with one feature to keep it extendable but also to prevent a vendor lock-in. A vendor lock-in usually happens when you buy into a technology but there is no escape hatch of using it in the future. Fortunately in *create-react-app* you have such an escape hatch with "eject".
+Quanto spiegato in questa sezione non è necessario per il deploy della tua applicazione in produzione, ma voglio spiegartelo lo stesso. *create-react-app* fornisce una funzionlità per renderlo estendibile e per prevenire una vendor lock-in. Vale a dire una situazione in cui adotti una tecnologia che poi non ti permette di abbandonarla in una fase successiva. Fortunatamente in *create-react-app* abbiamo una via di uscita con "eject".
 
-In your *package.json* you will find the scripts to *start*, *test* and *build* your application. The last script is *eject*. You could try it, but there is no way back. **It is a one-way operation. Once you eject, you can't go back!** If you just started to learn React, it makes no sense to leave the convenient environment of *create-react-app*.
+Nel file *package.json* troviamo gli script *start*, *test* e *build*, rispettivamente per far partire, testare, ed effettuare una build della tua applicazione. L'ultimo script è *eject*. Puoi provarlo, ma non c'è modo di tornare indietro. **E' un'operazione irreversibile. Una volta che effettui l'eject, non puoi tornare indietro!**. Se stai semplicemente imparando React, non ha senso abbandonare il confortevole ambiente di *create-react-app*.
 
-If you would run `npm run eject`, the command would copy all the configuration and dependencies to your *package.json* and a new *config/* folder. You would convert the whole project into a custom setup with tooling that includes Babel and Webpack. After all, you would have full control over all these tools.
+Se eseguissimo `npm run eject`, il comando copierebbe tutta la configurazione e le dipendenze di sviluppo nel file *package.json* e in una nuova directory *config/*. Praticamente convertirebbe l'intero progetto in uno con un setup custom con tool quali Babel e Webpack. Praticamente, il comando ti cederebbe il controllo di questi tool.
 
-The official documentation says that *create-react-app* is suitable for small to mid size projects. You shouldn't feel obligated to use the "eject" command.
+La documentazione ufficiale dice che *create-react-app* è adatta a progetti da piccole dimensioni fino a medie dimensioni. Non dovresti sentirti obbligato ad usare il comando "eject".
 
-### Exercises:
+### Esercizi:
 
-* read more about [eject](https://github.com/facebookincubator/create-react-app#converting-to-a-custom-setup)
+* leggi di più su [eject](https://github.com/facebookincubator/create-react-app#converting-to-a-custom-setup)
 
-## Deploy your App
+## Il deploy della tua App
 
-In the end, no application should stay on localhost. You want to go live. Heroku is a platform as a service where you can host your application. They offer a seamless integration with React. To be more specific: It's possible to deploy a *create-react-app* in minutes. It is a zero-configuration deployment which follows the philosophy of *create-react-app*.
+Alla fin fine, nessuna applicazione dovrebbe rimanere in localhost. Vogliamo invece andare live. Heroku è una piattaforma dove puoi mettere la tua applicazione che offre un'ottima integrazione con React. Per essere più specifici_ è possibile effettuare il deploy di un'applicazione realizzata con *create-react-app* in pochi minuti. E' praticamente un zero-configuration deployment che segue la stessa filosofia di *create-react-app*.
 
-You need to fulfill two requirements before you can deploy your application to Heroku:
+Ci sono due prerequisiti prima di poter effettuare il deploy di un'applicazione su Heroku:
 
-* install the [Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
-* create a [free Heroku account](https://www.heroku.com/)
+* installare l'[Heroku CLI](https://devcenter.heroku.com/articles/heroku-command-line)
+* creare un [account gratuito su Heroku](https://www.heroku.com/)
 
-If you have installed Homebrew, you can install the Heroku CLI from command line:
+Se hai installato Homebrew, puoi installare il client Heroku da linea di comando:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
@@ -33,7 +33,7 @@ brew update
 brew install heroku-toolbelt
 ~~~~~~~~
 
-Now you can use git and Heroku CLI to deploy your application.
+Ora puoi usare git e l'Heroku CLI per effettuare il deploy della tua applicazione.
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
@@ -45,8 +45,8 @@ git push heroku master
 heroku open
 ~~~~~~~~
 
-That's it. I hope your application is up and running now. If you run into problems you can check the following resources:
+Questo è tutto. Spero che la tua applicazione sia live ora. Se ti sei imbattuto in qualche problema controlla le risorse seguenti:
 
-* [Git and GitHub Essentials](https://www.robinwieruch.de/git-essential-commands/)
-* [Deploying React with Zero Configuration](https://blog.heroku.com/deploying-react-with-zero-configuration)
-* [Heroku Buildpack for create-react-app](https://github.com/mars/create-react-app-buildpack)
+* [Git e GitHub Essentials](https://www.robinwieruch.de/git-essential-commands/)
+* [Effettuare il deploy di un'app React con zero configurazione](https://blog.heroku.com/deploying-react-with-zero-configuration)
+* [Heroku Buildpack per create-react-app](https://github.com/mars/create-react-app-buildpack)
