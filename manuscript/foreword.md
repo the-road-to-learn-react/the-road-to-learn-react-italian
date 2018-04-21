@@ -1,14 +1,14 @@
-# Foreword
+# Prefazione
 
-The Road to learn React teaches you the fundamentals of React. You will build a real world application along the way in plain React without complicated tooling. Everything from project setup to deployment on a server will be explained. The book comes with additional referenced reading material and exercises with each chapter. After reading the book, you will be able to build your own applications in React. The material is kept up to date by me, Robin Wieruch, and the community.
+The road to learn React mira ad insegnarti i fondamenti di React. Svilupperemo lungo la strada un'applicazione reale in puro React senza avere a che fare con tool complicati. Tutto, dal setup del progetto, al deploy su un server, sarà spiegato. Il libro è integrato con riferimenti a materiale da leggere ed esercizi in ogni capitolo. Dopo averlo letto, sarai in grado di costruire le tue applicazioni React. Il materiale è mantenuto aggiornato da me, Robin Wieruch, e dalla community.
 
-In the Road to learn React, I want to offer a foundation before you start to dive into the broader React ecosystem. It has less tooling and less external state management, but a lot of information around React. It explains general concepts, patterns and best practices in a real world React application.
+In The Road to learn React, voglio offrirti le fondamenta prima di iniziare l'approfondimento del più esteso ecosistema React. Troverai quindi meno tooling and meno gestione esterna dello stato, ma molte informazioni circa React. Ti spiegherà i concetti general, i patterns e le best practice in un'applicazione React con un esempio reale.
 
-You will learn to build your own Hacker News application. It covers real world features like pagination, client-side caching and interactions like searching and sorting. Additionally you will transition from JavaScript ES5 to JavaScript ES6 along the way. I hope this book captures my enthusiasm for React and JavaScript and helps you to get started.
+Imparerai a sviluppare la tua applicazione Hacker News con features reali come la paginazione, il caching lato client e interazioni come la ricerca e l'ordinamento. Inoltre passeremo da JavaScript ES5 a JavaScript ES6 con l'avanzare dei capitoli. Spero che questo libro mostri il mio entusiasmo per React e JavaScript e che ti aiuti ad iniziare.
 
 {pagebreak}
 
-# Testimonials
+# Testimonianze
 
 **[Muhammad Kashif](https://twitter.com/appsdevpk/status/848625244956901376):** "The Road to Learn React is a unique book that I recommend to any student or professional interested in learning react basics to advanced level. It is packed with insightful tips and techniques that are hard to find elsewhere, and remarkably thorough in its use of examples and references to sample problems, i have 17 years of experience in web and desktop app development, and before reading this book i was having trouble in learning react, but this book works like magic."
 
@@ -32,120 +32,122 @@ You will learn to build your own Hacker News application. It covers real world f
 
 {pagebreak}
 
-# Education for Children
+# Didattica per bambini
 
-The book is open source and should enable everyone to learn React. However, not everyone is privileged to use open source resources, because not everyone is educated in the English language in the first place. Even though the book is pay what you want, I want to use it to support projects that teach children English in the developing world.
+Il libro è open source e dovrebbe garantire a tutti di imparare React. Tuttavia, non tutti hanno il privilegio di poter usare risorse open source, poiché non tutti sono istruiti nella lingua inglese prima di tutto. Sebbene il libro sia un "pay what you want", voglio usarlo per supportare progetti che insegnano l'inglese ai bambini nei paesi in via di sviluppo.
 
-* 11. April to 18. April, 2017, [Giving Back, By Learning React](https://www.robinwieruch.de/giving-back-by-learning-react/)
+* Aprile 2017, [Giving Back, By Learning React](https://www.robinwieruch.de/giving-back-by-learning-react/)
 
 {pagebreak}
 
 # FAQ
 
-**How do I get updates?** You can [subscribe](https://www.getrevue.co/profile/rwieruch) to the Newsletter or follow me on [Twitter](https://twitter.com/rwieruch) for updates. Once you have a copy of the book, it will stay updated when a new edition gets released. But you have to grab the copy again when an update is announced.
+**Come ottengo gli aggiornamenti?** Puoi [registrarti](https://www.getrevue.co/profile/rwieruch) alla newsletter o seguirmi su [Twitter](https://twitter.com/rwieruch) per gli aggiornamenti. Una volta ottenuta una copia del libro, sarà aggiornata quando una nuova release del libro viene rilasciata. Ma devi riscaricare una copia quando un aggiornamento è annunciato.
 
-**Does it use the recent React version?** The book always receives an update when the React version got updated. Usually books are outdated pretty soon after their release. Since this book is self-published, I can update it whenever I want.
+**Usa una versione recente di React?** Il libro viene sempre aggiornato quando una nuova versione di React è disponibile. Di solito i libri diventano vecchi poco dopo essere stati rilasciati. Siccome questo libro è auto-pubblicato io posso aggiornarlo ogni volta che voglio.
 
-**Does it cover Redux?** It doesn't. Therefore I have written a second book. The Road to learn React should give you a solid foundation before you dive into advanced topics. The implementation of the sample application in the book will show that you don't need Redux to build an application in React. After you have read the book, you should be able to implement a solid application without Redux. Then you can read my second book to learn [Redux](https://roadtoreact.com/course-details?courseId=TAMING_THE_STATE).
+**Include Redux?** No. Per questo ho scritto un secondo libro. The Road to learn React dovrebbe darti delle basi solide prima di lanciarti in argomenti avanzati. L'implementazione dell'applicazione di esempio nel libro ti mostrerà che non hai bisogno di Redux per sviluppare un'applicazione React. Dopo aver letto il libro, dovresti essere in grado di implementare una robusta applicazione senza Redux. Dopodiché puoi leggere il mio secondo libro per imparare [Redux](https://roadtoreact.com/course-details?courseId=TAMING_THE_STATE).
 
-**Does it use JavaScript ES6?** Yes. But don't worry. You will be fine if you are familiar with JavaScript ES5. All JavaScript ES6 features, that I describe on the journey to learn React, will transition from ES5 to ES6 in the book. Every feature along the way will be explained. The book does not only teach React, but also all useful JavaScript ES6 features for React.
+**Usa JavaScript ES6?** Sì, ma non preoccuparti, non avrai problemi se hai familiarità con JavaScript ES5. Tutte le funzionalità di JavaScript ES6 che descrivo durante il viaggio per imparare React verranno implementate a partire da ES5. Ogni funzionalità sarà spiegata lungo la strada. Il libro non si limita ad insegnare React, ma anche tutte le funzionalità di JavaScript ES6 utili nello sviluppo in React.
 
-**Will you add more chapters in the future?** You can have a look at the Change Log chapter for major updates that already happened. There will be unannounced improvements in between too. In general, it depends on the community whether I continue to work on the book. If there is an acceptance for the book, I will deliver more chapters and improve the old material. I will keep the content up to date with recent best practices, concepts and patterns.
+**Aggiungerai altri capitoli in futuro?** Puoi dare un'occhiata al capitolo Change Log per gli aggiornamenti principali che sono già avvenuti. Ci saranno anche miglioramenti non segnalati tra i vari rilasci. In generale, dipenderà dalla community se continuerò a lavorare al libro. Se ci sarà consenso per il libro, produrrò altri capitoli e migliorerò il vecchio materiale e manterrò il contenuto aggiornato con le recenti best practice, concetti e patterns.
 
-**What are the reading formats?** In addition to the .pdf, .epub, and .mobi formats, you can read it in pure markdown on [GitHub](https://github.com/rwieruch/the-road-to-learn-react). In general, I recommend reading it on a suitable format, otherwise the code snippets will have ugly line breaks.
+**Quali sono i formati disponibili?** Oltre ai formati .pdf, .epub, and .mobi, puoi leggerlo in puro markdown su [GitHub](https://github.com/rwieruch/the-road-to-learn-react). In generale consiglio di leggerlo in a un formato adeguato altrimenti gli snippet di codice avranno dei brutti ritorni a capo.
 
-**How can I get help while reading the book?** The book has a [Slack Group](https://slack-the-road-to-learn-react.wieruch.com/) for people who are reading the book. You can join the channel to get help or to help others. After all, helping others can improve your learnings too.
+**Come posso ottenere aiuto mentre leggo il libro?** Il libro ha un [Gruppo Slack](https://slack-the-road-to-learn-react.wieruch.com/) per le persone che stanno leggendo il libro. Puoi aggiungerti al canale per chiedere aiuto o aiutare gli altri. Dopotutto, anche aiutare gli altri può migliorare le tue conoscenze.
 
-**Is there any troubleshoot area?** If you run into problems, please join the Slack Group. In addition, you could have a look into the [open issues on GitHub](https://github.com/rwieruch/the-road-to-learn-react/issues) for the book. Perhaps your problem was already mentioned and you can find the solution for it. If your problem wasn't mentioned, don't hesitate to open a new issue where you can explain your problem, maybe provide a screenshot, and some more details (e.g. book page, node version). After all, I try to ship all fixes in next editions of the book.
+**C'è un'area di risoluzione problemi?** Se dovessi imbatterti in qualche problema, per favore accedi al Gruppo Slack. Inoltre, potesti dare un0occhiara ai [problemi aperti su GitHub](https://github.com/rwieruch/the-road-to-learn-react/issues) per il libro. Magari il tuo problema è già stato segnalato e ci puoi trovare una soluzione. Se il tuo problema non è ancora stato segnalato, non esitare ad aprire una nuova issue dove spieghi quale problema hai riscontrato, magari allegando uno screenshot, e qualche dettaglio in più (esempio la pagina del libro o la versione di node). Dopodiché, cercherò di risolvere tutti i problemi nella successiva edizione del libro.
 
-**Can I help to improve it?** Yes. You can have a direct impact with your thoughts and [contributions on GitHub](https://github.com/rwieruch/the-road-to-learn-react). I don't claim to be an expert nor to write in native English. I would appreciate your help very much.
+**Posso aiutare a migliorarlo?** Certo. Puoi avere un impatto diretto con i tuoi pareri e [contributi su GitHub](https://github.com/rwieruch/the-road-to-learn-react). Non pretendo di essere esperti o scrivere in inglese madrelingua. Apprezzerei molto il tuo aiuto.
 
-**Why is the book pay what you want?** I have put a lot of effort into this and will do so in the future. My desire is to reach as many people as possible. Everyone should be enabled to learn React. Still you could pay, if you can afford it. In addition, the [book attempts to support projects that educate children in the developing world](https://www.robinwieruch.de/giving-back-by-learning-react/). You can have an impact too.
+**Perché il libro è ad offerta libera?** Ho messo molto impegno in questo libro e così farò ancora in futuro. Il mio desiderio è raggiungere il maggior numero di persone possibile. Per tutti dovrebbe essere possibile imparare React. Ma puoi pagare, se te lo puoi permettere. Inoltro, il [book supporta progetti didattici per bambini nei paesi in via di sviluppo](https://www.robinwieruch.de/giving-back-by-learning-react/). Puoi avere un impatto anche tu.
+
+**Posso supportare il progetto?** Certo, sentiti libero di scrivermi. Investo molto del mio tempo in tutorial open source e risorse didattiche. Puoi dare un'occhiata alla mia pagina [about me](https://www.robinwieruch.de/about/). Mi piacerebbe averti come mio [Patron on Patreon](https://www.patreon.com/rwieruch).
 
 **Can I support the project?** Yes. Feel free to reach out. I invest a lot of my time into open source tutorials and learning resources. You can have a look at my [about me](https://www.robinwieruch.de/about/) page. I would love to have you as my [Patron on Patreon](https://www.patreon.com/rwieruch).
 
-**Is there a call to action?** Yes. I want you to take a moment to think about a person who would be a good match to learn React. The person could have shown the interest already, could be in the middle of learning React or might not yet be aware about wanting to learn React. Reach out to that person and share the book. It would mean a lot to me. The book is intended to be given to others.
+**C'è una call to action?** Sì. Voglio che ti prendi un momento per pensare ad una persona che sarebbe un buon match per imparare React. Quella persona potrebbe aver già mostrato interesse, potrebbe essere nel mezzo del suo apprendimento di React o potrebbe non sapere di voler imparare React. Contatta quella persona e condividi con lei questo libro. Vorrebbe dire molto per me. Il libro è intenzionalmente fatto per essere dato ad altri.
 
 {pagebreak}
 
 # Change Log
 
-**10. January 2017:**
+**10. Gennaio 2017:**
 
 * [v2 Pull Request](https://github.com/rwieruch/the-road-to-learn-react/pull/18)
-* even more beginner friendly
-* 37% more content
-* 30% improved content
-* 13 improved and new chapters
-* 140 pages of learning material
+* ancora più beginner friendly
+* 37% in più di contenuti
+* 30% di contenuti migliorati
+* 13 migliorato e nuovi capitoli
+* 140 pagine di materiale didattico
 * [+ interactive course of the book on educative.io](https://www.educative.io/collection/5740745361195008/5676830073815040)
 
-**08. March 2017:**
+**08. Marzo 2017:**
 
 * [v3 Pull Request](https://github.com/rwieruch/the-road-to-learn-react/pull/34)
-* 20% more content
-* 25% improved content
-* 9 new chapters
-* 170 pages of learning material
+* 20% in più di contenuti
+* 25% di contenuti migliorati
+* 9 nuovi capitoli
+* 170 pagine di materiale didattico
 
-**15. April 2017:**
+**15. Aprile 2017:**
 
-* upgrade to React 15.5
+* upgrade a React 15.5
 
-**5. July 2017:**
+**5. Luglio 2017:**
 
-* upgrade to node 8.1.3
-* upgrade to npm 5.0.4
-* upgrade to create-react-app 1.3.3
+* upgrade a node 8.1.3
+* upgrade a npm 5.0.4
+* upgrade a create-react-app 1.3.3
 
-**17. October 2017:**
+**17. Ottobre 2017:**
 
-* upgrade to node 8.3.0
-* upgrade to npm 5.5.1
-* upgrade to create-react-app 1.4.1
-* upgrade to React 16
+* upgrade a node 8.3.0
+* upgrade a npm 5.5.1
+* upgrade a create-react-app 1.4.1
+* upgrade a React 16
 * [v4 Pull Request](https://github.com/rwieruch/the-road-to-learn-react/pull/72)
-* 15% more content
-* 15% improved content
-* 3 new chapters (Bindings, Event Handlers, Error Handling)
-* 190+ pages of learning material
-* [+9 Source Code Projects](https://roadtoreact.com/course-details?courseId=THE_ROAD_TO_LEARN_REACT)
+* 15% in più di contenuti
+* 15% di contenuti migliorati
+* 3 nuovi capitoli (Bindings, Gestione di eventi, Gestione degli errori)
+* 190+ pagine di materiale didattico
+* [+9 codice sorgenti di progetti](https://roadtoreact.com/course-details?courseId=THE_ROAD_TO_LEARN_REACT)
 
 {pagebreak}
 
-# How to read it?
+# Come leggerlo?
 
-The book is my attempt to teach React while you will write an application. It is a practical guide to learn React and not a reference work about React. You will write a Hacker News application that interacts with a real world API. Among several interesting topics, it covers state management in React, caching and interactions (sorting and searching). On the way you will learn best practices and patterns in React.
+Il libro è un mio tentativo di insegnare React accompagnato dallo sviluppo di un'applicazione. E' una guida pratica per imparare React. Svilupperemo un'applicazione, Hacker News, che interagisce con API del mondo reale. Tra i tanti argomenti interessanti, copre la gestione dello stato in React, caching e interazioni utente (ordinamento e ricerca). Lungo la strada imparerai le best practice e i patterns propri di React.
 
-In addition, the book gives you a transition from JavaScript ES5 to JavaScript ES6. React embraces a lot of JavaScript ES6 features and I want to show you how you can use them.
+Inoltre il libro effettua una transizione da JavaScript ES5 a ES6. React adotta molte funzionalità di JavaScript ES6 e voglio mostrarmi come usarle.
 
-In general each chapter of the book will build up on the previous chapter. Each chapter will teach you something new. Don't rush through the book. You should internalize each step. You could apply your own implementations and read more about the topic. After each chapter I give you some reading material and exercises. If you really want to learn React, I highly recommend to read the extra material and do some hands on exercises. After you have read a chapter, make yourself comfortable with the learnings before you continue.
+In generale ogni capitolo del libro è costruito a partire dal precedente e ti insegnerà qualcosa di nuovo. Non andare di fretta. Dovresti internalizzare ogni passaggio. Potresti applicare le tue implementazioni e leggere di più sull'argomento. Dopo ogni capitolo ti darò del materiale da leggere e alcuni esercizi. Se vuoi davvero imparare React, ti suggerisco vivamente di leggere il materiale extra e di fare gli esercizi. Dopo aver letto un capiolo assicurati di essere a tuo agio con quanto appreso prima di continuare.
 
-In the end you will have a complete React application in production. I am very keen to see your results, so please text me when you have finished the book. The final chapter of the book will give you a handful of options to continue your React journey. In general you will find a lot of React related topics on [my personal website](https://www.robinwieruch.de/).
+Alla fine avremo un'applicazione React completa in produzione. Non vedo l'ora di vedere i tuoi risultati, quindi per favore scrivimi quando avrai finito il libro. Il capitolo finale ti darà alcune opzioni per continuare il tuo viaggio in React. In generale troverai molti argomenti correlati a React sul [mio sito personale](https://www.robinwieruch.de/).
 
-Since you are reading the book, I guess you are new to React. That's perfect. In the end I hope to get your feedback to improve the material to enable everyone to learn React. You can have a direct impact on [GitHub](https://github.com/rwieruch/the-road-to-learn-react) or text me on [Twitter](https://twitter.com/rwieruch).
+Siccome stai leggendo questo libro, immagino tu sia nuovo a React. Non c'è problema. Alla fine spero di ricevere un tuo feedback per migliorare il materiale e permettere ad ognuno di imparare React. Puoi trovarmi direttamente su  [GitHub](https://github.com/rwieruch/the-road-to-learn-react) o scrivermi su [Twitter](https://twitter.com/rwieruch).
 
-# What you can expect (so far...)
+# Cosa puoi aspettarti (finora...)
 
-* [Hacker News App in React](https://intense-refuge-78753.herokuapp.com/)
-* no complicated configurations
-* create-react-app to bootstrap your application
-* efficient lightweight code
-* only React setState as state management (so far...)
-* transition from JavaScript ES5 to ES6 along the way
-* the React API with setState and lifecycle methods
-* interaction with a real world API (Hacker News)
-* advanced user interactions
-  * client-sided sorting
-  * client-sided filtering
-  * server-sided searching
-* implementation of client-side caching
-* higher order functions and higher order components
-* snapshot test components with Jest
-* unit test components with Enzyme
-* neat libraries along the way
-* exercises and more readings along the way
-* internalize and reinforce your learnings
-* deploy your application to production
+* [L'applicazione Hacker News in React](https://intense-refuge-78753.herokuapp.com/)
+* niente configurazioni complicate
+* create-react-app per lo startup dell'applicazione
+* codice efficiente e leggero
+* solo setState di React per la gestion dello stato (finora...)
+* passaggio da JavaScript ES5 a ES6 lungo la strada
+* l'API di React con setState e i metodi di lifecycle
+* interazioni con API del mondo reale (Hacker News)
+* interazione utente avanzata
+  * ordinamento lato client
+  * filtri lato client
+  * ricerca lato server
+* implementazione cache lato client
+* funzioni di ordine superiore e componenti di ordine superiore
+* snapshot test dei componenti con Jest
+* unit test dei componenti con Enzyme
+* librerie interessanti lungo la strada
+* esercizi e letture aggiuntive lungo la strada
+* internalizzare e rafforzare il tuo apprendimento
+* effettuare il deploy della tua applicazione in produzione
 
 {pagebreak}
