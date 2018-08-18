@@ -357,7 +357,7 @@ it('renders without crashing', () => {
 });
 ~~~~~~~~
 
-Il blocco "it" descrive un caso di test. E' composto da una descrizione del test e quando eseguito può finire con successo o fallire. Inoltre, è possible raggruppare i test in un blocco "describe", che definisce una suit di test. Una suit di test include una serie di blocchi "it" per uno specifico componente. Vedrai questi blocchi "describe" più avanti. Entrambi i blocchi sono usati per separare ed organizzare i casi di test.
+Il blocco "it" descrive un caso di test. E' composto da una descrizione del test e quando eseguito può finire con successo o fallire. Inoltre, è possible raggruppare i test in un blocco "describe", che definisce una suite di test. Una suite di test include una serie di blocchi "it" per uno specifico componente. Vedrai questi blocchi "describe" più avanti. Entrambi i blocchi sono usati per separare ed organizzare i casi di test.
 
 Da notare che la funzione `it` è conosciuta nella community JavaScript come funzione dove viene eseguito un singolo test, ma in Jest potresti anche trovarlo con l'alias `test`.
 
@@ -384,7 +384,7 @@ Prima di scrivere il tuo primo snaphot test con Jest, devi installare un pacchet
 npm install --save-dev react-test-renderer
 ~~~~~~~~
 
-Ora puoi estendere i test del tuo componente App con il tuo primo snaphot test. Prima cosa, importiamo le nuove funzionalità dal pacchetto e inseriamo il precedente blocco "it" per il componente App in un descrittivo blocco "describe". In questo caso la suit di test è solo per il componente App.
+Ora puoi estendere i test del tuo componente App con il tuo primo snaphot test. Prima cosa, importiamo le nuove funzionalità dal pacchetto e inseriamo il precedente blocco "it" per il componente App in un descrittivo blocco "describe". In questo caso la suite di test è solo per il componente App.
 
 {title="src/App.test.js",lang=javascript}
 ~~~~~~~~

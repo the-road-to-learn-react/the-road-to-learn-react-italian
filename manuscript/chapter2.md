@@ -687,7 +687,7 @@ Partirà quando aprirai l'applicazione nel browser ma non quando cliccherai sul 
 ...
 ~~~~~~~~
 
-Per mantenerlo conciso, puoi trasformarlo in un JavaScript ES6 arrow function. 
+Per mantenerlo conciso, puoi trasformarlo in un JavaScript ES6 arrow function.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -771,7 +771,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Nel seguente scenario scriverai qualcosa nel tuo campo e filtrerai la lista attraverso il termine di ricerca che è stato scritto nel campo. Per abilitare il filtro attraverso il campo di ricerca, avrai bisogno di salvare il valore del campo nel tuo local state. Ma come avrai accesso al valore? Puoi usare i **synthetic event**. 
+Nel seguente scenario scriverai qualcosa nel tuo campo e filtrerai la lista attraverso il termine di ricerca che è stato scritto nel campo. Per abilitare il filtro attraverso il campo di ricerca, avrai bisogno di salvare il valore del campo nel tuo local state. Ma come avrai accesso al valore? Puoi usare i **synthetic event**.
 
 Definiamo un handler `onChange` per il campo input.
 
@@ -982,7 +982,7 @@ Un altro po' di refactoring può essere fatto con le arrow function ES6. Per ren
 // ES5
 function isSearched(searchTerm) {
   return function(item) {
-    return item.title.toLowerCase().includes(searchTerm.toLowerCase());
+    return item.title.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1;
   }
 }
 
@@ -1420,7 +1420,7 @@ class Table extends Component {
 }
 ~~~~~~~~
 
-Il componente Button si aspetta una proprietà `className` nei props. L'attributo `className` è un altro derivato React per l'atributo HTML class. Ma non abbiamo passato alcun `className` quando il Button è stato ustao. Nel codice dovrebbe essere più esplicito nel componente Button che `className` è opzionale. 
+Il componente Button si aspetta una proprietà `className` nei props. L'attributo `className` è un altro derivato React per l'atributo HTML class. Ma non abbiamo passato alcun `className` quando il Button è stato ustao. Nel codice dovrebbe essere più esplicito nel componente Button che `className` è opzionale.
 
 Perciò, puoi utilizzare il paramentro di default che è una feature di JavaScript ES6.
 
@@ -1498,7 +1498,7 @@ function Search({ value, onChange, children }) {
 }
 ~~~~~~~~
 
-Possiamo fare ancora di più. Sei a conoscenza delle arrow function che ti permettono di avere il codice più conciso. Puoi rimuovere il corpo della funzione. 
+Possiamo fare ancora di più. Sei a conoscenza delle arrow function che ti permettono di avere il codice più conciso. Puoi rimuovere il corpo della funzione.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1808,7 +1808,7 @@ Non voglio darti un'idea predominante, ma mi piace lasciarti alcune opzioni. Puo
 
 Hai appreso le basi per scrivere la tua applicazione React! Facciamo un riassuno:
 
-* React 
+* React
   * utilizza `this.state` e `setState()` per gestire il tuo internal component state
   * passa le funzioni o i metodi di classe al tuo element handler
   * utilizza form ed eventi in React per aggiungere interazione
@@ -1820,7 +1820,7 @@ Hai appreso le basi per scrivere la tua applicazione React! Facciamo un riassuno
 * ES6
   * le funzioni che sono vincolate ad una classe sono metodi di classe
   * destrutturazione di oggetti e di array
-  * parametri di default 
+  * parametri di default
 * General
   * higher order functions
 
