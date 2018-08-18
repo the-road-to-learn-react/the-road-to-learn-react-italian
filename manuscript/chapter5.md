@@ -86,7 +86,9 @@ Ora possiamo dare il focus al campo di testo quando il componente è inserito ne
 class Search extends Component {
 # leanpub-start-insert
   componentDidMount() {
-    this.input.focus();
+    if (this.input) {
+      this.input.focus();
+    }
   }
 # leanpub-end-insert
 

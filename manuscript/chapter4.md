@@ -359,6 +359,8 @@ it('renders without crashing', () => {
 
 Il blocco "it" descrive un caso di test. E' composto da una descrizione del test e quando eseguito può finire con successo o fallire. Inoltre, è possible raggruppare i test in un blocco "describe", che definisce una suit di test. Una suit di test include una serie di blocchi "it" per uno specifico componente. Vedrai questi blocchi "describe" più avanti. Entrambi i blocchi sono usati per separare ed organizzare i casi di test.
 
+Da notare che la funzione `it` è conosciuta nella community JavaScript come funzione dove viene eseguito un singolo test, ma in Jest potresti anche trovarlo con l'alias `test`.
+
 Puoi eseguire i test interattivamente usando lo script `test` di *create-react-app* dalla riga di comando. L'output sarà composto dall'output di tutti i casi di test nel tuo terminale.
 
 {title="Command Line",lang="text"}

@@ -4,7 +4,7 @@ The road to learn React mira ad insegnarti i fondamenti di React. Svilupperemo l
 
 In The Road to learn React, voglio offrirti le fondamenta prima di iniziare l'approfondimento del più esteso ecosistema React. Troverai quindi meno tooling and meno gestione esterna dello stato, ma molte informazioni circa React. Ti spiegherà i concetti general, i patterns e le best practice in un'applicazione React con un esempio reale.
 
-Imparerai a sviluppare la tua applicazione Hacker News con features reali come la paginazione, il caching lato client e interazioni come la ricerca e l'ordinamento. Inoltre passeremo da JavaScript ES5 a JavaScript ES6 con l'avanzare dei capitoli. Spero che questo libro mostri il mio entusiasmo per React e JavaScript e che ti aiuti ad iniziare.
+Imparerai a sviluppare la tua applicazione React con features reali come la paginazione, il caching lato client e interazioni come la ricerca e l'ordinamento. Inoltre passeremo da JavaScript ES5 a JavaScript ES6 con l'avanzare dei capitoli. Spero che questo libro mostri il mio entusiasmo per React e JavaScript e che ti aiuti ad iniziare.
 
 {pagebreak}
 
@@ -34,7 +34,7 @@ Imparerai a sviluppare la tua applicazione Hacker News con features reali come l
 
 # Didattica per bambini
 
-Il libro è open source e dovrebbe garantire a tutti di imparare React. Tuttavia, non tutti hanno il privilegio di poter usare risorse open source, poiché non tutti sono istruiti nella lingua inglese prima di tutto. Sebbene il libro sia un "pay what you want", voglio usarlo per supportare progetti che insegnano l'inglese ai bambini nei paesi in via di sviluppo.
+Il libro dovrebbe consentire a tutti di imparare React. Tuttavia, non tutti hanno il privilegio di poter usare queste risorse, poiché non tutti sono istruiti nella lingua inglese prima di tutto. Quindi voglio usare il progetto per supportare altri progetti che insegnano l'inglese ai bambini nei paesi in via di sviluppo.
 
 * Aprile 2017, [Giving Back, By Learning React](https://www.robinwieruch.de/giving-back-by-learning-react/)
 
@@ -52,15 +52,11 @@ Il libro è open source e dovrebbe garantire a tutti di imparare React. Tuttavia
 
 **Aggiungerai altri capitoli in futuro?** Puoi dare un'occhiata al capitolo Change Log per gli aggiornamenti principali che sono già avvenuti. Ci saranno anche miglioramenti non segnalati tra i vari rilasci. In generale, dipenderà dalla community se continuerò a lavorare al libro. Se ci sarà consenso per il libro, produrrò altri capitoli e migliorerò il vecchio materiale e manterrò il contenuto aggiornato con le recenti best practice, concetti e patterns.
 
-**Quali sono i formati disponibili?** Oltre ai formati .pdf, .epub, and .mobi, puoi leggerlo in puro markdown su [GitHub](https://github.com/rwieruch/the-road-to-learn-react). In generale consiglio di leggerlo in a un formato adeguato altrimenti gli snippet di codice avranno dei brutti ritorni a capo.
-
 **Come posso ottenere aiuto mentre leggo il libro?** Il libro ha un [Gruppo Slack](https://slack-the-road-to-learn-react.wieruch.com/) per le persone che stanno leggendo il libro. Puoi aggiungerti al canale per chiedere aiuto o aiutare gli altri. Dopotutto, anche aiutare gli altri può migliorare le tue conoscenze.
 
 **C'è un'area di risoluzione problemi?** Se dovessi imbatterti in qualche problema, per favore accedi al Gruppo Slack. Inoltre, potesti dare un0occhiara ai [problemi aperti su GitHub](https://github.com/rwieruch/the-road-to-learn-react/issues) per il libro. Magari il tuo problema è già stato segnalato e ci puoi trovare una soluzione. Se il tuo problema non è ancora stato segnalato, non esitare ad aprire una nuova issue dove spieghi quale problema hai riscontrato, magari allegando uno screenshot, e qualche dettaglio in più (esempio la pagina del libro o la versione di node). Dopodiché, cercherò di risolvere tutti i problemi nella successiva edizione del libro.
 
 **Posso aiutare a migliorarlo?** Certo. Puoi avere un impatto diretto con i tuoi pareri e [contributi su GitHub](https://github.com/rwieruch/the-road-to-learn-react). Non pretendo di essere esperti o scrivere in inglese madrelingua. Apprezzerei molto il tuo aiuto.
-
-**Perché il libro è ad offerta libera?** Ho messo molto impegno in questo libro e così farò ancora in futuro. Il mio desiderio è raggiungere il maggior numero di persone possibile. Per tutti dovrebbe essere possibile imparare React. Ma puoi pagare, se te lo puoi permettere. Inoltro, il [book supporta progetti didattici per bambini nei paesi in via di sviluppo](https://www.robinwieruch.de/giving-back-by-learning-react/). Puoi avere un impatto anche tu.
 
 **Posso supportare il progetto?** Certo, sentiti libero di scrivermi. Investo molto del mio tempo in tutorial open source e risorse didattiche. Puoi dare un'occhiata alla mia pagina [about me](https://www.robinwieruch.de/about/). Mi piacerebbe averti come mio [Patron on Patreon](https://www.patreon.com/rwieruch).
 
