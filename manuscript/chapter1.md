@@ -207,7 +207,7 @@ Diamo un'occhiata alle cartelle e ai file. E' un passo essenziale per comprender
 
 * **package.json:** Questo file mostra una lista di dipendenze dei package node e altre configurazioni legate al progetto.
 
-* **.gitignore:** Il file elenca tutti i file e cartelle che non dovranno essere aggiunti al repository remoto se usi git. Saranno solo presenti nel tuo progetto locale. La cartella *node_modules/* ne è un esempio. E' sufficiente condividere ilfile *package.json* con i tuoi collaboratori per permettere loro di installare tutte le dipendenze sui loro progetti locali senza condividere la cartella stessa.
+* **.gitignore:** Il file elenca tutti i file e cartelle che non dovranno essere aggiunti al repository se usi git. Saranno solo presenti nel tuo progetto locale. La cartella *node_modules/* ne è un esempio. E' sufficiente condividere ilfile *package.json* con i tuoi collaboratori per permettere loro di installare tutte le dipendenze sui loro progetti locali senza condividere la cartella stessa.
 
 * **public/:** La cartella contiene i file di sviluppo non JavaScript come *public/index.html*. Questa index è quella visualizzata quando visiti localhost:3000 mentre stai sviluppando la tua applicazione. Il boilerplate si prende cura di inserire in pagina gli script contenuti dentro *src/*.
 

@@ -23,10 +23,9 @@ class App extends Component {
 }
 ~~~~~~~~
 
+Il componente App è una sottoclasse di `Component`: ecco perché del `extends Component` nel tuo componente App. Apprenderai di più su questo concetto più tardi.
 
-Quando abbiamo a che fare con un costruttore nella tua class component ES6, non abbiamo altro che un mandatario che chiameremo `super();` perché l'App component è una subclasse di `Component`. Ecco perché hai letto `extends Component` nella tua App component. Apprenderai di più su questo concetto più tardi.
-
-Puoi anche chiamarla `super(props);`. Imposta `this.props` nel tuo costruttore nel caso tu voglia avere accesso ad essi nel tuo costruttore. Altrimenti, quando accedi a `this.props` nel tuo costruttore, riceveresti `undefined`. Anche questo argomento verrà ripreso più in là.
+E' obbligatorio chiamare `super(props);`. Questo setta `this.props` nel tuo costruttore nel caso tu voglia avere accesso ad essi nel tuo costruttore. Altrimenti, quando accedi a `this.props` nel tuo costruttore, riceveresti `undefined`. Anche questo argomento verrà ripreso più in là.
 
 Adesso, ritornando all'esempio, lo stato iniziale nel tuo componente dovrebbe essere la lista di item qui sotto.
 
@@ -1155,7 +1154,7 @@ class App extends Component {
 
 Ecco. Il ciclo di flusso dati unidirezionale per il campo input è autosufficiente adesso. L'internal component state è la singola sorgente di verità del campo input.
 
-L'intera gestione dell'internal state e il flusso dati unidirezionali dovrebbe essere un argomento nuovo per te. Ma appena lo utilizzerai, sarà un processo naturale per implementare le attività in React. In generale, React ha portato la novità del flusso di dati unidirezionali nelle applicazioni single page. E' adottato da tantissimi framework e libreria oggi.
+L'intera gestione dell'internal state e il flusso dati unidirezionali dovrebbe essere un argomento nuovo per te. Ma appena lo utilizzerai, sarà un processo naturale per implementare le attività in React. In generale, React ha portato la novità del flusso di dati unidirezionali nelle applicazioni single page. E' adottato da tantissimi framework e librerie oggi.
 
 ### Esercizi:
 
@@ -1164,9 +1163,7 @@ L'intera gestione dell'internal state e il flusso dati unidirezionali dovrebbe e
 
 ## Dividere i componenti
 
-Sei alle prese con un'applicazione grande in questo momento. Tenderà ad aumentare e può generare ulteriore confusione. Puoi iniziare a dividerla in componenti più piccoli.
-
-Iniziamo ad utilizzare un componente per l'input di ricerca e un componente per la lista di item.
+Sei alle prese con un'applicazione grande in questo momento. Tenderà ad aumentare e può generare ulteriore confusione. Puoi iniziare a dividerla in componenti più piccoli, creando componenti separati per l'input di ricerca e per la lista di oggetti.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1286,16 +1283,16 @@ class Table extends Component {
 
 Adesso hai tre classi di componenti ES6. Forse avrai notato l'oggetto `props` che è accessibile attraverso l'istanza della classe utilizzando `this`. I props, piccoli moduli per le proprietà, hanno tutti i valori che hai passato ai componenti quando li utilizzavi nella tua App. In questo modo, i componenti possono passare le proprietà lungo l'albero del componente.
 
-Estraeondo questi componenti dall'App, avrai la possibilità di riutilizzarli altrove. Dal momento in cui i componenti ricevono i valori utilizzando l'oggetto props, puoi passare ogni volta differenti props ai tuoi componenti quando li utilizzi per qualcos'altro. Questi componenti diventano riutilizzabili.
+Estraendo questi componenti dall'App, essi sono diventati riutilizzabili. Dal momento in cui i componenti ricevono i valori utilizzando l'oggetto props, puoi passare ogni volta differenti props ai tuoi componenti quando li utilizzi per qualcos'altro.
 
 ### Esercizi:
 
-* risolvi ulteriroi componenti che puoi dividere come hai fatto con i componenti Search e Table.
+* risolvi ulteriori componenti che puoi dividere come hai fatto con i componenti Search e Table.
     * ma non farlo adesso, altimenti ti troverai in una serie di conflitti presenti nei prossimi capitoli
 
-## Componenti componibilit
+## Componenti componibili
 
-C'è più di una piccola proprietà che è accessibile nei props object: il prop `children`. Puoi utilizzarlo per passare elementi ai tuoi componenti da sopra, che sono sconosciuti al componente stesso, ma permetti la creazione di componenti annidati. Vediamo cosa accade quando passi solo una stringa di testo come `child` al componente "Search".
+C'è più di una piccola proprietà che è accessibile nei props object: il prop `children`. Puoi utilizzarlo per passare elementi ai tuoi componenti da sopra, che sono sconosciuti al componente stesso, ma rende possibile mettere insieme componenti. Vediamo cosa accade quando passi solo una stringa di testo come `child` al componente "Search".
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1326,7 +1323,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Adesso il componente Search può destrutturare le proprietà `children` dai props object. Quindi può specificare dove i `children` saranno mostrati.
+Adesso il componente Search può destrutturare la proprietà `children` dal props object. Quindi può specificare dove sarà mostrata.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1338,7 +1335,8 @@ class Search extends Component {
     return (
       <form>
 # leanpub-start-insert
-        {children} <input
+        {children}
+        <input
 # leanpub-end-insert
           type="text"
           value={value}
