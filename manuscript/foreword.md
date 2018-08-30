@@ -1,6 +1,6 @@
 # Prefazione
 
-The road to learn React mira ad insegnarti i fondamenti di React. Svilupperemo lungo la strada un'applicazione reale in puro React senza avere a che fare con tool complicati. Tutto, dal setup del progetto, al deploy su un server, sarà spiegato. Il libro è integrato con riferimenti a materiale da leggere ed esercizi in ogni capitolo. Dopo averlo letto, sarai in grado di costruire le tue applicazioni React. Il materiale è mantenuto aggiornato da me, Robin Wieruch, e dalla community.
+The road to learn React mira ad insegnarti i fondamenti di React. Svilupperemo lungo la strada un'applicazione reale in puro React senza avere a che fare con tool complicati. Tutto, dal setup del progetto, al deploy su un server, ti sarà spiegato. Il libro è integrato con riferimenti a materiale da leggere ed esercizi in ogni capitolo. Dopo averlo letto, sarai in grado di costruire le tue applicazioni React. Il materiale è mantenuto aggiornato da me e dalla community.
 
 In The Road to learn React, voglio offrirti le fondamenta prima di iniziare l'approfondimento del più esteso ecosistema React. Troverai quindi meno tooling and meno gestione esterna dello stato, ma molte informazioni circa React. Ti spiegherà i concetti general, i patterns e le best practice in un'applicazione React con un esempio reale.
 
@@ -8,7 +8,21 @@ Imparerai a sviluppare la tua applicazione React con features reali come la pagi
 
 {pagebreak}
 
+# L'autore
+
+Robin Wieruch è un Software/Web engineer tedesco che si sta dedicando a imparare ed insegnare la programmazione in JavaScript. Dopo essersi laureato all'università con un master in computer science, non ha smesso di imparare ogni giorno per conto suo. Le sue esperienze dal mondo delle startup, dove ha usato largamente JavaScript sia durante il suo lavoro che nel tempo libero, gli hanno dato l'opportunità di insegnare ad altri questi argomenti.
+
+Per alcuni anni, Robin ha lavorato con un ottimo team di ingegneri in nell'azienda Small Improvements su una grossa applicazione. L'azienda sviluppa un prodotto SaaS che permette ai clienti di creare una cultura del feedback nelle loro aziende. L'applicazione era sviluppata con JavaScript frontend e Java backend. Inizialmente il frontend era scritto in Hava con il framework Wicket e jQuery. QUando la prima generazione di SPA è diventata popolare, l'azienda è migrata ad Angular 1.x per l'applicazione frontend. Dopo aver usato Angular per più di 2 anni, è diventato chiaro che Angular non era la soluzione migliore per realizzare applicazioni con dati complessi. Ecco perché l'azienda ha fatto l'ennesimo passaggio a React e Redux che hanno permesso di di lavorare efficacemente su larga scala.
+
+Durante questo periodo in azienda, Robin ha scritto regolarmente articoli sullo sviluppo web sul suo sito personale e ha iniziato a ricevere ottimi feedback sui suoi articoli che gli hanno permesso di migliorare la sua scrittura e il suo metodo didattico. Articolo dopo articolo Robin ha accresciuto la sua abilità di insegnare agli altri. Laddove il primo articolo aveva troppo contenuto da essere difficolto per gli studenti, gli articoli sono migliorati nel tempo, focalizzandosi e insegnando un solo argomento alla volta.
+
+Attualmente Robin è un lavoratore autonomo che insegna agli altri, e trova soddisfazione nel vedere i suoi studenti crescere dando loro chiavi obiettivi e un feedback veloce. Questa è una cosa che impareresti in un'azienda che si occupa di feedback, non trovi? Ma senza programmare lui per primo non sarebbe in grado di insegnare queste cose. Ecco perché investe il resto nel tempo nella programmazione. Puoi trovare maggiori informazioni su Robin e sui modi di supportarlo e lavorare con lui sul suo [sito web](https://www.robinwieruch.de/about).
+
+{pagebreak}
+
 # Testimonianze
+
+Ci sono molte [testimonianze](https://roadtoreact.com/), [valutazioni](https://www.goodreads.com/book/show/37503118-the-road-to-learn-react) e [recensioni](https://www.amazon.com/dp/B077HJFCQX?tag=21moves-20) del libro che dovrebbero confermarne la qualità. Ne sono molto fiero, non mi sarei mai aspettato un riscontro così travolgente. Se hai apprezzato il libro, apprezzerei avere anche un tuo feedback/recensione, mi aiuta a diffondere il libro. Qui di seguito ecco alcuni estratti di queste opinioni:
 
 **[Muhammad Kashif](https://twitter.com/appsdevpk/status/848625244956901376):** "The Road to Learn React is a unique book that I recommend to any student or professional interested in learning react basics to advanced level. It is packed with insightful tips and techniques that are hard to find elsewhere, and remarkably thorough in its use of examples and references to sample problems, i have 17 years of experience in web and desktop app development, and before reading this book i was having trouble in learning react, but this book works like magic."
 
@@ -109,6 +123,16 @@ Il libro dovrebbe consentire a tutti di imparare React. Tuttavia, non tutti hann
 * 190+ pagine di materiale didattico
 * [+9 codice sorgenti di progetti](https://roadtoreact.com/course-details?courseId=THE_ROAD_TO_LEARN_REACT)
 
+**17. February 2018:**
+
+* upgrade to node 8.9.4
+* upgrade to npm 5.6.0
+* upgrade to create-react-app 1.5.1
+* [v5 Pull Request](https://github.com/the-road-to-learn-react/the-road-to-learn-react/pull/105)
+* more learning paths
+* extra reading material
+* 1 new chapter (Axios instead of Fetch)
+
 {pagebreak}
 
 # Come leggerlo?
@@ -122,28 +146,5 @@ In generale ogni capitolo del libro è costruito a partire dal precedente e ti i
 Alla fine avremo un'applicazione React completa in produzione. Non vedo l'ora di vedere i tuoi risultati, quindi per favore scrivimi quando avrai finito il libro. Il capitolo finale ti darà alcune opzioni per continuare il tuo viaggio in React. In generale troverai molti argomenti correlati a React sul [mio sito personale](https://www.robinwieruch.de/).
 
 Siccome stai leggendo questo libro, immagino tu sia nuovo a React. Non c'è problema. Alla fine spero di ricevere un tuo feedback per migliorare il materiale e permettere ad ognuno di imparare React. Puoi trovarmi direttamente su  [GitHub](https://github.com/rwieruch/the-road-to-learn-react) o scrivermi su [Twitter](https://twitter.com/rwieruch).
-
-# Cosa puoi aspettarti (finora...)
-
-* [L'applicazione Hacker News in React](https://intense-refuge-78753.herokuapp.com/)
-* niente configurazioni complicate
-* create-react-app per lo startup dell'applicazione
-* codice efficiente e leggero
-* solo setState di React per la gestion dello stato (finora...)
-* passaggio da JavaScript ES5 a ES6 lungo la strada
-* l'API di React con setState e i metodi di lifecycle
-* interazioni con API del mondo reale (Hacker News)
-* interazione utente avanzata
-  * ordinamento lato client
-  * filtri lato client
-  * ricerca lato server
-* implementazione cache lato client
-* funzioni di ordine superiore e componenti di ordine superiore
-* snapshot test dei componenti con Jest
-* unit test dei componenti con Enzyme
-* librerie interessanti lungo la strada
-* esercizi e letture aggiuntive lungo la strada
-* internalizzare e rafforzare il tuo apprendimento
-* effettuare il deploy della tua applicazione in produzione
 
 {pagebreak}

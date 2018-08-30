@@ -154,8 +154,8 @@ Ora dovresti essere in grado di accedere all'elemento di input del dom. Nell'ese
 
 ### Esercizi
 
-* leggi di più su [l'attributo ref in generale in React](https://facebook.github.io/react/docs/refs-and-the-dom.html)
 * leggi di più su [l'utilizzo dell'attributo ref in React](https://www.robinwieruch.de/react-ref-attribute-dom-node/)
+* leggi di più su [l'attributo ref in generale in React](https://reactjs.org/docs/refs-and-the-dom.html)
 
 ## Caricamento ...
 
@@ -172,6 +172,7 @@ Ora avremo bisogno di una proprietà per salvare lo stato del caricamento. In ba
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
 class App extends Component {
+  _isMounted = false;
 
   constructor(props) {
     super(props);
@@ -223,10 +224,9 @@ class App extends Component {
     this.setState({ isLoading: true });
 # leanpub-end-insert
 
-    fetch(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
-      .then(response => response.json())
-      .then(result => this.setSearchTopStories(result))
-      .catch(e => this.setState({ error: e }));
+    axios(`${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}${page}&${PARAM_HPP}${DEFAULT_HPP}`)
+      .then(result => this._isMounted && this.setSearchTopStories(result.data))
+      .catch(error => this._isMounted && this.setState({ error }));
   }
 
   ...
@@ -350,7 +350,11 @@ Ora puoi usare l'HOC nel tuo JSX. Un altro caso d'uso nella nostra applicazione 
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
-const Button = ({ onClick, className = '', children }) =>
+const Button = ({
+  onClick,
+  className = '',
+  children,
+}) =>
   <button
     onClick={onClick}
     className={className}
@@ -446,7 +450,7 @@ Ora puoi importare la funzionalità di ordinamento di Lodash nel tuo file *src/A
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
 import React, { Component } from 'react';
-import fetch from 'isomorphic-fetch';
+import axios from 'axios';
 # leanpub-start-insert
 import { sortBy } from 'lodash';
 # leanpub-end-insert
@@ -502,6 +506,7 @@ Ora possiamo definire un nuovo metodo di classe nel nostro componente App che se
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
 class App extends Component {
+  _isMounted = false;
 
   constructor(props) {
 
@@ -517,6 +522,8 @@ class App extends Component {
     this.onSort = this.onSort.bind(this);
 # leanpub-end-insert
   }
+
+  ...
 
 # leanpub-start-insert
   onSort(sortKey) {
@@ -901,7 +908,7 @@ Seconda cosa importiamola all'inizio del file *src/App.js*.
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
 import React, { Component } from 'react';
-import fetch from 'isomorphic-fetch';
+import axios from 'axios';
 import { sortBy } from 'lodash';
 # leanpub-start-insert
 import classNames from 'classnames';
@@ -985,4 +992,4 @@ Hai imparato tecniche avanzate di gestione dei componenti React! Ricapitoliamo g
 * ES6
   * rest destructuring per estrarre valori da oggetti ed array
 
-Trovi i codici sorgenti nel [repository ufficiale](https://github.com/rwieruch/hackernews-client/tree/4.5).
+Trovi i codici sorgenti nel [repository ufficiale](https://github.com/the-road-to-learn-react/hackernews-client/tree/5.5).

@@ -6,7 +6,7 @@ Questo capitolo vuole essere una introduzione a React. Puoi chiederti: perché d
 
 **Perchè dovresti occuparti di React?** Negli anni recenti le applicazioni single-page ([SPA](https://en.wikipedia.org/wiki/Single-page_application)) sono diventate sempre più popolari. Framework come Angular, Ember e Backbone hanno aiutato gli sviluppatori JavaScript a costruire moderne applicazioni attraverso l'utilizzo di JavaScript puro e jQuery. La lista di questi progetti popolari non è esaustiva. In giro troviamo una grande quantità di framework SPA. Se consideriamo le date di rilascio, la maggior parte di loro sono della prima generazione di SPA: Angular 2010, Backbone 2010 e Ember 2011.
 
-La prima release di React è del 2013 ad opera di Facebook. React non è un framework SPA ma una view library. Rappresenta la lettara "V" nel concetto [MVC](https://de.wikipedia.org/wiki/Model_View_Controller) (model view controller).
+La prima release di React è del 2013 ad opera di Facebook. React non è un framework SPA ma una view library. Rappresenta la lettara "V" nel concetto [MVC](https://en.wikipedia.org/wiki/Model–view–controller) (model view controller).
 Il suo compito è renderizzare i componenti come elementi view nel browser. Tutto l'ecosistema attorno a React è orientato alla creazione di applicazioni single-page.
 
 Ma perché dobbiamo considerare React come un passo più avanti le prime generazioni di SPA? Mentre le prime generazioni di framework cercavano di risolvere una serie di cose alla volta, React si occupa solo di costruire il tuo *view layer*. E' una libreria, non un framework. L'idea che c'è dietro è la seguente: le tue view rappresentano una gerarchia di componenti "componibili".
@@ -26,6 +26,7 @@ React possiede uno snello API, un fantastico ecosistema e una grande community. 
 
 * leggi [perché sono passato da Angular a React](https://www.robinwieruch.de/reasons-why-i-moved-from-angular-to-react/)
 * leggi [L'ecosistema flessibile di React](https://www.robinwieruch.de/essential-react-libraries-framework/)
+* leggi [come imparare un framework](https://www.robinwieruch.de/how-to-learn-framework)
 
 ## Requisiti
 
@@ -46,9 +47,9 @@ Puoi verificare le tue versioni di node e npm attraverso riga di comando. Se il 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 node --version
-*v8.3.0
+*v8.9.4
 npm --version
-*v5.5.1
+*v5.6.0
 ~~~~~~~~
 
 ## node e npm
@@ -100,7 +101,7 @@ npm install --save-dev <package>
 
 L'istruzione `--save-dev` indica che il package node è solo usato per l'ambiente di sviluppo. Non sarà usato in produzione quando effettui il deploy dell'applicazione sul server. Che tipo di package node potrebbe essere? Immagina che tu voglia testare la tua applicazione con l'aiuto di un package node. Avrai la necessità di installare quel package via npm, ma vuoi escluderlo dal tuo ambiente di produzione. Il testing dovrebbe essere utile durante il processo di sviluppo ma non quando la tua applicazione è già in produzione. In questo caso non puoi più testare la tua applicazione. Dovrebbe essere testata e funzionare per i tuoi utenti. Quello è l'unico caso d'uso in cui dovresti usare l'istruzione  `--save-dev`.
 
-Ti capiterà di utilizzare diversi comandi npm lungo il tuo percorso di lavoro o di studio. 
+Ti capiterà di utilizzare diversi comandi npm lungo il tuo percorso di lavoro o di studio.
 Ma questi sono sufficienti per adesso.
 
 ### Esercizi:
@@ -145,7 +146,7 @@ Proprio per questo motivo Facebook intrudusse *create-react-app* come step inizi
 
 ### Esercizi:
 
-* dai un'occhiata alle [installazioni di React](https://facebook.github.io/react/docs/installation.html)
+* leggi sull' [installazione di React](https://reactjs.org/docs/try-react.html)
 
 ## Zero-Configuration Setup
 
@@ -163,7 +164,7 @@ Controlla la versione di *create-react-app* da riga di comando:
 {title="Command Line",lang="text"}
 ~~~~~~~~
 create-react-app --version
-*v1.4.1
+*v1.5.1
 ~~~~~~~~
 
 
@@ -327,16 +328,16 @@ export default App;
 ~~~~~~~~
 
 
-Dovrebbe funzionare non appena lanci da riga di comando l'istruzione `npm start`. 
+Dovrebbe funzionare non appena lanci da riga di comando l'istruzione `npm start`.
 
-In più dovresti dare un'occhiata all'attributo `className`. Riflette l'attributo standard `class` nell'HTML. Per ragioni tecniche, JSX doveva sostituire una serie di attributi HTML. Maggiori approfondimenti circa [gli attributi HTML supportati li trovi nella documentazione React](https://facebook.github.io/react/docs/dom-elements.html). La convenzione usata è *camelCase*. Nel tuo percorso di apprendimento di React, dovrai tenere in considrazione alcuni attributi specifici JSX.
+In più dovresti dare un'occhiata all'attributo `className`. Riflette l'attributo standard `class` nell'HTML. Per ragioni tecniche, JSX doveva sostituire una serie di attributi HTML. Maggiori approfondimenti circa [gli attributi HTML supportati li trovi nella documentazione React](https://reactjs.org/docs/dom-elements.html#all-supported-html-attributes). La convenzione usata è *camelCase*. Nel tuo percorso di apprendimento di React, dovrai tenere in considrazione alcuni attributi specifici JSX.
 
 ### Esercizi:
 
 * definisci una serie di variabili e renderizzali nel tuo JSX
   * usa un oggetto complesso per rappresentare un utente con un nome e cognome
   * renderizza le proprietà dell'utente nel tuo JSX
-* approfondisci di più su [JSX](https://facebook.github.io/react/docs/introducing-jsx.html)
+* approfondisci di più su [JSX](https://reactjs.org/docs/introducing-jsx.html)
 * approfondisci di più sui [componenti React, elementi e istanze](https://facebook.github.io/react/blog/2015/12/18/react-components-elements-and-instances.html)
 
 ## ES6 const e let
@@ -433,7 +434,7 @@ Di base `ReactDOM.render()` usa un nodo DOM nel tuo HTML per sostituirlo con JSX
 
 `ReactDOM.render()` accetta due argomenti. Il primo argomento è JSX che attiva la renderizzazione. Il secondo argomento specifica il posto dove l'applicazione React interviene nel tuo HTML. Accetta un elemento con un `id='root'`. Puoi aprire il tuo file *public/index.html* per trovare l'attributo id.
 
-Nell'implementazione `ReactDOM.render()` gestisce già la tua App component. 
+Nell'implementazione `ReactDOM.render()` gestisce già la tua App component.
 Ad ogni modo, è utile passare il più semplice JSX dal momento che è un JSX. Non ha bisogno di istanziare un componente.
 
 {title="Code Playground",lang=javascript}
@@ -447,7 +448,7 @@ ReactDOM.render(
 ### Esercizi:
 
 * apri *public/index.html* per vedere dove le applicazioni React impattano sul tuo HTML
-*  approfondisci il [rendering degli elementi in React](https://facebook.github.io/react/docs/rendering-elements.html)
+*  approfondisci il [rendering degli elementi in React](https://reactjs.org/docs/rendering-elements.html)
 
 ## Hot Module Replacement
 
@@ -621,7 +622,7 @@ Stai mostrando entrambe le liste adesso. Puoi avviare la tua app, aprire il tuo 
 
 ### Esercizi:
 
-* Approfondisci sulle [liste React e le chiavi](https://facebook.github.io/react/docs/lists-and-keys.html)
+* Approfondisci sulle [liste React e le chiavi](https://reactjs.org/docs/lists-and-keys.html)
 * fai un ripasso degli [array built-in di JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
 * utilizza più espressioni JavaScript sul tuo stesso JSX
 
@@ -726,7 +727,7 @@ class Developer {
 ~~~~~~~~
 
 
-Una classe ha un costruttore per renderla istanziabile. Il costruttore può prendere argomenti per assegnarli alla classe istanziata. Inoltre una classe può avere al suo interno metodi. 
+Una classe ha un costruttore per renderla istanziabile. Il costruttore può prendere argomenti per assegnarli alla classe istanziata. Inoltre una classe può avere al suo interno metodi.
 
 La classe Developer è solo una dichiarazione di classe. Puoi creare multiple istanze della classe invocandola. E' simile alla *class component*, che ha una dichiarazione, ma puoi usarla ovunque.
 
@@ -760,9 +761,9 @@ La classe App estende le funzionalità da una classe Component. Per essere più 
 
 La classe `Component` incapsula tutti i dettagli di implementazione di un componente React. Permette agli sviluppatori di usare classi come componenti in React.
 
-I metodi che espone un `Component` React sono rappresentati da un'interfaccia pubblica. Uno di questi metodi è sovrascritto, gli altri non hanno bisogno di essere sovrascritti. Imparerai questi ultimi quando il libro parlerà del ciclo di vita dei metodi in un capitolo. Il metodo `render()` sarà sovrascritto, perché definisce l'output di un `Component` React. 
+I metodi che espone un `Component` React sono rappresentati da un'interfaccia pubblica. Uno di questi metodi è sovrascritto, gli altri non hanno bisogno di essere sovrascritti. Imparerai questi ultimi quando il libro parlerà del ciclo di vita dei metodi in un capitolo. Il metodo `render()` sarà sovrascritto, perché definisce l'output di un `Component` React.
 
-Adesso sei a conoscenza delle classi JavaScript ES6 e come sono utilizzate all'interno di React per estenderle ai componenti. 
+Adesso sei a conoscenza delle classi JavaScript ES6 e come sono utilizzate all'interno di React per estenderle ai componenti.
 
 ### Esercizi:
 
@@ -785,6 +786,6 @@ Devi padroneggiare le basi di una applicazione React! Riassumiamo l'ultimo capit
   *  i metodi arrow possono essere usati per tenere le tue funzioni concise
   *  le classi sono usate per definire i componenti in React estendendoli
 
-Ha senso prendere una pausa in questo momento. Ripassa con la mente quanto hai appreso. Puoi sperimentare con il codice sorgente scritto.
+Ha senso prendere una pausa in questo momento. Ripassa con la mente quanto hai appreso. Puoi sperimentare con il codice sorgente scritto. Puoi trovare il codice sorgente nel [repository ufficiale](https://github.com/the-road-to-learn-react/hackernews-client/tree/5.1).
 
 Puoi trovare il codice sorgente nel [repository ufficiale](https://github.com/rwieruch/hackernews-client/tree/4.1).

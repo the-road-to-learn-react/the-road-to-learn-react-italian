@@ -348,11 +348,9 @@ onDismiss(id) {
 
 Avvia ancora una volta la tua applicazione e prova il bottone "Dismiss". Dovrebbe funzionare. Adesso hai acquisito le competenze per comprendere l'**unidirectional data flow** di React. Inneschi un'azione nella tua view con `onClick()`, una funzione o un metodo della classe modifica l'internal component state e il metodo `render()` del componente avvia ancora una volta l'aggiornamento della view.
 
-![Internal state update con unidirectional data flow](images/set-state-to-render-unidirectional.png)
-
 ### Esercizi:
 
-* approfondisci [lo state e il ciclo di vista in React](https://facebook.github.io/react/docs/state-and-lifecycle.html)
+* approfondisci [lo state e il ciclo di vista in React](https://reactjs.org/docs/state-and-lifecycle.html)
 
 ## Bindings (vincoli)
 
@@ -1027,7 +1025,7 @@ La funzionalità di ricerca dovrebbe funzionare ora. Provala nel browser.
 
 ### Esercizi:
 
-* approfondisci sugli [eventi React](https://facebook.github.io/react/docs/handling-events.html)
+* approfondisci sugli [eventi React](https://reactjs.org/docs/handling-events.html)
 * approfondisci sugli [higher order functions](https://en.wikipedia.org/wiki/Higher-order_function)
 
 ## ES6 Destrutturato
@@ -1161,7 +1159,8 @@ L'intera gestione dell'internal state e il flusso dati unidirezionali dovrebbe e
 
 ### Esercizi:
 
-* approfondisci i [form in React](https://facebook.github.io/react/docs/forms.html)
+* approfondisci i [form in React](https://reactjs.org/docs/forms.html)
+* scopri di più su [diversi controlled components](https://github.com/the-road-to-learn-react/react-controlled-components-examples)
 
 ## Dividere i componenti
 
@@ -1355,7 +1354,7 @@ Il testo "Search" dovrebbe essere visibile nel tuo campo input adesso. Quando ut
 
 ### Esercizi:
 
-* approfondisci il [model di composizione di React](https://facebook.github.io/react/docs/composition-vs-inheritance.html)
+* approfondisci il [model di composizione di React](https://reactjs.org/docs/composition-vs-inheritance.html)
 
 ## Componenti riusabili
 
@@ -1420,9 +1419,7 @@ class Table extends Component {
 }
 ~~~~~~~~
 
-Il componente Button si aspetta una proprietà `className` nei props. L'attributo `className` è un altro derivato React per l'atributo HTML class. Ma non abbiamo passato alcun `className` quando il Button è stato ustao. Nel codice dovrebbe essere più esplicito nel componente Button che `className` è opzionale.
-
-Perciò, puoi utilizzare il paramentro di default che è una feature di JavaScript ES6.
+Il componente Button si aspetta una proprietà `className` nei props. L'attributo `className` è un altro derivato React per l'attributo HTML class. Ma non abbiamo passato alcun `className` quando il Button è stato utilizzato. Nel codice dovrebbe essere più esplicito nel componente Button che `className` è opzionale. Pertanto potremmo assegnare il valore di default durante il destructuring dell'oggetto.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1441,11 +1438,7 @@ class Button extends Component {
 }
 ~~~~~~~~
 
-Adesso, ogni volta che non è specificata la proprietà `className` quando si utilizza il componente Button, il valore sarà una stringa vuota invece di`undefined`.
-
-### Esercizi:
-
-* approfondisci sui [parametri di default ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Default_parameters)
+Adesso, ogni volta che non è specificata la proprietà `className` quando si utilizza il componente Button, il valore sarà una stringa vuota invece di `undefined`.
 
 ## Dichiarazioni dei componenti
 
@@ -1541,7 +1534,7 @@ Adesso hai un componente functional stateless leggero. Nel momento in cui dovess
 ### Esercizi:
 
 * fai il refactoring dei componenti Table e Button e trasformali in componenti functional stateless
-* approfondisci le [componenti di classe ES6 e componenti functional stateless](https://facebook.github.io/react/docs/components-and-props.html)
+* approfondisci le [componenti di classe ES6 e componenti functional stateless](https://reactjs.org/docs/components-and-props.html)
 
 ## Decorare con stile i componenti
 
@@ -1824,6 +1817,4 @@ Hai appreso le basi per scrivere la tua applicazione React! Facciamo un riassuno
 * General
   * higher order functions
 
-Adesso ha un senso fare un break. Internalizza l'apprendimento e applicalo ai tuoi progetti. Puoi verificare il codice sorgente scritto un po' di tempo fa. Inoltre puoi dare un'occhiata alla documentazione [ufficiale](https://facebook.github.io/react/docs/installation.html).
-
-Puoi dare un'occhiata al codice sorgente nel [repository ufficiale](https://github.com/rwieruch/hackernews-client/tree/4.2).
+Adesso ha un senso fare un break. Internalizza l'apprendimento e applicalo ai tuoi progetti. Puoi verificare il codice sorgente scritto un po' di tempo fa. Puoi dare un'occhiata al codice sorgente nel [repository ufficiale](https://github.com/the-road-to-learn-react/hackernews-client/tree/5.2).

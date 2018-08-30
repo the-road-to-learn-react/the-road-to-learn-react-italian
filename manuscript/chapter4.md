@@ -354,6 +354,7 @@ import App from './App';
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(<App />, div);
+  ReactDOM.unmountComponentAtNode(div);
 });
 ~~~~~~~~
 
@@ -367,11 +368,6 @@ Puoi eseguire i test interattivamente usando lo script `test` di *create-react-a
 ~~~~~~~~
 npm test
 ~~~~~~~~
-
-**Nota:** If visualizzi degli errori quando esrgui il singolo test per il componente App la prima volta, potrebbe essere perché il metodo fetch in `fetchSearchTopStories()` che è chiamato dentro `componentDidMount()` non è supportato. Puoi farlo funzionare seguendo questi due passaggi:
-
-* Nella riga di comando, installa questo pacchetto:: `npm install isomorphic-fetch`
-* Includilo nel tuo file *App.js*: `import fetch from 'isomorphic-fetch';`
 
 Ora Jest dovrebbe permetterti di scrivere snapshot test. Questi test generano una snaphot del componente renderizzato e confrontano questa snapshot con future snapshot. Quando una futura snaposhet cambierà, verrai notificato dal test. A questo punto puoi accettare il fatto che la snaphot è cambiata, magari perché hai cambiato l'implementazione del componente di proposito, o rifiutare la modifica e investigare le cause dell'errore. Questo si coniuga molto bene con gli unit test, perché testa solo le differenze degli output renderizzati, non aggiunge grossi costi di maintenance, perché puoi semplicemente accettare i cambiamenti delle snaphot quando cambi qualcosa di proposito nell'output del tuo componente.
 
@@ -397,14 +393,15 @@ import App from './App';
 
 # leanpub-start-insert
 describe('App', () => {
-# leanpub-end-insert
 
+# leanpub-end-insert
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<App />, div);
+    ReactDOM.unmountComponentAtNode(div);
   });
-
 # leanpub-start-insert
+
 });
 # leanpub-end-insert
 ~~~~~~~~
@@ -423,6 +420,7 @@ describe('App', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<App />, div);
+    ReactDOM.unmountComponentAtNode(div);
   });
 
 # leanpub-start-insert
@@ -461,6 +459,7 @@ describe('Search', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<Search>Search</Search>, div);
+    ReactDOM.unmountComponentAtNode(div);
   });
 
   test('has a valid snapshot', () => {
@@ -494,6 +493,7 @@ describe('Button', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
     ReactDOM.render(<Button>Give Me More</Button>, div);
+    ReactDOM.unmountComponentAtNode(div);
   });
 
   test('has a valid snapshot', () => {
@@ -659,6 +659,8 @@ Ora è possibile importare le funzionalità di PropTypes.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
+import React, { Component } from 'react';
+import axios from 'axios';
 # leanpub-start-insert
 import PropTypes from 'prop-types';
 # leanpub-end-insert
@@ -668,7 +670,11 @@ Iniziamo ad assegnare un'interfaccia alle props dei componenti:
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
-const Button = ({ onClick, className = '', children }) =>
+const Button = ({
+  onClick,
+  className = '',
+  children,
+}) =>
   <button
     onClick={onClick}
     className={className}
@@ -789,13 +795,13 @@ Button.defaultProps = {
 
 Stessa cosa del parametro di default in ES6, la default prop assicura che alla proprietà venga assegnato il valore di default se il componente padre non lo specifica. Il controllo di tipo di PropTypes avviene dopo che il default prop è eseguito.
 
-Se esegui ancora i tuoi test, potresti notare errori PropTypes sui tuoi componenti nel terminale. Può succedere perché non hai rispettato tutte le definizioni PropTypes nei test dei tuoi componenti. I test passano tutti correttamente comunque. Puoi passare tutte le props obbligatorio per non vedere questi errori.
+Se esegui ancora i tuoi test, potresti notare errori PropTypes sui tuoi componenti nel terminale. Può succedere perché non hai rispettato tutte le definizioni PropTypes nei test dei tuoi componenti. I test passano tutti correttamente comunque. Puoi passare tutte le props obbligatorie ai componenti nei tuoi test per non vedere questi errori.
 
 ### Esercizi:
 
 * definire l'interfaccia PropType per il componente Search
 * aggiungere e modificare interfacce PropTypes quando aggiungi o modifichi componenti nei prossimi capitoli
-* leggi di più su [React PropTypes](https://facebook.github.io/react/docs/typechecking-with-proptypes.html)
+* leggi di più su [React PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html)
 
 {pagebreak}
 
@@ -810,4 +816,4 @@ Hai imparato come organizzare il codice e come testarlo! Ricapitoliamo gli ultim
 * Generale
   * l'organizzazione del codice ti permette di scalare la tua applicazione seguendo delle best practice
 
-Puoi trovare il codice sorgente nel [repository ufficiale](https://github.com/rwieruch/hackernews-client/tree/4.4).
+Puoi trovare il codice sorgente nel [repository ufficiale](https://github.com/the-road-to-learn-react/hackernews-client/tree/5.4).
