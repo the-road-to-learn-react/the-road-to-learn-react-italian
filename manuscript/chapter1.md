@@ -30,11 +30,11 @@ React possiede uno snello API, un fantastico ecosistema e una grande community. 
 
 ## Requisiti
 
-Se hai già usato SPA framework, avrai familiarità con questi concetti base dello sviluppo web. Se hai appena iniziato, invece, dovresti sentirti almeno a tuo agio con HTML, CSS e JavaScript ES5 per apprendere React. Il libro rappresenta un ottimo strumento per passare a JavaScript ES6 e oltre. Invito sempre tutti ad unirsi al [Gruppo ufficiale Slack](https://slack-the-road-to-learn-react.wieruch.com/) del libro per avere aiuto ed aiutare gli altri.
+Quali sono i requisiti di questo libro? Prima di tutto, devi avere familiarità con i concetti base dello sviluppo web. Dovresti saper usare HTML, CSS e JavaScript. Forse ha senso anche conoscere il termine [API](https://www.robinwieruch.de/what-is-an-api-javascript/), perché useremo API in questo libro. Invito sempre tutti ad unirsi al [Gruppo ufficiale Slack](https://slack-the-road-to-learn-react.wieruch.com/) del libro per avere aiuto ed aiutare gli altri.
 
 ### Editor e Terminale
 
-Come la mettiamo con l'ambiente di sviluppo? Avrai bisogno di un editor o IDE e di un terminale (la riga di comando). Puoi dare un'occhiata alla mia [guida di setup](https://www.robinwieruch.de/developer-setup/). E' illustrata per gli utenti MacOS, ma molti dei tool sono adatti per altri sistemi operativi. Ci sono migliaia di articoli che mostrano come impostare l'ambiente di sviluppo nel migliore dei modi.
+Come la mettiamo con l'ambiente di sviluppo? Avrai bisogno di un editor o IDE e di un terminale (la riga di comando). Puoi dare un'occhiata alla mia [guida di setup](https://www.robinwieruch.de/developer-setup/). E' illustrata per gli utenti MacOS, ma puoi trovare una guida di setup di React su Windows. In generale, ci sono migliaia di articoli che mostrano come impostare l'ambiente di sviluppo nel migliore dei modi.
 
 In alternativa puoi usare git e GitHub mentre fai gli esercizi di questo libro, per tenere traccia dei progressi nelle repository di GitHub. C'è anche una [piccola guida](https://www.robinwieruch.de/git-essential-commands/) su come usare questi tool. Ma ancora una volta, queste attività non sono obbligatorie per seguire questo libro perché imparerai ogni cosa da zero. Dunque puoi saltare questa parte se sei un beginner nello sviluppo web per focalizzarti sulle parti essenziali illustrate in questo testo.
 
@@ -209,7 +209,11 @@ Diamo un'occhiata alle cartelle e ai file. E' un passo essenziale per comprender
 
 * **.gitignore:** Il file elenca tutti i file e cartelle che non dovranno essere aggiunti al repository remoto se usi git. Saranno solo presenti nel tuo progetto locale. La cartella *node_modules/* ne è un esempio. E' sufficiente condividere ilfile *package.json* con i tuoi collaboratori per permettere loro di installare tutte le dipendenze sui loro progetti locali senza condividere la cartella stessa.
 
-* **public/:** La cartella contiene tutti i file per lavorare al tuo progetto in produzione. Di solito tutto il codice scritto lo troverai nella cartella *src/* e sarà raggruppato in un paio di file quando costruisci il tuo progetto e lo organizzi in questa cartella *public*.
+* **public/:** La cartella contiene i file di sviluppo non JavaScript come *public/index.html*. Questa index è quella visualizzata quando visiti localhost:3000 mentre stai sviluppando la tua applicazione. Il boilerplate si prende cura di inserire in pagina gli script contenuti dentro *src/*.
+
+* **build/** La cartella sarà creata quando viene eseguita la build per l'ambiente di produzione e conterrà tutti i file necessari per quest'ambiente. Il risultato di tutto il tuo codice nelle cartelle *src/* e *public/* finirà dentro alcuni file in questa cartella quando viene fatto il building del progetto in ambiente di produzione.
+
+* **build/** The folder will be created when building the project for production. It holds all your production files when building your project for production. All your written code in the *src/* and *public/* folders are bundled into a couple of files when building your project and placed in the build folder.
 
 * **manifest.json** e **registerServiceWorker.js:** non preoccuparti di questi file, non ne avremo bisogno nel progetto.
 

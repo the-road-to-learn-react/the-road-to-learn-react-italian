@@ -229,7 +229,7 @@ import {
   PARAM_SEARCH,
   PARAM_PAGE,
   PARAM_HPP,
-} from '../constants/index.js';
+} from '../../constants/index.js';
 
 ...
 ~~~~~~~~
@@ -247,7 +247,7 @@ import {
   PARAM_PAGE,
   PARAM_HPP,
 # leanpub-start-insert
-} from '../constants';
+} from '../../constants';
 # leanpub-end-insert
 
 ...
@@ -639,6 +639,7 @@ Potresti continuare facendo unit test sui tuoi componenti ma ricorda di mantener
 * Scrivi uno unit test con Enzyme per il tuo componente Button
 * Mantieni i tuoi unit test aggiornati durante i prossimi capitoli
 * Leggi di più su [enzyme e le sue API di rendering](https://github.com/airbnb/enzyme)
+* Leggi di più sul [testing di applicazioni React](https://www.robinwieruch.de/react-testing-tutorial)
 
 ## L'interfaccia dei componenti con PropTypes
 
