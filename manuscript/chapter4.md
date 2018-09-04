@@ -559,7 +559,7 @@ Gli snaphot test solitamente sono piuttosto semplici. Il senso è quello di assi
 
 [Enzyme](https://github.com/airbnb/enzyme) è una utility di test sviluppata da Airbnb per fare asserzioni, manipolare e navigare sui tuoi componenti React. Puoi usarla per condurre unit test da affiancare agli snaphot test in React.
 
-Vediamo come si usa enzyme. Prima di tutto devi installarlo, perché non è installato di default con *create-react-app*. E' distriubuito con un'estensione per usarlo con React.
+Vediamo come si usa Enzyme. Prima di tutto devi installarlo, perché non è installato di default con *create-react-app*. E' distriubuito con un'estensione per usarlo con React.
 
 {title="Command Line",lang="text"}
 ~~~~~~~~

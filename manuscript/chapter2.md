@@ -927,7 +927,7 @@ Prima di tutto, devi definire l'higher order function fuori dal tuo componente.
 ~~~~~~~~
 # leanpub-start-insert
 function isSearched(searchTerm) {
-  return function(item) {
+  return function (item) {
     // some condition which returns true or false
   }
 }
@@ -945,7 +945,7 @@ La funzione prende `searchTerm` e restituisce un'altra funzione, perché dopo tu
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
 function isSearched(searchTerm) {
-  return function(item) {
+  return function (item) {
 # leanpub-start-insert
     return item.title.toLowerCase().includes(searchTerm.toLowerCase());
 # leanpub-end-insert
@@ -978,7 +978,7 @@ Un altro po' di refactoring può essere fatto con le arrow function ES6. Per ren
 ~~~~~~~~
 // ES5
 function isSearched(searchTerm) {
-  return function(item) {
+  return function (item) {
     return item.title.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1;
   }
 }

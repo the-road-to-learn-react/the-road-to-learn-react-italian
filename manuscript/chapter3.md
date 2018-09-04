@@ -21,23 +21,22 @@ Il metodo `render()` è chiamato durante il mounting process, ma anche quando il
 Adesso sai di più su questi due lifecycle methods e quando sono richiamati.
 Puoi già utilizzarli. Ma c'è qualcos'altro.
 
-Il mounting di un componente ha due ulteriori lifecycle methods: `componentWillMount()` e `componentDidMount()`. Il costruttore è chiamato per primo, `componentWillMount()` è chiamato prima del metodo `render()` e `componentDidMount()` è chiamato dopo il metodo `render()`.
+Il mounting di un componente ha due ulteriori lifecycle methods: `getDerivedStateFromProps()` e `componentDidMount()`. Il costruttore è chiamato per primo, `getDerivedStateFromProps()` è chiamato prima del metodo `render()` e `componentDidMount()` è chiamato dopo il metodo `render()`.
 
 In totale il processo di mounting ha quattro lifecycle methods. Sono invocati nel seguente ordine:
 
 * constructor()
-* componentWillMount()
+* getDerivedStateFromProps()
 * render()
 * componentDidMount()
 
 Ma cosa accade ad un componente quando lo stato o i props cambiano? In totale ci sono 5 lifecycle methods nel seguente ordine:
 
-* componentWillReceiveProps()
+* getDerivedStateFromProps()
 * shouldComponentUpdate()
-* componentWillUpdate()
+* getSnapshotBeforeUpdate()
 * render()
 * componentDidUpdate()
-
 
 Ultimo, ma non per importanza il metodo `componentWillUnmount()`.
 
@@ -45,19 +44,17 @@ In effetti non hai bisogno di comprendere tutti questi lifecycle methods all'ini
 
 * **constructor(props)** - E' richiamato quando il componente viene inizializzato. Puoi assegnare uno stato iniziale e vincolarlo ai metodi di classe durante quel lifecycle method.
 
-* **componentWillMount()** - E' richiamato prima del metodo `render()`. Ecco perché può essere utilizzato per impostare l'internal component state, perché non innesca un secondo rendering del componente. In genere è raccomandato l'utilizzo di `constructor()` per impostare lo stato iniziale.
+* **static getDerivedStateFromProps(props, state)** - E' chiamato prima del metodo `render()`, entrambi al mount iniziale e ad ogni aggiornamento. Dovrebbe restituire un oggetto per aggiornare lo stato o null per non cambiare nulla. Esiste per **rari** casi dove lo stato dipende da cambiamenti di props nel tempo. E' importante notare che questo è un metodo statico e non ha accesso all'istanza del componente.
 
 * **render()** - Questo lifecycle method è obbligatorio e restituisce gli elementi come output del componente. Il metodo dovrebbe essere puro e dunque non modificherebbe lo stato del componente. Richiede un input come props e state e restituisce un elemento.
 
 * **componentDidMount()** - E' richiamato solo quando il componente è inizializzato. E' questo il momento perfetto per una richiesta asincrona che recuperi dati da un'API. I dati recuperati dovrebbero essere salvati in un internal component state per mostrarli con il metodo ` render()`.
 
-* **componentWillReceiveProps(nextProps)** - E' richiamato quando c'è un aggiornamento del lifecycle. Come input gli darai le props successive. Puoi differenziare le precedenti props dalle successive utilizzando `this.props`, per avere un differente comportamento basato sulla differenza. Inoltre, puoi impostare lo state derivato dai props successivi.
-
 * **shouldComponentUpdate(nextProps, nextState)** - E' sempre richiamato quando il componente si aggiorna a seguito di un cambiamento di state o props. E' da prendere in considerazione per le applicazioni mature, complesse. Utile per ottimizzare le performance. A seguito di un valore booleano restituito avrai la possibilità di renderizzare o meno un eventuale aggiornamento di un lifecycle. Puoi, quindi, prevenire il rendering di un lifecycle method di un componente.
 
-* **componentWillUpdate(nextProps, nextState)** - Il lifecycle metodo è immediatamente invocato prima del metodo `render()`. Hai già a disposizione i successivi props e state. Puoi utilizzare il metodo come ultima opportunità per ottimizzare la preparazione prima che il metodo di renderizzazione venga eseguito. E' bene precisare che non puoi più innescare `setSate()`. Se vuoi calcolare lo state basato sulle props successive, devi utilizzare `componentWillReceiveProps()`.
+* **getSnapshotBeforeUpdate(prevProps, prevState)** - Questo metodo di lifecycle è invocato subito prima del commit dell'output nel DOM. In rari casi, il componente ha bisogno di catturare informazioni dal DOM prima che sia potenzialmente cambiato. Questo metodo permette questo. Un altro metodo (`componentDidUpdate()`) riceverà il valore restituito da `getSnapshotBeforeUpdate()` come parametro.
 
-* **componentDidUpdate(prevProps, prevState)** - Il lifecycle method è invocato subito dopo il metodo ´render()`. Un'ottima opportunità per svolgere operazioni DOM o ulteriori richieste asincrone.
+* **componentDidUpdate(prevProps, prevState, snapshot)** - Questo metodo è invocato subito dopo che avvengono aggiornamenti, ma non nel render iniziale. Puoi usarlo per eseguire operazioni sul DOM o effettuare ulteriori richieste asincrone. Se il tuo componente implementa il metodo `getSnapshotBeforeUpdate()`, il valore che quel metodo restituisce sarà ricevuto come parametro `snapshot`.
 
 * **componentWillUnmount()** - E' richiamato prima che tu distrugga il tuo componente. Puoi utilizzare il lifecycle method per svolgere qualsiasi azione di pulizia dei task.
 
@@ -658,7 +655,7 @@ Now you can use the new constant to add the page parameter to your API request.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
-const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${searchTerm}&${PARAM_PAGE}`;
+const url = `${PATH_BASE}${PATH_SEARCH}?${PARAM_SEARCH}${DEFAULT_QUERY}&${PARAM_PAGE}`;
 
 console.log(url);
 // output: https://hn.algolia.com/api/v1/search?query=redux&page=

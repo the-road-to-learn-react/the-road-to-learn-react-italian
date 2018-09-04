@@ -6,18 +6,18 @@ Questo capitolo vuole essere una introduzione a React. Puoi chiederti: perché d
 
 **Perchè dovresti occuparti di React?** Negli anni recenti le applicazioni single-page ([SPA](https://en.wikipedia.org/wiki/Single-page_application)) sono diventate sempre più popolari. Framework come Angular, Ember e Backbone hanno aiutato gli sviluppatori JavaScript a costruire moderne applicazioni attraverso l'utilizzo di JavaScript puro e jQuery. La lista di questi progetti popolari non è esaustiva. In giro troviamo una grande quantità di framework SPA. Se consideriamo le date di rilascio, la maggior parte di loro sono della prima generazione di SPA: Angular 2010, Backbone 2010 e Ember 2011.
 
-La prima release di React è del 2013 ad opera di Facebook. React non è un framework SPA ma una view library. Rappresenta la lettara "V" nel concetto [MVC](https://en.wikipedia.org/wiki/Model–view–controller) (model view controller).
+React è stato inizialmente rilasciato da Facebook nel 2013. Non è un framework SPA ma una view library. Rappresenta la lettara "V" nel concetto [MVC](https://en.wikipedia.org/wiki/Model–view–controller) (model view controller).
 Il suo compito è renderizzare i componenti come elementi view nel browser. Tutto l'ecosistema attorno a React è orientato alla creazione di applicazioni single-page.
 
-Ma perché dobbiamo considerare React come un passo più avanti le prime generazioni di SPA? Mentre le prime generazioni di framework cercavano di risolvere una serie di cose alla volta, React si occupa solo di costruire il tuo *view layer*. E' una libreria, non un framework. L'idea che c'è dietro è la seguente: le tue view rappresentano una gerarchia di componenti "componibili".
+Ma perché dobbiamo considerare React come un passo più avanti le prime generazioni di SPA? Mentre le prime generazioni di framework cercavano di risolvere molte cose in una volta, React si occupa solo di costruire il tuo *view layer*. E' una libreria, non un framework. L'idea che c'è dietro è la seguente: le tue view rappresentano una gerarchia di componenti "componibili".
 
-In React puoi mantenere il focus sul tuo livello view prima di affrontare ulteriori aspetti della tua applicazionee. Ogni altro aspetto è un altro *building block* per la tua SPA. Questi *building block* sono essenziali per costruire una applicazione complessa. Hanno due vantaggi.
+In React puoi mantenere il focus sul tuo livello view prima di affrontare ulteriori aspetti della tua applicazione. Ogni altro aspetto è un altro *building block* per la tua SPA. Questi *building block* sono essenziali per costruire una applicazione complessa ed hanno due vantaggi.
 
 Prima di tutto puoi apprendere i *building block* un passo alla volta. Non devi preoccuparti di comprenderli nella loro completezza. E' differente rispetto ad un framework che ti obbliga a comprendere un *building block* sin dall'inizio. Ulteriori *building block* saranno affrontati più in là.
 
 In secondo luogo, tutti i *building block* sono intercambiabili. Questo rende l'ecosistema attorno a REact davvero innovativo. Più soluzioni sono in competizione tra di loro. Puoi scegliere quelle più utili per te e per i tuoi casi d'uso.
 
-La prima generazione di framework SPA è giunta ad un livello enterprise. Sono piuttosto rigidi. React resta innovativo ed è stato adottato da diverse compagnie leader come [Airbnb, Netflix e naturalmente Facebook](https://github.com/facebook/react/wiki/Sites-Using-React). Ognuna di loro ha investito nel futuro di React ed è soddisfatta di React e del suo ecosistema.
+La prima generazione di framework SPA è giunta ad un livello enterprise. Sono piuttosto rigidi. React resta innovativo ed è stato adottato da diverse aziende leader come [Airbnb, Netflix e naturalmente Facebook](https://github.com/facebook/react/wiki/Sites-Using-React). Queste aziende hanno investito nel futuro di React e sono soddisfatte di React e del suo ecosistema.
 
 React è probabilmente una delle migliori scelte per costruire moderne applicazioni web al giorno d'oggi. Il suo focus è rappresentato dalle *view layer*, [ma l'ecosistema React è un immenso e flessibile e intercambiabile framework](https://www.robinwieruch.de/essential-react-libraries-framework/).
 React possiede uno snello API, un fantastico ecosistema e una grande community. Puoi dare un'occhiata a perché [sono passato da Angular a React](https://www.robinwieruch.de/reasons-why-i-moved-from-angular-to-react/). Comprendere bene le differenze tra React e gli altri framework è caldamente consigliato. Dopo tutto chiunque è ansioso di sapere dove React ci porterà nei prossimi anni.
@@ -54,7 +54,7 @@ npm --version
 
 ## node e npm
 
-Questo capitolo vuole essere un piccolo crash course in node e npm. Non è esaustivo, ma ti aiuterà a prendere dimestichezza con concetti chiave. Se hai familiarità con entrambi i concetti, puoi tranquillamente saltare questo capitolo.
+Questa sezione del capitolo vuole essere un piccolo crash course in node e npm. Non è esaustivo, ma ti aiuterà a prendere dimestichezza con concetti chiave. Se hai familiarità con entrambi i concetti, puoi tranquillamente saltare questa sezione.
 
 Il **node package manager** (npm) ti permette di installare **package node** esterni attraverso la riga di comando. Questi package possono essere un set di metodi, librerie o framework interi. Sono le dipendenze delle tue applicazioni. Puoi installarli entrambi nella tua cartella globale dove risiederanno tutti i pacchetti node oppure nella tua cartella locale.
 
@@ -207,6 +207,8 @@ Diamo un'occhiata alle cartelle e ai file. E' un passo essenziale per comprender
 
 * **package.json:** Questo file mostra una lista di dipendenze dei package node e altre configurazioni legate al progetto.
 
+* **yarn.lock:** Di default, se Yarn è installato, create-react-app usa Yarn come package manager. Se non hai Yarn installato allora create-react-app userà npm. Se hai entrambi i package manager installati puoi usare npm passando --use-npm al comando create-react-app, ma non devi preoccuparti di questo file per ora.
+
 * **.gitignore:** Il file elenca tutti i file e cartelle che non dovranno essere aggiunti al repository se usi git. Saranno solo presenti nel tuo progetto locale. La cartella *node_modules/* ne è un esempio. E' sufficiente condividere ilfile *package.json* con i tuoi collaboratori per permettere loro di installare tutte le dipendenze sui loro progetti locali senza condividere la cartella stessa.
 
 * **public/:** La cartella contiene i file di sviluppo non JavaScript come *public/index.html*. Questa index è quella visualizzata quando visiti localhost:3000 mentre stai sviluppando la tua applicazione. Il boilerplate si prende cura di inserire in pagina gli script contenuti dentro *src/*.
@@ -235,8 +237,7 @@ npm test
 npm run build
 ~~~~~~~~
 
-
-Gli script sono definiti nel file *package.json* La tua applicazione base di React è pronta. La parte eccitante arriverà negli esercizi da testare nel tuo browser.
+Gli script sono definiti nel file *package.json*. La tua applicazione base di React è pronta. I seguenti esercizi di permetteranno finalmente di lanciare la tua applicazione in un browser.
 
 ### Esercizi:
 
@@ -250,7 +251,7 @@ Gli script sono definiti nel file *package.json* La tua applicazione base di Rea
 
 ## Introduzione a JSX
 
-Adesso ti toccherà sapere di più su JSX. E' la sintassi che troveremo in React. Come menzionato prima, *create-react-app* ha già di partenza una applicazione pronta per te. Tutti i file sono utili per una implementazione di default. Entriamo nel codice sorgente. L'unico file che toccherai all'inizio sarà *src/App.js*.
+Adesso ti toccherà sapere di più su JSX, che è la sintassi di React. Come menzionato prima, *create-react-app* ha già di partenza una applicazione pronta per te. Tutti i file sono utili per una implementazione di default. Entriamo nel codice sorgente. L'unico file che toccherai all'inizio sarà *src/App.js*.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -365,7 +366,7 @@ let helloWorld = 'Welcome to the Road to learn React';
 helloWorld = 'Bye Bye React';
 ~~~~~~~~
 
-Dovresti usare quando devi riassegnare una variabile.
+Dichiareresti una variabile con `let` se hai bisogno di riassegnare un valore alla variabile in seguito.
 
 Ad ogni modo, fai attenzione con `const`. Una variabile dichiarata con `const` non può essere modificata. Ma quando la variabile è un array o un oggetto, il valore può essere aggiornato. Il valore non è immutabile.
 
@@ -454,11 +455,11 @@ ReactDOM.render(
 
 ## Hot Module Replacement
 
-C'è una cosa che puoi fare nel file *src/index.js* per migliorare la tua esperienza di sviluppo. Ma è opzionale e non dovresti abusarne all'inizio dell'apprendimento di React.
+L'Hot Module Replacemente (HMR) è una cosa che puoi fare nel file *src/index.js* per migliorare la tua esperienza di sviluppo. Ma è opzionale e potrebbe confonderti all'inizio dell'apprendimento di React.
 
-In *create-react-app* è già un vantaggio che il browser automaticamente effettua il refresh della pagina quando cambia il tuo codice sorgente. Prova a cambiare la variabile `helloWorld` nel tuo file *src/App.js*. Il browser dovrebbe fare il refresh della pagina. Ma c'è un modo migliore per fare questo.
+Di default *create-react-app* farà effettuare automaticamente al browser il refresh della pagina quando cambia il tuo codice sorgente. Prova a cambiare la variabile `helloWorld` nel tuo file *src/App.js*. Il browser dovrebbe fare il refresh della pagina. Ma c'è un modo migliore per fare questo.
 
-L'Hot Module Replacement (HMR) è un tool per ricaricare la tua applicazione nel browser. Il browser non si occupa del refresh della pagina. Invece l'HMR la puoi facilmente attivare in *create-react-app*. Nel tuo file *src/index.js*, devi aggiungere qualche riga di configurazione.
+L'Hot Module Replacement è un tool per ricaricare la tua applicazione nel browser. Il browser non si occupa del refresh della pagina. Invece l'HMR la puoi facilmente attivare in *create-react-app*. Nel tuo file *src/index.js*, devi aggiungere qualche riga di configurazione.
 
 {title="src/index.js",lang=javascript}
 ~~~~~~~~
@@ -540,7 +541,7 @@ class App extends Component {
     return (
       <div className="App">
 # leanpub-start-insert
-        {list.map(function(item) {
+        {list.map(function (item) {
           return <div>{item.title}</div>;
         })}
 # leanpub-end-insert
@@ -563,7 +564,7 @@ class App extends Component {
     return (
       <div className="App">
 # leanpub-start-insert
-        {list.map(function(item) {
+        {list.map(function (item) {
           return (
             <div>
               <span>
@@ -590,7 +591,7 @@ React farà tutto il lavoro per te e mostrerà ogni item. Ma puoi aggiungere un 
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
-{list.map(function(item) {
+{list.map(function (item) {
   return (
 # leanpub-start-insert
     <div key={item.objectID}>
@@ -611,7 +612,7 @@ Dovresti assicurarti che l'attributo chiave sia un identificativo stabile. Non f
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
 // don't do this
-{list.map(function(item, key) {
+{list.map(function (item, key) {
   return (
     <div key={key}>
       ...
