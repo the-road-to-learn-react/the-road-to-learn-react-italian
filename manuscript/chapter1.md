@@ -281,12 +281,11 @@ Non lasciarti confondere dalle dichiarazioni import/export e dalle classi. Quest
 
 Nel file avrai un **React ES6 class component** come nome dell'App. E' una dichiarazione di un componente. Di base una volta che hai dichiarato un componente, puoi usarlo ovunque nell'applicazione. Produrrà una **istanza** del tuo **componente** o in altre parole: il componente verrà istanziato.
 
-L'**element** viene specificato nel metodo `render()`. Gli elementi sono prodotti dai componenti. E' utile comprendere le differenze tra componenti, istanze ed elementi.
+L'**element** viene specificato nel metodo `render()`. Gli elementi sono ciò di cui sono composti i componenti. E' utile comprendere le differenze tra un componente, un'istanza di un componente ed un elemento.
 
 Molto presto, vedrai dove la componente App è istanziata. Altrimenti non riusciresti a vedere l'output renderizzato nel browser. La componente App è solo la dichiarazione, non il suo utilizzo. Devi istanziare il componente in qualche punto nel suto JSX con `<App />`.
 
-Il contenuto nel blocco renderizzato è molto simile ad HTML, ma è in JSX.
-JSX ti permette di mixare HTML e JavaScript. E' potente ma può confondere quando sei abituato a separare il tuo contenuto HTML dal JavaScript. Ecco perché è una buona idea usare HTML base nel tuo JSX. All'inizio, rimuovi tutti i contenuti che distraggono.
+Il contenuto nel blocco renderizzato è molto simile ad HTML, ma è JSX. Il JSX ti permette di mixare HTML e JavaScript. E' potente ma può confondere quando sei abituato a separare il tuo contenuto HTML dal JavaScript. Ecco perché è una buona idea usare HTML base nel tuo JSX. Come punto d'inizio apri il file `App.js` e rimuovi tutto l'HTML non necessario come illustrato di seguito.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -357,8 +356,7 @@ const helloWorld = 'Welcome to the Road to learn React';
 helloWorld = 'Bye Bye React';
 ~~~~~~~~
 
-
-Una variabile dichiarata con `let` puoi cambiarla.
+Una variabile dichiarata con `let` può essere modificata.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -418,7 +416,7 @@ export default App;
 
 ## ReactDOM
 
-Prima di continuare con la tua App component, avrai voglia di vedere dove è usata. E' localizzata nel tuo entry point: il file *src/index.js*.
+Prima di continuare con il tuo componente App, avrai voglia di vedere dove è utilizzato. E' localizzato nel tuo entry point: il file *src/index.js*.
 
 {title="src/index.js",lang=javascript}
 ~~~~~~~~
