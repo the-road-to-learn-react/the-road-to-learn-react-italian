@@ -104,6 +104,8 @@ L'istruzione `--save-dev` indica che il package node è solo usato per l'ambient
 Ti capiterà di utilizzare diversi comandi npm lungo il tuo percorso di lavoro o di studio.
 Ma questi sono sufficienti per adesso.
 
+C'è un'altra cosa importante da dire. Molte persone utilizzano altri package manager per lavorare con i pacchetti node nelle loro applicazioni. **Yarn** è un gestore delle dipendenze che funzione in modo simile a **npm**. Ha una sua lista di comandi per eseguire gli stessi task, sempre avendo accesso all'archivio di npm. Yarn è nato per risolvere alcuni problemi che aveva npm. Oggi entrambi i tool stanno evolvendo rapidamente e puoi scegliere quello che vuoi utilizzare.
+
 ### Esercizi:
 
   * predisponi un progetto di lancio attraverso npm
@@ -114,6 +116,7 @@ Ma questi sono sufficienti per adesso.
   * dai un'occhiata nel file *package.json* e nella cartella *node_modules/*
   * scopri da solo come disinstallare il package *react*
   * dai un'occhiata a [npm](https://docs.npmjs.com/)
+  * dai un'occhiata al gestore di pacchetti [yarn](https://yarnpkg.com/en/docs/)
 
 ## Installazione
 
@@ -146,7 +149,7 @@ Proprio per questo motivo Facebook intrudusse *create-react-app* come step inizi
 
 ### Esercizi:
 
-* leggi sull' [installazione di React](https://reactjs.org/docs/try-react.html)
+* leggi sull' [installazione di React](https://reactjs.org/docs/getting-started.html)
 
 ## Zero-Configuration Setup
 
@@ -227,13 +230,13 @@ L'applicazione *create-react-app* è un progetto npm. Puoi dunque usare npm per 
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
-// Runs the application in http://localhost:3000
+# Runs the application in http://localhost:3000
 npm start
 
-// Runs the tests
+# Runs the tests
 npm test
 
-// Builds the application for production
+# Builds the application for production
 npm run build
 ~~~~~~~~
 
@@ -331,7 +334,6 @@ class App extends Component {
 export default App;
 ~~~~~~~~
 
-
 Dovrebbe funzionare non appena lanci da riga di comando l'istruzione `npm start`.
 
 In più dovresti dare un'occhiata all'attributo `className`. Riflette l'attributo standard `class` nell'HTML. Per ragioni tecniche, JSX doveva sostituire una serie di attributi HTML. Maggiori approfondimenti circa [gli attributi HTML supportati li trovi nella documentazione React](https://reactjs.org/docs/dom-elements.html#all-supported-html-attributes). La convenzione usata è *camelCase*. Nel tuo percorso di apprendimento di React, dovrai tenere in considrazione alcuni attributi specifici JSX.
@@ -342,7 +344,7 @@ In più dovresti dare un'occhiata all'attributo `className`. Riflette l'attribut
   * usa un oggetto complesso per rappresentare un utente con un nome e cognome
   * renderizza le proprietà dell'utente nel tuo JSX
 * approfondisci di più su [JSX](https://reactjs.org/docs/introducing-jsx.html)
-* approfondisci di più sui [componenti React, elementi e istanze](https://facebook.github.io/react/blog/2015/12/18/react-components-elements-and-instances.html)
+* approfondisci di più sui [componenti React, elementi e istanze](https://reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html)
 
 ## ES6 const e let
 
@@ -508,7 +510,7 @@ import './App.css';
 const list = [
   {
     title: 'React',
-    url: 'https://facebook.github.io/react/',
+    url: 'https://reactjs.org/',
     author: 'Jordan Walke',
     num_comments: 3,
     points: 4,
@@ -516,7 +518,7 @@ const list = [
   },
   {
     title: 'Redux',
-    url: 'https://github.com/reactjs/redux',
+    url: 'https://redux.js.org/',
     author: 'Dan Abramov, Andrew Clark',
     num_comments: 2,
     points: 5,
@@ -635,10 +637,10 @@ JavaScript ES6 introdusse i metodi arrow. Un metodo arrow è più breve di una c
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
-// function expression
+// function declaration
 function () { ... }
 
-// arrow function expression
+// arrow function declaration
 () => { ... }
 ~~~~~~~~
 
@@ -681,7 +683,7 @@ Dunque diamo un'occhiata al metodo `map`. Puoi scriverlo in maniera più concisa
 })}
 ~~~~~~~~
 
-In più, puoi rimuovere il *block body*, cioè le parentesi graffe del metodo arrow ES6. In un *concise body* un implicito return è incluso. Quindi puoi rimuovere l'istruzione return. Questo accadrà diverse volte nel libro, quindi assicurati di comprendere la differenza tra un *block body* e un *concise body* quando usi i metodi arrow.
+In più, puoi rimuovere il *block body*, cioè le parentesi graffe del metodo arrow ES6. In un *concise body* un implicito return è incluso. Quindi puoi rimuovere l'istruzione `return`. Questo accadrà diverse volte nel libro, quindi assicurati di comprendere la differenza tra un *block body* e un *concise body* quando usi i metodi arrow.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -701,7 +703,7 @@ In più, puoi rimuovere il *block body*, cioè le parentesi graffe del metodo ar
 # leanpub-end-insert
 ~~~~~~~~
 
-Il tuo JSX sembra più conciso e leggibile adesso. E stata omessa l'istruzione *function*, le parentesi graffe e il l'istruzione *return*. Perché uno sviluppatore deve concentrarsi sull'implementazione dei dettagli.
+Il tuo JSX sembra più conciso e leggibile adesso. E stata omessa l'istruzione `function`, le parentesi graffe e il l'istruzione return. Perché uno sviluppatore deve concentrarsi sull'implementazione dei dettagli.
 
 ### Esercizi:
 
@@ -771,6 +773,7 @@ Adesso sei a conoscenza delle classi JavaScript ES6 e come sono utilizzate all'i
 ### Esercizi:
 
 * dai un'occhiata alle [classi ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes)
+* dai un'occhiata ai [fondamenti di JavaScript prima di imparare React](https://www.robinwieruch.de/javascript-fundamentals-react-requirements/)
 
 {pagebreak}
 

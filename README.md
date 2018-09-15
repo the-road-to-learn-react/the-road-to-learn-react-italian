@@ -2,7 +2,17 @@
 
 [![Slack](https://slack-the-road-to-learn-react.wieruch.com/badge.svg)](https://slack-the-road-to-learn-react.wieruch.com/)
 
-The official repository for [The Road to learn React](https://www.robinwieruch.de/the-road-to-learn-react/). In addition, here you can find the [Source Code](https://github.com/the-road-to-learn-react/hackernews-client) and [Complete Course](https://roadtoreact.com/).
+The official repository for [The Road to learn React](https://www.robinwieruch.de/the-road-to-learn-react/). In addition, here you can find the [Source Code](https://github.com/the-road-to-learn-react/hackernews-client) and [Complete Course](https://roadtoreact.com/). This book is hosted on [Leanpub](https://leanpub.com/the-road-to-learn-react) as well.
+
+# Translations of the book into Leanpub
+
+The Road to learn React is also available in other languages. Thanks for all translators for their awesome work!
+
+* 🇨🇳 [Simplified Chinese](https://leanpub.com/the-road-to-learn-react-chinese)
+* 🇫🇷 [French](https://leanpub.com/the-road-to-learn-react-french)
+* 🇰🇷 [Korean](https://leanpub.com/the-road-to-learn-react-korean)
+* 🇧🇷 [Portuguese](https://leanpub.com/the-road-to-learn-react-portuguese)
+* 🇷🇺 [Russian](https://leanpub.com/the-road-to-learn-react-russian)
 
 ## Updates, Help and Support
 

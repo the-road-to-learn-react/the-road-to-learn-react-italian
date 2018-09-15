@@ -34,7 +34,7 @@ Adesso, ritornando all'esempio, lo stato iniziale nel tuo componente dovrebbe es
 const list = [
   {
     title: 'React',
-    url: 'https://facebook.github.io/react/',
+    url: 'https://reactjs.org/',
     author: 'Jordan Walke',
     num_comments: 3,
     points: 4,
@@ -1242,7 +1242,6 @@ class Search extends Component {
 # leanpub-end-insert
 ~~~~~~~~
 
-
 Il secondo è il componente Table.
 
 {title="src/App.js",lang=javascript}
@@ -1280,10 +1279,9 @@ class Table extends Component {
 # leanpub-end-insert
 ~~~~~~~~
 
-
 Adesso hai tre classi di componenti ES6. Forse avrai notato l'oggetto `props` che è accessibile attraverso l'istanza della classe utilizzando `this`. I props, piccoli moduli per le proprietà, hanno tutti i valori che hai passato ai componenti quando li utilizzavi nella tua App. In questo modo, i componenti possono passare le proprietà lungo l'albero del componente.
 
-Estraendo questi componenti dall'App, essi sono diventati riutilizzabili. Dal momento in cui i componenti ricevono i valori utilizzando l'oggetto props, puoi passare ogni volta differenti props ai tuoi componenti quando li utilizzi per qualcos'altro.
+Estraendo questi componenti dall'App, essi sono diventati riutilizzabili. Dal momento in cui i componenti ricevono i valori utilizzando l'oggetto `props`, puoi passare ogni volta differenti props ai tuoi componenti quando li utilizzi per qualcos'altro.
 
 ### Esercizi:
 
@@ -1323,7 +1321,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Adesso il componente Search può destrutturare la proprietà `children` dal props object. Quindi può specificare dove sarà mostrata.
+Adesso il componente Search può destrutturare la proprietà `children` dal `props` object. Quindi può specificare dove sarà mostrata.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1417,7 +1415,7 @@ class Table extends Component {
 }
 ~~~~~~~~
 
-Il componente Button si aspetta una proprietà `className` nei props. L'attributo `className` è un altro derivato React per l'attributo HTML class. Ma non abbiamo passato alcun `className` quando il Button è stato utilizzato. Nel codice dovrebbe essere più esplicito nel componente Button che `className` è opzionale. Pertanto potremmo assegnare il valore di default durante il destructuring dell'oggetto.
+Il componente Button si aspetta una proprietà `className` nei `props`. L'attributo `className` è un altro derivato React per l'attributo HTML class. Ma non abbiamo passato alcun `className` quando il Button è stato utilizzato. Nel codice dovrebbe essere più esplicito nel componente Button che `className` è opzionale. Pertanto potremmo assegnare il valore di default durante il destructuring dell'oggetto.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1446,7 +1444,7 @@ Da adesso hai quattro classi di componenti ES6. Ma puoi fare di meglio. Permetti
 
 * **ES6 Class Components:** Hai già utilizzato questo tipo di componente nei tuoi quattro componenti. Nella definizione di classe, estendono il componente React. `extend` si aggancia a tutti i metodi lifecycle disponibili nel componente API di React. Inoltre puoi salvare e manipolare lo state in nei componenti di classe ES6 utilizzando `this.state` e `this.setState()`.
 
-* **React.createClass:** La dichiarazione del componente era utilizzata in vecchie versioni di React ed è ancora presente nelle applicazioni React in JavaScript ES5. Ma [Facebook li considera deprecati](https://facebook.github.io/react/blog/2015/03/10/react-v0.13.html), favorendo JavaScript ES6. Se ne parla anche in un [warning nella versione 15.5](https://facebook.github.io/react/blog/2017/04/07/react-v15.5.0.html). Non si utilizzeranno in questo libro.
+* **React.createClass:** La dichiarazione del componente era utilizzata in vecchie versioni di React ed è ancora presente nelle applicazioni React in JavaScript ES5. Ma [Facebook li considera deprecati](https://reactjs.org/blog/2015/03/10/react-v0.13.html), favorendo JavaScript ES6. Se ne parla anche in un [warning nella versione 15.5](https://reactjs.org/blog/2017/04/07/react-v15.5.0.html). Non si utilizzeranno in questo libro.
 
 Quindi restano solo due dichiarazioni di componenti. Ma quando utilizzare i componenti functional stateless al posto dei componenti di classe ES6? Una regola è quella di utilizzare i componenti functional stateless quando non hai bisogno di local state o metodi lifecycle. Di solito inizi ad implementare i tuoi componenti come functional stateless. Nel momento in cui hai bisogno di accedere allo state o ai metodi lifecycle, ti occuperai del refactoring e lo trasformerai in componente di classe ES6. Nella nostra applicazione, abbiamo iniziato nell'altro modo per comprendere meglio React.
 
@@ -1470,7 +1468,7 @@ function Search(props) {
 # leanpub-end-insert
 ~~~~~~~~
 
-I props sono accessibili nella funzione e il valore restituito compare nel JSX. Ma puoi fare di più in un componente functional stateless. Sei già a conoscenza della destrutturazione in ES6. La migliore pratica è utilizzarla nella funzione per destrutturare i props.
+I `props` sono accessibili nella funzione e il valore restituito compare nel JSX. Ma puoi fare di più in un componente functional stateless. Sei già a conoscenza della destrutturazione in ES6. La migliore pratica è utilizzarla nella funzione per destrutturare i props.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -1543,7 +1541,7 @@ Aggiungiamo un po' di stile alla tua applicazione e ai tuoi componenti. Puoi riu
 body {
   color: #222;
   background: #f4f4f4;
-  font: 400 14px CoreSans, Arial,sans-serif;
+  font: 400 14px CoreSans, Arial, sans-serif;
 }
 
 a {

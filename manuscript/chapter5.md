@@ -47,7 +47,7 @@ class Search extends Component {
 # leanpub-end-insert
 ~~~~~~~~
 
-L'oggetto `this` di un componente in una classe ES6 ci aiuta a referenziare un nodo del DOM con l'attributo `ref`.
+L'oggetto `this` di un componente in una classe ES6 ci aiuta a referenziare un elemento del DOM con l'attributo `ref`.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -67,7 +67,7 @@ class Search extends Component {
           value={value}
           onChange={onChange}
 # leanpub-start-insert
-          ref={(node) => { this.input = node; }}
+          ref={el => this.input = el}
 # leanpub-end-insert
         />
         <button type="submit">
@@ -106,7 +106,7 @@ class Search extends Component {
           type="text"
           value={value}
           onChange={onChange}
-          ref={(node) => { this.input = node; }}
+          ref={el => this.input = el}
         />
         <button type="submit">
           {children}
@@ -139,7 +139,7 @@ const Search = ({
         value={value}
         onChange={onChange}
 # leanpub-start-insert
-        ref={(node) => input = node}
+        ref={el => this.input = el}
 # leanpub-end-insert
       />
       <button type="submit">
@@ -279,7 +279,7 @@ Inizialmente il componente Loading sarà mostrato quando eseguiremo la nostra ap
 
 ### Esercizi:
 
-* utilizza una libreria come [Font Awesome](http://fontawesome.io/) per mostrare un'icona di caricamento invece del testo "Loading ..."
+* utilizza una libreria come [Font Awesome](https://fontawesome.io/) per mostrare un'icona di caricamento invece del testo "Loading ..."
 
 ## Componenti di ordine superiore (HOC)
 
@@ -393,7 +393,8 @@ class App extends Component {
 # leanpub-start-insert
           <ButtonWithLoading
             isLoading={isLoading}
-            onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}>
+            onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}
+          >
             More
           </ButtonWithLoading>
 # leanpub-end-insert
@@ -976,7 +977,7 @@ Finalmente il nostro sistema di ordinamento avanzato è completo.
 
 ### Esercizi:
 
-* usa una libreria tipo [Font Awesome](http://fontawesome.io/) per indicare l'ordinamento inverso
+* usa una libreria tipo [Font Awesome](https://fontawesome.io/) per indicare l'ordinamento inverso
   * potrebbe essere una freccia verso l'alto o verso il basso vicino ad ogni header in Sort
 * leggi di più sulla [libreria classnames](https://github.com/JedWatson/classnames)
 
@@ -985,7 +986,7 @@ Finalmente il nostro sistema di ordinamento avanzato è completo.
 Hai imparato tecniche avanzate di gestione dei componenti React! Ricapitoliamo gli ultimi capitoli:
 
 * React
-  * l'attributo ref per riferirsi a nodi del DOM
+  * l'attributo `ref` per riferirsi a elementi del DOM
   * componenti di ordine superiore come modo per costruire componenti avanzati
   * implementazione di interazioni avanzate in React
   * nomi di classi CSS condizioni con l'aiuto di una piccola libreria

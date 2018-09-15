@@ -1,6 +1,6 @@
 # Organizzazione del codice e testing
 
-Il capitolo tratta temi importanti per mantenere il codice manutenibile in applicazioni che tendono a crescere. Imparerai ad organizzare il codice seguendo le best practice per quanto riguarda l'organizzazione di file e cartelle. Un altro tema che imparerai è il testing, che è importante per mantenere il codice robusto. Il capitolo farà un passo indietro sull'applicazione pratica e ti spiegherà alcune tematiche importanti.
+Il capitolo tratta temi importanti per mantenere il codice manutenibile in applicazioni che tendono a crescere. Imparerai ad organizzare il codice seguendo le best practice per quanto riguarda l'organizzazione di file e cartelle. Un altro tema che imparerai è il testing, che è importante per mantenere il codice robusto. Infine, imparerai un tool molto utile per il debugging delle tue applicazioni React. La maggior parte del capitolo farà un passo indietro sull'applicazione pratica e ti spiegherà alcune tematiche importanti.
 
 ## Moduli in ES6: import ed export
 
@@ -20,8 +20,8 @@ Puoi esportare una o più variabili. E' chiamato export nominativo (named export
 
 {title="Code Playground: file1.js",lang="javascript"}
 ~~~~~~~~
-const firstname = 'robin';
-const lastname = 'wieruch';
+const firstname = 'Robin';
+const lastname = 'Wieruch';
 
 export { firstname, lastname };
 ~~~~~~~~
@@ -33,7 +33,7 @@ E importarle in un altro file con path relativo al primo file.
 import { firstname, lastname } from './file1.js';
 
 console.log(firstname);
-// output: robin
+// output: Robin
 ~~~~~~~~
 
 Puoi anche importare tutte le variabili esportate da un altro fle come un unico oggetto.
@@ -43,17 +43,17 @@ Puoi anche importare tutte le variabili esportate da un altro fle come un unico 
 import * as person from './file1.js';
 
 console.log(person.firstname);
-// output: robin
+// output: Robin
 ~~~~~~~~
 
 Gli import possono avere un alias. Può succedere che si importino funzionalità da diversi file che abbiano lo stesso nome, a questo servono gli alias.
 
 {title="Code Playground: file2.js",lang="javascript"}
 ~~~~~~~~
-import { firstname as foo } from './file1.js';
+import { firstname as username } from './file1.js';
 
-console.log(foo);
-// output: robin
+console.log(username);
+// output: Robin
 ~~~~~~~~
 
 Un'altra possibilità è l'istruzione `default`. Può essere usata in alcuni scenari:
@@ -65,8 +65,8 @@ Un'altra possibilità è l'istruzione `default`. Può essere usata in alcuni sce
 {title="Code Playground: file1.js",lang="javascript"}
 ~~~~~~~~
 const robin = {
-  firstname: 'robin',
-  lastname: 'wieruch',
+  firstname: 'Robin',
+  lastname: 'Wieruch',
 };
 
 export default robin;
@@ -79,15 +79,15 @@ Si possono omettere le parentesi graffe per importare le funzionalità esportare
 import developer from './file1.js';
 
 console.log(developer);
-// output: { firstname: 'robin', lastname: 'wieruch' }
+// output: { firstname: 'Robin', lastname: 'Wieruch' }
 ~~~~~~~~
 
 Inoltre, il nome importato può essere diverso dal nome di default esportato. Ed è anche possibile usarlo insieme a degli import ed export nominativi.
 
 {title="Code Playground: file1.js",lang="javascript"}
 ~~~~~~~~
-const firstname = 'robin';
-const lastname = 'wieruch';
+const firstname = 'Robin';
+const lastname = 'Wieruch';
 
 const person = {
   firstname,
@@ -102,22 +102,24 @@ export {
 export default person;
 ~~~~~~~~
 
+E importare il default o l'export con nome in un altro file.
+
 {title="Code Playground: file2.js",lang="javascript"}
 ~~~~~~~~
 import developer, { firstname, lastname } from './file1.js';
 
 console.log(developer);
-// output: { firstname: 'robin', lastname: 'wieruch' }
+// output: { firstname: 'Robin', lastname: 'Wieruch' }
 console.log(firstname, lastname);
-// output: robin wieruch
+// output: Robin Wieruch
 ~~~~~~~~
 
-Gli export nominativi è possibile suddividerli su più righe e anche esportare le variabili direttamente.
+Puoi anche farlo su più righe ed esportare le variabili direttamente per export nominativi.
 
 {title="Code Playground: file1.js",lang="javascript"}
 ~~~~~~~~
-export const firstname = 'robin';
-export const lastname = 'wieruch';
+export const firstname = 'Robin';
+export const lastname = 'Wieruch';
 ~~~~~~~~
 
 Queste sono le funzionalità principali dei moduli in ES6. Sono utili ad organizzare il codice, a manutenerlo e a progettare moduli riusabili (API). Puoi anche importare o esportare funzionalità a scopo di test ed è quello che faremo in uno dei prossimi capitoli.
@@ -316,9 +318,9 @@ Potresti aver sentito parlare della piramide del testing. Ci sono i test codsidd
 
 Di quanti test per ogni tipo ho bisogno? Solitamente si vuole avere molti unit test per coprire le funzioni in modo isolato. Dopodiché, potremmo avere diversi test d'integrazione per assicurarsi che le più importanti funzioni funzionino come ci aspettiamo quando messe insieme. Infine, potremmo avere giusto alcuni test end-to-end per simulare gli scenari critici dell'applicazione. Questo è quanto per quanto riguarda le tipologie di test generali.
 
-Quindi, come applichiamo questo conoscenze del testing alla nostra applicazione React? Le basi del testing in React sono i test dei componenti che può essere generalizzato come unit testing e una parte di essi come snapshot test. Applicherai lo unit testing sui tuoi componenti nel prossimo capitolo usando una libreria chiamata Enzyme. In questo capitolo, invece, ci concentreremo su un altro tipo di test: gli snapshot test. Qui è dove entra in gioco Jest.
+Quindi, come applichiamo questo conoscenze del testing alla nostra applicazione React? Le basi del testing in React sono i test dei componenti che può essere generalizzato come unit testing e una parte di essi come snapshot test. Applicherai lo unit testing sui tuoi componenti nel prossimo capitolo usando una libreria chiamata Enzyme. In questa sezione, invece, ci concentreremo su un altro tipo di test: gli snapshot test. Qui è dove entra in gioco Jest.
 
-[Jest](https://facebook.github.io/jest/) è un framework di testing JavaScript che è usato in Facebook. Nella comunità React è usato per testare i componenti React. Fortunatamente *create-react-app* contiene già Jest, quindi non dobbiamo preoccuparci di installarlo e configurarlo.
+[Jest](https://jestjs.io/) è un framework di testing JavaScript che è usato in Facebook. Nella comunità React è usato per testare i componenti React. Fortunatamente *create-react-app* contiene già Jest, quindi non dobbiamo preoccuparci di installarlo e configurarlo.
 
 Iniziamo a testare i tuoi primi componenti. Prima di tutto però, è necessario esportare i componenti che vogliamo testare, dal tuo file *src/App.js*. A questo punto, è possibile testarli in un altro file. Dovresti aver imparato questi concetti nel capitolo sull'organizzazione del codice.
 
@@ -428,7 +430,7 @@ describe('App', () => {
     const component = renderer.create(
       <App />
     );
-    let tree = component.toJSON();
+    const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 # leanpub-end-insert
@@ -466,7 +468,7 @@ describe('Search', () => {
     const component = renderer.create(
       <Search>Search</Search>
     );
-    let tree = component.toJSON();
+    const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
@@ -500,7 +502,7 @@ describe('Button', () => {
     const component = renderer.create(
       <Button>Give Me More</Button>
     );
-    let tree = component.toJSON();
+    const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
@@ -538,7 +540,7 @@ describe('Table', () => {
     const component = renderer.create(
       <Table { ...props } />
     );
-    let tree = component.toJSON();
+    const tree = component.toJSON();
     expect(tree).toMatchSnapshot();
   });
 
@@ -553,7 +555,7 @@ Gli snaphot test solitamente sono piuttosto semplici. Il senso è quello di assi
 * guarda come lo snaphot test fallisce se cambi il valore di ritorno del metodo `render()` del tuo commponente
   * accetta o rifiuta i cambiamenti della snapshot
 * mantini i tuoi snaphot test aggiornati quando l'implementazione dei componenti cambierà nei prossimi capitoli
-* leggi di più su [Jest in React](https://facebook.github.io/jest/docs/tutorial-react.html)
+* leggi di più su [Jest in React](https://jestjs.io/docs/en/tutorial-react)
 
 ## Unit test con Enzyme
 
@@ -638,7 +640,7 @@ Potresti continuare facendo unit test sui tuoi componenti ma ricorda di mantener
 
 * Scrivi uno unit test con Enzyme per il tuo componente Button
 * Mantieni i tuoi unit test aggiornati durante i prossimi capitoli
-* Leggi di più su [enzyme e le sue API di rendering](https://github.com/airbnb/enzyme)
+* Leggi di più su [Enzyme e le sue API di rendering](https://github.com/airbnb/enzyme)
 * Leggi di più sul [testing di applicazioni React](https://www.robinwieruch.de/react-testing-tutorial)
 
 ## L'interfaccia dei componenti con PropTypes
@@ -647,7 +649,7 @@ Potresti essere a conoscenza di [TypeScript](https://www.typescriptlang.org/) o 
 
 In questo non introdurremo Flow o TypeScript ma un'altra efficace alternativa per controllare i tipi di dato dei tuoi componenti. React contiene di default un modo per controllare i tipi di dato e prevenire errori. Puoi usare PropTypes per descrivere l'interfaccia dei tuoi componenti. Tutte le props che vengono passate da un componente padre a un componente figlio possono essere validate assegnando delle specifiche PropTypes al componente figlio.
 
-Questo capitolo ti mostrerà come rendere tutti i tuoi componenti sicuri con PropTypes. Non riporterò queste modifiche nei capitoli successivi perché richiederebbero dei refactoring non necessari al codice ma tu dovresti applicarle e mantenerle aggiornate nel corso del libro per mantenere l'interfaccia dei tuoi componenti type safe.
+Questa sezione ti mostrerà come rendere tutti i tuoi componenti sicuri con PropTypes. Non riporterò queste modifiche nei capitoli successivi perché richiederebbero dei refactoring non necessari al codice ma tu dovresti applicarle e mantenerle aggiornate nel corso del libro per mantenere l'interfaccia dei tuoi componenti type safe.
 
 Prima cosa, è necessario installare un pacchetto per React.
 
@@ -709,7 +711,7 @@ Inoltre abbiamo altri due PropTypes per definire frammenti renderizzabili (nodi)
 
 Abbiamo già usato il PropType `node` per il componente Button. In generale ci sono altre definizioni di PropType di cui puoi leggere sulla documentazione ufficiale di React.
 
-Al momento tutte le PropTypes che abbiamo definito per Button sono opzionali. I parametri possono essere null o undefined. Ma in molti casi si vuole ottenere che queste proprietà siano definite. Puoi rendere un requisito che queste props siano passate al componente.
+Al momento tutte le PropTypes che abbiamo definito per Button sono opzionali. I parametri possono essere `null` o `undefined`. Ma in molti casi si vuole ottenere che queste proprietà siano definite. Puoi rendere un requisito che queste props siano passate al componente.
 
 {title="src/App.js",lang=javascript}
 ~~~~~~~~
@@ -804,6 +806,29 @@ Se esegui ancora i tuoi test, potresti notare errori PropTypes sui tuoi componen
 * aggiungere e modificare interfacce PropTypes quando aggiungi o modifichi componenti nei prossimi capitoli
 * leggi di più su [React PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html)
 
+## Il debugging con i React Developer Tools
+
+Quest'ultima sezione ti introduce un utile strumento, generalmente usato per ispezionare e fare il debugging delle applicazione React. [React Developer Tools](https://github.com/facebook/react-devtools) ti permettono di ispezionare la gerarchia dei componenti React, le loro props e i loro stati. Puoi installarla come estensione per il browser (per Chrome e Firefor al momento) o come applicazione standalone (che funziona in tutti gli ambienti). Una volta installata, l'icona dell'estensione sarà illuminata nei siti che usano React. In quelle pagine vedrai una tab chiamata "React" negli strumenti per sviluppatori del browser.
+
+Proviamo con la nostra applicazione Hacker News. Con la maggior parte dei browser, un modo veloce per scatenare i _dev tools_ è fare click destro sulla pagina e cliccare "Inspect". Fallo quando la tua applicazione ha caricato e clicca la tab "React". Dovrsti vedere la sua gerarchia degli elementi, con `<App>` come elemento root. Se lo espandi troverai anche le istanze dei componenti `<Search>`, `<Table>` e `<Button>`.
+
+L'estensione mostra nel pannello a lato lo stato e le props dell'elemento selezionato. Per esempio, se clicchi su `<App>`, vedrai che non ha props ma ha uno stato. Una tecnica di debugging molto semplice consiste nel monitorare i cambiamenti di stato dell'applicazione a seguito dell'interazione utente.
+
+Per prima cosa, dovresti mettere la spunta sull'opzione "Evidenzia aggiornamenti" (highlight updates). Poi, potresti provare a digitare qualcosa nel campo di ricerca dell'applicazione. Come vedrai, solo `searchTerm` verrà modificato nello stato del componente. Tu già sapevi che sarebbe successo, ma adesso puoi veramente vederlo accadere come pianificato.
+
+Infine puoi premere il bottone "Search". La proprietà `searchKey` dello stato sarà immediatamente cambiata con lo stesso valore di `searchTerm` e l'oggetto di risposta sarà aggiunto a `results` poco dopo. La natura asincrona del nostro codice è adesso visibile ai tuoi occhi.
+
+Inoltre, se fai click destro su qualsiasi elemento, un menu ti mostrerà delle opzioni utili. Per esempio, potresti copiare le props dell'elemento o il nome, trovare il corrispondente nodo del DOM o saltare al codice dell'applicazione nel browser. Quest'ultima opzione è molto utile per inserire breakpoint e fare il debugging di funzioni JavaScript.
+
+### Esercizi:
+
+* installare l'estensione [React Developer Tools](https://github.com/facebook/react-devtools) per il tuo browser preferito
+  * eseguire la nostra applciazione clone di Hacker News e ispezionarla usando l'estensione
+  * sperimentare con cambiamenti di stato e di props
+  * vedere cosa succede quando viene scatenata una richiesta asincrona
+  * eseguire più richieste, anche ripetute. Vedere il meccanismo di caching funzionare
+* leggi di più su [Come fare il debugging di funzioni JavaScript nel browser](https://developers.google.com/web/tools/chrome-devtools/javascript/)
+
 {pagebreak}
 
 Hai imparato come organizzare il codice e come testarlo! Ricapitoliamo gli ultimi capitoli:
@@ -812,6 +837,7 @@ Hai imparato come organizzare il codice e come testarlo! Ricapitoliamo gli ultim
   * PropTypes ti permette di definire i tipi di dato dell'interfaccia dei tuoi componenti
   * Jest ti permette di scrivere snapshot test per i tuoi componenti
   * Enzyme ti permette di scrivere unit test per i tuoi componenti
+  * L'utile strumento di debugging React Developer Tools
 * ES6
   * le istruzioni di import ed export ti aiutano ad organizzare il codice
 * Generale

@@ -472,7 +472,7 @@ Hai imparato tecniche di gestione dello stato avanzate in React! Ricapitoliamo q
 
 * React
   * spostare la gestione dello stato più in alto e più in basso ai componenti più indicati
-  * setState può prendere in input una funzione per prevenire bug da dati non aggiornati
+  * `setState` può prendere in input una funzione per prevenire bug da dati non aggiornati
   * soluzioni esterne esistenti che aiutano a domare lo stato
 
 Puoi trovare il codice sorgente nel [repository ufficiale](https://github.com/the-road-to-learn-react/hackernews-client/tree/5.6).
