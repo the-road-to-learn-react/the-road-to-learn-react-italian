@@ -1,177 +1,161 @@
 # Introduzione a React
 
-Questo capitolo vuole essere una introduzione a React. Puoi chiederti: perché dovrei imparare React? L'obiettivo di questo capitolo è rispondere a questa domanda. Quindi ti catapulterai nell'ecosistema React con una applicazione da zero senza alcuna configurazione particolare. Lungo questo percorso sarai introdotto ad argomenti come JSX e ReactDOM. Infine sarai pronto per i tuoi primi componenti React.
+Questo capitolo è un'introduzione a React, una libreria JavaScript per il rendering di applicazioni single-page e mobile, dove spiego perché i programmatori dovrebbero considerare di aggiungere la libreria React alla loro cassetta per gli attrezzi. Ci immergeremo nell'ecosistema React, creando la nostra prima applicazione React da zero senza configurazioni. Lungo la strada introdurremo JSX, la sintassi per React, e ReactDOM, così da darti un'idea degli utilizzi pratici di React nello sviluppo di moderne applicazioni web.
 
 ## Ciao, mi chiamo React.
 
-**Perchè dovresti occuparti di React?** Negli anni recenti le applicazioni single-page ([SPA](https://en.wikipedia.org/wiki/Single-page_application)) sono diventate sempre più popolari. Framework come Angular, Ember e Backbone hanno aiutato gli sviluppatori JavaScript a costruire moderne applicazioni attraverso l'utilizzo di JavaScript puro e jQuery. La lista di questi progetti popolari non è esaustiva. In giro troviamo una grande quantità di framework SPA. Se consideriamo le date di rilascio, la maggior parte di loro sono della prima generazione di SPA: Angular 2010, Backbone 2010 e Ember 2011.
+Le applicazioni single-page ([SPA](https://en.wikipedia.org/wiki/Single-page_application)) sono diventate sempre più popolari negli ultimi anni, da quando framework come Angular, Ember e Backbone hanno permesso ai programmatori JavaScript di sviluppare applicazioni web moderne utilizzando tecniche oltre al vanilla JavaScript e jQuery. I tre menzionati sono stati tra i primi per SPAs, ognuno uscito tra il 2010 e il 2011, ma ci sono molte altre opzioni per lo sviluppo di applicazioni single-page. La prima generazione di framework SPA è arrivata al livello enterprise, quindi questi sono più rigidi. React, d'altro canto, rimane una libreria innovativa che è stata adottata da molti leader tecnologici quali [Airbnb, Netflix, e Facebook](https://github.com/facebook/react/wiki/Sites-Using-React).
 
-React è stato inizialmente rilasciato da Facebook nel 2013. Non è un framework SPA ma una view library. Rappresenta la lettara "V" nel concetto [MVC](https://en.wikipedia.org/wiki/Model–view–controller) (model view controller).
-Il suo compito è renderizzare i componenti come elementi view nel browser. Tutto l'ecosistema attorno a React è orientato alla creazione di applicazioni single-page.
+React è stato rilasciato dal team di sviluppo web di Facebook nel 2013 come libreria per lo sviluppo di view, il che lo rende la 'V' nel pattern [MVC](https://en.wikipedia.org/wiki/Model–view–controller) (model view controller) (model view controller). Come view, ti permette di effettuare il render di componenti come elementi visualizzabili in un browser, mentre il suo ecosistema permette di sviluppare applicazioni single-page complete. Mentre la prima generazione di framework tentò di risolvere molti problemi in una volta, React è utilizzato solamente per il layer di view; nello specifico, è una libreria dove la view è una gerarchia di componenti componibili. Se non hai mai sentito prima MVC, non preoccuparti, ci serve solo a collocare React storicamente in un contesto per le persone che vengono da altri linguaggi di programmazione.
 
-Ma perché dobbiamo considerare React come un passo più avanti le prime generazioni di SPA? Mentre le prime generazioni di framework cercavano di risolvere molte cose in una volta, React si occupa solo di costruire il tuo *view layer*. E' una libreria, non un framework. L'idea che c'è dietro è la seguente: le tue view rappresentano una gerarchia di componenti "componibili".
+In React il focus rimane sul layer di view fino a che altri concetti sono introdotti nell'applicazione. Questi sono i componenti fondamentali per una SPA, che sono essenziali per sviluppare un'applciazione matura. Questo porta due vantaggi:
 
-In React puoi mantenere il focus sul tuo livello view prima di affrontare ulteriori aspetti della tua applicazione. Ogni altro aspetto è un altro *building block* per la tua SPA. Questi *building block* sono essenziali per costruire una applicazione complessa ed hanno due vantaggi.
+* Puoi imparare gli elementi essenziali uno alla volta, senza dover capire tutto insieme. In contrasto, i framework SPA ti offrono ognuno di questi elementi dall'inizio. Questo libro pone il focus su React come primo tassello. Altri argomenti arriverrano in futuro.
 
-Prima di tutto puoi apprendere i *building block* un passo alla volta. Non devi preoccuparti di comprenderli nella loro completezza. E' differente rispetto ad un framework che ti obbliga a comprendere un *building block* sin dall'inizio. Ulteriori *building block* saranno affrontati più in là.
+* Tutti questi elementi essenziali sono intercambiabili, il che rende l'ecosistema attorno React altamente innovativo. Più soluzioni possono competere tra loro e tu puoi scegliere la soluzione che più ti convince per ogni sfida in cui ti imbatterai.
 
-In secondo luogo, tutti i *building block* sono intercambiabili. Questo rende l'ecosistema attorno a REact davvero innovativo. Più soluzioni sono in competizione tra di loro. Puoi scegliere quelle più utili per te e per i tuoi casi d'uso.
-
-La prima generazione di framework SPA è giunta ad un livello enterprise. Sono piuttosto rigidi. React resta innovativo ed è stato adottato da diverse aziende leader come [Airbnb, Netflix e naturalmente Facebook](https://github.com/facebook/react/wiki/Sites-Using-React). Queste aziende hanno investito nel futuro di React e sono soddisfatte di React e del suo ecosistema.
-
-React è probabilmente una delle migliori scelte per costruire moderne applicazioni web al giorno d'oggi. Il suo focus è rappresentato dalle *view layer*, [ma l'ecosistema React è un immenso e flessibile e intercambiabile framework](https://www.robinwieruch.de/essential-react-libraries-framework/).
-React possiede uno snello API, un fantastico ecosistema e una grande community. Puoi dare un'occhiata a perché [sono passato da Angular a React](https://www.robinwieruch.de/reasons-why-i-moved-from-angular-to-react/). Comprendere bene le differenze tra React e gli altri framework è caldamente consigliato. Dopo tutto chiunque è ansioso di sapere dove React ci porterà nei prossimi anni.
+React è uno delle scelte migliori per realizzare applicazioni web moderne ma ripeto, offre solo il layer di vista, è con l'ecosistema che lo circonda che diventa un framework flessibile e con parti intercambiabili. React ha un'API snella, un ecosistema robusto e in evoluzione, e una grande community.
 
 ### Esercizi
 
-* leggi [perché sono passato da Angular a React](https://www.robinwieruch.de/reasons-why-i-moved-from-angular-to-react/)
-* leggi [L'ecosistema flessibile di React](https://www.robinwieruch.de/essential-react-libraries-framework/)
-* leggi [come imparare un framework](https://www.robinwieruch.de/how-to-learn-framework)
+Se ti interessa sapere il perché ho scelto React, o dare un'occhiata più approfondita agli argomenti menzionati sopra, questi articoli forniscono una prospettiva più approfondita:
+
+* [Perché sono passato da Angular a React](https://www.robinwieruch.de/reasons-why-i-moved-from-angular-to-react/)
+* [L'ecosistema flessibile di React](https://www.robinwieruch.de/essential-react-libraries-framework/)
+* [Come imparare un framework](https://www.robinwieruch.de/how-to-learn-framework/)
 
 ## Requisiti
 
-Quali sono i requisiti di questo libro? Prima di tutto, devi avere familiarità con i concetti base dello sviluppo web. Dovresti saper usare HTML, CSS e JavaScript. Forse ha senso anche conoscere il termine [API](https://www.robinwieruch.de/what-is-an-api-javascript/), perché useremo API in questo libro. Invito sempre tutti ad unirsi al [Gruppo ufficiale Slack](https://slack-the-road-to-learn-react.wieruch.com/) del libro per avere aiuto ed aiutare gli altri.
+Per seguire questo libro dovresti aver familiarità con le basi dello sviluppo web, es. saper usare HTML, CSS e JavaScript. Ha anche senso capire come funzionano le [API](https://www.robinwieruch.de/what-is-an-api-javascript/), considerato che saranno trattate a fondo. Inoltre, ti invito ad entrare a far parte del [Gruppo Slack](https://slack-the-road-to-learn-react.wieruch.com/) ufficiale per far parte di una community su React in crescita da cui puoi imparare e/o aiutare altri.
 
 ### Editor e Terminale
 
-Come la mettiamo con l'ambiente di sviluppo? Avrai bisogno di un editor o IDE e di un terminale (la riga di comando). Puoi dare un'occhiata alla mia [guida di setup](https://www.robinwieruch.de/developer-setup/). E' illustrata per gli utenti MacOS, ma puoi trovare una guida di setup di React su Windows. In generale, ci sono migliaia di articoli che mostrano come impostare l'ambiente di sviluppo nel migliore dei modi.
-
-In alternativa puoi usare git e GitHub mentre fai gli esercizi di questo libro, per tenere traccia dei progressi nelle repository di GitHub. C'è anche una [piccola guida](https://www.robinwieruch.de/git-essential-commands/) su come usare questi tool. Ma ancora una volta, queste attività non sono obbligatorie per seguire questo libro perché imparerai ogni cosa da zero. Dunque puoi saltare questa parte se sei un beginner nello sviluppo web per focalizzarti sulle parti essenziali illustrate in questo testo.
+Per le lezioni avrai bisogno di un editor di testo o di un IDE e di un terminale (tool a linea di comando). Ho fornito [una guida di setup](https://www.robinwieruch.de/developer-setup/) se dovessi aver bisogno di un aiuto ulteriore. Opzionalmente consiglio di tenere i tuoi progetti su GitHub durante lo svolgimento degli esercizi del libro. C'è una [breve guida](https://www.robinwieruch.de/git-essential-commands/) sul come utilizzare questi tool. Github ha un eccellente controllo di versione, così che tu possa vedere quali modifiche sono state fatte se fai un errore, o semplicemente vuoi un modo più diretto per seguire gli sviluppi.
 
 ### Node e NPM
 
-Ultimo, ma non per importanza: avrai bisogno di un'installazione di [node e npm](https://nodejs.org/en/). Entrambi saranno usati per gestire le librerie di cui avrai bisogno nel tuo percorso. In questo libro installerai i package esterni node via npm (node package manager). Questi package node possono essere librerie o interi framework.
+Infine, avrai bisogno di installare [node ed npm](https://nodejs.org/en/). Entrambi sono utilizzati per gestire le librerie dic ui avrai bisogno lungo la strada. In questo libro installerai package node esterni tramite npm (node package manager). Questi package node possono essere librerie o interi framework.
 
-Puoi verificare le tue versioni di node e npm attraverso riga di comando. Se il terminale non ti restituisce nulla, allora devi installare node e npm prima. Queste sono le mie versioni mentre ti scrivo questo libro:
+Puoi verificare le tue versioni di node ed npm dalla linea di comando. Se non ottieni nessun output nel terminale, avrai prima bisogno di installare node ed npm. Queste sono le mie versioni al momento della scrittura di questo libro:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 node --version
-*v8.9.4
+*v10.11.0
 npm --version
-*v5.6.0
+*v6.4.1
 ~~~~~~~~
 
-## node e npm
+Il restante contenuto di questa sezione è un crash course su node ed npm. Non è esaustivo, ma coprirà tutti gli strumenti necessari. Se hai già famigliarità con entrambi puoi passare alla prossima sezione.
 
-Questa sezione del capitolo vuole essere un piccolo crash course in node e npm. Non è esaustivo, ma ti aiuterà a prendere dimestichezza con concetti chiave. Se hai familiarità con entrambi i concetti, puoi tranquillamente saltare questa sezione.
+**node package manager** (npm) ti permette di installare pacchetti node esterni dalla linea di comando. Questi pacchetti possono essere un insieme di funzioni di utilità, librerie, interi framework, e sono le dipendenze della tua applicazione. Puoi installare questi pacchetti nella tua cartella di package node globale o in quella locale.
 
-Il **node package manager** (npm) ti permette di installare **package node** esterni attraverso la riga di comando. Questi package possono essere un set di metodi, librerie o framework interi. Sono le dipendenze delle tue applicazioni. Puoi installarli entrambi nella tua cartella globale dove risiederanno tutti i pacchetti node oppure nella tua cartella locale.
-
-Se installi tutto in modo "global" i pacchetti saranno utilizzabili ovunque dal terminale e dovrai installarli solo una volta nella tua directory globale. Per installare i package globalmente digita nel tuo terminale:
+I pacchetti node globali sono accessibili ovunque nel terminale, e necessitano di essere installati una sola volta. Puoi installare un pacchetto in modo globale digitanto nel terminale:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm install -g <package>
 ~~~~~~~~
 
-La `-g` dice a npm di installare il package globalmente. I package locali sono usati nella tua applicazione. Per esempio, React come libreria sarà un package locale che può essere utilizzato nella tua applicazione. Puoi installarlo via terminale digitando:
-
-{title="Command Line",lang="text"}
-~~~~~~~~
-npm install <package>
-~~~~~~~~
-
-Per React dovrai scrivere:
+Il flag `-g` istruisce npm ad installare il pacchetto in modalità globale. I pacchetti locali sono invece usati dalla tua applicazione di default. Per i nostri scopi installeremo React nella cartella locale, da terminale, con il comando:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm install react
 ~~~~~~~~
 
-I package installati appariranno automaticamente nella cartella chiamata *node_modules/* e saranno elencati nel file *package.json* insieme alle relative dipendenze.
+Il pacchetto installato apparirà automaticamente nella cartella *node_modules/* e nel file *package.json* insieme alle altre dipendenze.
 
-Ma come inizializzare la cartella *node_modules/* e il file *package.json* per il tuo progetto? C'è un comando npm utile per l'inizializzazione attraverso il file *package.json*. Solo quando avrai quel file, puoi installare nuovi package locali via npm.
+Per inizializzare la cartella *node_modules/* e il file *package.json* per il tuo progetto, usa il comando npm seguente. Poi, potrai installare nuovi pacchetti locali via npm:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm init -y
 ~~~~~~~~
 
-La lettera `-y` è uno shortcut per inizializzare tutti i default nel tuo file *package.json*. Se non usi questa istruzione, dovrai occuparti della configurazione del file. Dopo l'inizializzazione del tuo progetto npm sei pronto per installare nuovi package attraverso `npm install <package>`.
+Il flag `-y` utilizza tutti i default nel tuo *package.json*. Dopo aver inizializzato il tuo progetto npm, sei pronto per installare nuovi pacchetti con `npm install <package>`.
 
-Ancora una parola sul file *package.json*. Questo file ti permette di condividere il tuo progetto con altri sviluppatori senza condividere tutto il package node. Il file, infatti, ha tutte le referenze dei package node usati nel progetto. Questi package sono chiamati dipendenze. Chiunque può copiare il tuo progetto senza le dipendenze. Queste, infatti, sono referenziate nel file *package.json*. Chi vuol copiare il tuo progetto deve semplicemente installare tutti i package usando il comando `npm install` via riga di comando. Lo script `npm install` recupera tutte le dipendenze elencate nel file *package.json* e le installa nella cartella *node_modules/*.
+Il file *package.json* ti permette di condividere il tuo progetto con altri programmatori senza dover condividere anche tutti i pachetti node. Conterrà tutte le reference a tutti i pacchetti utilizzati nel tuo progetto, che sono chiamati **dipendenze** (dependencies). Altri utenti possono copiare un progetto senza le dipendenze usando le reference nel *package.json* per installarle facilmente con il comando `npm install`. Lo script `npm install` prenderà tutte le dipendenze elencate nel file *package.json* e le installerà nella cartella *node_modules/*.
 
-Vorrei parlare di un altro comando npm:
+Infine, c'è ancora un comando da trattare di npm:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm install --save-dev <package>
 ~~~~~~~~
 
-L'istruzione `--save-dev` indica che il package node è solo usato per l'ambiente di sviluppo. Non sarà usato in produzione quando effettui il deploy dell'applicazione sul server. Che tipo di package node potrebbe essere? Immagina che tu voglia testare la tua applicazione con l'aiuto di un package node. Avrai la necessità di installare quel package via npm, ma vuoi escluderlo dal tuo ambiente di produzione. Il testing dovrebbe essere utile durante il processo di sviluppo ma non quando la tua applicazione è già in produzione. In questo caso non puoi più testare la tua applicazione. Dovrebbe essere testata e funzionare per i tuoi utenti. Quello è l'unico caso d'uso in cui dovresti usare l'istruzione  `--save-dev`.
+Il flag `--save-dev` indica che il pacchetto node è utilizzato solo nell'ambiente di sviuppo, che significa che non sarà utilizzato quando l'applicazione sarà deployata su un server o usata in produzione. È utile per testare un applicazione usando un pacchetto node ma escludendolo dal tuo ambiente di produzione.
 
-Ti capiterà di utilizzare diversi comandi npm lungo il tuo percorso di lavoro o di studio.
-Ma questi sono sufficienti per adesso.
-
-C'è un'altra cosa importante da dire. Molte persone utilizzano altri package manager per lavorare con i pacchetti node nelle loro applicazioni. **Yarn** è un gestore delle dipendenze che funzione in modo simile a **npm**. Ha una sua lista di comandi per eseguire gli stessi task, sempre avendo accesso all'archivio di npm. Yarn è nato per risolvere alcuni problemi che aveva npm. Oggi entrambi i tool stanno evolvendo rapidamente e puoi scegliere quello che vuoi utilizzare.
+Alcuni di voi potrebbero voler usare altrimenti gestori di pacchetti per lavore con i pacchetti node nella tua applicazione. **Yarn** è un gestore delle dipendenze che funziona in modo simile a
+**npm**. Ha la sua lista di comandi, ma al contempo hai accesso allo stesso npm registry (stessi pacchetti). Yarn è stato creato per risolvere problemi che npm non poteva risolvere, ma entrambi i tool sono evoluti al punto che uno qualsiasi dei due è sufficiente.
 
 ### Esercizi:
 
-  * predisponi un progetto di lancio attraverso npm
-  * crea una nuova cartella con  `mkdir <folder_name>`
-  * vai nella cartella con  `cd <folder_name>`
-  * esegui `npm init -y` oppure `npm init`
-  * installa un package localmente come React attraverso `npm install react`
-  * dai un'occhiata nel file *package.json* e nella cartella *node_modules/*
-  * scopri da solo come disinstallare il package *react*
-  * dai un'occhiata a [npm](https://docs.npmjs.com/)
-  * dai un'occhiata al gestore di pacchetti [yarn](https://yarnpkg.com/en/docs/)
+* Fai il setup di un progetto npm usa e getta utilizzando il terminale:
+  * Crea una nuova cartella con `mkdir <folder_name>`
+  * Naviga nella cartella con `cd <folder_name>`
+  * Esegui `npm init -y` o `npm init`
+  * Installa un pacchetto locale come React con `npm install react`
+  * Controlla il file *package.json* e la cartella *node_modules/*
+  * Prova a disinstallare e reinstallare il pacchetto node *react*
+* Leggi su [npm](https://docs.npmjs.com/)
+* Leggi sul gestore di pacchetti [yarn](https://yarnpkg.com/en/docs/)
 
 ## Installazione
 
-Sono diversi gli approcci per iniziare una applicazione React.
+Ci sono molti approcci per iniziare con un'applicazione React. Il primo che esploreremo è una CND, acronimo per
+[content delivery network](https://en.wikipedia.org/wiki/Content_delivery_network). Non preoccuparti troppo delle CDN ora, perché non le useremo in questo libro, ma ha senso spiegarle brevemente. Molte aziende usano CDN per fare l'host di file pubblici per i loro utenti. Alcuni di questi file sono librerie come React, dal momento che la libreria React è un solo file Javascript *react.js*.
 
-La prima è usare CDN. Potrebbe sembrare più complicato di quello che realmente è. CDN è l'acronimo di [content delivery network](https://en.wikipedia.org/wiki/Content_delivery_network). Sono numerose le aziende che utilizzano CDN per rilasciare pubblicamente i propri file e permettere agli utenti di utilizzarli. Questi file possono essere librerie come React, perché in effetti React è solo un file *react.js*. Può quindi essere ospitato su qualunque server.
-
-Come usare un CDN per iniziare a lavorare con React? Attraverso un tag `<script>` inline nella tua pagina HTML che punta all'url CDN. Per iniziare a lavorare con React hai bisogno di ude file (librerie): *react* e *react-dom*.
+Per iniziare con React usando una CDN, trova il tag `<script>` nella pagina web HTML che punta agli url della CDN. Avrai bisogno di due librerie: *react* e *react-dom*.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
-<script crossorigin src="https://unpkg.com/react@16/umd/react.development.js"></script>
-<script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script
+  crossorigin
+  src="https://unpkg.com/react@16/umd/react.development.js"
+></script>
+
+<script
+  crossorigin
+  src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
+></script>
 ~~~~~~~~
 
-Ma perché dovresti usare un CDN quando hai a disposizione una installazione attraverso npm?
-
-Se la tua applicazione ha un file *package.json*, puoi installare *react* e *react-dom* da riga di comando. Il requisito fondamentale è che la cartella debba essere inizializzata come progetto npm utilizzando il comando `npm init -y` con all'interno il file *package.json*. E' possibile installare diversi pacchetti node tutti in una linea attraverso npm.
+Puoi anche ottenere React nella tua applicazione inizializzando la come progetto node. Con un file *package.json* puoi installare *react* e *react-dom* dalla linea di comando. In questo caso dobbiamo inizializzare il progetto con npm usando `npm init -y` per creare il file *package.json*. Adesso puoi installare più pacchetti node con npm:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm install react react-dom
 ~~~~~~~~
 
-Questo approccio è quello più usato per aggiungere React ad una applicazione esistente gestita attraverso npm.
+Questo approccio è usato spesso per aggiungere React ad applicazioni esistenti gestite con npm.
 
-Sfortunatamente non è tutto. Dovresti utilizzare [Babel](http://babeljs.io/) per rendere la tua applicazione idonea a JSX (cioè, la sintassi utilizzata da React) e a JavaScript ES6. Babel compila il tuo codice in modo tale che il browser può interpretare JavaScript ES6 e JSX. Non tutti i browser sono capaci di interpretare la sintassi. Il setup include una serie di configurazioni e di strumenti. Può essere frustrante per chi utilizza per la prima volta React preoccuparsi di tutta la configurazione.
-
-Proprio per questo motivo Facebook intrudusse *create-react-app* come step iniziale per imparare a configurare React. Il capitolo successivo ti mostrerà come fare il setup della tua applicazione utilizzando il tool di bootstrapping.
+Potresti anche dover avere a che fare con [Babel](http://babeljs.io/) per rendere la tua applicazione a conoscenza del JSX (la sintassi di React) e JavaScript ES6. Babel effettua il transpile del tuo codice--vale a dire, lo converte in vanilla JavaScript--così che la maggior parte dei browser moderni possano interpretare JavaScript ES6 e JSX. Per via di questo difficile setup, Facebook ha introdotto *create-react-app* come soluzione React a zero configurazione. La prossima sezione mostrerà come fare il setup della tua applicazione usando un tool di boostrapping.
 
 ### Esercizi:
 
-* leggi sull' [installazione di React](https://reactjs.org/docs/getting-started.html)
+* Leggi sulle [installazioni di React](https://reactjs.org/docs/getting-started.html)
 
-## Zero-Configuration Setup
+## Setup con zero configurazioni
 
-Nel tuo cammino per imparare React, userai [create-react-app](https://github.com/facebookincubator/create-react-app) per far partire la tua applicazione. E' uno starter kit con zero-configurazione per iniziare con React, introdotto da Facebook nel 2016. C'è chi (96%) lo [raccomanda ai principianti](https://twitter.com/dan_abramov/status/806985854099062785). All'interno di *create-react-app* tutto ciò che è configurazione procede in background mentre il focus resta sull'implementazione dell'applicazione.
+In the Road to learn React, noi useremo [create-react-app](https://github.com/facebookincubator/create-react-app) per fare il bootstrap della tua applicazione. È uno starter kit per React opinionated ma a configurazione zero introdotto da Facebook nel 2016, [consigliato ai principianti dal 96% degli utenti React](https://twitter.com/dan_abramov/status/806985854099062785). Con *create-react-app* il tool e la configuazione evolvono in background, mentre il focus è sull'implementazione dell'applicazione.
 
-Per iniziare, devi installare il package globalmente. Dopo aver fatto ciò, avrai sempre a disposizione con riga di comando la possibilità di creare nuove applicazioni React.
+Per iniziare, installa il pacchetto tra i tuoi pacchetti node globali, così da averlo disponibile nella linea di comando per fare il bootstrap di applicazioni React:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm install -g create-react-app
 ~~~~~~~~
 
-Controlla la versione di *create-react-app* da riga di comando:
+Puoi controllare la versione di *create-react-app* per verificare che l'installazione sia avvenuta con successo dalla linea di comando:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 create-react-app --version
-*v1.5.1
+*v2.0.2
 ~~~~~~~~
 
-
-Adesso puoi far partire la tua prima applicazione React. La chiameremo *hackernews*, ma puoi dargli un nome diverso. L'installazione richiede un paio di secondi. Dopo questo step, vai all'interno della cartella:
+Ora sei pronto per iniziare con la tua prima applicazione React. L'esempio verrà chiamato *hackernews*, ma tu puoi scegliere il nome che preferisci. Dopodiché, naviga nella cartella del progetto:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
@@ -179,7 +163,7 @@ create-react-app hackernews
 cd hackernews
 ~~~~~~~~
 
-Adesso puoi aprire l'applicazione nel tuo editor. La seguente struttura di cartelle, o una sua variante dipende dalla versione di *create-react-app* che scaricherai:
+Ora puoi aprire l'applicazione in un editor di testo. Ti dovresti trovare la seguente struttura di directory, o una variante, in base alla versione di *create-react-app*:
 
 {title="Folder Structure",lang="text"}
 ~~~~~~~~
@@ -199,34 +183,31 @@ hackernews/
     index.css
     index.js
     logo.svg
-    registerServiceWorker.js
+    serviceWorker.js
 ~~~~~~~~
 
-Diamo un'occhiata alle cartelle e ai file. E' un passo essenziale per comprendere React.
+Questa è un'analisi dettagliata delle directory e dei file:
 
-* **README.md:** L'estensione .md indica che il file è in markdown. Markdown è un linguaggio di markup molto snello utilizzato per formattare il testo. La maggior parte dei progetti ha al suo interno un file *README.md* con le istruzioni iniziali. Quando fai un *push* su piattaforme come GitHub, il file *README.md* mostrerà il contenuto del progetto a chiunque avrà accesso ail tuo repository. Siccome hai usato *create-react-app*, il tuo file *README.md* dovrebbe essere il medesimo usato sul [repository ufficiale di create-react-app](https://github.com/facebookincubator/create-react-app).
+* **README.md:** L'estensione .md indica che il file è un file di markdown. Il markdown è usato in quanto linguaggio di markup snello con sintassi di formattazione del testo. Il codice di molti progetti contiene un file *README.md* che fornisce le indicazioni principali sul progetto. Quando si mette il proprio progetto su una piattaforma come GitHub, il file *README.md* mostra informazioni circa il contenuto del repository. Siccome abbiamo utilizzato *create-react-app*, il nostro *README.md* dovrebbe essere lo stesso del [repository GitHub ufficiale di create-react-app](https://github.com/facebookincubator/create-react-app).
 
-* **node_modules/:** All'interno di questa cartella troverai tutti i package node che sono stati installati via npm. Dal momento in cui hai usato *create-react-app*, troverai un paio di moduli node installati. Di solito questa è una cartella da non toccare, utile solo per installare e disinstallare package node via riga di comando (con npm).
+* **node_modules/:** Questa cartella contiene tutti i pacchetti node che sono stati installati via npm. Siccome
+abbiamo usato *create-react-app*, dovrebbe contenere già alcuni moduli node installati per noi. Toccheremo raramente questa cartella, visto che i pacchetti node sono generalmente installati e disinstallati dalla linea di comando attraverso npm.
 
-* **package.json:** Questo file mostra una lista di dipendenze dei package node e altre configurazioni legate al progetto.
+* **package.json:** Questo file mostra una lista di pacchetti node utilizzati come dipendenze e altre configurazioni del progetto.
 
-* **yarn.lock:** Di default, se Yarn è installato, create-react-app usa Yarn come package manager. Se non hai Yarn installato allora create-react-app userà npm. Se hai entrambi i package manager installati puoi usare npm passando --use-npm al comando create-react-app, ma non devi preoccuparti di questo file per ora.
+* **.gitignore:** Questo file mostra tutti i file e le directory che non dovrebbero essere aggiunte al repository git; questi dovrebbero essere presenti solo nel progetto locale. La cartella *node_modules/* ne è un esempio. È sufficiente condividere il file *package.json* con altri, così che essi possano installare le dipendenze con `npm install` senza la directory di dipendenze.
 
-* **.gitignore:** Il file elenca tutti i file e cartelle che non dovranno essere aggiunti al repository se usi git. Saranno solo presenti nel tuo progetto locale. La cartella *node_modules/* ne è un esempio. E' sufficiente condividere ilfile *package.json* con i tuoi collaboratori per permettere loro di installare tutte le dipendenze sui loro progetti locali senza condividere la cartella stessa.
+* **public/:** Questa directory contiene file di sviluppo, come *public/index.html*. La index è mostrata all'indirizzo localhost:3000 mentre sviluppi la tua app. Il boilerplate si preoccuperà di fornire questa index con tutti gli script in *src/*.
 
-* **public/:** La cartella contiene i file di sviluppo non JavaScript come *public/index.html*. Questa index è quella visualizzata quando visiti localhost:3000 mentre stai sviluppando la tua applicazione. Il boilerplate si prende cura di inserire in pagina gli script contenuti dentro *src/*.
+* **build/** Questa direcyory è creata quando si effettua il build del progetto, tipicamente per la produzione. Quando si effettua la build del progetto per la produzione, tutti i sorgenti nelle cartelle *src/* e *public/* sono impacchettati e posti nella cartella build.
 
-* **build/** La cartella sarà creata quando viene eseguita la build per l'ambiente di produzione e conterrà tutti i file necessari per quest'ambiente. Il risultato di tutto il tuo codice nelle cartelle *src/* e *public/* finirà dentro alcuni file in questa cartella quando viene fatto il building del progetto in ambiente di produzione.
+* **manifest.json** and **serviceWorker.js:** Questi file non saranno utilizzati per questo progetto, quindi possiamo ignorarli per ora.
 
-* **build/** The folder will be created when building the project for production. It holds all your production files when building your project for production. All your written code in the *src/* and *public/* folders are bundled into a couple of files when building your project and placed in the build folder.
+All'inizio, tutto quello di cui hai bisogno è collocato nella cartella *src/*. Il focus principale è sul file *src/App.js* che è utilizzato per implementare componenti React. Sarà utilizzato per implementare la tua applicazione, ma più tardi potresti voler dividere i tuoi componenti in svariati file, dove ogni file contiene uno o più componenti.
 
-* **manifest.json** e **registerServiceWorker.js:** non preoccuparti di questi file, non ne avremo bisogno nel progetto.
+Inoltre, troverai un file *src/App.test.js* per i test, e un entry point al mondo React in *src/index.js*. Conoscerai più a fondo entrambi i file in capitoli successivi. Ci sono anche i file *src/index.css* e *src/App.css* per stilizzare l'applicazione e i singoli componenti, che attualmente contengono degli stili di default. Modificheremo anche questi più avanti.
 
-In effetti, non hai bisogno di toccare i file e le cartelle menzionate. All'inizo qualsiasi cosa di cui tu abbia bisogno è presente all'interno della cartella *src/*. Il focus è nel file *src/App.js* per implementare i componenti React. Saranno usati per implementare la tua applicazione, ma più in laà potresti aver bisogno di dividere i tuoi componenti in file diversi dove ogni file mantiene uno o più componenti.
-
-In più, utilizzerai il file *src/App.test.js* per i tuoi test e il file *src/index.js* come entry point al mondo React. Comprenderai entrambi i file più in là. Inoltre, c'è il file *src/index.css* e *src/App.css* per gestire lo stile della tua applicazione e dei tuoi componenti. Al loro interno troverai già delle regole di default.
-
-L'applicazione *create-react-app* è un progetto npm. Puoi dunque usare npm per installare e disinstallare i package node nel tuo progetto. La riga di comando è la seguente:
+L'applicazione *create-react-app* è un progetto npm che puoi usare per installare e disinstallare pacchetti node. È fornito con i seguenti script per la linea di comando:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
@@ -240,23 +221,22 @@ npm test
 npm run build
 ~~~~~~~~
 
-Gli script sono definiti nel file *package.json*. La tua applicazione base di React è pronta. I seguenti esercizi di permetteranno finalmente di lanciare la tua applicazione in un browser.
+Gli script sono definiti nel *package.json*, e la nostra applicazione React di prova è pronta. I seguenti esercizi ti permetteranno finalmente di eseguire l'applicazione in un browser.
 
 ### Esercizi:
 
-* `npm start` per avviare la tua apllicazione e vederla nel browser (puoi uscire con il comando Control + C)
-* avvia lo script interattivo `npm test`
-* avvia `npm run build` e controlla che la cartella *build/* sia stata aggiunta al tuo progetto (puoi rimuoverla poi; fa attenzione però perché la cartella sarà utilizzata più tardi per il [deploy](https://www.robinwieruch.de/deploy-applications-digital-ocean/))
-)
-* prendi dimestichezza con la struttura della cartella
-* prendi dimenstichezza con il contenuto dei file
-* approfondisci i comandi [npm e create-react-app](https://github.com/facebookincubator/create-react-app)
+* Lancia l'applicazione con `npm start` e visitala nel browser (fermala digitando Control + C)
+* Lancia lo script `npm test`
+* Lancia lo script `npm run build` e verifica che una cartella *build/* è stata aggiunta al progetto (puoi rimuoverla subito dopo. Ma nota che questa cartella può essere usata successivamente per effettuare il [deploy della tua applicazione](https://www.robinwieruch.de/deploy-applications-digital-ocean/))
+* Prendi familiarità con la struttura delle directory
+* Controlla il contenuto dei file
+* Leggi di più sugli [script npm e create-react-app](https://github.com/facebookincubator/create-react-app)
 
 ## Introduzione a JSX
 
-Adesso ti toccherà sapere di più su JSX, che è la sintassi di React. Come menzionato prima, *create-react-app* ha già di partenza una applicazione pronta per te. Tutti i file sono utili per una implementazione di default. Entriamo nel codice sorgente. L'unico file che toccherai all'inizio sarà *src/App.js*.
+Ora inizieremo a conoscere JSX, la sintassi di React. Come menzionato prima, *create-react-app* ha già effettuato il bootstrap di un'applicazione base per noi, e tutti i file sono forniti con una loro implementazione di default. Per ora, l'unico file che andremo a modificare è *src/App.js*.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 import React, { Component } from 'react';
 import logo from './logo.svg';
@@ -268,11 +248,18 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
+          </p>
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
+          </a>
         </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
       </div>
     );
   }
@@ -281,17 +268,29 @@ class App extends Component {
 export default App;
 ~~~~~~~~
 
-Non lasciarti confondere dalle dichiarazioni import/export e dalle classi. Queste caratteristiche sono già presenti in JavaScript ES6. Gli daremo un'occhiata più tardi.
+Non preoccuparti se ti senti confuso dalle istruzioni di import/export e dalla dichiarazione di class per ora. Queste sono funzionalità di JavaScript ES6 che vedremo in un capitolo successivo.
 
-Nel file avrai un **React ES6 class component** come nome dell'App. E' una dichiarazione di un componente. Di base una volta che hai dichiarato un componente, puoi usarlo ovunque nell'applicazione. Produrrà una **istanza** del tuo **componente** o in altre parole: il componente verrà istanziato.
+Nel file dovresti vedere un **componente React implementato con una classe ES6** dal nome App. È in sostanza la dichiarazione di un componente. Dopo che hai dichiarato un componente, puoi usarlo come un elemento qualsiasi ovunque nell'applicazione. Questo produrrà un'**istanza** del tuo **componente** o, in altre parole, il componente verrà istanziato.
 
-L'**element** viene specificato nel metodo `render()`. Gli elementi sono ciò di cui sono composti i componenti. E' utile comprendere le differenze tra un componente, un'istanza di un componente ed un elemento.
+{title="Code Playground",lang="javascript"}
+~~~~~~~~
+// component declaration
+class App extends Component {
+  ...
+}
 
-Molto presto, vedrai dove la componente App è istanziata. Altrimenti non riusciresti a vedere l'output renderizzato nel browser. La componente App è solo la dichiarazione, non il suo utilizzo. Devi istanziare il componente in qualche punto nel suto JSX con `<App />`.
+// component usage (also called instantiation for a class)
+// creates an instance of the component
+<App />
+~~~~~~~~
 
-Il contenuto nel blocco renderizzato è molto simile ad HTML, ma è JSX. Il JSX ti permette di mixare HTML e JavaScript. E' potente ma può confondere quando sei abituato a separare il tuo contenuto HTML dal JavaScript. Ecco perché è una buona idea usare HTML base nel tuo JSX. Come punto d'inizio apri il file `App.js` e rimuovi tutto l'HTML non necessario come illustrato di seguito.
+L'**elemento** restituito è specificato nel metodo `render()`. I componenti che hai istanziato prima sono fatti da elementi, quindi è importante capire la differenza tra componente, istanza di un componente, ed elemento.
 
-{title="src/App.js",lang=javascript}
+Dovresti vedere dove il componente App è istanziato, altrimenti non dovresti vedere l'output renderizzato nel browser. Il componente App è solo la dichiarazione, ma non l'utilizzo. Puoi istanziare un componente ovunque nel tuo JSX con `<App />`. Vedremo dopo dove questo avviene nella nostra applicazione.
+
+Il contenuto del blocco render potrebbe sembrare simile ad HTML, ma in realtà è JSX. JSX ti permette di mischiare HTML e JavaScript. E' molto potente, ma può essere disorientante quando sei abituato a vedere i due linguaggi separati. È una buona idea iniziare usando HTML di base nel tuo JSX. Apri il file `App.js` e rimuovi tutto il codice HTML non necessario come mostrato:
+
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 import React, { Component } from 'react';
 import './App.css';
@@ -309,9 +308,9 @@ class App extends Component {
 export default App;
 ~~~~~~~~
 
-Adesso restituisci solo HTML nel tuo metodo `render()` senza JavaScript. Definiamo il "Welcome to the Road to learn React" come variabile. Una variabile può essere usata nel tuo JSX usando le parentesi graffe.
+Adesso stiamo restituendo solo HTML nel mostro metodo `render()`, senza nessun JavaScript. Definiamo "Welcome to the Road to learn React" come variabile. Una variabile in JSX si usa tramite parentesi graffe.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 import React, { Component } from 'react';
 import './App.css';
@@ -334,23 +333,21 @@ class App extends Component {
 export default App;
 ~~~~~~~~
 
-Dovrebbe funzionare non appena lanci da riga di comando l'istruzione `npm start`.
+Avvia l'applicazione da linea di comando con `npm start` per verificare i cambiare che abbiamo introdotto.
 
-In più dovresti dare un'occhiata all'attributo `className`. Riflette l'attributo standard `class` nell'HTML. Per ragioni tecniche, JSX doveva sostituire una serie di attributi HTML. Maggiori approfondimenti circa [gli attributi HTML supportati li trovi nella documentazione React](https://reactjs.org/docs/dom-elements.html#all-supported-html-attributes). La convenzione usata è *camelCase*. Nel tuo percorso di apprendimento di React, dovrai tenere in considrazione alcuni attributi specifici JSX.
+Potresti aver notato l'attributo `className`. Si riflette nell'attributo HTML standard `class`. JSX ha sostituito alcuni attributi HTML interni, ma puoi trovare tutti gli [attributi HTML supportati nella documentazione React](https://reactjs.org/docs/dom-elements.html#all-supported-html-attributes), dove tutti seguono la convenzione camelCase. Durante il tuo apprendimento di React aspettati di imbatterti in altri attributi specifici di JSX.
 
 ### Esercizi:
 
-* definisci una serie di variabili e renderizzali nel tuo JSX
-  * usa un oggetto complesso per rappresentare un utente con un nome e cognome
-  * renderizza le proprietà dell'utente nel tuo JSX
-* approfondisci di più su [JSX](https://reactjs.org/docs/introducing-jsx.html)
-* approfondisci di più sui [componenti React, elementi e istanze](https://reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html)
+* Definisci più variabili e renderizzale nel JSX
+  * Utilizza un oggetto complesso per rappresentare un utente con nome e cognome
+  * Renderizza le proprietà dell'utente nel JSX
+* Leggi su [JSX](https://reactjs.org/docs/introducing-jsx.html)
+* Leggi su [componenti React, elementi ed istanze](https://reactjs.org/blog/2015/12/18/react-components-elements-and-instances.html)
 
 ## ES6 const e let
 
-Sono sicuro che tu abbia notato che abbiamo dichiarato la variabile `helloWorld` con una dichiarazione `var`. JavaScript ES6 ha due opzioni in più per dichiarare le tue variabili: `const` e `let`. In JavaScript ES6, raramente troverai l'istruzione `var`.
-
-Una variabile dichiarata con `const` non può essere riassegnata o dichiarata nuovamente. Non può mutare (cambiare, essere modificata). Puoi concepire strutture dati immutabili in questo modo. Una volta che la struttura dei dati è definita, non puoi cambiarla.
+Nota come abbiamo dichiarato la variabile `helloWorld` con la parola chiave `var`. JavaScript ES6 ci fornisce due modi in più per dichiarare variabili: `const` e `let`. In JavaScript ES6, raramente troverai più `var`. Una variabile dichiarata con `const` non può essere riassegnata o ridichiarata, e non può essere cambiata o modificata. Una volta che la variabile è assegnata, non la puoi cambiare:
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -359,7 +356,7 @@ const helloWorld = 'Welcome to the Road to learn React';
 helloWorld = 'Bye Bye React';
 ~~~~~~~~
 
-Una variabile dichiarata con `let` può essere modificata.
+Diversamente, una variabile dichiarata con `let` può essere modificata:
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -368,9 +365,9 @@ let helloWorld = 'Welcome to the Road to learn React';
 helloWorld = 'Bye Bye React';
 ~~~~~~~~
 
-Dichiareresti una variabile con `let` se hai bisogno di riassegnare un valore alla variabile in seguito.
+**CONSIGLIO:** Dichiara le variabili con `let` se pensi che vorrai riassegnarle in seguito.
 
-Ad ogni modo, fai attenzione con `const`. Una variabile dichiarata con `const` non può essere modificata. Ma quando la variabile è un array o un oggetto, il valore può essere aggiornato. Il valore non è immutabile.
+Nota che una variabile dichiarata direttamente con `const` non può essere modificata. Però, quando la variabile è un array o un oggetto, il valore che contiene può essere aggiornato tramite mezzi indiretti:
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -381,14 +378,9 @@ const helloWorld = {
 helloWorld.text = 'Bye Bye React';
 ~~~~~~~~
 
+Ci sono varie opinioni sul quando utilizzare *const* e quando utilizzare *let*. Consiglierei di usare `const` ovunque possibile per mostare l'intento di mantenere la struttura dati immutabile, così rimanga da preoccuparsi solo dei valori contenuti in oggetti ed array. Il concetto di immutability è adottato dall'ecosistema React, quindi `const` dovrebbe essere la scelta di default quando si parla di dichiarare una variabile, sebbene non sia davvero immutabile, ma più assegnare le variabili una sola volta. Questo mostra l'intento di non cambiare (riassegnare) la variabile nonostante il suo contenuto possa essere cambiato.
 
-Ma quando usare una delle due dichiarazioni? Ci sono differenti opinioni a riguardo. Suggerisco di usare `const` ogni volta che puoi. E' indicata quando vuoi mantenere la tua struttura dati immutabile anche se i valori in oggetti o array possono essere modificati. Se vuoi modificare la tua variabile, puoi usare `let`.
-
-L'immutabilità è concepita in React e nel suo ecosistema. Ecco perché `const` dovrebbe essere la scelta di default quando definisci una variabile. Ancora, negli oggetti complessi i valori all'interno possono essere modificati. Fa attenzione a questo comportamento.
-
-Nella tua applicazione dovresti usare `const` al posto di `var`.
-
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 import React, { Component } from 'react';
 import './App.css';
@@ -409,19 +401,21 @@ class App extends Component {
 export default App;
 ~~~~~~~~
 
+Nella nostra applicazione useremo `const` e `let` piuttosto che `var` per il resto del libro.
+
 ### Esercizi:
 
-* dai un'occhiata all'istruzione [ES6 const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)
-* dai un'occhiata all'istruzione [ES6 let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)
-* cerca ulteriori strutture dati immutabili
-  * perchè hanno un senso nella programmazione in generale
-  * perché sono usate in React e nel suo ecosistema
+* Leggi su [ES6 const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)
+* Leggi su [ES6 let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let)
+* Capire le strutture dati immutabili:
+  * Perché hanno senso in programmazione?
+  * Perché sono adottato in React e nel suo ecosistema?
 
 ## ReactDOM
 
-Prima di continuare con il tuo componente App, avrai voglia di vedere dove è utilizzato. E' localizzato nel tuo entry point: il file *src/index.js*.
+Il componente App è utilizzato nel nostro entry point al mondo React: il file *src/index.js*.
 
-{title="src/index.js",lang=javascript}
+{title="src/index.js",lang="javascript"}
 ~~~~~~~~
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -434,15 +428,11 @@ ReactDOM.render(
 );
 ~~~~~~~~
 
+`ReactDOM.render()` usa un nodo del DOM nel tuo HTML da sostituire con del JSX. È un modo per integrare React in una qualsiasi applicazione facilmente, ed è possibile utilizzare `ReactDOM.render()` più volte nell'applicazione. È possibile usare per fare il bootstrap di semplice sintassi JSX, di un componente React, di componenti React multipli, o di un'intera applicazione. In un'applicazione React pura tipicamente è utilizzato solo una volta per fare il bootstrap dell'albero dei componenti.
 
-Di base `ReactDOM.render()` usa un nodo DOM nel tuo HTML per sostituirlo con JSX. Ecco perché puoi integrare facilmente React in qualsiasi applicazione esterna. Non è vietato usare `ReactDOM.render()` diverse volte nella tua applicazione. Puoi usarlo in differenti punti per impostare una semplice sintassi JSX, un component React, multipli componenti React o una intera applicazione. Ma in una applicazione React lo userai solo una volta per impostare il tuo intero "albero" di componenti.
+`ReactDOM.render()` si aspetta due argomenti. Il primo serve a renderizzare il JSX, il secondo specifica il posto dove l'applicazione React si deve agganciare all'HTML, e nel nostro caso si aspetta un elemento con `id='root'` nel file *public/index.html*.
 
-`ReactDOM.render()` accetta due argomenti. Il primo argomento è JSX che attiva la renderizzazione. Il secondo argomento specifica il posto dove l'applicazione React interviene nel tuo HTML. Accetta un elemento con un `id='root'`. Puoi aprire il tuo file *public/index.html* per trovare l'attributo id.
-
-Nell'implementazione `ReactDOM.render()` gestisce già la tua App component.
-Ad ogni modo, è utile passare il più semplice JSX dal momento che è un JSX. Non ha bisogno di istanziare un componente.
-
-{title="Code Playground",lang=javascript}
+{title="Code Playground",lang="javascript"}
 ~~~~~~~~
 ReactDOM.render(
   <h1>Hello React World</h1>,
@@ -450,25 +440,25 @@ ReactDOM.render(
 );
 ~~~~~~~~
 
+Durante l'inizializzazione, `ReactDOM.render()` prende come parametro il componente App, sebbene gli si possa passare anche semplice JSX. Non richiede necessariamente l'istanza di un componente.
+
 ### Esercizi:
 
-* apri *public/index.html* per vedere dove le applicazioni React impattano sul tuo HTML
-*  approfondisci il [rendering degli elementi in React](https://reactjs.org/docs/rendering-elements.html)
+* Apri il file *public/index.html* per vedere dove l'applicazione React si aggancia al tuo HTML
+* Leggi su [renderizzare elementi con React](https://reactjs.org/docs/rendering-elements.html)
 
 ## Hot Module Replacement
 
-L'Hot Module Replacemente (HMR) è una cosa che puoi fare nel file *src/index.js* per migliorare la tua esperienza di sviluppo. Ma è opzionale e potrebbe confonderti all'inizio dell'apprendimento di React.
+L'Hot Module Replacement è un tool che può essere utilizzato nel file *src/index.js* per migliorare la tua esperienza come sviluppatore. Di default, *create-react-app* forzerà il browser a fare il refresh della pagina ogniqualvolta venga fatta una modifica al codice sorgente dell'applicazione. Provalo cambiando il valore della variabile `helloWorld` nel file *src/App.js*, che dovrebbe forzare il browser a refreshare la pagina. Detto questo, c'è un modo migliore di gestire le modifiche al codice durante lo sviluppo.
 
-Di default *create-react-app* farà effettuare automaticamente al browser il refresh della pagina quando cambia il tuo codice sorgente. Prova a cambiare la variabile `helloWorld` nel tuo file *src/App.js*. Il browser dovrebbe fare il refresh della pagina. Ma c'è un modo migliore per fare questo.
+L'Hot Module Replacement (HMR) è un tool per ricaricare la tua applicazione nel browser senza il refresh della pagina. Puoi attivarlo in *create-react-app* aggiungendo la seguente configurazione nel file *src/index.js*:
 
-L'Hot Module Replacement è un tool per ricaricare la tua applicazione nel browser. Il browser non si occupa del refresh della pagina. Invece l'HMR la puoi facilmente attivare in *create-react-app*. Nel tuo file *src/index.js*, devi aggiungere qualche riga di configurazione.
-
-{title="src/index.js",lang=javascript}
+{title="src/index.js",lang="javascript"}
 ~~~~~~~~
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
 import './index.css';
+import App from './App';
 
 ReactDOM.render(
   <App />,
@@ -482,26 +472,24 @@ if (module.hot) {
 # leanpub-end-insert
 ~~~~~~~~
 
-Ecco fatto. Prova ancora una volta a cambiare la variabile `helloWorld` nel tuo file *src/App.js*. Il browser non ricarica la pagina, ma l'applicazione ricarica e mostra il corretto output. HMR ha diversi vantaggi:
+Prova a cambiare ancora il valore della variabile `helloWorld` nel file *src/app.js*. Il browser non dovrebbe effettuare il refresh, ma l'applicazione dovrebbe ricaricare e mostrare l'output corretto. HMR porta moltplici vantaggi:
 
-Immagina di essere alle prese con il debugging del tuo codice e stai utilizzando `console.log()`. Queste dichiarazioni restano nella tua developer console, anche quando cambi il tuo codice, perché il browser non fa il refresh della pagina. Una situazione molto conveniente per il debugging.
+Immagina che stai effettuando il debug del tuo codice con delle istruzioni `console.log()`. Queste istruzioni rimarranno nella tua console da sviluppatore anche quando modificherai il tuo codice, perché il browser non effettuerà più il refresh della pagina. In un'applicazione di dimensioni importanti i refresh delle pagine impattano sulla produttività; HMR rimuove questo ostacolo eliminando l'accumularsi di tempo perso dal browser per ricaricare.
 
-In una applicazione complessa il refresh di una pagina rallenta la tua produttività. Devi attendere fino a quando la pagina non ricaricata. Una pagina in ricaricamento può richiedere diversi secondi in una applicazione complessa. HMR azzera questi svantaggi.
-
-Il più grande beneficio è che puoi mantenere lo stato dell'applicazione con HMR. Immagina di avere un dialogo nella tua applicazione con differenti step e sei al terzo step. Di solito è un wizard. Senza HMR quando cambi il tuo codice, il tuo browser ricarica la pagina e dovrai ripartire dallo step 1 per arrivare allo step 3. Con HMR resti allo step 3. Mantiene lo stato dell'applicazione anche se il codice sorgente cambia. L'applicazione stessa si ricarica, non la pagina.
+Il vantaggio più utile di HMR è che puoi mantenere lo stato dell'applicazione dopo il reload della stessa. Per esempio, immagina di avere una finestra di dialogo o wizard nel tua applicazione formata da più passi, e di essere al passo 3. Senza HMR, quando effettui una modifica al codice il browser refresha la pagina. A questo punto dovresti riaprile la finestra di dialogo e navigare dal passo 1 al passo 3 ogni volta. Con HMR la tua finestra di dialogo rimarrà aperta al punto 3, così che tu possa continuare ad effettuare il debug dall'esatto punto su cui stai lavorando. Con il tempo risparmiato dal caricamento della pagina HMR diventa un prezioso strumento  per gli sviluppatori React.
 
 ### Esercizi:
 
-* cambia il tuo codice sorgente in *src/App.js* un po' di volte per vedere HMR in azione
-* dai un'occhiata ai primi 10 minuti d [Live React: Hot Reloading with Time Travel](https://www.youtube.com/watch?v=xsSnOQynTHs) di Dan Abramov
+* Cambia il codice di *src/App.js* un po' di volte per vedere l'HMR in azione
+* Guarda i primi dieci minuti di [Live React: Hot Reloading with Time Travel](https://www.youtube.com/watch?v=xsSnOQynTHs) di Dan Abramov
 
-## Complex JavaScript in JSX
+## JavaScript complesso nel JSX
 
-Torniamo alla nostra applicazione. Finora renderizzavi le variabili primitive nel tuo JSX. Adesso inizierai a renderizzare una lista di item. La lista sarà composta da semplici dati all'inizio, ma più tardi recupererai i dati da un'[API esterna](https://www.robinwieruch.de/what-is-an-api-javascript/). Questo sarà molto più divertente.
+Finora, hai renderizzato poche variabili primitive nel nostro JSX. Ora renderizzeremo una lista di oggetti. La lista conterrà dati di esempio all'inizio ma più tardi imparerai a fare il fetch di dati da una API esterna.
 
-Prima di tutto definiamo la lista di item.
+Innanzitutto definiamo la lista di oggetti:
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 import React, { Component } from 'react';
 import './App.css';
@@ -532,18 +520,18 @@ class App extends Component {
 }
 ~~~~~~~~
 
-I dati semplici saranno simili ai dati che andremo a recuperare più tardi attraverso l'API. Un item nella lista ha un titolo, un url e un autore. In più avrà un identificativo, punteggio (che indicherà la popolarità dell'articolo) e un conteggio dei commenti.
+Questi dati di esempio rappresentano le informazioni di cui faremo il fetch da un API in seguito. Ogni oggetto in questa lista ha un titolo, un url, un autore, un identificativo, punti (che indicano quanto è popolare un articolo) e un contatore di commenti.
 
-Adesso puoi usare il metodo built-in di JavaScript `map` nel tuo JSX. Ti permette di ciclare la tua lista per mostrare gli item. Inoltre utilizzerai le parentesi graffe per incapsulare l'espressione JavaScript nel tuo JSX.
+Adesso possiamo usare la [funzionalità built-in di JavaScript map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) nel JSX, la quale itera su una lista di oggetti per mostrarne attributi specifici. Usiamo ancora le parentesi graffe per incapsulare espressioni JavaScript nel JSX:
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 class App extends Component {
   render() {
     return (
       <div className="App">
 # leanpub-start-insert
-        {list.map(function (item) {
+        {list.map(function(item) {
           return <div>{item.title}</div>;
         })}
 # leanpub-end-insert
@@ -555,18 +543,29 @@ class App extends Component {
 export default App;
 ~~~~~~~~
 
-Usare JavaScript nell'HTML è molto più efficace nel JSX. Di solito dovresti usare `map` per convertire una lista di item in un'altra lista di item. Questa volta usa `map` per convertire una lista di item in elementi HTML.
+Utilizzare JavaScript assieme all'HTML nel JSX è molto potente. Per un altro compito avresti potuto dover usare `map` per convertire una lista di oggetti in un'altra. Questa volta abbiamo utilizzato `map` per convertire una lista di oggetti in elementi HTML.
 
-Per adesso solo il `title` sarà mostrato per ogni item. Mostriamo qualcosa in più delle proprietà dell'item.
+{title="Code Playground",lang="javascript"}
+~~~~~~~~
+const array = [1, 4, 9, 16];
 
-{title="src/App.js",lang=javascript}
+// pass a function to map
+const newArray = array.map(function (x) { return x * 2; });
+
+console.log(newArray);
+// expected output: Array [2, 8, 18, 32]
+~~~~~~~~
+
+Finora, solamente il `title` è mostrato per ogni oggetto. Sperimento con più di una proprietà dell'oggetto:
+
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 class App extends Component {
   render() {
     return (
       <div className="App">
 # leanpub-start-insert
-        {list.map(function (item) {
+        {list.map(function(item) {
           return (
             <div>
               <span>
@@ -587,13 +586,13 @@ class App extends Component {
 export default App;
 ~~~~~~~~
 
-Puoi notare come il metodo `map` è semplicemente *inlined* nel tuo JSX. Ogni proprietà dell'item è mostrata in un tag `<span>`. Inoltre la proprietà url dell'item è usata nell'attributo `href` dell'anchor tag.
+Nota come la funzione `map` è in ordine nel tuo JSX. Ogni proprietà dell'oggetto è mostrata con un tag `<span>` e la proprietà url dell'oggetto è nell'attributo `href` del tag `<a>`.
 
-React farà tutto il lavoro per te e mostrerà ogni item. Ma puoi aggiungere un helper per React per racchiudere la sua potenzialità e migliorare la sua performance. Devi assegnare un attributo chiave ad ogni elemento della lista. In questo modo React sarà in grado di identificare gli item aggiunti, modificati e rimossi quando la lista cambia. La lista semplice degli item ha già un identificativo.
+React mostrerà ogni oggetto, ma possiamo fare ancora di più per aiutare React a rendere al massimo del suo potenziale. Assegnando un attributo key ad ogni elemento della lista, React può identificare gli oggetti modificati quando la lista cambia. Questi oggetti di esempio hanno un identificativo:
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
-{list.map(function (item) {
+{list.map(function(item) {
   return (
 # leanpub-start-insert
     <div key={item.objectID}>
@@ -609,12 +608,12 @@ React farà tutto il lavoro per te e mostrerà ogni item. Ma puoi aggiungere un 
 })}
 ~~~~~~~~
 
-Dovresti assicurarti che l'attributo chiave sia un identificativo stabile. Non fare l'errore di usare index dell'item nell'array. L'index dell'array non è stabile dopo tutto. Per esempio, quando la lista cambia il suo ordine, React avrà difficoltà a identificare gli item in maniera corretta.
+Assicurati che l'attributo key sia un identificativo stabile. Evita di utilizzare l'indice dell'oggetto nell'array, perché l'indice dell'array non è stabile. Se la lista cambia il suo ordine, per esempio, React non sarà in grado di identificare gli oggetti adeguatamente.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 // don't do this
-{list.map(function (item, key) {
+{list.map(function(item, key) {
   return (
     <div key={key}>
       ...
@@ -623,17 +622,17 @@ Dovresti assicurarti che l'attributo chiave sia un identificativo stabile. Non f
 })}
 ~~~~~~~~
 
-Stai mostrando entrambe le liste adesso. Puoi avviare la tua app, aprire il tuo browser e vedere entrambi gli item della lista.
+Avvia l'app nel browser e dovresti vedere entrambi gli elementi della lista renderizzati.
 
 ### Esercizi:
 
-* Approfondisci sulle [liste React e le chiavi](https://reactjs.org/docs/lists-and-keys.html)
-* fai un ripasso degli [array built-in di JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
-* utilizza più espressioni JavaScript sul tuo stesso JSX
+* Leggi su [liste React e chiavi](https://reactjs.org/docs/lists-and-keys.html)
+* Riassunto delle [funzionalità standard degli array in JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/)
+* Utilizza più espressioni JavaScript nel tuo JSX
 
 ## ES6 Arrow Functions
 
-JavaScript ES6 introdusse i metodi arrow. Un metodo arrow è più breve di una classico metodo.
+JavaScript ES6 ha introdotto le espressioni arrow functions, che sono più concise delle classiche espressioni di funzione.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -644,9 +643,7 @@ function () { ... }
 () => { ... }
 ~~~~~~~~
 
-Ma devi comprendere bene le sue caratteristiche. Una di esse è il differente comportamento dell'oggetto `this`. Un metodo classico definisce sempre il suo oggetto `this`. Un metodo arrow ha l'oggetto `this` nel suo contesto chiuso. Non confondere quando utilizzi `this`  nel metodo arrow.
-
-C'è un'altra questione che riguarda i metodi arrow. E riguarda le parentesi. Puoi rimuovere le parentesi quando il metodo restituisce solo un argomento, ma devi tenerle quando nel restituisce più di uno.
+Puoi rimuovere le parentesi da un'espressione arrow function se ha solo un argomento, ma devi mantenerle se ne multipli:
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -663,9 +660,9 @@ item, key => { ... }
 (item, key) => { ... }
 ~~~~~~~~
 
-Dunque diamo un'occhiata al metodo `map`. Puoi scriverlo in maniera più concisa con un metodo arrow ES6.
+Puoi anche scrivere funzioni `map` più concise con le arrow function di ES6:
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 # leanpub-start-insert
 {list.map(item => {
@@ -683,9 +680,9 @@ Dunque diamo un'occhiata al metodo `map`. Puoi scriverlo in maniera più concisa
 })}
 ~~~~~~~~
 
-In più, puoi rimuovere il *block body*, cioè le parentesi graffe del metodo arrow ES6. In un *concise body* un implicito return è incluso. Quindi puoi rimuovere l'istruzione `return`. Questo accadrà diverse volte nel libro, quindi assicurati di comprendere la differenza tra un *block body* e un *concise body* quando usi i metodi arrow.
+Puoi rimuovere il *corpo della funzione*, le parentesi graffe, con le arrow function di ES6. In un *corpo conciso* è aggiunto un return implicito; dunque, puoi rimuovere il `return`. Questo succederà spesso in questo libro, quindi assicurati di capire la differenza tra un corpo della funzione e uno conciso usando le arrow function.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 # leanpub-start-insert
 {list.map(item =>
@@ -703,19 +700,19 @@ In più, puoi rimuovere il *block body*, cioè le parentesi graffe del metodo ar
 # leanpub-end-insert
 ~~~~~~~~
 
-Il tuo JSX sembra più conciso e leggibile adesso. E stata omessa l'istruzione `function`, le parentesi graffe e il l'istruzione return. Perché uno sviluppatore deve concentrarsi sull'implementazione dei dettagli.
+Il tuo JSX dovrebbe apparire più conciso e leggibile adesso, con l'omissione dell'istruzione `function`, le parentesi graffe, e l'istruzione return.
 
 ### Esercizi:
 
-* dai un'occhiata ai [metodi arrow ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+* Leggi su [arrow function ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
 
-## Le classi ES6
+## Classi ES6
 
-JavaScript ES6 introdusse le classi. Una classe è comunemente usata nella programmazione object-oriented (orientata agli oggetti). JavaScript era ed è molto flessibile nei suoi paradigmi di programmazione. Puoi lavorare con la programmazione funzionale e object-oriented a seconda dei casi.
+JavaScript ES6 ha introdotto le classi, che sono usate comunemente nei linguaggi di programmazioen orientati agli oggetti. JavaScript, sempre flessibile nei suoi paradigmi di programmazione, permette alla programmazione funzionale e a quella orientata agli oggetti di funzionare fianco a fianco.
 
-Anche se React predilige la programmazione funzionale, per esempio con le strutture dati immutabili, le classi sono usate per dichiarare i componenti. Sono chiamate ES6 *class components*. React miscela le parti buone di entrambi i paradigmi.
+Mentre React abbraccia la programmazione funzionale, es. strutture dati immutabili e composione di funzioni, le classi sono utilizzate per dichiarare componenti ES6. React mischia le parti buone di entrambi i paradigmi di programmazione.
 
-Consideriamo la segunete classe per esaminare una classe JavaScript ES6 senza pensare ad un componente.
+Considera la seguente classe Developer per esaminare una classe JavaScript ES6 che non sia un componente.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -731,12 +728,9 @@ class Developer {
 }
 ~~~~~~~~
 
+Una classe ha un costruttore per renderla instanziabile. Il costruttore prendere argomenti e li assegna all'istanza della classe. Una classe può definire funzioni. Poiché la funzione è associata alla classe, è chiamata metodo, o metodo di classe.
 
-Una classe ha un costruttore per renderla istanziabile. Il costruttore può prendere argomenti per assegnarli alla classe istanziata. Inoltre una classe può avere al suo interno metodi.
-
-La classe Developer è solo una dichiarazione di classe. Puoi creare multiple istanze della classe invocandola. E' simile alla *class component*, che ha una dichiarazione, ma puoi usarla ovunque.
-
-Vediamo come puoi istanziare la classe e come usare i suoi methodi.
+La classe Developer è solo la dichiarazione della classe che usiamo qui, poiché puoi creare più istanze di una classe invocandola. È simile ai componenti dichiarati tramite classe ES6, che hanno una dichiarazione, ma va utilizzata altrove per istanziarla:
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -745,9 +739,9 @@ console.log(robin.getName());
 // output: Robin Wieruch
 ~~~~~~~~
 
-React usa le classi JavaScript ES6 per le *class component*. Eccone una.
+React utilizza classi JavaScript ES6 per creare componenti, che hai già visto almeno una volta fino a qui:
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 import React, { Component } from 'react';
 
@@ -760,38 +754,33 @@ class App extends Component {
 }
 ~~~~~~~~
 
-La classe App estende `Component`. Di base dichiari il component App, ma è l'estensione di un altro componente. Cosa significa estendere? Nella programmazione object-oriented affronterai il principio dell'ereditarietà. E' usata per passare funzionalità da una classe ad un'altra.
+Quando dichiari il componente App viene esteso da un altro componente. Nella programmazione orientata agli oggetti, il termine "estendere" si riferisce al principio di ereditarietà, che significa quella funzionalità può essere passata da una classe ad un'altra. La classe App estende la classe Component, il che significa eredita le funzionalità dalla classe Component. La classe Component è utilizata per estendere classi basiche ES6 in classi Component ES6. Ha quindi tutti le funzionalità di cui un componente in React ha bisogno. Il metodo rendere è un funzione che hai già utilizzato. Imparerai altri metodi della classe Component più avanti.
 
-La classe App estende le funzionalità da una classe Component. Per essere più specifico, eredità le funzionalità della classe Component. La classe Component è usata per estendere una classe basic ES6 in una *component class* ES6. Ha anche tutte le funzionalità che un component React deve avere. Il metodo render è una di queste funzionalità che tu già usi. Imparerai altro sui metodi delle *class component* più tardi.
+La classe `Component` incapsula tutti i dettagli implementative di un componente React, il che permette agli sviluppatori di usare le classi come componenti in React.
 
-La classe `Component` incapsula tutti i dettagli di implementazione di un componente React. Permette agli sviluppatori di usare classi come componenti in React.
-
-I metodi che espone un `Component` React sono rappresentati da un'interfaccia pubblica. Uno di questi metodi è sovrascritto, gli altri non hanno bisogno di essere sovrascritti. Imparerai questi ultimi quando il libro parlerà del ciclo di vita dei metodi in un capitolo. Il metodo `render()` sarà sovrascritto, perché definisce l'output di un `Component` React.
-
-Adesso sei a conoscenza delle classi JavaScript ES6 e come sono utilizzate all'interno di React per estenderle ai componenti.
+I metodi esposti da un `Component` React sono la sua interfaccia pubblica. Uno di questi metodi deve essere ridefinito, mentre gli altri non ne hanno bisogno. Imparerai queste cose quando discuteremo i metodi di lifecycle più avanti. Il metodo `render()` deve essere ridefinito, perché definisce l'output di un `Component` React, quindi è necessario. Queste sono le basi delle classi ES6 di JavaScript, e come sono utilizzate in React per estenderle ai componenti.
 
 ### Esercizi:
 
-* dai un'occhiata alle [classi ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes)
-* dai un'occhiata ai [fondamenti di JavaScript prima di imparare React](https://www.robinwieruch.de/javascript-fundamentals-react-requirements/)
+* Leggi su [basi di JavaScript prima di imparare React](https://www.robinwieruch.de/javascript-fundamentals-react-requirements/)
+* Leggi su [classi ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes)
 
 {pagebreak}
 
-Devi padroneggiare le basi di una applicazione React! Riassumiamo l'ultimo capitolo:
+Congratulazioni, hai imparato come si fa il bootstrap della tua prima applicazione React! Ricapitoliamo:
 
-* React
-  * fai partire una applicazione React create-react-app
-  * JSX miscela HTML e JavaScript per definire l'output dei componenti React nei loro metodi render
-  * componenti, istanze ed elementi sono cose differenti in React
-  * `ReactDOM.render()` è un entry point per un'applicazione React per agganciare React al DOM
-  * le funzionalità built-in di JavaScript possono essere usate nel JSX
-    * map può essere usato per renderizzare una lista di item come elementi HTML
-* ES6
-  * le variabili `const` e `let` possono essere utilizzate per casi d'uso specifici
-    * usa *const* al posto di *let* nelle applicazioni React
-  *  i metodi arrow possono essere usati per tenere le tue funzioni concise
-  *  le classi sono usate per definire i componenti in React estendendoli
+* **React**
+  * Create-react-app fa il bootstrap di un'applicazione React
+  * JSX mischia HTML e JavaScript per definire l'output di componenti React nei loro metodi render
+  * Componenti, instanze e elementi sono cose differenti in React
+  * `ReactDOM.render()` è l'entry point di un'applicazione React per agganciarsi a React nel DOM
+  * Funzionalità built-in di JavaScript possono essere usate nel JSX
+  * Map può essere usato per renderizzare una lista di oggi come elementi HTML
+* **ES6**
+  * Dichiarazioni di variabile con `const` e `let` possono essere usate per use case specifiche
+  * Il maggior utilizzo di const su let in applicazioni React
+  * Le arrow functions possono essere usate per mantenere le proprie funzioni concise
+  * Le classi sono usate per definire componenti in React estendendoli
 
-Ha senso prendere una pausa in questo momento. Ripassa con la mente quanto hai appreso. Puoi sperimentare con il codice sorgente scritto. Puoi trovare il codice sorgente nel [repository ufficiale](https://github.com/the-road-to-learn-react/hackernews-client/tree/5.1).
-
-Puoi trovare il codice sorgente nel [repository ufficiale](https://github.com/rwieruch/hackernews-client/tree/4.1).
+Ora che hai completato il primo capitolo, è consigliabile sperimentare con il codice sorgente scritto fin qui e capire quali modifiche puoi apportare per conto tuo. Puoi trovare i sorgenti nel
+[repository ufficiale](https://github.com/the-road-to-learn-react/hackernews-client/tree/5.1).
