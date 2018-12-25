@@ -1,22 +1,20 @@
 # Componenti React avanzati
 
-Questo capitolo si concentra sull'implementazione di componenti React avanzati. Imparerai cosa sono i componenti di ordine superiore (higher order components, anche abbreviato HOC) e come implementarli. Inoltre ci immergeremo in argomenti avanzati di React e implementeremo interazioni complesse tra le parti.
+Questo capitolo è dedicato all'implementazione di componenti React più avanzati. Imparerai come implementare componenti di ordine superiore (higher-order components) e approfondiremo argomenti più avanzati di React.
 
-## Ref su un elemento del DOM
+## Accedere ad un elemento del DOM
 
-A volte hai bisogno di interagire con i nodi del DOM in React. L'attributo `ref` ti dà accesso ai nodi dei tuoi elementi. Di solito questo è considerato un anti pattern in React perché dovresti usare il suo modo dichiarativo e il passaggio unidirezionale dei dati per fare le cose. Hai imparato queste cose quando abbiamo introdotto il tuo primo campo di ricerca. Ma ci sono certi casi dove hai bisogno di avere accesso al nodo del DOM. La documentazione ufficiale cita tre casi:
+Alcune volte capita di aver bisogno di interagire con dei nodi del DOM in React. L'attributo `ref` offre l'accesso al nodo dei tuoi elementi. Questo è solitamente un anti pattern in React, poiché dovremmo usare la sua modalità dichiarativa per svolgere il lavoro e sfuttare il suo unidirectional data flow, ne abbiamo parlato quando abbiamo introdotto il primo campo di input per la ricerca, ma ci sono casi dove si ha bisogno di accedere ad un nodo del DOM. La documentazione ufficiale ne menziona tre:
 
-* per usare l'API del DOM (focus, riproduzione di media ecc.)
-* per innescare animazioni del DOM
-* per integrarsi con librerie di terze parti che hanno bisogno di nodi del DOM (esempio [D3.js](https://d3js.org/))
+* usare l'API del DOM (focus, media playback ecc.)
+* Invocare in modo imperativo animazioni di nodi del DOM
+* Integrarsi con librerie di terze parti che hanno bisogno del nodo del DOM (es. [D3.js](https://d3js.org/))
 
-Facciamo un esempio con il componente Search. QUando l'applicazione viene renderizzata la prima volta, il campo di input dovrebbe avere il focus. Questo è un caso d'uso dove avresti bisogno di accedere all'API del DOM. Questo capitolo ti mostrerà come funziona, ma siccome non è molto utile nel complesso dell'applicazione, ometteremo queste modifiche nei capitoli seguenti. Puoi mantenerli comunque nella tua applicazione.
+Useremo il componente Search come esempio. Quando l'applicazione si renderizza per la prima volta, il campo di input dovrebbe avere il focus. Questo è uno dei casi dove abbiamo bisogno di accedere all'API del DOM. L'attributo `ref` può essere usato sia in componenti funzionali privi di stato sia in componenti implementati tramite classi ES6. In questo esempio avremo bisogno di un metodo di lifecycle, quindi l'approccio è mostrato usando l'attributo `ref` in un componente implementato come classe ES6.
 
-In generale, puoi usare l'attributo `ref` sia in componenti funzionali privi di stato sia in componenti realizzati con classi ES6. Nell'esempio del focus avremo bisogno di un metodo di lifecycle, per questo l'approccio di questo primo caso è realizzato usando l'attributo `ref` con un componente che è una classe ES6.
+Lo step iniziale è rifattorizzare il componente funzionale privo di stato in un componente come classe ES6.
 
-Il primo passaggio è refattorizzare il componente funzionale stateless in un componente tramite class ES6.
-
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 # leanpub-start-insert
 class Search extends Component {
@@ -47,9 +45,9 @@ class Search extends Component {
 # leanpub-end-insert
 ~~~~~~~~
 
-L'oggetto `this` di un componente in una classe ES6 ci aiuta a referenziare un elemento del DOM con l'attributo `ref`.
+L'oggetto `this` di una classe ES6 ci aiuta a referenziare l'elemento del DOM con l'attributo `ref`.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 class Search extends Component {
   render() {
@@ -79,9 +77,9 @@ class Search extends Component {
 }
 ~~~~~~~~
 
-Ora possiamo dare il focus al campo di testo quando il componente è inserito nel DOM usando l'oggetto `this`, il metodo di lifecycle appropriato, e le API del DOM.
+Ora possiamo dare il focus al campo di input quando il componente è caricato usando l'oggetto `this`, il metodo di lifecycle appropriato e l'API del DOM.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 class Search extends Component {
 # leanpub-start-insert
@@ -117,11 +115,9 @@ class Search extends Component {
 }
 ~~~~~~~~
 
-Il campo di testo dovrebbe ora avere il focus quando l'applicazione viene renderizzata. Questo è praticamente tutto per quanto riguarda l'attributo `ref`.
+Il campo di input dovrebbe avere il focus quando l'applicazione è renderizzata. Accediamo al `ref` in un componente funzionale privo di stato senza l'oggetto `this` usando la seguente modalità:
 
-Ma come possiamo accedere a `ref` in un componente funzionale stateless considerata l'assenza dell'oggetto `this`? Il seguente componente privo di stato lo ne è un esempio.
-
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 const Search = ({
   value,
@@ -150,26 +146,26 @@ const Search = ({
 }
 ~~~~~~~~
 
-Ora dovresti essere in grado di accedere all'elemento di input del dom. Nell'esempio del caso d'uso del focus questo non ti avrebbe aiutato, considerata l'assenza, nei componenti stateless, di metodi di lifecycle per effettuare il trigger del focus. Ma in futuro potresti imbatterti in altri casi dove ha senso usare un componente funzionale stateless con l'attribute `ref`.
+Adesso possiamo accedere all'input dell'elemento del DOM. In questo caso non aiuterebbe molto siccome non abbiamo un metodo di lifecycle in un componente funzionale dove innescare il focus. Quindi non andremo ad utilizzare la variabile input qui. In futuro però potresti incontrare casi dove ha senso usare un componente funzionale con un attributo `ref`.
 
 ### Esercizi
 
-* leggi di più su [l'utilizzo dell'attributo ref in React](https://www.robinwieruch.de/react-ref-attribute-dom-node/)
-* leggi di più su [l'attributo ref in generale in React](https://reactjs.org/docs/refs-and-the-dom.html)
+* Leggi sull'[uso dell'attributo ref in React](https://www.robinwieruch.de/react-ref-attribute-dom-node/)
+* Leggi sull'[attributo ref in generale in React](https://reactjs.org/docs/refs-and-the-dom.html)
 
 ## Caricamento ...
 
-Ora torniamo alla nostra applicazione. Potresti voler aggiungere un indicatore di caricamento quando viene eseguita una richiesta di ricerca alle API di Hacker News. La richiesta è asincrona e dovrebbe dare all'utente un feedback del fatto che qualcosa sta accadendo. Definiamo un componente Loading riusabile in un file *src/App.js*.
+Adesso torniamo alla nostra applicazione, dove mostreremo un indicatore di caricamento quando viene effettuata una ricerca all'API di Hacker News. La richiesta è asincrona quindi dovremmo mostrare un feedback all'utente che qualcosa sta succedendo. Definiamo un componente Loading riusabile nel file *src/App.js*.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 const Loading = () =>
   <div>Loading ...</div>
 ~~~~~~~~
 
-Ora avremo bisogno di una proprietà per salvare lo stato del caricamento. In base al caricamento nello stato possiamo decidere di mostrare il componente Loading.
+Adesso avremo bisogno di una proprietà dove salvare lo stato di loading. In base allo stato di loading decideremo se mostrare il componente.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 class App extends Component {
   _isMounted = false;
@@ -195,11 +191,9 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Il valore iniziale della proprietà `isLoading` è false. Non vogliamo caricare niente prima che il componente App è eseguito.
+Il valore iniziale della proprietà `isLoading` è false. Non carichiamo niente prima che il componente App sia montato. Quando viene effettuata la richiesta lo stato loading è settato a true. Quando la richiesta sarà stata gestita potremo risettare lo stato loading a false.
 
-Quando la richiesta è eseguita, possiamo settare la proprietà a true. Quando la richiesta andrà a buon fine possiamo settare la proprietà nuovamente a false.
-
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 class App extends Component {
 
@@ -234,9 +228,9 @@ class App extends Component {
 }
 ~~~~~~~~
 
-In quest'ultimo passaggio useremo il componente Loading nel nostro componente App. Un controllo è eseguito prima di decidere se mostrare il componente Loading o il componente Button (conditional rendering). Quest'ultimo è il bottone che permette di recuperare più dati.
+Nell'ultimo step usiamo il componente Loading nel componente App. Un rendering condizionale sullo stato di loading deciderà se mostrare il componente Loading o il componente Button. Quest'ultimo è il bottone per cercare altri dati.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 class App extends Component {
 
@@ -263,7 +257,8 @@ class App extends Component {
           { isLoading
             ? <Loading />
             : <Button
-              onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}>
+                onClick={() => this.fetchSearchTopStories(searchKey, page + 1)}
+              >
               More
             </Button>
           }
@@ -275,21 +270,21 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Inizialmente il componente Loading sarà mostrato quando eseguiremo la nostra applicazione perché eseguiamo la nostra richiesta nel metodo `componentDidMount()`. Non c'è il componente Table, perché la lista di risulta è ancora vuota. Quando riceviamo la risposta dall'API di Hacker News, il risultato viene mostrato, la proprietà `isLoading` è settata a false e il componente Loading scompare. Di conseguenza il bottone "More" per caricare più dati compare. Se viene eseguita una richiesta per caricare più dati, il bottone scompare nuovamente e il componente Loading è mostrato.
+Inizialmente il componente Loading verrà mostrato quando l'applicazione viene eseguita, poiché facciamo una richeista nel metodo `componentDidMount()`. Non c'è componente Table, poiché la lista è vuota. Quando si ottiene la risposta dall'API di Hacker News, il risultato è mostrato, lo stato loading è settato a false e il componente Loading sparisce. Il bottone "More" per cercare altri dati appare, se si ricerca altro il bottone sparirà di nuovo e il componente Loading farà la sua comparsa.
 
 ### Esercizi:
 
-* utilizza una libreria come [Font Awesome](https://fontawesome.io/) per mostrare un'icona di caricamento invece del testo "Loading ..."
+* Usa una libreria come [Font Awesome](https://fontawesome.com/) per mostrare un'icona di caricamento invece del testo "Loading ..."
 
-## Componenti di ordine superiore (HOC)
+## Componenti di ordine superiore
 
-I componenti di ordine superiore (higher order components, HOC) sono un concetto avanzato di React. Gli HOC sono un equivalente delle funzioni di ordine superiore. Prendono dell'input - la maggior parte delle volte un componente, ma anche parametri opzionali - e restituiscono un componente come output. Il componente restituito è una versione con più funzionalità del componente in input e può essere usato nel tuo JSX.
+I componenti di ordine superiore (higher-order components, HOC) sono un argomento avanzato di React. Sono una specie di equivalente delle funzioni di ordine superiore. Questi prendono un input, di solito un componente, ma anche argomenti opzionali, e restituiscono un componente in output. Il componente restituito è un versione arricchita di funzionalità del componente di input, che può essere usato nel JSX.
 
-Gli HOC hanno diversi casi d'uso. Possono prepare delle proprietà, gestire lo stato o alterare la rappresentazione di un componente. Un caso d'uso potrebbe essere quello di usare un HOC come helper per del conditional rendering. Immagina di avere un componente List che renderizza una lista di oggetti o niente, perché la lista è vuota o null. Il HOC può occuparsi del caso in cui la lista non renderizzerebbe niente perché non presente. Dopotutto, il semplice componente List non dovrebbe occuparsi anche del caso in cui la lista non è presente. Così si preoccupa solo di renerizzare la lista.
+Gli HOC sono usati in diversi casi. Possono preparare proprietà, gestire stati, alterare la rappresentazione di un componente. Una use case è quella di usare gli HOC come helper per del conditional rendering. Immagina di avere una componente List che renderizza una lista di oggetti o nulla se la lista è vuota o nulla. L'HOC potrebbe mascherare il non renderizzare niente quando non c'è una lista. D'altra parte il componente List semplice (non HOC) non ha più bisogno di fare controlli su una lista non esistente e si preoccuperà quindi solo di renderizzare una lista.
 
-Implementiamo un semplice HOC che prendere in input un componente e restituisce un altro componente. Puoi metterlo nel file *src/App.js*.
+Implementiamo un semplice HOC che prende in input un componente e restituisce un componente. Possiamo metterlo sempre nel file *src/App.js*.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 function withFoo(Component) {
   return function(props) {
@@ -298,17 +293,17 @@ function withFoo(Component) {
 }
 ~~~~~~~~
 
-Una convenzione diffusa è quella di mettere un prefisso `with` al nome dell'HOC. Siccome stai usando JavaScript ES6, puoi implementare lo stesso HOC in modo più conciso con una arrow function in ES6.
+Un'utile convezione consiste nel mettere un prefisso `with` ai componenti di ordine superiore. Siccome stiamo usando JavaScript ES6 possiamo esprimere meglio l'HOC con una arrow function di ES6.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
-const withFoo = (Component) => (props) =>
+const withEnhancement = (Component) => (props) =>
   <Component { ...props } />
 ~~~~~~~~
 
-Nell'esempio, il componente di input resta uguale al componente di output. Non succede niente di interessante. Renderizza l'istanza dello stesso componente e passa tutte le props al componente in output. Ma questo è inutile. Aggiungiamo delle funzionalità al componente di output. Il componente di output dovrebbe mostrare il componente Loading, quando la property loading è true, altrimenti mostrare il componente in input. Un conditional rendering è un'ottima use case per un HOC.
+Nel nostro esempio il componente di input rimane come componente di output, quindi non succede niente. Il componente di output potrebbe mostrare il componente Loading quando lo stato loading è true, altrimenti mostrare il componente di input. Un rendering condizionale è un ottimo caso d'uso per un HOC.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 # leanpub-start-insert
 const withLoading = (Component) => (props) =>
@@ -318,23 +313,21 @@ const withLoading = (Component) => (props) =>
 # leanpub-end-insert
 ~~~~~~~~
 
-In base alla proprietà loading possiamo applicare il conditional rendering. La funzione restituirà il componente Loading o il componente in input.
-
-In generale può essere molto efficiente fare lo spread di un oggetto, come le proprietà dell'oggetto nell'esempio precedente, come input di un componente. Guardiamo la differenza con il seguente frammento di codice.
+In base alla proprietà loading possiamo applicare un conditional rendering. La funzione restituirà il componente Loading o il componente di input. In generale, può essere molto efficiente effettuare lo spread di un oggetto come l'oggetto props nell'esempio precedente in input ad un componente. Vediamo la differenza nel seguente codice:
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
 // before you would have to destructure the props before passing them
-const { foo, bar } = props;
-<SomeComponent foo={foo} bar={bar} />
+const { firstname, lastname } = props;
+<UserProfile firstname={firstname} lastname={lastname} />
 
 // but you can use the object spread operator to pass all object properties
-<SomeComponent { ...props } />
+<UserProfile { ...props } />
 ~~~~~~~~
 
-C'è un piccolo dettaglio che possiamo evitare. Abbiamo passato tutte le proprietà inclusa la proprietà `isLoading`, facendo lo spread dell'oggetto, dentro al componente di input. Tuttavia, al componente di input potrebbe non interessare più la proprietà `isLoading`. Possiamo usare il rest destructuring per evitarlo.
+Abbiamo passato tutte le props inclusa la proprietà `isLoading` facendo lo spreading dell'oggetto come input del componente. Al componente di output potrebbe non interessare della proprietà `isLoading`. Possiamo usare la funzionalità di rest destructuring di ES6 per evitarlo:
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 # leanpub-start-insert
 const withLoading = (Component) => ({ isLoading, ...rest }) =>
@@ -344,11 +337,11 @@ const withLoading = (Component) => ({ isLoading, ...rest }) =>
 # leanpub-end-insert
 ~~~~~~~~
 
-Estrae una proprietà dall'oggetto ma mantiene il resto dell'oggetto. Funziona anche con proprietà multiple. Potresti aver già letto a riguardo nel [compito sul destructuring](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
+Questo estrare una proprietà dall'oggetto ma mantiene le restanti, e funziona anche con più di una proprietà. Puoi leggerne di più sul [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) di Mozilla.
 
-Ora puoi usare l'HOC nel tuo JSX. Un altro caso d'uso nella nostra applicazione potrebbe essere quello di mostrare il bottone "More" o il componente Loading. Il componente Loading è già incapsulato in un HOC ma un componente di input non c'è. Nell'esempio di mostrare un componente Button o un componente Loading, il Button è il componente in input all'HOC. Il componente in output, arricchito di funzionalità, è il componente ButtonWithLoading.
+Ora possiamo usare l'HOC nel JSX. Magari vuoi mostrare o il bottone "More" o il componente Loading. Il componente Loading è già racchiuso nell'HOC, ma manca un componente di input. Per mostrare o un componente Button o un componente Loading il Button sarà il componente di input dell'HOC. Il componente di output arricchito di funzionalità sarà il componente ButtonWithLoading.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 const Button = ({
   onClick,
@@ -376,9 +369,9 @@ const ButtonWithLoading = withLoading(Button);
 # leanpub-end-insert
 ~~~~~~~~
 
-Tutto è definito ora. Come ultimo passaggio dobbiamo utilizzare il componente ButtonWithLoading, che riceve la proprietà loading come proprietà addizionale. Mentre il HOC fa uso della proprietà loading, tutte le altre proprietà vengono passate al componente Button.
+Adesso abbiamo definito tutto. Come ultima cosa non ci rimane che usare il componente ButtonWithLoading, che riceve lo stato loading come proprietà addizionale. Mentre l'HOC utilizza la proprietà loading, tutte le altre props sono passate al componente Button.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 class App extends Component {
 
@@ -405,7 +398,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Se esegui nuovamente i test, noterai che lo snapshot test per il componente App fallisce. La differenza potrebbe apparire la seguente nel terminale:
+Nota che se esegui nuovamente i test lo snapshot test per il componente App fallirà. La differenza sarà qualcosa del genere nella riga di comando:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
@@ -421,34 +414,31 @@ Se esegui nuovamente i test, noterai che lo snapshot test per il componente App 
 +    </div>
 ~~~~~~~~
 
-Puoi o sistmare subito il componente, quando pensi che c'è qualcosa di sbagliato, o accettare la sua nuova snapshot generata. Poiché abbiamo introdotto il componente Loading in questo capitolo, potresti accettare le modifiche alla snapshot nella riga di comando del test interattivo.
+Puoi o sistemare subito il componente, quando pensi che abbia qualcosa che non va, o accettare la sua nuova snapshot. Poiché abbiamo appena introdotto il componente Loading accetteremo le modifiche alla snapshot dalla riga di comando nel test interattivo.
 
-I componenti di ordine superiore sono una tecnica avanzata in React. Hanno molti scopi come migliorare la reusabilità dei componenti, migliorare le astrazioni, l'interazione tra i componenti e la manipolazione di proprietà, stato e viste. Non preoccuparti se non li capisci immediatamente, richiedono tempo per assimilarli.
-
-Ti invito a leggere [gentle introduction to higher order components](https://www.robinwieruch.de/gentle-introduction-higher-order-components/). Ti offre un altro approccio per impararli, mostra un modo elegante per usarli nella programmazione funzionale e risolve specificatamente il problema del conditional rendering con componenti di ordine superiore.
+Gli higher-order components sono un pattern avanzato di React. Questi hanno molti scopi: migliorare la riusabilità dei componenti, migliorare le astrazioni, favorire la composability dei componenti, e la manipolazione di props, stato e vista. Ti suggerisco di leggere questa [leggera introduzione ai componenti di ordine superiore](https://www.robinwieruch.de/gentle-introduction-higher-order-components/), che ti darà un altro approccio per impararli, ti mostrerà un modo elegante per usarli con la programmazione funzionale.
 
 ### Esercizi:
 
-* leggi [a gentle introduction to higher order components](https://www.robinwieruch.de/gentle-introduction-higher-order-components/)
-* sperimenta con gli HOC che hai creato
-* pensa a un altro caso in cui un HOC avrebbe senso
-  * implementa il HOC, se hai trovato un caso
+* Leggere questa [leggera introduzione ai componenti di ordine superiore](https://www.robinwieruch.de/gentle-introduction-higher-order-components/)
+* Sperimenta con gli HOC che abbiamo creato
+* Pensa ad un altro caso in cui un HOC avrebbe senso
+  * Implementa l'HOC in questione
 
 ## Ordinamento avanzato
 
-Hai già implementato un'interazione tra client e server. Siccome hai un componente Table, avrebbe senso arricchire il componente Table con interazioni avanzate. E se introducessimo una funzionalità di ordinamento su ogni colonna, usando gli header di colonna di Table?
+Abbiamo precedentemente implementato l'interazione di una ricerca client e server side. Dal momento che abbiamo un componente Table, avrebbe senso arricchirlo con altre interazioni avanzate. Con la prossima introdurremo una funzionalità di ordinamento per ogni colonna usando gli header delle colonne del componente Table.
 
-Sarebbe possibile scrivere la propria funzione di ordinamento ma personalmente preferisco usare una libreria per questi casi.
-[Lodash](https://lodash.com/) è una di queste librerie di utilità ma puoi usare quella che preferisci. Installiamo lodash e usiamola per la funzionalità di ordinamento.
+È possibile scriversi da soli le funzioni di ordinamento ma qui preferiremo usare una libreria di utilità come [Lodash](https://lodash.com/) per questi casi. Ci sono altre opzioni ma noi installeremo Lodash per la nostra funzione di sorting:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm install lodash
 ~~~~~~~~
 
-Ora puoi importare la funzionalità di ordinamento di Lodash nel tuo file *src/App.js*.
+Adesso importiamo la funzionalità di sorting di Lodash nel file *src/App.js*:
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 import React, { Component } from 'react';
 import axios from 'axios';
@@ -458,9 +448,9 @@ import { sortBy } from 'lodash';
 import './App.css';
 ~~~~~~~~
 
-Abbiamo diverse colonne in Table. Ci sono le colonne titolo, autore, commenti e punti. Possiamo definire funzioni di ordinamento dove ogni funzione prendere una lista e restituisce una lista di oggetti ordinati per quella specifica proprietà. Inoltre, avremo bisogno di una funzione di ordinamento di default, che non ordina niente ma restituisce la lista non ordinata. Quello sarà il nostro stato iniziale.
+Attualmente abbiamo svariate colonne in Table: titolo, autore, numero di commenti e punti. Possiamo definire funzioni di ordinamento dove ognuna prende una lista e restituisce una lista di oggetti ordinati da una specifica proprietà. Inoltre, avremo bisogno anche di una funzione di ordinamento di default che non ordina davvero, ma restituisce la lista non ordinata. Questa sarà il nostro stato iniziale.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 ...
 
@@ -480,13 +470,13 @@ class App extends Component {
 ...
 ~~~~~~~~
 
-Puoi vedere come due delle funzioni di ordinamento restituisco una lista al contrario. Questo perché vogliamo vedere gli oggetti con più commenti e più punti in alto, piuttosto che quelli con i valori più bassi, quando ordiniamo la lista per la prima volta.
+Due delle funzioni di ordinamento restituiscono una lista al contrario. Questo è per mostrare gli oggetti con commenti e punti più alti, piuttosto che gli oggetti con conteggio più basso quando la lista è ordinata per la prima volta.
 
-L'oggetto `SORTS` ci permette ora di referenziare ogni funzione di ordinamento.
+L'oggetto `SORTS` ti permette ora di referenziare qualsiasi funzione di sorting.
 
-Di nuovo il componente App è responsabile per mantenere lo stato dell'ordinamento. Lo stato inziale sarà la funzione di ordinamento di default, che non ordina gli elementi e restituisce la lista in input come output.
+Il componente App è responsabile per salvare lo stato dell'ordinamento. Lo stato iniziale sarà la funzione di sorting di default, che non ordina nulla e restituisce la lista di input come output.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 this.state = {
   results: null,
@@ -500,11 +490,11 @@ this.state = {
 };
 ~~~~~~~~
 
-Ogni volta che una diversa `sortKey` è scelta, diciamo la chiave `AUTHOR`, ordineremo la lista con la funzione di ordinamento dell'oggetto `SORTS` appropriata.
+Una volta scelta una diversa `sortKey`, come per esempio la chiave `AUTHOR`, ordiniamo la lista con l'appropriata funzione di sorting dall'oggetto `SORTS`.
 
-Ora possiamo definire un nuovo metodo di classe nel nostro componente App che semplicemente setta una `sortKey` nello stato locale del componente. Dopodiché, la `sortKey` può essere usata per recuperare la funzione di ordinamento da applicare alla lista.
+Adesso definiamo un nuovo metodo di classe nel componente App che setta una `sortKey` nello stato locale del componente, poi utilizza `sortKey` per recuperare la funzione di ordinamento da applicare alla lista:
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 class App extends Component {
   _isMounted = false;
@@ -537,9 +527,9 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Il prossimo passaggio è quello di passare il metodo e la `sortKey` al componente Table.
+Il prossimo step è passare il metodo e la `sortKey` al componente Table.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 class App extends Component {
 
@@ -577,9 +567,9 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Il componente Table è responsabile dell'ordinamento della lista. Prende una delle funzioni dell'oggetto `SORT` passando la `sortKey` e passa la lista come input. A questo punto procede con il map sulla lista ordinata.
+Il componente Table è responsabile per l'ordinamento della lista. Prende una delle funzioni da `SORT` in base a `sortKey` e gli passa la lista come input, dopodiché esegue il solito map ma sulla lista ordinata.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 # leanpub-start-insert
 const Table = ({
@@ -600,9 +590,9 @@ const Table = ({
   </div>
 ~~~~~~~~
 
-In teoria la lista sarebbe ordinata da una delle funzione di ordinamente ma il l'ordinamento di default è settato a `NONE` quindi non è stato ancora applicato nessun ordinamento, fin qui nessuno ha eseguito il metodo `onSort()` per cambiare la `sortKey`. Estendiamo il componente Table con una riga contenente gli header delle colonne utilizzando i componente Sort nelle colonne per ordinare ogni singola colonna.
+In teoria la lista dovrebbe essere ordinata da una delle funzioni, ma l'ordinamento di default è settato a `NONE`, quindi niente è ancora ordinato, visto che niente esegue il metodo `onSort()` per cambiare la `sortKey`. Estendiamo Table con una riga di header di colonna che usano componenti Sort nelle colonne per ordinare ogni colonna:
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 const Table = ({
   list,
@@ -656,9 +646,9 @@ const Table = ({
   </div>
 ~~~~~~~~
 
-Ogni componente Sort richiede una specifica `sortKey` e la funzione generale `onSort()`. Internamente chiamere il metodo con la `sortKey` per impostare la chiave specifica.
+Ogni componente Sort prendere una specifica `sortKey` e la funzione generale `onSort()`. Internamente chiama il metodo con la `sortKey` settata alla specifica chiave.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 const Sort = ({ sortKey, onSort, children }) =>
   <Button onClick={() => onSort(sortKey)}>
@@ -666,11 +656,11 @@ const Sort = ({ sortKey, onSort, children }) =>
   </Button>
 ~~~~~~~~
 
-Come puoi vedere, il componente Sort riusa il nostro comune componente Button. Al click di un bottone verrà settata la `sortKey` dal metodo `onSort()`. Ora dovremmo essere in grado di ordinare la lista quando avviene un click su un header di colonna.
+Come puoi notare il componente Sort riusa il componente Button. Al click di ogni bottone ogni `sortKey` è settato dal metodo `onSort()`, quindi la lista viene ordinata quando gli header di colonna sono selezionati.
 
-Possiamo effettuare un piccolo miglioramento all'aspetto della UI. Assegnamo al bottone nel componente Sort un `className`.
+Adesso rifiniremo l'aspetto del bottone nell'header di colonna. Assegniamoli uno specifico `className`:
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 const Sort = ({ sortKey, onSort, children }) =>
 # leanpub-start-insert
@@ -683,9 +673,9 @@ const Sort = ({ sortKey, onSort, children }) =>
   </Button>
 ~~~~~~~~
 
-Dovrebbe avere un aspetto migliore adesso. Il prossimo obiettivo potrebbe essere quello di implementare anche l'ordinamento inverso. La lista dovrebbe essere ordinata al contrario quando un componente Sort è cliccato due volte. Prima cosa, abbiamo bisogno di definire una proprietà booleana nello stato. L'ordinamento può essere al contrario o no.
+Questo è stato fatto per migliorare la UI. Il primo obiettivo è implementare un sorting inverso. La lista dovrebbe eseguire un ordinamento inverso una volta che il componente Sort è cliccato per la seconda volta. Per prima cosa definiamo lo stato inverso con un booleano. L'ordinamento potrà essere inverso o non inverso.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 this.state = {
   results: null,
@@ -700,9 +690,9 @@ this.state = {
 };
 ~~~~~~~~
 
-Ora nel metodo di ordinamento, possiamo verificare e impostare se la lista richiede un ordinamento inverso. Si tratta di un ordinamento inverso se la `sortKey` nello stato è la stessa di quella scelta e la proprietà di reverse non è stata già settata a true.
+Adesso nel metodo sort potremo valutare se la lista è in ordine inverso. Lo è se la `sortKey` nello stato è la stessa di quella chiamata e se lo stato inverso non è già settato a true.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 onSort(sortKey) {
 # leanpub-start-insert
@@ -712,9 +702,9 @@ onSort(sortKey) {
 }
 ~~~~~~~~
 
-Passiamo anche la proprietà che specifica se l'ordinamento è inverso al componente Table.
+Passiamo la prop reverse al componente Table:
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 class App extends Component {
 
@@ -754,9 +744,9 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Adesso è necessario che Table faccia uso di un arrow function per eseguire l'operazione sui dati.
+Table deve avere un blocco body per l'arrow function dove eseguire i dati adesso:
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 # leanpub-start-insert
 const Table = ({
@@ -789,13 +779,9 @@ const Table = ({
 # leanpub-end-insert
 ~~~~~~~~
 
-L'ordinamento inverso dovrebbe funzionare ora.
+Infine, vogliamo dare all'utente un feedback visivo per distinguere per quale colonna è attivo il sorting. Ogni componente Sort ha già una specifica `sortKey`, che può essere usata per identificare l'ordinamento attivo. Passiamo la `sortKey` dallo stato interno al componente come chiave di ordinamento attiva al componente Sort:
 
-A questo punto è bene porsi una domanda nel nome di una migliore user experience. Può un utente distinguere quale colonna è correntemente ordinata? Per ora non è possibile. Diamo all'utente un feedback visuale.
-
-Ogni componente Sort prendere già una specifica `sortKey`. Potrebbe essere usata come modo per identificare l'ordinamento selezionato. Possiamo passare la `sortKey` dallo stato del componente al componente Sort come chiave attiva di ordinamento.
-
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 const Table = ({
   list,
@@ -868,9 +854,9 @@ const Table = ({
 }
 ~~~~~~~~
 
-Ora nel componente Sort basandoci sulla `sortKey` e su `activeSortKey` sappiamo se l'ordinamento è quello attivo correntemente. Diamo al componente Sort un attributo `className` extra, in caso sia quello ordinato, per dare all'utente un feedback visivo.
+Adesso l'utente saprà se l'ordinamento è attivo in base alla `sortKey` e ad `activeSortKey`. Diamo al componente Sort un attributo extra come `className` per dare un feedback visivo in caso sia ordinato:
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 # leanpub-start-insert
 const Sort = ({
@@ -897,16 +883,16 @@ const Sort = ({
 # leanpub-end-insert
 ~~~~~~~~
 
-Il modo per definire il `className` è un po' articolato, vero? C'è una piccola libreria che fa esattamento qeusto. Per prima cosa installiamola.
+Possiamo definire `sortClass` più efficientemente usando una libreria chiamata classnames, installata tramite npm:
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm install classnames
 ~~~~~~~~
 
-Seconda cosa importiamola all'inizio del file *src/App.js*.
+Dopo l'installazione, importiamola in cima al file *src/App.js*.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 import React, { Component } from 'react';
 import axios from 'axios';
@@ -917,9 +903,9 @@ import classNames from 'classnames';
 import './App.css';
 ~~~~~~~~
 
-Ora possiamo usarla per definire il `className` del componente con classi condizionali.
+Adesso possiamo definire `className` con classi condizionali:
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 const Sort = ({
   sortKey,
@@ -947,9 +933,9 @@ const Sort = ({
 }
 ~~~~~~~~
 
-Se eseguiamo i nostri test dovremmo vedere i test di snapshot fallire così come gli unit test del componente Table. Siccome abbiamo modifica la rappresentazione dei nostri componenti possiamo accettare la nuova snapshot, ma dobbiamo correggere gli unit test. Nel file *src/App.test.js* dobbiamo fornire una `sortKey` e il booleano `isSortReverse` per il componente Table.
+Noterai test falliti sia per snapshot che unit test per quanto riguarda il componente Table. Siccome abbiamo consapevolmente cambiato nuovamente la rappresentazione del componente, accetteremo la nuova snapshot, ma avremo comunque bisogno di fixare lo unit test. In *src/App.test.js*, forniamo una `sortKey` e il booleano `isSortReverse` al componente Table.
 
-{title="src/App.test.js",lang=javascript}
+{title="src/App.test.js",lang="javascript"}
 ~~~~~~~~
 ...
 
@@ -971,26 +957,23 @@ describe('Table', () => {
 });
 ~~~~~~~~
 
-Ancora una volta potrebbe essere necessario accettare le snapshot dei test che falliscono per il componente Table, perché abbiamo previsto nuove proprietà.
-
-Finalmente il nostro sistema di ordinamento avanzato è completo.
+Potremmo dover accettare ancora una snapshot per un test che fallisce sul componente Table, poiché abbiamo fornito altre props. L'interazione di ordinamento avanzata è finalmente completa.
 
 ### Esercizi:
 
-* usa una libreria tipo [Font Awesome](https://fontawesome.io/) per indicare l'ordinamento inverso
-  * potrebbe essere una freccia verso l'alto o verso il basso vicino ad ogni header in Sort
-* leggi di più sulla [libreria classnames](https://github.com/JedWatson/classnames)
+* Utilizza una libreria come [Font Awesome](https://fontawesome.com/) per indiciare l'ordinamento, inverso o no. Potrebbe essere l'icona di una freccia verso l'alto o il basso accanto all'header Sort
+* Leggi sulla [libreria classnames](https://github.com/JedWatson/classnames)
 
 {pagebreak}
 
-Hai imparato tecniche avanzate di gestione dei componenti React! Ricapitoliamo gli ultimi capitoli:
+Hai imparato delle tecniche avanzate per componenti in React! Ricapitoliamo cosa abbiamo visto:
 
-* React
-  * l'attributo `ref` per riferirsi a elementi del DOM
-  * componenti di ordine superiore come modo per costruire componenti avanzati
-  * implementazione di interazioni avanzate in React
-  * nomi di classi CSS condizioni con l'aiuto di una piccola libreria
-* ES6
-  * rest destructuring per estrarre valori da oggetti ed array
+* **React**
+  * L'attributo `ref` per referenziare elementi del DOM
+  * I componenti di ordine superiore come modo comune per costruire componenti avanzati
+  * Implementazione di interazioni avanzate in React
+  * Nomi di classe css condizionali con una libreria di utilità
+* **ES6**
+  * Rest destructuring per suddividere oggetti ed array
 
-Trovi i codici sorgenti nel [repository ufficiale](https://github.com/the-road-to-learn-react/hackernews-client/tree/5.5).
+Puoi sempre trovare il codice sorgente nel [repository ufficiale](https://github.com/the-road-to-learn-react/hackernews-client/tree/5.5).
