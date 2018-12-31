@@ -1,18 +1,16 @@
-# Gestione dello stato in React e alternative
+# Gestione dello stato in React
 
-Hai già imparato le basi della gestione dello stato in React nei capitoli precedenti. Questo capitolo approfondisce l'argomento. Imparerai le best practice, come applicarle e perché potresti considerare di usare una libreria di terze parti per la gestione dello stato.
+Abbiamo già visto le basi sulla gestione dello stato in React nello scorso capitolo, usando lo stato locale dei componenti React, in questo capitolo quindi approfondiremo l'argomento. Vedremo le best practice, come applicarle e perché potresti considerare di usare una libreria di terze parti per la gestione dello stato.
 
-## Spostare lo stato (lifting state)
+## Lifting State
 
-Solo il component App è un componente ES6 contenente dello stato nella nostra applicazione. Gestisce molto dello stato dell'applicazione e della logica nei suoi metodi di classe. Forse hai notato che passiamo molte proprietà al componente Table. Molte di queste proprietà sono usato esclusivamente nel componente Table. In conclusione si potrebbe discutere sul senso che il componente App conosca queste proprietà.
+Solo il componente App è uno stateful componente nella nostra applicazione. Gestisce molto dello stato dell'applicazione e delle logiche dei metodi della classe. Inoltre, passiamo molte proprietà al componente Table, la maggior parte delle quali sono usate solo lì. Non è importante che il componente App le conosca, quindi la funzionalità di sort può essere spostata nel componente Table.
 
-L'intera funzionalità di ordinamento è usata solo nel componente Table. Si potrebbe spostare nel componente Table, perché il componente App non ha bisogno affatto di conoscerne il funzionamento. Il processo di refactoring parti di stato da un componente ad un altro è conosciuto come *lifting state*. Nel nostro caso, vogliamo spostare lo stato che non è utilizzato nel componente App al componente Table. Quindi spostarlo dal padre al componente figlio.
+Spostare parti di stato da un componente ad un altro è un'operazione conosciuta come *lifting state*. Vogliamo spostare lo stato che non è usato dal componente App nel componente Table, dal componente padre al componente figlio. Per poter avere uno stato e dei metodi di classe nel componente Table, questo deve prima diventare una classe ES6. Rifattorizzare un componente funzionale senza stato in un componente come classe ES6 è un'operazione semplice.
 
-Per contenere dello stato e metodi di classe il componente Table deve diventare un componente implementato con una classe ES6. Il refactoring da componente funzionale privo di stato a componente classe ES6 è piuttosto semplice.
+Il componente Table come componente funzionale stateless:
 
-Il nostro componente Table come componente funzionale privo di stato:
-
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 const Table = ({
   list,
@@ -34,7 +32,7 @@ const Table = ({
 
 Il componente Table come classe ES6:
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 # leanpub-start-insert
 class Table extends Component {
@@ -60,9 +58,9 @@ class Table extends Component {
 # leanpub-end-insert
 ~~~~~~~~
 
-Dal momento che vogliamo gestire lo stato e aggiungere metodi al nostro componente, dobbiamo aggiungere un costruttore e uno stato iniziale.
+Siccome vogliamo gestire uno stato e dei metodi nel componente, aggiungeremo un costruttore ed uno stato iniziale.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 class Table extends Component {
 # leanpub-start-insert
@@ -79,9 +77,9 @@ class Table extends Component {
 }
 ~~~~~~~~
 
-Ora possiamo spostare lo stato e i metodi riguardanti la funzionalità di ordinamento dal componente App giù al componente Table.
+Adesso possiamo spostare la porzione di stato e i metodi di classe della funzionalità di sort dal componente App giù nel componente Table.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 class Table extends Component {
   constructor(props) {
@@ -99,7 +97,9 @@ class Table extends Component {
 
 # leanpub-start-insert
   onSort(sortKey) {
-    const isSortReverse = this.state.sortKey === sortKey && !this.state.isSortReverse;
+    const isSortReverse = this.state.sortKey === sortKey &&
+      !this.state.isSortReverse;
+
     this.setState({ sortKey, isSortReverse });
   }
 # leanpub-end-insert
@@ -110,9 +110,9 @@ class Table extends Component {
 }
 ~~~~~~~~
 
-Non dimenticarti di rimuovere la parte di stato spostata e il metodo `onSort()` dal tuo componente App.
+Ricordati di rimuovere la porzione di stato spostato e il metodo di classe `onSort()` dal componente App.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 class App extends Component {
   _isMounted = false;
@@ -141,9 +141,9 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Inoltre, possiamo rendere l'API del componente Table più leggera. Rimuoviamo le proprietà che gli sono passate dal componente App, perché adesso sono gestite internamente dal componente Table stesso.
+Possiamo anche rendere più leggero il componente Table. Per fare questo, spostiamo le props che gli vengono passate dal componente App, poiché sono gestite internamente al componente Table.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 class App extends Component {
 
@@ -171,10 +171,10 @@ class App extends Component {
           </div>
           : <Table
 # leanpub-start-insert
-              list={list}
-              onDismiss={this.onDismiss}
+            list={list}
+            onDismiss={this.onDismiss}
 # leanpub-end-insert
-            />
+          />
         }
         ...
       </div>
@@ -183,9 +183,9 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Ora nel componente Table possiamo usare il metodo `onSort()` interno e lo stato interno.
+Nel componente Table usiamo ora il metodo interno `onSort()` e anche lo stato locale al componente:
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 class Table extends Component {
 
@@ -269,25 +269,25 @@ class Table extends Component {
 }
 ~~~~~~~~
 
-La nostra applicazione dovrebbe funzionare ancora. Ma abbiamo applicato un refactoring cruciale. Abbiamo spostato funzionalità e parti di stato più vicini ad un componente che ne ha bisogno. Altri componenti sono stati resi più leggeri. L'API del componente Table è stata resa molto più snella perché adesso sfrutta la funzionalità di ordinamento interna al componente.
+Abbiamo applicato un refactoring cruciale spostando la funzionalità e lo stato più vicino ad un altro componente, e reso più leggeri altri componenti. Inoltre anche l'API del componente Table è ora più leggera poiché gestisce internamente la funzionalità di sorting.
 
-Il processo di spostare lo stato può prendere anche la via opposta, cioè dal figlio al componente padre. Immagina di avere a che fare con lo stato interno di un componente figlio e viene fatta una richiesta di mostrare parti di quello stato anche nel componente padre. In quel caso dovresti portare lo stato più in altro nella gerarchia al componente padre. Ma c'è altro. Immagina di voler mostrare quello stato a componenti fratelli del componente figlio. Di nuovo abbiamo la necessità di spostare lo stato più in alto ad un componente padre. Il componente padre si occuperà di gestire lo stato internamente e di esporlo ad entrambi i figli.
+Spostare lo stato può essere utile anche nel verso opposto: dal componente figlio al componente padre. Immaginare di stare lavorando con lo stato di un componente figlio ma di voler soddisfare un requisito di mostrare lo stato anche nel componente padre. In questo caso dovresti spostare in alto lo stato al componente padre. O ancora, immagina di voler mostrare lo stesso stato in un componente fratello del componente figlio in questione. Anche in questo caso bisogna spostare lo stato verso l'alto al componente padre. A questo punto il componente padre gestisce lo stato localmente e lo espone ad entrambi i componenti figli.
 
 ### Esercizi:
 
-* leggi di più su [spostare lo stato in React](https://reactjs.org/docs/lifting-state-up.html)
-* leggi di più su spostare lo stato in [imparare React prima di usare Redux](https://www.robinwieruch.de/learn-react-before-using-redux/)
+* Leggi su [spostare lo stato in React](https://reactjs.org/docs/lifting-state-up.html)
+* Leggi su spostare lo stato in [imparare React prima di usare Redux](https://www.robinwieruch.de/learn-react-before-using-redux/)
 
-## Approfondimento setState()
+## Rivisto: setState()
 
-Finora abbiamo usato il metodo `setState()` di React per gestire lo stato interno di un componente, passando un oggetto alla funzione aggiornando parzialmente (o completamente, in base all'oggetto passato) lo stato interno.
+Finora abbiamo utilizzato `setState()` per gestire lo stato interno dei nostri componenti. Possiamo un oggetto alla funzione che aggiorna parzialmente lo stato locale.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
-this.setState({ foo: bar });
+this.setState({ value: 'hello'});
 ~~~~~~~~
 
-Ma `setState()` non prendere in input necessariamente un oggetto. Nella sua seconda versione possiamo passare una funzione per aggiornare lo stato.
+Ma `setState()` non prende in input solo un oggetto. Nella sua seconda versione è possibile passare una funzione per aggiornare lo stato.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -296,35 +296,31 @@ this.setState((prevState, props) => {
 });
 ~~~~~~~~
 
-Perché dovresti farlo? C'è un caso d'uso cruciale dove ha senso usare una funzione piuttosto che un oggetto. Cioè quando l'aggiornamento di stato dipende dal precedente stato o dalle props. Se in questi casi non usi una funzione, la gestione dello stato interno può causare bug.
-
-Ma perché causerebbe errori l'uso di un oggetto al posto di una funzione quando l'aggiornamento dipende dallo stato precedente o da props? Il metodo `setState()` di React è asincrono. React raggruppa chiamate a `setState()` e le esegue ad un certo punto. Può succedere che lo stato precedente o che le props siano cambiate da quando avresti contato sul loro valore nella chiamata a `setState()`.
+C'è un caso cruciale dove ha senso passare una funzione invece di un oggetto: quando si aggiorna lo stato in base a proprietà dello stato stesso o delle props precedenti. Se in questi casi non si usa una funzione si potrebbero verificare dei bug. Il metodo di React `setState()` è asincrono. React potrebbe raccogliere più chiamate a `setState()` ed eseguirle in seguito. Alcune volte lo stato o le props precedenti cambiano tra successiva chiamate e quindi non possiamo farci affidamento in una chiamata a `setState()`.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
-const { fooCount } = this.state;
-const { barCount } = this.props;
-this.setState({ count: fooCount + barCount });
+const { oneCount } = this.state;
+const { anotherCount } = this.props;
+this.setState({ count: oneCount + anotherCount });
 ~~~~~~~~
 
-Immagina che `fooCount` e `barCount`, o lo stato o le pros, cambino da qualche altra parte, in modo asincrono, al momento della chiamata a `setState()`. In un'applicazione di discrete dimensioni, potresti avere più di una chiamata a `setState()` all'interno della tua applicazione. Siccome `setState()` viene eseguita in modo asincrono, potresti fare affidamento su dati ormai vecchi.
+Immagina che `oneCount` e `anotherCount`, quindi lo stato o le props, cambiano da qualche parte in modo asincrono quando chiami `setState()`. In un'applicazione di dimensioni non trascurabili potresti avere più di una chiamata a `setState()` in giro per l'applicazione. E siccome `setState()` viene eseguita in modo asincrono potresti affidarti nell'esempio a valori vecchi.
 
-Con l'altro approccio, la funzione passata a `setState()` è una callback che lavora sui dati dello stato e delle props, al momento dell'esecuzione della funzione di callback. Anche se `setState()` è una chiamata asincrona, con la funzione come parametro prende lo stato e le props nel momento in cui viene eseguita.
+Con l'approccio con la funzione, la funzione in `setState()` è una callback che opera su stato e props nel momento  in cui la funzione callback viene eseguita. Sebbene `setState()` è asincrona con una funzione prende lo stato e le props nel momento in cui viene eseguita.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
 this.setState((prevState, props) => {
-  const { fooCount } = prevState;
-  const { barCount } = props;
-  return { count: fooCount + barCount };
+  const { oneCount } = prevState;
+  const { anotherCount } = props;
+  return { count: oneCount + anotherCount };
 });
 ~~~~~~~~
 
-Ora, torniamo al codice per aggiustare questo comportamento. Insieme modificheremo un posto dove `setState()` è chiamato e fa affidamento sui valori dello stato o delle props, dopodiché sarai in grado di sistemare lo stesso problema laddove dovesse essere necessario.
+Nel nostro codice, il metodo `setSearchTopStories()` si basa sullo stato precedente, quindi questo è un buon esempio dove usare una funzione al posto di un oggetto come parametro alla `setState()`. Adesso il codice è il seguente:
 
-Il metodo `setSearchTopStories()` conta sullo stato precedente ed è quindi un perfetto esempio dove usare una funzione piuttosto che un oggetto in una chiamata a `setState()`. Per ora, il suo codice è quello che segue.
-
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 setSearchTopStories(result) {
   const { hits, page } = result;
@@ -349,9 +345,9 @@ setSearchTopStories(result) {
 }
 ~~~~~~~~
 
-Estraiamo valori dallo stato ma aggiorniamo lo affidandoci ai valori dello stato precedente in modo asincrono. Ora possiamo usare l'approccio con funzione per prevenire bug da dati non aggiornati.
+Qui abbiamo estratto i valori dallo stato, ma aggiornato lo stato in base al valore precedente dello stato asincronicamente. Adesso useremo l'approccio funzionale per prevenire bug da stato non aggiornato:
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 setSearchTopStories(result) {
   const { hits, page } = result;
@@ -364,9 +360,9 @@ setSearchTopStories(result) {
 }
 ~~~~~~~~
 
-Possiamo spostare l'intero blocco che abbiamo già implementato dentro alla funzione di callback. Dobbiamo solo cambiare il fatto che operiamo sul `prevState`, lo stato precedente, piuttosto che da quello attuale, `this.state`.
+Possiamo spostare l'intero blocco che abbiamo implementato nella funzione operando direttamente su `prevState` invece che su `this.state`.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 setSearchTopStories(result) {
   const { hits, page } = result;
@@ -396,9 +392,9 @@ setSearchTopStories(result) {
 }
 ~~~~~~~~
 
-Questo aggiusta il problema di aggiornamento con dati non aggiornati. Possiamo fare un ulteriore miglioramento. Siccome è una funzione, possiamo estrarla per migliorare la leggibilità. Questo è un altro vantaggio nell'usare una funzione piuttosto che un oggetto. La funzione può vivere fuori dal componente ma dobbiamo usare una funzione di ordine superiore per passargli il risultato.
+Questo risolverà eventuali problemi da stato non aggiornato, ma c'è ancora un miglioramento che si può fare. Siccome è una funzione, si può estrarre un'altra funzione per migliorarne la leggibilità. Un altro vantaggio di utilizzare una funzione al posto di un oggetto è che la funzione può vivere anche fuori dal componente. Dobbiamo ancora usare una funzione di ordine superiore per passarle il risultato siccome vogliamo aggiornare lo stato in base ai risultati recuperati dall'API.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 setSearchTopStories(result) {
   const { hits, page } = result;
@@ -406,9 +402,9 @@ setSearchTopStories(result) {
 }
 ~~~~~~~~
 
-La funzione `updateSearchTopStoriesState()` deve restituire una funzione. E' una funzione di ordine superiore. Possiamo definirla fuori dal componente App. Nota come la firma della funzione cambia leggermente adesso.
+La funzione `updateSearchTopStoriesState()` deve restituire una funzione. È una funzione di ordine superiore che può essere definita fuori dal componente App. Nota come la firma della funzione cambia leggermente adesso.
 
-{title="src/App.js",lang=javascript}
+{title="src/App.js",lang="javascript"}
 ~~~~~~~~
 # leanpub-start-insert
 const updateSearchTopStoriesState = (hits, page) => (prevState) => {
@@ -438,41 +434,38 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Questo è quanto. L'approccio con funzione piuttosto che un oggetto in input al metodo `setState()` evita il verificarsi di eventuali bug e migliore la leggibilità e la manutenibilità del codice. Inoltre diventa testabile fuori dal componente App. Potresti esportarla e scrivere un test per testarla come esercizio.
+L'approccio con una funzione invece dell'oggetto come parametro alla `setState()` risolve potenziali bug e aumenta la leggibilità e manutenibilità del codice. Inoltre, diventa testabile fuori dal componente App. Consiglio di esportarla e testarla come esercizio.
 
 ### Esercizi:
 
-* leggi di più su [React e l'utilizzo corretto dello stato](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly)
-* esportare updateSearchTopStoriesState dal file
-  * scrivere un test per questa funzione passando il payload (hits, page) e uno stato precedente inventato e infine aspettarsi il nuovo stato
-* rifattorizzare i tuoi metodi `setState()` usando una funzione come parametro
-  * ma solo quando ha senso, cioè quando l'aggiornamento conta sullo stato precedente o sulle props
-* esegui ancora i test e verifica che tutto sia aggiornato
+* Leggi su [usare lo stato correttamente in React](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly)
+* Esporta updateSearchTopStoriesState dal file
+  * Scrivici un test che passa un payload (hits e page) e inventa uno stato precedente e infine aspettati un nuovo stato
+* Rifattorizza i metodi `setState()` per usare una funzione, ma solo quando ha senso, quindi quando l'aggiornamento si basa su props o stato precedente
+* Esegui di nuovo i test e verifica che tutto è aggiornato
 
 ## Domare lo stato
 
-I capitoli precedenti hanno mostrato come gestire lo stato può essere un argomento cruciale in applicazioni di grandi dimensioni. In generale, non solo React ma anche gli altri framework per creare SPA (single page application) hanno difficoltà su questo argomento. Le applicazioni stanno diventando molto più complesse in questi ultimi anni. Una grande sfida per le web applications in questi giorni è come domare e controllare lo stato in grosse applicazioni.
+I precedenti capitoli ti hanno mostrato come la gestione dello stato può essere un argomento cruciale in applicazioni complesse, e come React e molti altri framework per SPA debbano battersi per affrontarlo. Quando le applicazioni diventano complesse, la grossa sfida nelle applicazioni web è domare e controllare lo stato.
 
-In confronto ad altre soluzioni, React ha già fatto un grande passo avanti. Il fluire dei dati in modo unidirezionale e una semplice API per gestire lo stato in un componente sono indispensabili. Questi concetti rendono più semplice ragionare sullo stato e sui suoi aggiornamenti. Rende più facile ragionare a riguardo a livello di componente e fino ad un certo punto anche a livello applicativo.
+In confronto ad altre soluzioni React ha già fatto un grande passo avanti. L'unidirectional data flow e una semplice API per gestire lo stato nei componenti è indispensabile. Questi concetti facilitano il ragionare sullo stato e sui cambiamenti di stato. Rende anche più facile ragionare a livello di componente e a livello di applicazione.
 
-In un'applicazione che tende a crescere, diventa difficile ragionare sui cambiamenti di stato. E' più facile introdurre bug da operazioni su dati non aggiornati quando si usa un oggetto piuttosto che una funzione nelle chiamate a `setState()`. Ed è necessario spostare lo stato in giro per condividere parti di stato comuni o nascondere parti di stato non necessarie tra componenti. Può succedere che un componente ha bisogno di spostare lo stato al padre, perché i componenti fratelli dipendono da quello stato. Magari il componente è lontano nell'albero dei componenti e quindi è necessario condividere lo stato attraverso l'intero sottoalbero di componenti. In conclusione i componenti vengono coinvolti maggiormente nella gestione dello stato. Ma dopotutto, la principale responsabilità dei componenti, dovrebbe essere quella di rappresentare la UI, no?
+È possibile introdurre bug operando su uno quando non aggiornato quando si usa un oggetto al posto di una funzione come parametro alla `setState()`. Spostiamo lo stato in giro per condividere o nascondere porzioni di stato tra i componenti come conveniente. Alcune volte un componente ha bisogno di spostarlo in alto, per renderlo visibile anche ad un componente fratello. Oppure il componente è molto lontano nell'albero de componenti, quindi è necessario condividerlo per l'intero albero di componenti. I componenti sono più coinvolti nella gestione dello stato, siccome la responsabilità principale dei componenti è rappresentare la UI.
 
-Per tutte queste ragioni, esistono soluzioni standalone che si preoccupano della gestione dello stato, e non sono limitate a React. Tuttavia, questo è quello che rende così potente l'ecosistema React. Possiamo usare differenti soluzioni per risolvere i nostri problemi. Per risolvere il problema della gestione dello stato in modo scalabile, potresti aver sentito parlare di alcune librerie tipo [Redux](http://redux.js.org/docs/introduction/) o [MobX](https://mobx.js.org/). Puoi usare una di queste soluzioni in un'applicazione React. Esistono estensioni, [react-redux](https://github.com/reactjs/react-redux) e [mobx-react](https://github.com/mobxjs/mobx-react) che permettono loro l'integrazione con le viste di React.
-
-Redux e MobX sono esclusi dalla portata di questo libro. Alla fine di questo libro, riceverai consigli su come continuare a imparare circa React e il suo ecosistema. Una possibilità è quella di imparare Redux. Prima di buttarti nell'approfondimento dell'argomento delle soluzioni di gestione di stato di terze parti, ti invito a leggere questo [articolo](https://www.robinwieruch.de/redux-mobx-confusion/), che mira a darti una maggiore comprensione di come imparare la gestione di stato con soluzioni di terze parti.
+Per questo motivo esistono soluzioni standalone per prendersi cura della gestione dello stato. Librerie come [Redux](https://redux.js.org/introduction) o [MobX](https://mobx.js.org/) sono entrambe soluzioni praticabili in applicazioni React. Queste forniscono estensioni, [react-redux](https://github.com/reactjs/react-redux) e [mobx-react](https://github.com/mobxjs/mobx-react) per integrarle nel layer di vista di React. Redux e MobX esulano dallo scopo di questo libro, ma ti incoraggio a studiare i diversi modi di gestire la complessità della gestione dello stato quando le tue applicazioni React diventeranno più complesse.
 
 ### Esercizi:
 
-* leggi di più su [gestione dello stato esterna a React e come impararla](https://www.robinwieruch.de/redux-mobx-confusion/)
-* dai un'occhiata al mio secondo libro sulla [gestione dello stato in React](https://roadtoreact.com/)
+* Leggi su [gestione esterna dello stato e come impararla](https://www.robinwieruch.de/redux-mobx-confusion/)
+* Dai un'occhiata al mio secondo libro sulla gestione dello stato in React, si chiama [Taming the State in React](https://roadtoreact.com/)
 
 {pagebreak}
 
-Hai imparato tecniche di gestione dello stato avanzate in React! Ricapitoliamo quando visto negli ultimi capitoli:
+Hai imparato a gestire lo stato in React in modo avanzato. Ricapitoliamo l'ultimo capitolo:
 
-* React
-  * spostare la gestione dello stato più in alto e più in basso ai componenti più indicati
-  * `setState` può prendere in input una funzione per prevenire bug da dati non aggiornati
-  * soluzioni esterne esistenti che aiutano a domare lo stato
+* **React**
+  * Sposta la gestione dello stato su e giù in base nei componenti adeguati
+  * `setState()` può prendere una funzione come parametro per evitare bug da stato non aggiornato
+  * Le soluzioni esterne esistenti che aiutano a gestire lo stato
 
 Puoi trovare il codice sorgente nel [repository ufficiale](https://github.com/the-road-to-learn-react/hackernews-client/tree/5.6).
