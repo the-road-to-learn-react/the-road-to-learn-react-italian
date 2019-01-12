@@ -1,10 +1,10 @@
 # Le basi di React
 
-Questo capitolo ti guiderà attraverso le basi di React. Tratta lo stato e le interazioni fra componenti necessarie quando abbandoniamo i componenti statici. Tratteremo anche i differenti modi per dichiarare un componente e come mantenere i componenti componibili e riusabili.
+Questo capitolo ti guiderà attraverso le basi di React. Tratta lo stato e le interazioni fra componenti, necessarie quando andiamo oltre a semplici componenti statici. Tratteremo anche i differenti modi per dichiarare un componente e come mantenere i componenti componibili e riusabili.
 
 ## Stato locale ai componenti
 
-Lo stato locale ai componenti, conosciuto anche come stato interno ai componenti, ti permette di salvare, modificare ed eliminare proprietà immagazzinate nei tuoi componenti. Il componente implementato con una classe ES6 poi utilizza un costruttore per inizializzare lo stato locale del componente. Il costruttore è chiamato una sola volta, quando il componente si inizializza:
+Lo stato locale ai componenti, conosciuto anche come stato interno ai componenti, ti permette di salvare, modificare ed eliminare proprietà immagazzinate nei tuoi componenti. Un componente implementato con una classe ES6 utilizza un costruttore per inizializzare lo stato locale al componente. Il costruttore è chiamato una sola volta, quando il componente viene inizializzato:
 
 Introduciamo il costruttore della classe.
 
@@ -25,7 +25,7 @@ class App extends Component {
 
 Il componente App è una sottoclasse di `Component`, quindi `extends Component` è presente nella dichiarazione del componente App.
 
-È obbligatorio chiamare `super(props);`. Questo setta `this.props` nel costruttore in caso tu vi voglia accedere da lì. Altrimenti sarebbe `underfined` quando viene effettuato l'accesso a `this.props` nel costruttore. In questo caso, lo stato iniziale del componente dovrebbe essere la lista di oggetti di esempio:
+È obbligatorio chiamare `super(props);`. Questo setta `this.props` nel caso in cui tu voglia accedervi dal costruttore. Altrimenti `this.props` sarebbe `underfined` quando viene effettuato l'accesso nel costruttore. In questo caso, lo stato iniziale del componente dovrebbe essere la lista di oggetti di esempio:
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -58,7 +58,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Lo stato è legato alla classe usando l'oggetto `this`, così che sia possibile accedere allo stato locale dell'intero componente. Per esempio, può essere utilizzato nel metodo `render()`. Precedentemente abbiamo mappato una lista statica di oggetti nel metodo `render()` che era definita fuori dal componente. Adesso vediamo come utilizzare la lista dallo stato locale nel componente.
+Lo stato è legato alla classe usando l'oggetto `this`, così che sia possibile accedere allo stato locale dell'intero componente. Per esempio, può essere utilizzato nel metodo `render()`. Precedentemente abbiamo mappato una lista statica di oggetti nel metodo `render()` che era definita fuori dal componente. Adesso vediamo come utilizzare la lista dallo stato locale al componente.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -87,20 +87,20 @@ class App extends Component {
 }
 ~~~~~~~~
 
-La lista è adesso parte del componente, nel suo stato locale. Potremmo aggiungere, cambiare o rimuovere elementi dalla lista. Ogni volta che tu cambi lo stato di un componente, il metodo `render()` del componente viene eseguito nuovamente. Ecco come si può modificare lo stato locale del componente e vedere il componente ri-renderizzare i dati corretti dallo stato locale.
+La lista è adesso parte del componente, risiede nel suo stato locale. Potremmo aggiungere, cambiare o rimuovere elementi dalla lista. Ogni volta che tu cambi lo stato di un componente, il metodo `render()` del componente viene eseguito nuovamente. Ecco come si può modificare lo stato locale del componente e vedere il componente ri-renderizzare i dati corretti dallo stato locale.
 
-Stai attento a non mutare lo stato direttamente. Invece, dovresti usare un metodo chiamato `setState()` per modificare gli stati. Parleremo di questi concetti più in profondità nel prossimo capitolo.
+Stai attento a non mutare lo stato direttamente. Dovresti invece usare un metodo chiamato `setState()` per modificare gli stati. Parleremo di questi concetti in modo più approfondito nel prossimo capitolo.
 
 ### Esercizi:
 
 * Sperimenta con lo stato locale
   * Definisci più stato iniziale nel costruttore
   * Utilizza ed accedi allo stato nel metodo `render()`
-* Leggi su [il costruttore nelle classi ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes#Constructor)
+* Leggi di più sul [costruttore nelle classi ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Classes#Constructor)
 
 ## L'oggetto inizializzatore in ES6
 
-In JavaScript ES6 è possibile utilizzare un'abbreviazione nella sintassi delle proprietà per inizializzare gli oggetti in modo più conciso, come la seguente inizializzazione di oggetto:
+In JavaScript ES6 è possibile utilizzare un'abbreviazione, nella sintassi delle proprietà, per inizializzare gli oggetti in modo più conciso. Guardiamo la seguente inizializzazione di oggetto:
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -177,13 +177,13 @@ In seguito sarai in grado di usare nomi tramite computed property per allocare v
 ### Esercizi:
 
 * Sperimenta con l'oggetto inizializzatore di ES6
-* Leggi sull'[oggetto inizializzatore di ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer)
+* Leggi di più sull'[oggetto inizializzatore di ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Object_initializer)
 
 ## Unidirectional Data Flow
 
 Adesso abbiamo uno stato locale nel nostro componente App, ma non lo abbiamo ancora manipolato. Lo stato locale è statico, così come lo è il suo componente. Un buon modo per fare esperienza con la manipolazione dello stato è affrontare l'interazione tra componenti.
 
-Faremo pratica con questo concetto aggiungendo un bottone per ogni oggetto nella lista visualizzata. Il bottone leggerà "Dismiss", siccome il suo scopo sarà di rimuovere un oggetto dalla lista. In un client email, per esempio, sarebbe utile per contrassegnare alcuni email come 'lette' mantenendo quelle non lette separate.
+Faremo pratica con questo concetto aggiungendo un bottone per ogni oggetto nella lista visualizzata. Il bottone mostrerà "Dismiss", siccome il suo scopo sarà di rimuovere un oggetto dalla lista. In un client email, per esempio, sarebbe utile per contrassegnare alcuni email come 'lette', mantenendo quelle non lette separate.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -222,9 +222,9 @@ class App extends Component {
 
 Il metodo della classe `onDismiss()` non è ancora definito però. Lo faremo presto, ma per ora concentriamoci sul gestore `onClick` dell'elemento button. Come puoi vedere, il metodo `onDismiss()` nell'handler `onClick` è racchiuso in un arrow function. Puoi usarlo per dare un'occhiata alla proprietà `objectID` dell'oggetto `item` e identificare l'oggetto che verrà eliminato. Un modo alternativo sarebbe quello di definire la funzione all'esterno dell'handler `onClick` e passargli solo la funzione definita. Approfondiremo gli handlers più in dettaglio in seguito.
 
-Notiamo l'uso degli elementi button su più righe e come gli elementi con svariati attributi possono facilmente diventare disorganizzati. L'elemento button è utilizzato su più righe e indentato correttamente per mantenerlo leggibile. Anche se questa pratica non è specifica dello sviluppo React, è uno stile di programmazione che consiglio per chiarezza.
+Notiamo l'uso degli elementi button su più righe e come gli elementi con svariati attributi possono facilmente diventare disorganizzati. L'elemento button è definito su più righe e indentato correttamente per mantenerlo leggibile. Anche se questa pratica non è specifica dello sviluppo React, è uno stile di programmazione che consiglio per ottenere una maggiore chiarezza.
 
-Adesso implementeremo invece la funzionalità `onDismiss()`. Prenderà in input un id per identificare l'oggetto da eliminare. La funzione appartiene alla classe, quindi sarà un metodo di classe. Ecco perché ci accediamo con `this.onDismiss()` and non `onDismiss()`. L'oggetto `this` si riferisce all'istanza della classe. Per definire `onDismiss()` come metodo di classe è necessario fare il binding nel costruttore:
+Adesso implementeremo invece la funzionalità `onDismiss()`. Prenderà in input un id per identificare l'oggetto da eliminare. La funzione appartiene alla classe, quindi sarà un metodo di classe: ecco perché ci accediamo con `this.onDismiss()` e non `onDismiss()`. L'oggetto `this` si riferisce all'istanza della classe. Per definire `onDismiss()` come metodo di classe è necessario farne il binding nel costruttore:
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -276,7 +276,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Adesso possiamo definire cose succede all'interno del metodo della classe. Ricorda, l'obiettivo è rimuovere l'elemento identificato dall'id dalla lista e memorizzare la lista aggiornata nello stato locale. La lista aggiornata sarà utilizzata quando verrà rieseguito il metodo `render()` per visualizzarla, dove non sarà più presente l'elemento eliminato.
+Adesso possiamo definire cose succede all'interno del metodo della classe. Ricorda, l'obiettivo è rimuovere l'elemento identificato dal parametro id dalla lista, e memorizzare la lista aggiornata nello stato locale. La lista aggiornata sarà utilizzata quando verrà rieseguito il metodo `render()` per visualizzarla, dove non sarà più presente l'elemento eliminato.
 
 Puoi rimuovere un elemento da una lista utilizzando la funzionalità [built-in di JavaScript filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), che prende una funzione come suo input. La funzione avrà accesso ad ogni valore della lista, poiché itera su ogni elemento, cosicché tu possa valutarne ognuno in base a determinate condizioni.
 
@@ -290,7 +290,7 @@ console.log(filteredWords);
 // expected output: Array ["exuberant", "destruction", "present"]
 ~~~~~~~~
 
-La funzione restituisce una lista lista piuttosto che mutare l'originale e supporta quindi la convenzione di React di usare strutture dati immutabili.
+La funzione restituisce una nuova lista, piuttosto che mutare l'originale, e supporta quindi la convenzione di React di usare strutture dati immutabili.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -330,7 +330,7 @@ onDismiss(id) {
 }
 ~~~~~~~~
 
-Potresti addirittura renderla inline come abbiamo fatto con l'handler `onClick` del button, sebbene si potrebbe trovare meno leggibile:
+Potresti addirittura renderla inline come abbiamo fatto con l'handler `onClick` del bottone, sebbene ciò potrebbe risultare meno leggibile:
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -341,7 +341,7 @@ onDismiss(id) {
 }
 ~~~~~~~~
 
-La lista rimuove ora l'oggetto cliccato, ma lo stato non è stato ancora aggiornato. Utilizziamo il metodo di classe `setState()` per aggiornare la lista nello stato locale del componente:
+La lista non contiene più l'oggetto cliccato, ma lo stato non è stato ancora aggiornato. Utilizziamo il metodo di classe `setState()` per aggiornare la lista nello stato locale del componente:
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -354,11 +354,11 @@ onDismiss(id) {
 }
 ~~~~~~~~
 
-Esegui di nuovo l'applicazione e prova il pulsante "Dismiss". Quello che stai sperimentando è ciò che viene chiamato l'**unidirectional data flow** di React. Un'azione è innescata nel layer di vista con `onClick()`, un'altra funzione o metodo di classe modifica lo stato locale del componente, e infine il metodo `render()` del componente viene eseguito di nuovo per aggiornare la vista.
+Esegui di nuovo l'applicazione e prova il bottone "Dismiss". Quello che stai sperimentando è ciò che viene chiamato l'**unidirectional data flow** di React. Un'azione è innescata nel layer di vista con `onClick()`, un'altra funzione o metodo di classe modifica lo stato locale al componente, e infine il metodo `render()` del componente viene eseguito di nuovo per aggiornare la vista.
 
 ### Esercizi:
 
-* Leggi su [lo stato e i metodi di lifecycle dei componenti React](https://reactjs.org/docs/state-and-lifecycle.html)
+* Leggi di più [sullo stato e i metodi di lifecycle dei componenti React](https://reactjs.org/docs/state-and-lifecycle.html)
 
 ## Bindings
 
@@ -381,7 +381,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Il passaggio di binding è necessario perché il metodo di classe non collega direttamente il `this` all'istanza dell'oggetto. Dimostriamolo con l'aiuto del seguente componente tramite classe ES6:
+Il passaggio di binding è necessario perché il metodo di classe non collega direttamente il `this` all'istanza dell'oggetto. Dimostriamolo con l'aiuto del seguente componente implementato con le classi di ES6:
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -403,7 +403,7 @@ class ExplainBindingsComponent extends Component {
 }
 ~~~~~~~~
 
-Il componente viene visualizzato correttamente, ma quando si clicca il button, verrà visualizzato `undefined` come log nella console degli strumenti da sviluppatore. Questa è una delle principali fonte di bug che gli sviluppatori incontrano in React. Se vuoi accesso a `this.state` nel tuo metodo di classe, non può essere recuperato perché il `this` è `undefined`. Per render `this` accessibile nei metodo di classe, bisogna effettuare l binding dei metodi con `this`.
+Il componente viene visualizzato correttamente, ma quando si clicca il button, verrà visualizzato `undefined` come log nella console degli strumenti da sviluppatore. Questa è una delle principali fonte di bug che gli sviluppatori incontrano in React. Per rendere `this` accessibile nei metodi di classe, bisogna effettuare il binding dei metodi con `this`.
 
 Nel seguente componente il metodo è correttamente collegato nel costruttore della classe:
 
@@ -459,7 +459,7 @@ class ExplainBindingsComponent extends Component {
 }
 ~~~~~~~~
 
-Però evita questa pratica, dal momento che effettua il binding del metodo ogni volta che il metodo `render()` è eseguito. Vale a dire ogni volta che il componente è aggiornato, il che inciderebbe sulle performance della tua applicazione. Mentre effettuare il binding del costruttore viene fatto una sola volta, quando il componente è istanziato.
+Però evita questa pratica, dal momento che effettua il binding del metodo ogni volta che il metodo `render()` è eseguito. Vale a dire ogni volta che il componente è aggiornato, il che inciderebbe sulle performance della tua applicazione. Mentre effettuare il binding nel costruttore viene fatto una sola volta, quando il componente è istanziato.
 
 Alcuni sviluppatori definiscono la logica dei loro metodi di classe nel costruttore:
 
@@ -489,7 +489,7 @@ class ExplainBindingsComponent extends Component {
 }
 ~~~~~~~~
 
-Evita anche questo approccio, che rende il tuo costruttore un casino col tempo. Il costruttore serve ad istanziare una classe e le sue proprietà, quindi le logiche dei metodi dovrebbero essere definite fuori dal costruttore.
+Evita anche questo approccio, che tende a rendere il costruttore un casino con il tempo. Il costruttore serve ad istanziare una classe e le sue proprietà, quindi le logiche dei metodi dovrebbero essere definite fuori dal costruttore.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -560,7 +560,7 @@ Adesso tratteremo i gestori di eventi negli elementi. Nella nostra applicazione 
 ...
 ~~~~~~~~
 
-Questa funzione è già abbastanza complessa, dal momento che passa un valore al metodo di classe e dev'essere inclusa in un'altra funzione. Praticamente, è una funzione che deve essere passata ad un handler. Il codice seguente non funzionerebbe, perché il metodo sarebbe eseguita immediatamente quando l'applicazione viene aperta nel browser:
+Questa funzione è già abbastanza complessa, dal momento che passa un valore al metodo di classe e dev'essere inclusa in un'altra funzione. Praticamente, è una funzione che deve essere passata ad un handler. Il codice seguente non funzionerebbe, perché il metodo sarebbe eseguito immediatamente quando l'applicazione viene aperta nel browser:
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -708,7 +708,7 @@ Questo metodo sarà eseguito quando apri l'applicazione nel browser, ma non quan
 ...
 ~~~~~~~~
 
-I neofiti di React hanno spesso difficoltà ad usare funzioni negli event handler, quindi non scoraggiarti se dovessi avere problemi all'inizio. Dovresti ottenere un arrow function ES6 inline con accesso alla property `objectID` dell'oggetto `item`:
+I neofiti di React hanno spesso difficoltà ad usare funzioni negli event handler, quindi non scoraggiarti se dovessi avere problemi all'inizio. Dovremmo infine ottenere un arrow function ES6 inline con accesso alla property `objectID` dell'oggetto `item`:
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -893,7 +893,7 @@ class App extends Component {
 
 Salviamo il valore del campo di input nello stato locale ogni volta che il valore dell'input cambia.
 
-Possiamo assumere che quando aggiorniamo `searchTerm` con `this.setState()`, anche la lista ha bisogno di essere passata per mantenerla. `this.setState()` di React è quello che viene chiamato uno shallow merge, tuttavia, quindi preserva da solo i fratelli delle proprietà dell'oggetto stato quando aggiorna una o più property. La lista dello stato rimarrà uguale dunque, dopo l'aggiornamento della property `searchTerm`.
+Possiamo assumere che quando aggiorniamo `searchTerm` con `this.setState()`, abbiamo bisogno di passare anche la lista per mantenerne il valore. `this.setState()` di React effettua quello che viene chiamato uno shallow merge, tuttavia, quindi preserva da solo i fratelli delle proprietà dell'oggetto stato quando aggiorna una o più property. La lista dello stato rimarrà uguale dunque, dopo l'aggiornamento della property `searchTerm`.
 
 Ritornando all'applicazione, possiamo notare come la lista non sia ancora aggiornata, in base al valore dell'input salvato nello stato locale. Abbiamo bisogno di filtrare la lista temporaneamente basandoci su `searchTerm`, e abbiamo tutto quello di cui abbiamo bisogno per effettuare questa operazione. Nel metodo `render()`, prima del map sugli elementi della lista, ci applichiamo un filtro. Il filtro sarà applicato solo se `searchTerm` è presente nella property title dell'elemento. Abbiamo già usato la funzionalità di filtro built-in di JavaScript filter, quindi usiamola nuovamente per inserire una funzione di filtro prima della funzione map. La funzione di filtro restituirà un nuovo array, così che la funzione map possa farne uso.
 
@@ -967,9 +967,9 @@ class App extends Component {
 }
 ~~~~~~~~
 
-La condizione confronta `searchTerm` passato alla funzione con la property title dell'elemento dalla lista. Possiamo fare questo con la funzionalità built-in di JavaScript `includes`. Quando il pattern combacia, restituisce true e l'elemento rimarrà nella lista; quando il pattern non combacia, l'elemento sarà rimosso dalla lista. Non dimenticarti di ignorare il case su entrambe le stringhe, altrimenti non ci sarà matching tra la query di ricerca 'redux' e il titolo di un elemento 'Redux'. Siccome stiamo lavorando con una lsita immutabile e restituendo una nuova lista usando la funzione filter, la lista originale nello stato locale non sarà modificata.
+La condizione confronta il `searchTerm` passato alla funzione con la property title dell'elemento della lista. Possiamo fare questo con la funzionalità built-in di JavaScript `includes`. Quando il pattern combacia, restituisce true e l'elemento rimarrà nella lista; quando il pattern non combacia, l'elemento sarà rimosso dalla lista. Non dimenticarti di ignorare il case su entrambe le stringhe, altrimenti non ci sarà matching tra la query di ricerca 'redux' e il titolo di un elemento 'Redux'. Siccome stiamo lavorando con una lsita immutabile e restituendo una nuova lista usando la funzione filter, la lista originale nello stato locale non sarà modificata.
 
-Abbiamo un po' barato usando una feature di JavaScript ES6, che non sono preenti in ES5. Per ES5, utilizza la funzione `indexOf()` per ottenere l'indice dell'elemento nella lista. Quando l'elemento è nella lista `indexOf()` restituirà il suo indice nell'array.
+Abbiamo un po' barato usando una feature di JavaScript ES6, non presente in ES5. Per ES5, utilizza la funzione `indexOf()` per ottenere l'indice dell'elemento nella lista. Quando l'elemento è nella lista `indexOf()` restituirà il suo indice nell'array.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -1026,16 +1026,16 @@ class App extends Component {
 }
 ~~~~~~~~
 
-La funzionalità di ricerca dovrebbe funzionare ora. Provala nel browser.
+La funzionalità di ricerca dovrebbe funzionare ora, provala nel browser.
 
 ### Esercizi:
 
-* Leggi sugli [eventi di React](https://reactjs.org/docs/handling-events.html)
-* Leggi sulle [funzioni di ordine superiore](https://en.wikipedia.org/wiki/Higher-order_function)
+* Leggi di più sugli [eventi in React](https://reactjs.org/docs/handling-events.html)
+* Leggi di più sulle [funzioni di ordine superiore](https://en.wikipedia.org/wiki/Higher-order_function)
 
 ## Destructuring ES6
 
-Il destructuring in JavaScript ES6 fornisce un modo più semplice per accedere alle proprietà di oggetti e array. Confronta il seguente codice in ES5 e ES6:
+Il destructuring in JavaScript ES6 fornisce un modo più semplice per accedere alle proprietà di oggetti e array. Confronta il seguente codice rispettivamente in ES5 e ES6:
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -1119,13 +1119,13 @@ Ma siccome il libro utilizza principalmente ES6, dovresti fare lo stesso.
 
 ### Esercizi:
 
-* Leggi su [destructuring ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
+* Leggi di più sul [destructuring di ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 
 ## Componenti controlled
 
 Abbiamo in precedenza parlato dell'unidirectional data flow di React, la stessa legge si applica al campo di input, che aggiorna lo stato con il `searchTerm` per filtrare la lista. Non appena lo stato cambia, il metodo `render()` viene eseguito di nuovo e utilizza il nuovo `searchTerm` dello stato locale per applicare la condizione di filtro.
 
-Ma non abbiamo dimenticato qualcosa nell'elemento input? Un tag HTML input può avere un attributo `value`. L'attributo value di solito contiene il valore mostrato nel campo di input. In questo caso questo è la property `searchTerm`. Gli elementi dei form come `<input>`, `<textarea>` e `<select>` mantengono il loro stato in plain HTML. Questi modificano il valore internamente quanto qualcuno gli modifica dall'esterno. In React questi sono chiamati **componenti non controllati** (uncontrolled component), perché gestiscono il proprio stato. Noi invece vogliamo essere sicuri che questi elementi siano **componenti controllati** (controlled components).
+Ma non abbiamo dimenticato qualcosa nell'elemento input? Un tag HTML input può avere un attributo `value`. L'attributo value di solito contiene il valore mostrato nel campo di input. In questo caso questo è la property `searchTerm`. Gli elementi dei form come `<input>`, `<textarea>` e `<select>` mantengono il loro stato in plain HTML. Questi modificano il valore internamente quando qualcuno li modifica dall'esterno. In React questi sono chiamati **componenti non controllati** (uncontrolled component), perché gestiscono il proprio stato. Noi invece vogliamo essere sicuri che questi elementi siano **componenti controllati** (controlled components).
 
 Per fare questo setteremo l'altro value dei campi di input, che è già salvato nella property `searchTerm` dello stato, quindi possiamo accedervi da lì:
 
@@ -1157,11 +1157,11 @@ class App extends Component {
 
 Il ciclo di unidirectional data flow per il campo di input è autocontenuto, e lo stato locale del componente è l'unica fonte di verità per il campo di input.
 
-La gestione dello stato locale e l'unidirectional data flow potrebbero essere nuovi per te, ma una volta che ci fai l'abitudine diverranno un modo naturale da seguire per le implementazioni in React. React porta pattern innovativi con l'unidirectional data flow, infatti è stato adottata da diversi framework e librerie per la creazione di applicazioni single page.
+La gestione dello stato locale e l'unidirectional data flow potrebbero essere nuovi per te, ma una volta che ci farai l'abitudine diverranno un metodo naturale da seguire per le implementazioni in React. React introduce pattern innovativi con l'unidirectional data flow, infatti è stato adottata da diversi framework e librerie per la creazione di applicazioni single page.
 
 ### Esercizi:
 
-* Leggi sui [form in React](https://reactjs.org/docs/forms.html)
+* Leggi di più sui [form in React](https://reactjs.org/docs/forms.html)
 * Leggi di più su [differenti controlled components](https://github.com/the-road-to-learn-react/react-controlled-components-examples)
 
 ## Suddivisione in componenti
@@ -1217,7 +1217,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Adesso definiremo i componenti assieme al componente App, lo faremo utilizzando le classi di JavaScript ES6. Questi renderizzano li stessi elementi di prima.
+Adesso definiremo i componenti assieme al componente App, lo faremo utilizzando le classi di JavaScript ES6. Questi renderizzano gli stessi elementi di prima.
 
 Il primo sarà il componente Search:
 
@@ -1282,7 +1282,7 @@ class Table extends Component {
 # leanpub-end-insert
 ~~~~~~~~
 
-Adesso abbiamo tre componenti sotto forma di classi ES6. Nota come l'oggetto `props` è accessibile attraverso l'istanza della classe utilizzando `this`. Props, abbreviazione per properties, conterrà tutti i valori passati ai componenti quando abbiamo usato il componente App. In questo modo i componenti possono passare proprietà giù nell'albero di componenti.
+Adesso abbiamo tre componenti sotto forma di classi ES6. Nota come l'oggetto `props` è accessibile attraverso l'istanza della classe utilizzando `this`. Props, abbreviazione per properties, conterrà tutti i valori passati ai componenti quando abbiamo usato il componente App. In questo modo i componenti possono passare proprietà giù nell'albero dei componenti.
 
 Estraendo questi componenti dal componente App questi diventano anche riutilizzabili. Visto che i componenti prendono i loro valori usando l'oggetto `props`, puoi passare props diverse ai tuoi componenti ogni volta che li usi da qualche altra parte.
 
@@ -1347,15 +1347,15 @@ class Search extends Component {
 }
 ~~~~~~~~
 
-Il testo "Search" dovrebbe ora essere visibile a fianco del campo di input. Quando userai il componente Search altrove, potrai specificare differenti entità, siccome non è solo il testo che può essere passato come figlio. Puoi anche passare un elemento, o alberi di elementi, che può essere incapsulato dai componenti come figli. La proprietà children render possibile intrecciare componenti tra loro.
+Il testo "Search" dovrebbe ora essere visibile a fianco del campo di input. Quando userai il componente Search altrove, potrai specificare differenti entità, siccome non è solo il testo che può essere passato come figlio. Puoi anche passare un elemento, o un albero di elementi, che può essere incapsulato dai componenti come figli. La proprietà children rende possibile intrecciare componenti tra loro.
 
 ### Esercizi:
 
-* Leggi su [il modello a composizione di React](https://reactjs.org/docs/composition-vs-inheritance.html)
+* Leggi di più sul [modello a composizione di React](https://reactjs.org/docs/composition-vs-inheritance.html)
 
 ## Componenti riutilizzabili
 
-Componenti riutilizzabili e componibili ti danno il potere di realizzare gerarchie di componenti efficaci, le basi del layer di vista di React. Le ultime sezioni hanno menzionato la riusabilità e adesso possiamo vedere come funziona la riusabilità di componenti come Table e Search nel nostro caso. Anche il componente App è riutilizzabile, visto che può essere istanziato altro anche lui.
+Componenti riutilizzabili e componibili ti danno il potere di realizzare gerarchie di componenti efficaci, le basi del layer di vista di React. Le ultime sezioni hanno menzionato la riusabilità e adesso possiamo vedere come funziona la riusabilità di componenti come Table e Search nel nostro caso. Anche il componente App è riutilizzabile, visto che può essere istanziato altrove anche lui.
 
 Definiamo un nuovo componente riusabile, un componente Button che può essere riutilizzato spesso:
 
@@ -1382,7 +1382,7 @@ class Button extends Component {
 }
 ~~~~~~~~
 
-Potrebbe sembrare ridondante dichiarare componenti come questo, ma non lo è. Usiamo un componente `Button` invece di un elemento `button`, che risparmia solo il `type="button"`. Potrebbe non sembrare una rande vittoria, ma queste cose si vedono sulla lunga distanza. Immagina di avere diversi bottoni nella tua applicazione, e di voler cambiare un attributo, uno stile, o il comportamento per solo uno. Senza il componente, dovresti cambiare (rifattorizzare) ognuno. Il componente Button assicura che l'operazione abbia un singolo punto di verità, o un Button per rifattorizzare tutti gli altri in una volta.
+Potrebbe sembrare ridondante dichiarare componenti come questo, ma non lo è. Usiamo un componente `Button` invece di un elemento `button`, che risparmia solo il `type="button"`. Potrebbe non sembrare una grande vittoria, ma queste cose si vedono sulla lunga distanza. Immagina di avere diversi bottoni nella tua applicazione, e di voler cambiare un attributo, uno stile, o il comportamento per solo uno. Senza il componente, dovresti cambiare (rifattorizzare) ognuno. Il componente Button assicura che l'operazione abbia un singolo punto di verità, o un Button per rifattorizzare tutti gli altri in una volta.
 
 Visto che abbiamo già un elemento button, possiamo già usare il componente Button al suo posto. Ometteremo l'attributo type, perché il componente Button lo specifica da sé.
 
@@ -1439,19 +1439,19 @@ Adesso, ovunque non ci sia una proprietà `className` specificata per il compone
 
 ### Esercizi:
 
-* Leggi su [come passare le props in React](https://www.robinwieruch.de/react-pass-props-to-component/)
+* Leggi di più su [come passare le props in React](https://www.robinwieruch.de/react-pass-props-to-component/)
 
 ## Dichiarazione di componenti
 
-Adesso abbiamo quattro componenti come classi ES6, ma l'applicazione può ancora essere migliorata usando componenti funzionali senza stato (functional stateless components) in alternative ai componenti come classi ES6. Prima di rifattorizzare i nostri componenti, introduciamo i diversi tipi.
+Adesso abbiamo quattro componenti come classi ES6, ma l'applicazione può ancora essere migliorata usando componenti funzionali senza stato (functional stateless components) in alternativa ai componenti realizzati tramite classe. Prima di rifattorizzare i nostri componenti, introduciamo i diversi tipi di implementazione per componenti.
 
-* **Functional Stateless Components** sono funzioni che prendono un input e restituiscono un output. Gli input sono le props e l'output è l'istanza del componente in plain JSX. Fin qui, è piuttosto simile ad un componente come classe ES6. Però, i function al stateless components sono funzioni (functional) e non hanno stato locale (stateless). Non puoi accedere o aggiornare lo stato con `this.state` o `this.setState()` perché non c'è un oggetto `this`. Inoltre, non hanno metodi di lifecycle eccetto per il metodo `render()` che sarà applicato implicitamente nel caso dei functional stateless components. Non abbiamo ancora imparato niente sui metodi di lifecycle, ma ne abbiamo già usati due: `constructor()` e `render()`. Il costruttore viene eseguito solo una volta nella vita di un componente, mentre il metodo di classe `render()` una volta inizialmente e in seguito ogni volta che il componente viene aggiornato. Tiene a mente che i functional stateless components non hanno metodi di lifecycle quando arriveremo a trattarli in un capitolo successivo.
+* **Functional Stateless Components** sono funzioni che prendono un input e restituiscono un output. Gli input sono le props e l'output è l'istanza del componente in plain JSX. Fin qui, è piuttosto simile ad un componente implementato come classe ES6. Però, i functional stateless components sono funzioni (functional) e non hanno stato locale (stateless). Non puoi accedere o aggiornare lo stato con `this.state` o `this.setState()` perché non c'è un oggetto `this`. Inoltre, non hanno metodi di lifecycle eccetto per il metodo `render()` che sarà applicato implicitamente nel caso dei functional stateless components. Non abbiamo ancora imparato niente sui metodi di lifecycle, ma ne abbiamo già usati due: `constructor()` e `render()`. Il costruttore viene eseguito solo una volta nella vita di un componente, mentre il metodo di classe `render()` viene eseguito una volta inizialmente e in seguito ogni volta che il componente viene aggiornato. Tieni a mente che i functional stateless components non hanno metodi di lifecycle quando arriveremo a trattarli in un capitolo successivo.
 
-* **Componenti come classi ES6** si estendono dal componente di React. L'`extend` aggancia tutti i metodi di lifecycle, disponibili nell'API del componente React, al componente definito. Ecco come eravamo in grado di usare il metodo di classe `render()`. Puoi anche salvare e manipolare lo stato nei componenti come classe ES6 usando `this.state` e `this.setState()`.
+* **Componenti come classi ES6** si estendono dalla classe Component di React. L'`extend` aggancia tutti i metodi di lifecycle, disponibili nell'API del Component React, al componente definito. Ecco come eravamo in grado di usare il metodo di classe `render()`. Puoi anche salvare e manipolare lo stato nei componenti implementati tramite classe ES6 usando `this.state` e `this.setState()`.
 
-* **React.createClass** era utilizzato in vesione vecchie di React ed è ancora utilizzato in applicazioni React che fanno uso di JavaScript ES5. In ogni caso [Facebook l'ha dichiarato deprecato](https://reactjs.org/blog/2015/03/10/react-v0.13.html) in favore di JavaScript ES6. È anche stato aggiunto un [warning di deprecazione dalla versione 15.5](https://reactjs.org/blog/2017/04/07/react-v15.5.0.html), quindi non useremo questa modalità nel libro.
+* **React.createClass** era utilizzato in vesioni vecchie di React ed è ancora utilizzato in applicazioni React che fanno uso di JavaScript ES5. In ogni caso [Facebook l'ha dichiarato deprecato](https://reactjs.org/blog/2015/03/10/react-v0.13.html) in favore di JavaScript ES6. È anche stato aggiunto un [warning di deprecazione dalla versione 15.5](https://reactjs.org/blog/2017/04/07/react-v15.5.0.html), quindi non useremo questa modalità nel libro.
 
-Quando bisogna decidere se utilizzare componenti funzionali senza stato al posto di componenti tramite classi ES6, una buona regola da seguire è di usare i componenti funzionali senza stato quando non si ha bisogno di uno stato locale o di utilizzare metodi di lifecycle. Di solito si usa implementare i componenti come functional stateless componentes, ma quando è necessario accedere allo stato o utilizzare metodi di lifecycle, rifattorizzarli in classi ES6. Abbiamo fatto l'opposto finora ma solo per motivi didattici.
+Quando bisogna decidere se utilizzare componenti funzionali senza stato al posto di componenti tramite classi ES6, una buona regola da seguire è di usare i componenti funzionali senza stato quando non si ha bisogno di uno stato locale o di utilizzare metodi di lifecycle. Di solito si usa implementare i componenti come functional stateless componentes, e quando è necessario accedere allo stato o utilizzare metodi di lifecycle, rifattorizzarli in classi ES6. Abbiamo fatto l'opposto finora ma solo per motivi didattici.
 
 Ritornando all'applicazione, vediamo come il componente App faccia uso dello stato locale, quindi deve rimanere una classe ES6. Gli altri tre componenti non hanno stato, quindi non hanno bisogno di accedere a `this.state` o `this.setState()`, e non hanno metodi di lifecycle. Rifattorizzeremo ora il componente Search in uno stateless functional component. Il refactoring dei componenti Table e Button sarà lasciato come esercizio.
 
@@ -1533,11 +1533,11 @@ Adesso abbiamo un componente funzionale senza stato molto leggero. Quando avremo
 ### Esercizi:
 
 * Rifattorizza i componenti Table e Button in componenti funzionali senza stato
-* Leggi su [componenti come classi ES6 e componenti funzionali senza stato](https://reactjs.org/docs/components-and-props.html)
+* Leggi di più su [componenti come classi ES6 e componenti funzionali senza stato](https://reactjs.org/docs/components-and-props.html)
 
 ## Lo stile dei componenti
 
-In questa sezione aggiungere dello stile base alla nostra applicazione e ai componenti utilizzando i file *src/App.css* e *src/index.css*. Questi file dovrebbero già essere nel tuo progetto, visto che abbiamo effettuato il bootstrap con *create-react-app*. Dovrebbero anche essere già imporati nei file *src/App.js* e *src/index.js*. Il seguente è CSS che può essere copiato e incollato in questi file, ma sentiti libero di usare del tuo stile se sei a tuo agio con CSS.
+In questa sezione aggiungeremo dello stile base alla nostra applicazione e ai componenti utilizzando i file *src/App.css* e *src/index.css*. Questi file dovrebbero già essere nel tuo progetto, visto che abbiamo effettuato il bootstrap con *create-react-app*. Dovrebbero anche essere già imporati nei file *src/App.js* e *src/index.js*. Il seguente è CSS che può essere copiato e incollato in questi file, ma sentiti libero di usare del tuo stile se sei a tuo agio con CSS.
 
 Prima lo stile generale dell'applicazione:
 
@@ -1660,7 +1660,7 @@ Secondo lo stile per i componenti nel file App:
 
 Ora possiamo usare questo stile con alcuni dei nostri componenti. Ricorda di usare `className` in React invece di `class` come attributo HTML.
 
-Prima cosa applichiamo al nostro componente App:
+Prima cosa applichiamolo al nostro componente App:
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -1736,7 +1736,7 @@ const Table = ({ list, pattern, onDismiss }) =>
 
 Ora l'applicazione ed i componenit sono stati stilizzati con del CSS di base. Inoltre, noi sappiamo che JSX mescola HTML e JavaScript, ora possiamo aggiungere CSS al mix probabilmente. Questo è chiamato inline style, dove si può definire oggetti JavaScript e passarli come attributo style ad un elemento.
 
-Manteniamo la larghezza delle colonne di Tabel flessibile utilizzando dello stile inline.
+Manteniamo la larghezza delle colonne di Table flessibile utilizzando dello stile inline.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -1791,7 +1791,7 @@ const smallColumn = {
 Dopodiché possiamo usarli nelle colonne: `<span style={smallColumn}>`. Ci sono diverse opinioni e soluzioni circa lo stile in React, ma il puro CSS inline che abbiamo utilizzato è sufficiente per questo tutorial. Non voglio prendere una decisione in particolare qui, ma voglio offrirti altre opzioni. Puoi leggerle e applicarle da solo:
 
 * [styled-components](https://github.com/styled-components/styled-components)
-* [CSS Modules](https://github.com/css-modules/css-modules) (leggi il mio breve articolo su [come usare moduli CSS in create-react-app](https://www.robinwieruch.de/create-react-app-css-modules/))
+* [Moduli CSS](https://github.com/css-modules/css-modules) (leggi il mio breve articolo su [come usare moduli CSS in create-react-app](https://www.robinwieruch.de/create-react-app-css-modules/))
 * [Sass](https://sass-lang.com/) (leggi il mio breve articolo su [come usare Sass in create-react-app](https://www.robinwieruch.de/create-react-app-with-sass-support/))
 
 Ma se sei nuovo di React ti consiglio di attenerti al puro CSS inline per ora.
@@ -1816,4 +1816,4 @@ Hai imparato le basi su come scrivere un'applicazione React! Ricapoliamo l'ultim
 * **Concetti generali**
   * Funzioni di ordine superiore
 
-Di nuovo ha senza fermarmi per una pausa ora, interiorizzare le lezioni e applicarle per conto proprio. Sperimenta con il codice che abbiamo scritto fin qui. Il codice sorgente per questo progetto si trova nel [repository ufficiale](https://github.com/the-road-to-learn-react/hackernews-client/tree/5.2).
+Di nuovo ha senso fermarsi per una pausa ora, interiorizzare le lezioni e applicarle per conto proprio. Sperimenta con il codice che abbiamo scritto fin qui. Il codice sorgente per questo progetto si trova nel [repository ufficiale](https://github.com/the-road-to-learn-react/hackernews-client/tree/5.2).
