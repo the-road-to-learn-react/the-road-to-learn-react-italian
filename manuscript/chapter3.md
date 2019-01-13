@@ -1,19 +1,19 @@
 # Renderlo reale con le API
 
-È arrivato il momento di rendere più reale l'applicazione attraverso un'API e abbandonare i dati di esempio. Se non hai famigliarità, ti consiglio di [leggere il mio articolo su come ho imparato a capire le API](https://www.robinwieruch.de/what-is-an-api-javascript/).
+È arrivato il momento di rendere più reale l'applicazione attraverso un'API e abbandonare i dati di esempio. Se non hai familiarità, ti consiglio di [leggere il mio articolo su come ho capito le API](https://www.robinwieruch.de/what-is-an-api-javascript/).
 
 Per la nostra prima incursione in questo concetto useremo [Hacker News](https://news.ycombinator.com/), un affidabile aggregatore di news con argomento la tecnologia. In questo esercizio useremo le API di Hacker News per recuperare gli articoli di tendenza. Esistono le modalità API [base](https://github.com/HackerNews/API) e API [ricerca](https://hn.algolia.com/api) per recuperare i dati dalla piattaforma. La modalità ricerca ha senso per la nostra applicazione, perché vogliamo essere in grado di cercare tra gli articoli di Hacker News. Dai un'occhiata alla specifica delle API per capirne la struttura dati.
 
 ## Metodi di lifecycle
 
-Potresti ricordarti che abbiamo menzionato i metodi di lifecycle nello scorso capitolo, come modo per agganciarsi nel ciclo di vita di un componente React. Questi possono essere usati in un componente implementato tramite classe ES6, non in un componente funzionale privo di stato. A parte il metodo `render()` ci sono altri metodi che possono essere sovrascritti in un componente implementato tramite una classe ES6. Tutti questi sono metodi di lifecycle.
+Potresti ricordarti che abbiamo menzionato i metodi di lifecycle nello scorso capitolo, come modo per agganciarsi al ciclo di vita di un componente React. Questi possono essere usati in un componente implementato tramite classe ES6, non in un componente funzionale privo di stato. A parte il metodo `render()` ci sono altri metodi che possono essere sovrascritti in un componente implementato tramite una classe ES6. Tutti questi sono metodi di lifecycle.
 
-Ne abbiamo già conosciuti due di questi metodi che possono essere utilizzati in un componente implementato tramite classe ES6:
+Ne abbiamo già conosciuti due di questi metodi che possono essere utilizzati in un componente implementato tramite classe:
 
 * Il costruttore è chiamato solo una volta quando viene creata un'istanza del componente e inserita nel DOM. Il componente viene istanziato in un processo chiamato mounting del componente.
 * Anche il metodo `render()` è chiamato durante il processo di mounting, ma anche quando il componente viene aggiornato. Ogni volta che lo stato o le props di un componente cambiano, il metodo `render()` viene chiamato.
 
-Ci sono altri due metodi di lifecycle che vengono eseguito durante il mounting di un componente: `getDerivedStateFromProps()` e `componentDidMount()`. Il costruttore è il primo che viene chiamato, `getDerivedStateFromProps()` è chiamato prima del metodo `render()`, e `componentDidMount()` è chiamato dopo il metodo `render()`.
+Ci sono altri due metodi di lifecycle che vengono eseguiti durante il mounting di un componente: `getDerivedStateFromProps()` e `componentDidMount()`. Il costruttore è il primo che viene chiamato, `getDerivedStateFromProps()` è chiamato prima del metodo `render()`, e `componentDidMount()` è chiamato dopo il metodo `render()`.
 
 Nel complesso il processo di mounting è composto da quattro metodi di lifecycle, invocati nel seguente ordine:
 
@@ -22,7 +22,7 @@ Nel complesso il processo di mounting è composto da quattro metodi di lifecycle
 * render()
 * componentDidMount()
 
-I metodi di lifecylce che vengono chiamati in aggiornamento di un componente, quando lo stato o le props cambiano, sono cinque e e vengono chiamati in quest'ordine:
+I metodi di lifecylce che vengono chiamati in aggiornamento di un componente, quando lo stato o le props cambiano, sono cinque e vengono chiamati in quest'ordine:
 
 * getDerivedStateFromProps()
 * shouldComponentUpdate()
@@ -36,13 +36,13 @@ Non hai bisogno di conoscere tutti i metodi di lifecycle dall'inizio, e anche in
 
 * **constructor(props)** è chiamato quando il componente viene inizializzato. In questo metodo puoi settare uno stato iniziale al componente e associare metodi di classe.
 
-* **static getDerivedStateFromProps(props, state)** è chiamato prima del metodo `render()`, sia al mount iniziale, sia agli aggiornamenti successivi. Dovrebbe restituire un oggetto per aggiornare lo stato o null per non aggiornare niente. Esiste per quei **rari** casi dove lo stato dipendene dai cambiamenti delle props nel tempo. È importante sapere che questo è un metodo statico e non avrà quindi accesso all'istanza del componente.
+* **static getDerivedStateFromProps(props, state)** è chiamato prima del metodo `render()`, sia al mount iniziale, sia agli aggiornamenti successivi. Dovrebbe restituire un oggetto per aggiornare lo stato o null per non aggiornare niente. Esiste per quei **rari** casi dove lo stato dipende dai cambiamenti delle props nel tempo. È importante sapere che questo è un metodo statico e non avrà quindi accesso all'istanza del componente.
 
 * **render()** è un metodo di lifecycle obbligatorio che restutisce gli elementi in output al componente. Il metodo dovrebbe essere puro, quindi non dovrebbe modificare lo stato del componente. Prende in input props e state e restituisce un elemento.
 
-* **componentDidMount()** è chiamato una volta, quando il mounting del componente è completato. Questo è il momento perfetto per eseguire una richiesta asincrono per effettuare il fetching di dati da un API. I dati recuperati sono salvati nello stato locale del componente per renderizzarli nel metodo `render()`.
+* **componentDidMount()** è chiamato una volta, quando il mounting del componente è completato. Questo è il momento perfetto per eseguire una richiesta asincrona ed effettuare il fetching di dati da un API. I dati recuperati sono salvati nello stato locale del componente per renderizzarli nel metodo `render()`.
 
-* **shouldComponentUpdate(nextProps, nextState)** è chiamato ogni volta che di un componente viene aggiornato lo stato o le props. Si usa in applicazioni React mature per otimizzare le performance. In base ad un valore booleano che questo metodo di lifecycle restituisce, il componente ed i suoi figli verranno o no ri-renderizzati. Serve praticamente a prevenire in alcuni casi l'esecuzione del metodo render di un componente.
+* **shouldComponentUpdate(nextProps, nextState)** è chiamato ogni volta che di un componente viene aggiornato lo stato o se le props cambiano. Si usa in applicazioni React mature per ottimizzare le performance. In base ad un valore booleano che questo metodo di lifecycle restituisce, il componente ed i suoi figli verranno o no ri-renderizzati. Serve praticamente a prevenire in alcuni casi l'esecuzione del metodo render di un componente.
 
 * **getSnapshotBeforeUpdate(prevProps, prevState)** è un metodo di lifecycle invocato prima che il più recente output renderizzato è applicato al DOM. In casi rari, il componente ha bisogno di catturare l'informazione dal DOM prima che sia potenzialmente cambiato. Questo metodo permette al component di farlo. Un altro metodo (`componentDidUpdate()`) riceverà qualsiasi valore restituito da `getSnapshotBeforeUpdate()` come parametro.
 
@@ -50,19 +50,19 @@ Non hai bisogno di conoscere tutti i metodi di lifecycle dall'inizio, e anche in
 
 * **componentWillUnmount()** è chiamato prima che il componente venga distrutto. Puoi usare questo metodo di lifecycle per eseguire qualsiasi task di clean up.
 
-Come avrai capito i metodi di lifecycle `constructor()` e `render()` sono i più comunemente usati nei componenti implementati come classi ES6. Il metodo `render()` è sempre obbligatorio per restituire l'istanza di un componente.
+Come avrai capito i metodi di lifecycle `constructor()` e `render()` sono i più comunemente usati nei componenti implementati tramite classi ES6. Il metodo `render()` è sempre obbligatorio per restituire l'istanza di un componente.
 
-Infine, `componentDidCatch(error, info)` è stato introdotto in [React 16](https://www.robinwieruch.de/what-is-new-in-react-16/) come metodo per catturare gli errori nei componenti. Per esempio, la visualizzazione della lista di esempio nella nostra applicazione funziona, ma potrebbero esserci casi in cui una lista è salvata nello stato locale come `null` per errore (es. quando viene fatto il fetching della lista da un API esterna, ma la richiesta fallisce e la lista viene salvata nello stato locale come null). In questo caso diventa impossibile filtrare e trasformare la lista, poiché abbiamo null e non una lista vuota. Il componente si romperebbe e l'intera applicazione crasherebbe. Usando `componentDidCatch()` è possibile catturare l'errore, salvarlo nello stato locale e mostrare un messaggio all'utente.
+Infine, `componentDidCatch(error, info)` è stato introdotto in [React 16](https://www.robinwieruch.de/what-is-new-in-react-16/) come metodo per catturare gli errori nei componenti. Per esempio, la visualizzazione della lista di esempio nella nostra applicazione funziona, ma potrebbero esserci casi in cui una lista è salvata nello stato locale come `null` per errore (es. quando viene fatto il fetching della lista da un API esterna, ma la richiesta fallisce e la lista viene salvata nello stato locale come null). In questo caso diventa impossibile filtrare e trasformare la lista, poiché abbiamo null e non una lista vuota. In questo caso il componente si romperebbe e l'intera applicazione crasherebbe. Usando `componentDidCatch()` è possibile catturare l'errore, salvarlo nello stato locale e mostrare un messaggio all'utente.
 
 ### Esercizi:
 
-* Leggi sui [metodi di lifecycle in React](https://reactjs.org/docs/react-component.html)
-* Leggi sullo [stato e le sue relazioni con i metodi di lifecycle in React](https://reactjs.org/docs/state-and-lifecycle.html)
-* Leggi sulla [gestione di errori nei componenti](https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html)
+* Leggi di più sui [metodi di lifecycle in React](https://reactjs.org/docs/react-component.html)
+* Leggi di più sullo [stato e le sue relazioni con i metodi di lifecycle in React](https://reactjs.org/docs/state-and-lifecycle.html)
+* Leggi di più sulla [gestione di errori nei componenti](https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html)
 
 ## Fetch di dati
 
-Adesso siamo pronti per recuperare i dati dall'API di Hacker News. C'era un metodo di lifecycle che è stato nominato per essere usato per il recupero di dati: `componentDidMount()`. Prima di usarlo, inizializziamo le costanti URL e i parametri di default per dividere gli endpoint delle URL delle richieste API in parti più piccole.
+Adesso siamo pronti per recuperare i dati dall'API di Hacker News. C'è un metodo di lifecycle che è stato nominato per essere usato per il recupero di dati: `componentDidMount()`. Prima di usarlo, inizializziamo le costanti URL e i parametri di default per dividere gli endpoint delle URL delle richieste API in parti più piccole.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -138,11 +138,11 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Per prima cosa abbiamo rimosso la lista di esempio, visto che andremo a recuperare la lista reale dalle API di Hacker News. Lo stato iniziale del componente avrà un risultato vuoto e una query di ricerca di default. La stessa query di ricerca di default è utilizzato nel campo di input del componente Search e nella prima richiesta.
+Per prima cosa abbiamo rimosso la lista di esempio, visto che andremo a recuperare la lista reale dalle API di Hacker News. Lo stato iniziale del componente avrà un risultato vuoto e una query di ricerca di default. La stessa query di ricerca di default è utilizzata nel campo di input del componente Search e nella prima richiesta.
 
 Seconda cosa, useremo il metodo di lifecylce `componentDidMount()` per fare il fetching dei dati quando il componente è applicato al DOM. La prima richiesta utilizza la query di ricerca di default dello stato locale. Questo recupererà gli articoli su "redux", visto che questo è il parametro di default.
 
-Terza cosa, l'API nativa fetch è utilizzata. Il template strings di JavaScript ES6 ci permette di comporre l'URL con `searchTerm`. L'URL è l'argomento della funzione nativa fetch. La risposta viene trasformata in un JSON, un passaggio obbligatorio in una chiamata fetch che restituisce un JSON come struttura dati, dopo di ché il risultato verrà salvato nello stato locale del componente. Se si verifica un errore durante la richiesta, la funzione eseguirà il blocco catch invece del blocco then.
+Terza cosa, viene utilizzata l'API nativa fetch. Il template strings di JavaScript ES6 ci permette di comporre l'URL con `searchTerm`. L'URL è l'argomento della funzione nativa fetch. La risposta viene trasformata in un JSON, un passaggio obbligatorio in una chiamata fetch che restituisce un JSON come struttura dati, dopodiché il risultato verrà salvato nello stato locale del componente. Se si verifica un errore durante la richiesta, la funzione eseguirà il blocco catch invece del blocco then.
 
 Ricordati di effettuare il binding dei metodi del componente nel costruttore.
 
@@ -179,9 +179,9 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Ora ricapitoliamo cosa succede durante il ciclo di vita del componente. Il componente è inizializzato dal costruttore, dopo di ché sarà renderizzato per la prima volta. Abbiamo evitato che mostrasse niente, perché result nello stato locale è null. È permesso restituire null per un componente per non mostrare niente. A seguire il metodo di lifecycle `componentDidMount()` effettua la richiesta di recupero dei dati asincronamente dall'API di Hacker News. Una volta che i dati sono arrivati, viene aggiornato lo stato locale del componente in `setSearchTopStories()`. Il ciclo di vita si attiva nuovamente perché lo stato è stato aggiornato. Il componente esegue di nuovo il metodo `render()`, ma questa volta con result popolato nello stato locale. Il componente e il componente Table sono mostrati con il loro contenuto.
+Ora ricapitoliamo cosa succede durante il ciclo di vita del componente. Il componente è inizializzato dal costruttore, dopodiché sarà renderizzato per la prima volta. Abbiamo evitato che mostrasse niente, perché result nello stato locale è null. È permesso restituire null per un componente per non mostrare niente. A seguire il metodo di lifecycle `componentDidMount()` effettua la richiesta di recupero dei dati in modo asincrono dall'API di Hacker News. Una volta che i dati sono arrivati, viene aggiornato lo stato locale del componente in `setSearchTopStories()`. Il ciclo di vita si attiva nuovamente perché lo stato è stato aggiornato. Il componente esegue di nuovo il metodo `render()`, ma questa volta con result popolato nello stato locale. Il componente e il componente Table sono mostrati con il loro contenuto.
 
-Abbiamo utilizzato l'API nativa fetch supportata dalla maggior parte dei browser per effettuare una richiesta asincrona all'API. La configurazione di *create-react-app* si assicura che sia supportata da tutti i browser. Ci sono anche pacchetti node di terze parti che si possono usare per sostituire l'API nativa fetch: [axios](https://github.com/mzabriskie/axios). Useremo axios più tardi in questo libro.
+Abbiamo utilizzato l'API nativa fetch supportata dalla maggior parte dei browser per effettuare una richiesta asincrona all'API. La configurazione di *create-react-app* si assicura che sia supportata da tutti i browser. Ci sono anche pacchetti node di terze parti che si possono usare per sostituire l'API nativa fetch: [axios](https://github.com/mzabriskie/axios). Useremo axios più avanti in questo libro.
 
 In questo libro useremo la notazione concisa di JavaScript per i controlli di veridicità. Nell'esempio precedente `if (!result)` è stato utilizzato al posto di `if (result === null)`. La stessa cosa succederà per altri casi. Per esempio, `if (!list.length)` è utilizzato al posto di `if (list.length === 0)`, oppure `if (someString)` è utilizzato piuttosto che `if (someString !== '')`.
 
@@ -189,13 +189,13 @@ La lista di articoli dovrebbe adesso essere visibile nella nostra applicazione; 
 
 ### Esercizi:
 
-* Leggi sui [template literals di ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals)
-* Leggi sull'[API nativa fetch](https://developer.mozilla.org/en/docs/Web/API/Fetch_API)
-* Leggi sul [fetching di dati in React](https://www.robinwieruch.de/react-fetching-data/)
+* Leggi di più sui [template literals di ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Template_literals)
+* Leggi di più sull'[API nativa fetch](https://developer.mozilla.org/en/docs/Web/API/Fetch_API)
+* Leggi di più sul [fetching di dati in React](https://www.robinwieruch.de/react-fetching-data/)
 
-## Gli Spread Operator di ES6
+## Lo Spread Operator di ES6
 
-Il bottone "Dismiss" non funziona perché il metodo `onDismiss()` non è a conoscenza del complesso oggetto result. Conosce solo la vecchia lista semplice dello stato locale, ma non è più così. Cambione la logica per operare sull'oggetto result invece che sulla lista stessa.
+Il bottone "Dismiss" non funziona perché il metodo `onDismiss()` non è a conoscenza del complesso oggetto result. Conosce solo la vecchia lista semplice dello stato locale, ma non è più così. Cambiamo la logica per operare sull'oggetto result invece che sulla lista stessa.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -220,9 +220,9 @@ Potremmo ovviare a questo problema mutando la lista hits nell'oggetto risultato.
 this.state.result.hits = updatedHits;
 ~~~~~~~~
 
-Come sappiamo React abbraccia le strutture dati immutabili, quindi non vogliamo mutare un oggetto (o mutare lo stato direttamente). Quello che vogliamo fare è generare un nuovo oggetto basandoci sulle informazioni date, così che nessun oggetto venga alterato in modo da mantenere le strutture dati immutabili. Restituiremo sempre un oggetto, ma senza alterare quello originale.
+Come sappiamo React abbraccia le strutture dati immutabili, quindi non vogliamo mutare un oggetto (o mutare lo stato direttamente). Quello che vogliamo fare è generare un nuovo oggetto basandoci sulle informazioni date, così che nessun oggetto venga alterato in modo da mantenere le strutture dati immutabili. Restituiremo sempre un oggetto, e senza alterare quello originale.
 
-Per far questo useremo la funzione di JavaScript ES6 `Object.assign()`. Questa funzione prende un oggetto target come primo argomento. Tutti gli argomenti successivi sono oggetti source, che verranno mergiati nell'oggetto target. L'oggetto target può anche essere un oggetto vuoto. Questo rispetta l'immutabilità, perché nessun oggetto source viene mutato.
+Per fare questo useremo la funzione di JavaScript ES6 `Object.assign()`. Questa funzione prende un oggetto target come primo argomento. Tutti gli argomenti successivi sono oggetti source, che verranno mergiati nell'oggetto target. L'oggetto target può anche essere un oggetto vuoto. Questo rispetta l'immutabilità, perché nessun oggetto source viene mutato.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -259,7 +259,7 @@ console.log(allUsers);
 // output: ['Robin', 'Andrew', 'Dan', 'Jordan']
 ~~~~~~~~
 
-La variabile `allUsers` è un array completamente nuovo. Le altre variabili `userList` e `additionalUser` restano le stesse. È anche possibile fare il merge due array in un nuovo array.
+La variabile `allUsers` è un array completamente nuovo. Le altre variabili `userList` e `additionalUser` restano le stesse. È anche possibile fare il merge di due array in un nuovo array.
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -271,7 +271,7 @@ console.log(allUsers);
 // output: ['Robin', 'Andrew', 'Dan', 'Jordan']
 ~~~~~~~~
 
-Diamo adesso un'occhiata allo spread operator per gli oggetti, che non è parte di JavaScript ES6. Fa parte di una [proposta per una versione successiva di JavaScript](https://github.com/sebmarkbage/ecmascript-rest-spread) che è già utilizzata dalla comunità React, ed è per questo che *create-react-app* incorpora la feature nella sua configurazione. Lo spread operator per gli oggetti funziona come quello per gli array di ES6, eccetto che è per oggetti. Ogni coppia chiave e valore è copiata nel nuovo oggetto:
+Diamo adesso un'occhiata allo spread operator per gli oggetti, che non è parte di JavaScript ES6. Esso fa parte di una [proposta per una versione successiva di JavaScript](https://github.com/sebmarkbage/ecmascript-rest-spread) che è già utilizzata dalla comunità React, ed è per questo che *create-react-app* incorpora la feature nella sua configurazione. Lo spread operator per gli oggetti funziona come quello per gli array di ES6, eccetto che è per oggetti. Ogni coppia chiave e valore è copiata nel nuovo oggetto:
 
 {title="Code Playground",lang="javascript"}
 ~~~~~~~~
@@ -314,14 +314,14 @@ Il bottone "Dismiss" dovrebbe funzionare adesso, poiché il metodo `onDismiss()`
 
 ### Esercizi:
 
-* Leggi sul metodo [Object.assign() di ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
-* Leggi sullo [spread operator di array e oggetti](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Spread_operator)
+* Leggi di più sul metodo [Object.assign() di ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
+* Leggi di più sullo [spread operator di array e oggetti](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Spread_operator)
 
 ## Rendering condizionale
 
-Il rendering condizionale viene di solito introdotto presto nello sviluppo di applicazione React, sebbene non l'abbiamo ancora usato nel nostro esempio. Succede quando decidi di renderizzare due possibili elementi, che di solito è una scelta tra renderizza un elemento o non renderizzare nulla. Il più semplice utilizzo di rendering condizionale può essere espresso da un'istruzione if-else nel JSX.
+Il rendering condizionale viene di solito introdotto presto nello sviluppo di applicazione React, sebbene non l'abbiamo ancora usato nel nostro esempio. Succede quando decidi di renderizzare due possibili elementi, che di solito è una scelta tra renderizzare un elemento o non renderizzare nulla. Il più semplice utilizzo di rendering condizionale può essere espresso da un'istruzione if-else nel JSX.
 
-L'oggetto `result` nello stato locale del componente è `null` inizialmente. Fino ad ora, il componente App non ha restituito elementi quando `result` non è ancora arrivato dalle API. Questo è già un rendering condizione, poiché restituiamo prima l'output di un componente nel metodo `render()` per una certa condizione. Il componente App o non renderizza nulla o renderizza i suoi elementi.
+L'oggetto `result` nello stato locale del componente è `null` inizialmente. Fino ad ora, il componente App non ha restituito elementi quando `result` non è ancora arrivato dalle API. Questo è già un rendering condizionale, poiché restituiamo prima l'output di un componente nel metodo `render()` per una certa condizione. Il componente App o non renderizza nulla o renderizza i suoi elementi.
 
 Ma spingiamoci un passo oltre. Ha più senso racchiudere il componente Table, che è l'unico componente che dipende da `result`, in un rendering condizionale indipendente. Tutto il resto dovrebbe essere visualizzato, anche se non c'è ancora un `result`.Possiamo semplicemente usare un [operatore ternario](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) nel JSX:
 
@@ -387,20 +387,20 @@ Possiamo fare uso di questo comportamento anche in React. Se la condizione è ve
 }
 ~~~~~~~~
 
-Questi erano alcuni approcci per usare il rendering condizionale in React. Puoi leggere [più alternative in una lista esaustiva di esempi](https://www.robinwieruch.de/conditional-rendering-react/). Inoltre, conoscerai usi differente e quando applicarli.
+Questi erano alcuni approcci per usare il rendering condizionale in React. Puoi leggere [più alternative in una lista esaustiva di esempi](https://www.robinwieruch.de/conditional-rendering-react/). Inoltre, conoscerai usi differenti e quando applicarli.
 
-Dovresti adesso essere in grado di vedere i dati recuperati dall'API nell'applicazione. Tutto eccetto Table è visualizzato quando il fetching dei dati non è ancora stato completato. Una volta che la richiesta recupera il risultato che viene salvato nello stato locale, il componente Table è visualizzato, poiché il metodo `render()` viene eseguito ancora, e la condizione del rendering condizione si risolve questa volta a favore della visualizzazione del componente Table.
+Dovresti adesso essere in grado di vedere i dati recuperati dall'API nell'applicazione. Tutto eccetto Table è visualizzato quando il fetching dei dati non è ancora stato completato. Una volta che la richiesta recupera il risultato, che viene salvato nello stato locale, il componente Table è visualizzato, poiché il metodo `render()` viene eseguito ancora, e la condizione del rendering condizionale si risolve questa volta a favore della visualizzazione del componente Table.
 
 ### Esercizi:
 
 * Leggi dei [differenti metodi per il rendering condizionale](https://www.robinwieruch.de/conditional-rendering-react/)
-* Leggi sul [rendering condizionale in React](https://reactjs.org/docs/conditional-rendering.html)
+* Leggi di più sul [rendering condizionale in React](https://reactjs.org/docs/conditional-rendering.html)
 
 ## Ricerca lato client e lato server
 
-Adesso, quando usiamo il componente Search, con il suo campo di input, questo filtrerà la lista. Questo accade lato client però. Noi vogliamo usare le API di Hacker News per cercare lato server. Altrimenti avremmo a che fare solo con la prima risposta API che facciamo in `componentDidMount()` con il parametro query di ricerca di default.
+Adesso, quando usiamo il componente Search, con il suo campo di input, questo filtrerà la lista. Questo accade lato client però. Noi vogliamo usare le API di Hacker News per effettuare ricerche lato server. Altrimenti avremmo a che fare solo con la prima risposta API che facciamo in `componentDidMount()` con il parametro query di ricerca di default.
 
-Possiamo definire un metodo `onSearchSubmit()` nel componente App che effettui il fetch dei risultati dall'API di Hacker News quando viene effettuata una ricerca nel componente Search.
+Possiamo definire un metodo `onSearchSubmit()` nel componente App, che effettui il fetch dei risultati dall'API di Hacker News, quando viene effettuata una ricerca nel componente Search.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -490,7 +490,7 @@ class App extends Component {
 
 Ora il componente Search ha bisogno di un bottone addizionale che scateni esplicitamente la richiesta. Altrimenti effettueremmo il fetch dei dati dall'API di Hacker News ogni volta che il valore del campo di input cambia. Vogliamo farlo esplicitamente in un handler `onClick()`.
 
-In alternativa, potremmo effettuare il debounce (ritardare) la funzione `onChange()` e risparmiarci il bottone, ma aggiungerebbe più complessità, e noi vogliamo mantenere le cose semplici per ora.
+In alternativa, potremmo effettuare il debounce (ritardare) la funzione `onChange()` e risparmiarci il bottone, ma questo aggiungerebbe più complessità, e noi vogliamo mantenere le cose semplici per ora.
 
 Prima cosa, passiamo il metodo `onSearchSubmit()` al componente Search.
 
@@ -528,7 +528,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Seconda, introduciamo un bottone nel componente Search. Il bottone avrà `type="submit"` and il form userà l'attributo `onSubmit` per passare il metodo `onSubmit()`. Possiamo usare la proprietà `children`, ma questa volta sarà utilizzata come contenuto del bottone.
+Seconda, introduciamo un bottone nel componente Search. Il bottone avrà `type="submit"` e il form userà l'attributo `onSubmit` per passare il metodo `onSubmit()`. Possiamo usare la proprietà `children`, ma questa volta sarà utilizzata come contenuto del bottone.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -592,7 +592,7 @@ const Table = ({ list, onDismiss }) =>
   </div>
 ~~~~~~~~
 
-Se adesso provi ad effettuare una ricerca noterai il browser ricaricare. Questo è un comportamento nativo del browser per una callback submit in un form HTML. In React, ti imbatterai spesso nel metodo `preventDefault()` degli eventi per evitare questo comportamento nativo dei browser.
+Se adesso provi ad effettuare una ricerca noterai il browser ricaricare. Questo è un comportamento nativo del browser, per una callback submit, in un form HTML. In React, ti imbatterai spesso nel metodo `preventDefault()` degli eventi per evitare questo comportamento nativo dei browser.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -611,14 +611,14 @@ Dovresti essere in grado di cercare tra gli articoli di Hacker News ora. Abbiamo
 
 ### Esercizi:
 
-* Leggi sui [synthetic events di React](https://reactjs.org/docs/events.html)
+* Leggi di più sui [synthetic events di React](https://reactjs.org/docs/events.html)
 * Sperimenta con l'[API di Hacker News](https://hn.algolia.com/api)
 
 ## Fetch paginata
 
-Dai un'occhiata più approfondita alla struttura dati e osserva come l'[API di Hacker News](https://hn.algolia.com/api) restituisce più di una lista di articoli. Precisamente restituisce una lista paginata. La property page, che è `0` nella prima risposta, può essere usata per fare il fetch di altre sottoliste paginate come risultato. Dobbiamo solo passare la pagina successiva con la stessa query di ricerca all'API.
+Dai un'occhiata più approfondita alla struttura dati e osserva come l'[API di Hacker News](https://hn.algolia.com/api) restituisca più di una lista di articoli. Precisamente restituisce una lista paginata. La property page, che è `0` nella prima risposta, può essere usata per fare il fetch di altre sottoliste paginate come risultato. Dobbiamo solo passare la pagina successiva con la stessa query di ricerca all'API.
 
-Estendiamo le nostre costanti componibile dell'API così che possano affrontare dei dati paginati:
+Estendiamo le nostre costanti componibili dell'API così che possano affrontare dei dati paginati:
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -642,7 +642,7 @@ console.log(url);
 // output: https://hn.algolia.com/api/v1/search?query=redux&page=
 ~~~~~~~~
 
-Il metodo `fetchSearchTopStories()` prenderà page come secondo argomento. Se il secondo argomento non viene fornito userà 0 come fallback per la richiesta inziale. Dunque i metodi `componentDidMount()` e `onSearchSubmit()` recupereranno la prima pagina alla prima richiesta. Ogni fetch addizionale effettuare il fetch della pagina successiva fornendola come secondo argomento.
+Il metodo `fetchSearchTopStories()` prenderà page come secondo argomento. Se il secondo argomento non viene fornito userà 0 come fallback per la richiesta inziale. Dunque i metodi `componentDidMount()` e `onSearchSubmit()` recupereranno la prima pagina alla prima richiesta. Ogni fetch addizionale effettuerà il fetch della pagina successiva fornendola come secondo argomento.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -664,7 +664,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-L'argomento page utilizza un default di JavaScript ES6 per introdurre un fallback page `0` nel caso un argomento page definito venga fornito alla funzione.
+L'argomento page utilizza un default di JavaScript ES6 per introdurre un fallback page `0` nel caso in cui un argomento page non venga fornito alla funzione.
 
 Adesso possiamo usare la pagina corrente dalla risposta dell'API nel metodo `fetchSearchTopStories()`. Possiamo usare questo metodo in un bottone per ottenere più articoli con un handler sull'`onClick` del bottone. Utilizziamo Button per richiedere più dati paginati dall'API di Hacker News. Per fare questo definiremo un handler `onClick`, che prenderà la query di ricerca corrente e la pagina successiva (la pagina corrente + 1).
 
@@ -702,9 +702,9 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Nel metodo `render()`, assicurati di mettere di default page a 0 quando non abbiamo ancora ottenuto un risultato. Ricorda, il metodo `render()` è chiamato prima che i dati siano recuperati asincronamente nel metodo di lifecycle `componentDidMount()`.
+Nel metodo `render()`, assicurati di mettere di default page a 0 quando non abbiamo ancora ottenuto un risultato. Ricorda, il metodo `render()` è chiamato prima che i dati siano recuperati in modo asincrono nel metodo di lifecycle `componentDidMount()`.
 
-Manca ancora un passaggio, poiché recuperare la pagina successiva di dati sovrascriverà quella precedente. Quello che vogliamo è concatenare la vecchia e la nuova lista di articoli dallo stato locale in un nuovo oggetto result, quindi aggiusteremo il comportamente per aggiungere nuovi dati più che sovrascriverli.
+Manca ancora un passaggio, poiché recuperare la pagina successiva di dati sovrascriverà quella precedente. Quello che vogliamo è concatenare la vecchia e la nuova lista di articoli dallo stato locale in un nuovo oggetto result, quindi aggiusteremo il comportamento per aggiungere nuovi dati più che sovrascriverli.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -768,16 +768,16 @@ fetchSearchTopStories(searchTerm, page = 0) {
 }
 ~~~~~~~~
 
-Adesso la richiesta all'API di Hacker News recupera più elementi alla volta di prima. Come puoi vedere, un'API potente come quella di Hacker News offre più modi di sperimentare con dati del mondo reale. Dovresti farne uso per fare i tuoi sforzi quando apprendi qualcosa di nuovo più eccitante. Questo è [come ho imparato la forza che le API forniscono](https://www.robinwieruch.de/what-is-an-api-javascript/) quando si impara un nuovo linguaggio di programmazione o una libreria.
+Adesso la richiesta all'API di Hacker News recupera più elementi alla volta di prima. Come puoi vedere, un'API potente come quella di Hacker News offre più modi di sperimentare con dati del mondo reale. Questo è [come ho imparato la potenza che le API forniscono](https://www.robinwieruch.de/what-is-an-api-javascript/) quando si impara un nuovo linguaggio di programmazione o una libreria.
 
 ### Esercizi:
 
-* Leggi sui [parametri di default di ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Default_parameters)
+* Leggi di più sui [parametri di default di ES6](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Functions/Default_parameters)
 * Sperimenta con i [parametri dell'API di Hacker News](https://hn.algolia.com/api)
 
 ## Cache lato client
 
-Ogni ricerca scatena una richiesta all'API di Hacker News. Potresti per esempio cercare "redux", poi "react", e poi ancora "redux", per un totale di tre richieste. Però abbiamo cercato due volte "redux" e entrambe le volte abbiamo effettuato un'intera chiamata asincrona per recuperare i dati. Una cache lato client salverebbe ogni risultato. Quando viene effettuata una ricerca, prima viene controllato che il risultato non sia già presente, se così, viene usata la cache, altrimenti la richiesta viene fatta davvero.
+Attualmente ogni ricerca scatena una richiesta all'API di Hacker News. Potresti per esempio cercare "redux", poi "react", e poi ancora "redux", per un totale di tre richieste. Però abbiamo cercato due volte "redux" e entrambe le volte abbiamo effettuato un'intera chiamata asincrona per recuperare i dati. Una cache lato client salverebbe ogni risultato. Quando viene effettuata una ricerca, prima viene controllato che il risultato non sia già presente, se così, viene usata la cache, altrimenti la richiesta viene fatta per davvero.
 
 Per avere una cache lato client per ogni risultato, dobbiamo salvare più `results` piuttosto che uno solo nello stato locale del nostro componente. Gli oggetti results saranno una mappa con la query di ricerca come chiave e il risultato come valore. Ogni risultato dall'API sarà salvato come chiave di ricerca (key).
 
@@ -834,7 +834,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-La `searchKey` deve essere settata prima che venga effettuata ogni richiesta. Questa riflette la query di ricerca. Capire perché non usiamo `searchTerm` qui una parte cruciale da capire prima di procedere con l'implementazione. `searchTerm` è una variabile temporanea, perché verrà cambiata ogni volta che viene digitato qualcosa nel campo di input della ricerca. Vogliamo invece una variabile persistente che determina la più recente query di ricerca usata nella richiesta all'API e può essere usata per recuperare il corretto risultato dalla mappa di risultati. È un puntatore al risultato corrente nella cache, che può essere usato per mostrare il risultato corrente nel metodo `render()`.
+La `searchKey` deve essere settata prima che venga effettuata ogni richiesta. Questa riflette la query di ricerca. Capire perché non usiamo `searchTerm` qui è una parte cruciale da capire prima di procedere con l'implementazione. `searchTerm` è una variabile temporanea, perché verrà cambiata ogni volta che viene digitato qualcosa nel campo di input della ricerca. Vogliamo invece una variabile persistente che determina la più recente query di ricerca usata nella richiesta all'API e può essere usata per recuperare il corretto risultato dalla mappa di risultati. È un puntatore al risultato corrente nella cache, che può essere usato per mostrare il risultato corrente nel metodo `render()`.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -971,7 +971,7 @@ Siccome abbiamo messo un default ad una lista vuota quando non ci sono risultato
 
 Adesso la funzionalità di ricerca dovrebbe salvare tutti i risultati dall'API di Hacker News.
 
-Adesso possiamo vedere che il metodo `onDismiss()` ha bisogno di una sistemata, siccome ha anche a che fare con l'oggetto `result`. Noi vogliamo che gestisca multipli `results`:
+Possiamo vedere che il metodo `onDismiss()` ha bisogno di una sistemata, siccome ha anche a che fare con l'oggetto `result`. Noi vogliamo che gestisca multipli `results`:
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -1043,7 +1043,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Adesso il nostro client fa una determinata richiesta all'API soltanto una volta, anche se cerchi una query più volte. Anche dati paginati con più pagine vengono cachati in questo modo, poiché salvamo sempre l'ultima pagina per ogni risultato nella mappa `results`. Questo è un potente approccio per introdurre il caching in un'applicazione. L'API di Hacker News fornisce tutto quanto è necessario per effettuare il caching dei dati paginati efficacemente.
+Adesso il nostro client fa una determinata richiesta all'API soltanto una volta, anche se cerchi una query più volte. Anche dati paginati con più pagine vengono cachati in questo modo, poiché salviamo sempre l'ultima pagina per ogni risultato nella mappa `results`. Questo è un potente approccio per introdurre il caching in un'applicazione. L'API di Hacker News fornisce tutto quanto è necessario per effettuare il caching dei dati paginati efficacemente.
 
 ## Gestione degli errori
 
@@ -1051,7 +1051,7 @@ Finora ci siamo presi cura delle interazioni con l'API di Hacker News. Abbiamo i
 
 In questo capitolo introdurremo un'efficente soluzione per aggiungere la gestione degli errori nell'applicazione in caso di errori nella richiesta all'API. Abbiamo visto le basi per introdurre la gestione degli errori in React: stato locale e rendering condizionale. L'errore è semplicemente un'altra proprietà nello stato che salviamo e visualizziamo con del rendering condizionale nel componente.
 
-Adesso la implementeremo nel componente App, visto che è dove effettuaiamo il recupero dei dati dall'API di Hacker News. Per prima cosa, introduciamo una proprietà errore nello stato locale. È inizializzata a null ma sarà settato con l'oggetto dell'errore in caso di errori.
+Adesso la implementeremo nel componente App, visto che è dove effettuaiamo il recupero dei dati dall'API di Hacker News. Per prima cosa, introduciamo una proprietà errore nello stato locale. È inizializzata a null ma sarà settata con l'oggetto dell'errore in caso di errori.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -1143,7 +1143,7 @@ Se volessimo testare che la nostra gestione degli errori funzioni, potremmo camb
 const PATH_BASE = 'https://hn.mydomain.com/api/v1';
 ~~~~~~~~
 
-Adesso dovresti vedere un messaggio di errore. Sta a noi decidere dove mettere il rendering condizionale per il messaggio di errore. In questo caso l'app è sovrascritta dal messaggio di errore, ma questo non è il massimo come esperienza utente. In questo modo il resto dell'applicazione sarebbe ancora visibile quindi l'utente sa che sta ancora girando:
+Adesso dovresti vedere un messaggio di errore. Sta a noi decidere dove mettere il rendering condizionale per il messaggio di errore. In questo caso l'app è sovrascritta dal messaggio di errore, ma questo non è il massimo come esperienza utente. In questo modo il resto dell'applicazione sarebbe ancora visibile quindi l'utente sa che sta ancora funzionando:
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -1205,13 +1205,13 @@ L'applicazione adesso gestisce gli errori nel caso una richiesta all'API falliss
 
 ### Esercizi:
 
-* Leggi sulla [gestione degli errori per componente in React](https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html)
+* Leggi di più sulla [gestione degli errori per componenti in React](https://reactjs.org/blog/2017/07/26/error-handling-in-react-16.html)
 
 ## Axios al posto di Fetch
 
 Prima abbiamo introdotto il metodo nativo fetch per eseguire una richiesta alla piattaforma di Hacker News. Il browser ti permette di utilizzare questa API nativa fetch. Purtroppo però non è supportata ancora da tutti i browser, in particolare da quelli più vecchi. Se provi a testare l'applicazione con un browser headless (dove non c'è un browser, è simulato), potrebbero esserci problemi con l'API fetch. Ci sono alcuni modi per fare funzionare fetch anche con i browser più vecchi (polyfill) e nei test ([isomorphic-fetch](https://github.com/matthew-andrews/isomorphic-fetch)), ma questi concetti esulano un po' dallo scopo di imparare React.
 
-Un'alternativa è sostituire l'API nativa fetch con una libreria stabile come [axios](https://github.com/axios/axios), che effettua richieste asincrone a API remote. In questo capitolo scopriremo come sostituire una libreria, un'API nativa del browser in questo caso, con un'altra libreria.
+Un'alternativa è sostituire l'API nativa fetch con una libreria stabile come [axios](https://github.com/axios/axios), che effettua richieste asincrone ad API remote. In questo capitolo scopriremo come sostituire una libreria, un'API nativa del browser in questo caso, con un'altra libreria.
 
 Sotto, l'API nativa fetch è sostituita con axios. Prima cosa, installiamo axios dalla riga di comando:
 
@@ -1264,11 +1264,11 @@ C'è un altro miglioramento che possiamo fare nel componente App per la richiest
 
 Se dovessi incontrare uno di questi nel tool per sviluppatori del tuo browser dai un'occhiata a [questa guida passo passo su come prevenire memory leaks in React](https://www.robinwieruch.de/react-warning-cant-call-setstate-on-an-unmounted-component/). Non è così importante per chi sta iniziando con React, ma ho visto molti principianti in React confusi da questi warning.
 
-Questo capitolo ha mostrato come si può sostituire una libreria con un'altra in React. Se ti imbatti in qualche problema puoi far uso del vasto ecosistema JavaScript per trovare una soluzione.
+Questo capitolo ha mostrato come si può sostituire una libreria con un'altra in React. Se ti imbatti in qualche problema puoi far uso del vasto ecosistema JavaScript per trovare un'altra soluzione.
 
 ### Esercizi:
 
-* Leggi sul [perché i framework contano](https://www.robinwieruch.de/why-frameworks-matter/)
+* Leggi di più sul [perché i framework contano](https://www.robinwieruch.de/why-frameworks-matter/)
 
 {pagebreak}
 
