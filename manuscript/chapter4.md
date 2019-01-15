@@ -1,20 +1,20 @@
 # Organizzazione del codice e testing
 
-Il capitolo tratterà di organizzazione del codice in un'applicazione che tende a crescere. Quindi vedremo le best practice per la struttura delle cartelle e dei file. Tratteremo anche il testing, una pratica importante per mantenere il codice robusto ed uno strumento importante per il debug di applicazioni React. Questo capitolo farà un passo indietro dall'applicazione pratica per il momento, così che possiamo concentrarci su questi argomenti in dettaglio prima di andare avanti.
+Il capitolo tratterà di organizzazione del codice in un'applicazione che cresce di dimensioni. Quindi vedremo le best practice per la struttura delle cartelle e dei file. Tratteremo anche il testing, una pratica importante per mantenere il codice robusto ed uno strumento importante per il debug di applicazioni React. Questo capitolo farà un passo indietro dall'applicazione pratica per il momento, così che possiamo concentrarci su questi argomenti in dettaglio prima di andare avanti.
 
 ## Moduli ES6: import ed export
 
-In JavaScript ES6 si possono importare ed esportare funzionalità da moduli. Si può trattare di molte cose: funzioni, classi, componenti, costanti, essenzialmente qualsiasi cosa si possa assegnare ad una variabile. I moduli possono essere sia singoli file o intere cartelle con un file index come entry point.
+In JavaScript ES6 si possono importare ed esportare funzionalità da moduli. Possono essere elementi di vario tipo: funzioni, classi, componenti, costanti, essenzialmente qualsiasi cosa si possa assegnare ad una variabile. I moduli possono essere sia singoli file che intere cartelle con un file index come entry point.
 
-Dopo che abbiamo inizializzato la nostra applicazione con *create-react-app* all'inizio, abbiamo già utilizzato svariate istruzioni di `import` ed `export` nei file iniziali. Le istruzioni di `import` ed `export` aiutano a condividere il codice tra più file. Storicamente c'erano già più soluzioni per questo compito in ambiente JavaScript, ma la cosa era confusionaria perché non c'era un metodo standardizzato per eseguire questo compito. JavaScript ES6 ha infine aggiunto  questo comportamento in modo nativo.
+Dopo che abbiamo inizializzato la nostra applicazione con *create-react-app* all'inizio, abbiamo già utilizzato svariate istruzioni di `import` ed `export` nei file iniziali. Le istruzioni di `import` ed `export` aiutano a condividere il codice tra più file. Storicamente c'erano già più soluzioni per questo compito in ambiente JavaScript, ma la cosa era confusionaria perché non c'era un metodo standardizzato per eseguire questo compito. JavaScript ES6 ha infine definito questo comportamento in modo nativo.
 
 Queste istruzioni abbracciano la filosofia del code splitting, dove distribuiamo il codice su più file per renderlo riusabile e manutenibile. La prima caratteristica è ottenuta poiché possiamo importare un pezzo di codice in tutti i file in cui ne abbiamo bisogno, la seconda poiché esiste solo una fonte dove bisogna manutenere il pezzo di codice in questione.
 
 Vogliamo pensare anche all'incapsulamento del codice, siccome non tutte le funzionalità hanno bisogno di essere esportate da un file. Alcune di queste potrebbero essere usate solo nei file dove sono state definite. Gli export di un file sono essenzialmente l'API pubblica del file, dove solo le funzionalità esportate saranno disponibili per essere riusate altrove. Questo segue la best practice dell'incapsulamento.
 
-I seguenti esempi illustrano queste istruzioni condividendo una o più variabili in due file. Alla fine l'approccio può essere usato anche su più file e può essere condiviso più che semplici variabili.
+I seguenti esempi illustrano queste istruzioni condividendo una o più variabili tra due file. Alla fine l'approccio può essere usato anche su più file e può essere condiviso di più che semplici variabili.
 
-L'azione dell'esportare una o più variabili è chiamata export:
+L'azione dell'esportare una o più variabili è chiamata export nominativo:
 
 {title="Code Playground: file1.js",lang="javascript"}
 ~~~~~~~~
@@ -24,7 +24,7 @@ const lastname = 'Wieruch';
 export { firstname, lastname };
 ~~~~~~~~
 
-E importarle in un altro file con un path relativo al primo file.
+Ed ecco come importarle in un altro file con un path relativo al primo file.
 
 {title="Code Playground: file2.js",lang="javascript"}
 ~~~~~~~~
@@ -58,7 +58,7 @@ C'è anche l'istruzione `default`, che può essere usata per alcuni casi:
 
 * esportare ed importare una singola funzionalità
 * per fare risaltare la funzionalità principale dell'API esportata da un modulo
-* per avere un funzionalità di import di fallback
+* per avere una funzionalità di import di fallback
 
 {title="Code Playground: file1.js",lang="javascript"}
 ~~~~~~~~
@@ -120,20 +120,20 @@ export const firstname = 'Robin';
 export const lastname = 'Wieruch';
 ~~~~~~~~
 
-Queste sono le funzionalità principali dei moduli ES6. Questi aiutano ad organizzare il codice, manutenerlo, e a realizzare API di moduli riutilizzabili. Puoi anche esportare ed importare funzionalità per testarle e lo faremo in un capitolo successivo.
+Queste sono le funzionalità principali dei moduli ES6. Questi aiutano ad organizzare il codice, manutenerlo, e a realizzare API di moduli riutilizzabili. Puoi anche esportare ed importare funzionalità allo scopo di testarle e lo faremo in un capitolo successivo.
 
 ### Esercizi:
 
-* Leggi sugli [import ES6](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
-* Leggi sugli [export ES6](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
+* Leggi di più sugli [import ES6](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+* Leggi di più sugli [export ES6](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export)
 
 ## Organizzazione del codice con i moduli ES6
 
-Potresti chiederti perché non abbiamo seguito la buona pratica di dividere i componenti in file differenti nel file *src/App.js*. Nel file abbiamo già diversi componenti che potrebbero essere definiti in loro file/cartelle (moduli). Per lo scopo di imparare React è più pratico mantenere questi componenti in un unico posto. Una volta che la tua applicazione React raggiunge certe dimensioni dovresti considerare di dividere questi componenti in diversi moduli così che possa crescere in modo produttivo.
+Potresti chiederti perché non abbiamo seguito la buona pratica di dividere i componenti in file differenti nel file *src/App.js*. Nel file abbiamo già diversi componenti che potrebbero essere definiti in loro file/cartelle (moduli). Per lo scopo di imparare React è più pratico mantenere questi componenti in un unico posto. Una volta che la tua applicazione React raggiunge certe dimensioni dovresti considerare di dividere questi componenti in diversi moduli, così che possa crescere in modo produttivo.
 
-Di seguito propongo alcune strutture dei moduli che potrebbe essere applicate. Puoi provarle più avanti come esercizio ma continueremo a sviluppare la nostra app con il solo file *src/App.js* per mantenere le cose semplici.
+Di seguito propongo alcune strutture dei moduli che potrebbe essere applicate. Puoi provarle più avanti come esercizio ma continueremo a sviluppare la nostra app con il solo file *src/App.js* allo scopo di mantenere le cose semplici.
 
-Questa è una possibile struttura dei moduli:
+Questa è una prima possibile struttura dei moduli:
 
 {title="Folder Structure",lang="text"}
 ~~~~~~~~
@@ -154,7 +154,7 @@ src/
   Search.css
 ~~~~~~~~
 
-Questa separa ogni componenti in dei file propri ma non sembra troppo promettente. Possiamo notare molta duplicazione nei nomi, dove solo l'estensione del file differisce. Un'altra struttura potrebbe essere:
+Questa separa ogni componente in dei file propri ma non sembra troppo promettente. Possiamo notare molta duplicazione nei nomi, dove differisce solo l'estensione del file. Un'altra struttura potrebbe essere:
 
 {title="Folder Structure",lang="text"}
 ~~~~~~~~
@@ -179,9 +179,9 @@ src/
     index.css
 ~~~~~~~~
 
-Adesso sembra più chiara di prima. Il nome index per i file li descrive come file entry point della cartella. Ma questa è solo una naming convention, puoi decidere tu quali nomi utilizzare. In questa struttura un componente è definito della sua dichiarazione nel file JavaScript, ma anche del suo file di stile e dai test. Se dovessi aver problemi a trovare i componenti in questo modo, cercandoli nel tuo editor/IDE, prova a cercare i path piuttosto che i file (es. cerca "Table index").
+Questa sembra più chiara di quella precedente. Il nome index per i file li descrive come file entry point della cartella. Ma questa è solo una naming convention, puoi decidere tu quali nomi utilizzare. In questa struttura un componente è definito della sua dichiarazione nel file JavaScript, ma anche dal suo file di stile e dai test. Se dovessi aver problemi a trovare i componenti in questo modo, cercandoli nel tuo editor/IDE, prova a cercare i path piuttosto che i file (es. cerca "Table index").
 
-Un altro passaggio pure essere quello di estrarre le variabili costanti dal componente App, quelle usate per comporre le URL dell'API di Hacker News.
+Un altro passaggio può essere quello di estrarre le variabili costanti dal componente App, quelle usate per comporre le URL dell'API di Hacker News.
 
 {title="Folder Structure",lang="text"}
 ~~~~~~~~
@@ -204,7 +204,7 @@ src/
     ...
 ~~~~~~~~
 
-Natualmente i moduli sarebbe divisi in *src/constants/* e *src/components/*. Il file *src/constants/index.js* potrebbe essere come il seguente:
+Natualmente i moduli sarebbero divisi in *src/constants/* e *src/components/*. Il file *src/constants/index.js* potrebbe essere come il seguente:
 
 {title="Code Playground: src/constants/index.js",lang="javascript"}
 ~~~~~~~~
@@ -234,7 +234,7 @@ import {
 ...
 ~~~~~~~~
 
-Quando utilizzi la naming convention  *index.js* puoi omettere il nome del file dal path relativo.
+Quando utilizzi la naming convention *index.js* puoi omettere il nome del file dal path relativo.
 
 {title="Code Playground: src/components/App/index.js",lang="javascript"}
 ~~~~~~~~
@@ -268,7 +268,7 @@ src/
     CancelButton.js
 ~~~~~~~~
 
-La cartella *Buttons/* ha diversi componenti Button definiti in file distinti. Ogni file può fare un `export default` dello specifico componente, renderlo disponibile in *Buttons/index.js*. Il file *Buttons/index.js* tutte le differenti rappresentazioni di bottoni e le esporta come API pubblica del modulo.
+La cartella *Buttons/* ha diversi componenti Button definiti in file distinti. Ogni file può fare un `export default` dello specifico componente, per renderlo disponibile in *Buttons/index.js*. Il file *Buttons/index.js* importa tutte le differenti rappresentazioni di bottoni e le esporta come API pubblica del modulo.
 
 {title="Code Playground: src/Buttons/index.js",lang="javascript"}
 ~~~~~~~~
@@ -294,7 +294,7 @@ import {
 } from '../Buttons';
 ~~~~~~~~
 
-Invece può essere visto come una bad practice raggiunge file diversi da *index.js* nel modulo, poiché viola le regole dell'incapsulamento.
+Attenzione che può essere vista come una bad practice raggiungere file diversi da *index.js* in un determinato modulo, poiché questo viola le regole dell'incapsulamento.
 
 {title="Code Playground: src/App/index.js",lang="javascript"}
 ~~~~~~~~
@@ -302,7 +302,7 @@ Invece può essere visto come una bad practice raggiunge file diversi da *index.
 import SubmitButton from '../Buttons/SubmitButton';
 ~~~~~~~~
 
-Abbiamo rifattorizzato il nostro codice in un modulo con i vincoli di incapsulamento. Ricordo che manterremo le cose semplici nel libro, ma dovresti sempre rifattorizzare il tuo codice per tenerlo pulito.
+Abbiamo rifattorizzato il nostro codice in un modulo con i vincoli di incapsulamento. Ricordo che manterremo le cose più semplici nel libro, ma il mio consiglio è che dovresti sempre rifattorizzare il tuo codice per tenerlo pulito.
 
 ### Esercizi:
 
@@ -310,7 +310,7 @@ Abbiamo rifattorizzato il nostro codice in un modulo con i vincoli di incapsulam
 
 ## Snapshot test con Jest
 
-Testare il codice è essenziale nella programmazione e dovrebbe essere visto come obbligatorio. Vogliamo mantenere la qualità del codice alta ed essegre sicuri che tutto funzioni prima di usarlo in produzione. Useremo la piramide del testing come guida.
+Testare il codice è essenziale nella programmazione e dovrebbe essere vista come una pratica obbligatoria. Vogliamo mantenere la qualità del codice alta ed essere sicuri che tutto funzioni, prima di usarlo in produzione. Useremo la piramide del testing come guida.
 
 La piramide del testing include test end-to-end, test d'integrazione e test d'unità. Un test d'unità (unit test) è per piccoli ed isolati blocchi di codice, come una singola funzione. Tuttavia alcune volte le unità funzionano bene in isolamento ma non in combinazione con altre unità, quindi necessitano di essere testate come un gruppo. Qui è dove i test d'integrazione possono aiutarci a capire se le unità funzionano bene insieme. Un test end-to-end è una simulazione di uno scenario reale, come per esempio il setup automatico di un browser che simula il processo di login in un'applicazione web. Laddove gli unit test sono veloci e facili da scrivere e mantenere, i test end-to-end sono all'opposto dello spettro.
 
@@ -320,7 +320,7 @@ La base del testing in React sono i test dei componenti, in parte come unit test
 
 Jest è un framework di testing JavaScript usato da Facebook. È utilizzato per il test di componenti dalla community React. Fortunatamente *create-react-app* contiene già Jest, quindi non dovremo fare niente per farlo funzionare.
 
-Prima di testare il primo componente, notiamo come bisogna esportare il componente interessato, un questo caso il file *src/App.js*. Dopodiché sarà possibile testarlo in un altro file.
+Prima di testare il primo componente, notiamo come bisogna esportare il componente interessato, in questo caso il file *src/App.js*. Dopodiché sarà possibile testarlo in un altro file.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -358,18 +358,18 @@ it('renders without crashing', () => {
 });
 ~~~~~~~~
 
-Il blocco "it" descrive un caso di test. È formato da una descrizione del test e quando viene testato può avere successo o fallire. È inoltre possibile racchiuderlo in un blocco "describe" che definisce la suite di test. Una test di suite include svariati blocchi "it" per uno specifico componente. Vedremo il blocco "describe" più avanti. Entrambi i blocchi sono usati per separare ed organizzare i casi di test.
+Il blocco "it" descrive un caso di test. È formato da una descrizione del test e quando viene eseguito può avere successo o fallire. È inoltre possibile racchiuderlo in un blocco "describe" che definisce la suite di test. Una test di suite include svariati blocchi "it" per uno specifico componente. Vedremo il blocco "describe" più avanti. Entrambi i blocchi sono usati per separare ed organizzare i casi di test.
 
 Nota come la funzione `it` è riconosciuta nella community JavaScript come la funzione dove viene eseguito un singolo test. Tuttavia in Jest è più spesso trovato con la funzione alias `test`.
 
-Puoi eseguire i casi di test usando lo script test interattivo di *create-react-app* dalla linea di comando. Otterrai l'output per tutti i test nell'intefaccia della linea di comando.
+Puoi eseguire i casi di test usando lo script interattivo test di *create-react-app* dalla linea di comando. Otterrai l'output per tutti i test nell'intefaccia della linea di comando.
 
 {title="Command Line",lang="text"}
 ~~~~~~~~
 npm test
 ~~~~~~~~
 
-Jest ti permette di scrivere snapshot test. Questi test effettuano una snapshot del componente renderizzato e la eseguono per differenza con le snapshot future. Quando una snapshot futura cambia, il test te lo segnalerà. A questo punto ci sono due possibilità: accettare le modifiche alla snapshot, magari perché hai cambiato di proposito l'implementazione del componente, o rifiutare le modifiche e verificare il perché della differenza. Questo è un ottimo complemento agli unit test, poiché si testano solo le differenze degli output renderizzati. Questo non aggiunge grossi costi di manutenzione, considerato che si possono accettare le nuove snapshot a seguito di modifiche intenzionali.
+Jest ti permette di scrivere snapshot test. Questi test effettuano una snapshot del componente renderizzato e la eseguono per differenza con le snapshot future. Quando una snapshot futura cambia, il test te lo segnalerà. A questo punto ci sono due possibilità: accettare le modifiche alla snapshot, magari perché hai cambiato di proposito l'implementazione del componente, o rifiutare le modifiche e verificare il perché della differenza. Questo è un ottimo complemento agli unit test, poiché si testano solo le differenze degli output renderizzati. Non aggiunge grossi costi di manutenzione, considerato che si possono accettare le nuove snapshot a seguito di modifiche intenzionali.
 
 Jest salva le snapshot in una cartella così che possa validare le differenze rispetto a future snapshot. Questo permette anche di condividere le snapshot con un team se si usa un sistema di versionamento del codice come git.
 
@@ -380,7 +380,7 @@ Prima di scrivere il nostro primo test di snapshot con Jest bisogna installare u
 npm install --save-dev react-test-renderer
 ~~~~~~~~
 
-Adesso possiamo estendere i test del componente App con il nostro primo snapshot test. Per prima cosa importiamo la nuova funzionalità dal pacchetto node che abbiamo installato e racchiudiamo il precedente bloccato "it" in un descrittivo blocco "describe". In questo caso la test di suite è solo per il componente App.
+Adesso possiamo estendere i test del componente App con il nostro primo snapshot test. Per prima cosa importiamo la nuova funzionalità dal pacchetto node che abbiamo installato e racchiudiamo il precedente blocco "it" in un descrittivo blocco "describe". In questo caso la test di suite è solo per il componente App.
 
 {title="src/App.test.js",lang="javascript"}
 ~~~~~~~~
@@ -476,7 +476,7 @@ describe('Search', () => {
 
 Il componente Search ha due test simili a quelli del componente App. Il primo renderizza semplicemente il componente Search nel DOM e verifica che non ci siano errori durante il processo di rendering. Se si verificasse un errore il test fallirebbe nonostante non ci siano assertion (es. expect, match, equal) nel blocco di test. Il secondo è un test di snapshot ed è utilizzato per salvare una snapshot del componente renderizzato e confrontarla con la versione precedente. Questo fallisce quando la snapshot cambia.
 
-Secondo testiamo il componente Button visto che si applicano le stesso logiche del componente Search.
+Secondo testiamo il componente Button, visto che si applicano le stesso logiche del componente Search.
 
 {title="src/App.test.js",lang="javascript"}
 ~~~~~~~~
@@ -508,7 +508,7 @@ describe('Button', () => {
 # leanpub-end-insert
 ~~~~~~~~
 
-Infine il componente Table, al quale passiamo del props iniziali per renderizzarlo con una lista di esempio.
+Infine il componente Table, al quale passiamo delle props iniziali per renderizzarlo con una lista di esempio.
 
 {title="src/App.test.js",lang="javascript"}
 ~~~~~~~~
@@ -546,14 +546,14 @@ describe('Table', () => {
 # leanpub-end-insert
 ~~~~~~~~
 
-Gli snapshot test di solito sono piuttosto semplici. Ci vogliamo solo assicurare che l'output del componente non cambi. Quando cambia dobbiamo decidere se accettare i cambiamenti o sistemare il componente.
+Gli snapshot test di solito sono piuttosto semplici. Ci vogliamo solo assicurare che l'output del componente non cambi accidentalmente. Quando cambia dobbiamo decidere se accettare i cambiamenti o sistemare il componente.
 
 ### Esercizi:
 
 * Guarda come fallisce un test di snapshot una volta che cambi il valore di ritorno nel metodo `render()`
   * Accetta o rifiuta i cambiamenti alla snapshot
 * Tieni aggorni gli snapshot test quando l'implementazione dei componenti cambierà nei prossimi capitoli
-* Leggi su [Jest in React](https://jestjs.io/docs/en/tutorial-react)
+* Leggi di più su [Jest in React](https://jestjs.io/docs/en/tutorial-react)
 
 ## Unit test con Enzyme
 
@@ -623,7 +623,7 @@ describe('Table', () => {
 
 Shallow renderizza il componente senza i suoi componenti figli, così che possiamo dedicare il test ad un singolo componente.
 
-Enzyme ha tre meccanismi di rendering nelle sue API. Abbiamo già visto `shallow()` ma ci sono anche `mount()` e `render()`. Entrambi istanziano le istanze del componente padre e di tutti i componenti figli. `mount()` ti da' accesso ai metodi di lifecycle del componente. Queste sono le regole su quando usare questi meccanismi:
+Enzyme ha tre meccanismi di rendering nelle sue API. Abbiamo già visto `shallow()`, ma ci sono anche `mount()` e `render()`. Entrambi istanziano le istanze del componente padre e di tutti i componenti figli. `mount()` ti da' accesso ai metodi di lifecycle del componente. Queste sono le regole su quando usare questi meccanismi:
 
 * Iniziare sempre con un test shallow
 * Se devono essere testati `componentDidMount()` o `componentDidUpdate()` usare `mount()`
@@ -636,14 +636,14 @@ Continua ad applicare lo unit testing dei componenti ma assicurati che i test si
 
 * Scrivi uno unit test con Enzyme per il componente Button
 * Mantieni gli unit test aggiornati durante i prossimi capitoli
-* Leggi su [Enzyme e la sua API di rendering](https://github.com/airbnb/enzyme)
-* Leggi sul [testing di applicazioni in React](https://www.robinwieruch.de/react-testing-tutorial)
+* Leggi di più su [Enzyme e la sua API di rendering](https://github.com/airbnb/enzyme)
+* Leggi di più sul [testing di applicazioni in React](https://www.robinwieruch.de/react-testing-tutorial)
 
 ## L'interfaccia dei componenti con PropTypes
 
 [TypeScript](https://www.typescriptlang.org/) e [Flow](https://flowtype.org/) sono utilizzati per introdurre un sistema di tipi in JavaScript. Un linguaggio tipizzato è meno soggetto ad errori poiché il codice viene validato dal testo del programma. Editor e altri strumenti possono catturare gli errori prima che il programma venga eseguito.
 
-In questo libro non tratteremo Flow e TypeScript ma un altro utile strumento per controllare i tipi nei componenti: React è dotato di un type checker built-in per prevenire bug. È possibile utilizzare PropTypes per descrivere l'interfaccia dei componenti. Tutte le props passate da un componente padre al figlio vengono validate in base all'interfaccia PropTypes assegnata al figlio.
+In questo libro non tratteremo Flow e TypeScript ma un altro utile strumento per controllare i tipi nei componenti: React è dotato di un type checker built-in per prevenire bug: PropTypes. È possibile utilizzare PropTypes per descrivere l'interfaccia dei componenti. Tutte le props passate da un componente padre al componente figlio vengono validate in base all'interfaccia PropTypes assegnata al figlio.
 
 Questa sezione ti illustrerà come realizzare componenti type safe con PropTypes. Ometterò i cambiamenti nei prossimi capitoli, dal momento che richiederebbe refactoring non necessario, ma tu dovresti aggiornarli per mantere l'interfaccia dei tuoi componenti type safe.
 
@@ -700,14 +700,14 @@ Praticamente vogliamo prendere ogni argomento dalla firma della funzione e asseg
 * PropTypes.object
 * PropTypes.string
 
-Ci sono altre due PropTypes che possono definire un frammento renderizzabile (nodo), ad esempio una stringa e un elemento React:
+Ci sono altre due PropTypes che possono definire un frammento renderizzabile (nodo), ad esempio una stringa, e un elemento React:
 
 * PropTypes.node
 * PropTypes.element
 
 Abbiamo già usato la PropType `node` nel componente Button. Ci sono altre definizioni PropType nella documentazione ufficiale di React.
 
-Al momento, tutte le PropTypes per Button sono opzionali. I parametri possono essere `null` o `undefined`. Ma per alcune props vorremmo poter forzare il fatto che siano definiti. Per fare questo rendiamo un requisito il fatto che siano passate al componente.
+Al momento, tutte le PropTypes per Button sono opzionali. I parametri possono essere `null` o `undefined`. Ma per alcune props vorremmo poter forzare il fatto che siano definite. Per fare questo rendiamo un requisito il fatto che siano passate al componente.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -792,19 +792,19 @@ Button.defaultProps = {
 # leanpub-end-insert
 ~~~~~~~~
 
-Come il parametro di default di ES6 la default prop assicura che la proprietà sia settata ad un valore di default quando il componente padre non la speicifca. Il controllo di tipo PropType avviene dopo che la default prop è valutata.
+Come il parametro di default di ES6 la default prop assicura che la proprietà sia settata ad un valore di default quando il componente padre non la specifica. Il controllo di tipo PropType avviene dopo che la default prop è valutata.
 
-Se esegui nuovamente i test potresti vedere degli error PropType per i tuoi componenti nella riga di comando. Succede quando non definiamo tutte le props per i componenti nei test che sono richieste nella definizione PropType. I test passano correttamente in ogni caso. Assicurati solo di passare tutte le props richieste ai componenti nei tuoi test per evitare questi errori.
+Se esegui nuovamente i test potresti vedere degli error PropType per i tuoi componenti nella riga di comando. Succede quando non definiamo tutte le props che sono richieste nella definizione PropType. I test passano correttamente in ogni caso. Assicurati solo di passare tutte le props richieste ai componenti nei tuoi test per evitare questi errori.
 
 ### Esercizi:
 
 * Definisci l'interfaccia PropType per il componente Search
 * Aggiungi e modifica l'interfaccia PropType quando aggiungerai e modificherai componenti nei prossimi capitoli
-* Leggi su [React PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html)
+* Leggi di più su [React PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html)
 
 ## Debugging con React Developer Tools
 
-[React Developer Tools](https://github.com/facebook/react-devtools) ti permette di fare l'inspect nella gerarchia dei componenti React, delle props e degli stati. È fornita come estensione del browser per Chrome e Firefox e come applicazione standalone per altri ambienti. Una volta installata, l'icona dell'estensione si accenderà nei siti che usano React. In queste pagine vedrai una tab chiamata "React" negli strumenti per sviluppatori del browser.
+[React Developer Tools](https://github.com/facebook/react-devtools) ti permette di fare l'inspect nella gerarchia dei componenti React, delle props e degli stati. È fornita come estensione del browser per Chrome e Firefox e come applicazione standalone per altri ambienti. Una volta installata, l'icona dell'estensione si evidenzierà nei siti che utilizzano React. In queste pagine vedrai una tab chiamata "React" negli strumenti per sviluppatori del browser.
 
 Proviamola con la nostra applicazione Hacker News. Nella maggior parte dei browser un modo veloce per attivare i *dev tools* è fare un click con il destro nella pagina e cliccare "Inspect". Fallo quando l'applicazione è caricata, poi clicca la tab "React". Dovrsti vedre la gerarchia dei suoi elementi, con `<App>` come elemento radice. Se la espandi dovresti trovare anche le istanze dei componenti `<Search>`, `<Table>` e `<Button>`.
 
@@ -812,7 +812,7 @@ L'estensione mostra nel pannello a lato lo stato e le props del componente per l
 
 Per prima cosa, spunta l'opzione "Highlight Updates", di solito sopra all'albero degli elementi. Secondo, digita una differente query di ricerca nel campo di input dell'applicazione. Solo `searchTerm` verrà cambiato nello stato del componente. Sapevamo già che sarebbe successo ma adesso possiamo vederlo funzionare come ci aspettavamo.
 
-Infine premi il bottone "Search". Lo proprietà `searchKey` dello stato immediatamente cambierà allo stato valore di `searchTerm` e l'oggetto di risposta sarà aggiunto a `results`. La natura asincrona del nostro codice è adesso visibile.
+Infine premi il bottone "Search". La proprietà `searchKey` dello stato immediatamente cambierà allo stato valore di `searchTerm` e l'oggetto di risposta sarà aggiunto a `results`. La natura asincrona del nostro codice è adesso chiaramente visibile.
 
 Se fai click destro su un elemento un menu a cascata mostrerà alcune opzioni utili. Per esempio, è possibile copiare le props o il nome di un elemento, trovare il corrispondente nodo del DOM o saltare al sorgente del codice nel browser. Quest'ultima opzione è molto utile per inserire breakpoint e debuggare le funzioni JavaScript.
 
@@ -823,16 +823,16 @@ Se fai click destro su un elemento un menu a cascata mostrerà alcune opzioni ut
   * Sperimenta con cambiamenti di stato e props
   * Guarda cosa succede quando inneschi una richiesta asincrona
   * Esegui diverse richieste, anche ripetute. Osserva il meccanismo di caching in azione
-* Leggi su [come debuggare le tue funzioni JavaScript nel browser](https://developers.google.com/web/tools/chrome-devtools/javascript/)
-* Leggi (e usa) su [il profiler di React](https://reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html)
+* Leggi di più su [come debuggare le tue funzioni JavaScript nel browser](https://developers.google.com/web/tools/chrome-devtools/javascript/)
+* Leggi di più sul [profiler di React](https://reactjs.org/blog/2018/09/10/introducing-the-react-profiler.html) ed utilizzalo
 
 Hai imparato come organizzare e testare il tuo codice React! Ricapitoliamo quest'ultimo capitolo:
 
 * **React**
-  * Le PropTypes ti permettono di definire controllo dei tipi per i componenti
+  * Le PropTypes ti permettono di definire un controllo dei tipi per i tuoi componenti
   * Jest ti permette di scrivere snapshot test per i componenti
   * Eznyme ti permette di scrivere unit test per i componenti
-  * I React Developer Tools sono uno strumenti di debugging molto utile
+  * I React Developer Tools sono uno strumento di debugging molto utile
 * **ES6**
   * le istruzioni di import ed export ti aiutano ad organizzare il codice
 * **Generale**
