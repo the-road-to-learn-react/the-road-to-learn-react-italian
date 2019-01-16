@@ -12,7 +12,7 @@ Alcune volte capita di aver bisogno di interagire con dei nodi del DOM in React.
 
 Useremo il componente Search come esempio. Quando l'applicazione si renderizza per la prima volta, il campo di input dovrebbe avere il focus. Questo è uno dei casi dove abbiamo bisogno di accedere all'API del DOM. L'attributo `ref` può essere usato sia in componenti funzionali privi di stato sia in componenti implementati tramite classi ES6. In questo esempio avremo bisogno di un metodo di lifecycle, quindi l'approccio è mostrato usando l'attributo `ref` in un componente implementato come classe ES6.
 
-Lo step iniziale è rifattorizzare il componente funzionale privo di stato in un componente come classe ES6.
+Lo step iniziale è rifattorizzare il componente funzionale privo di stato in un componente implementato come classe ES6.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -150,12 +150,12 @@ Adesso possiamo accedere all'input dell'elemento del DOM. In questo caso non aiu
 
 ### Esercizi
 
-* Leggi sull'[uso dell'attributo ref in React](https://www.robinwieruch.de/react-ref-attribute-dom-node/)
-* Leggi sull'[attributo ref in generale in React](https://reactjs.org/docs/refs-and-the-dom.html)
+* Leggi di più sull'[uso dell'attributo ref in React](https://www.robinwieruch.de/react-ref-attribute-dom-node/)
+* Leggi di più sull'[attributo ref in generale in React](https://reactjs.org/docs/refs-and-the-dom.html)
 
 ## Caricamento ...
 
-Adesso torniamo alla nostra applicazione, dove mostreremo un indicatore di caricamento quando viene effettuata una ricerca all'API di Hacker News. La richiesta è asincrona quindi dovremmo mostrare un feedback all'utente che qualcosa sta succedendo. Definiamo un componente Loading riusabile nel file *src/App.js*.
+Adesso torneremo alla nostra applicazione, dove mostreremo un indicatore di caricamento quando viene effettuata una ricerca all'API di Hacker News. La richiesta è asincrona quindi dovremmo mostrare un feedback all'utente che qualcosa sta succedendo. Definiamo un componente Loading riusabile nel file *src/App.js*.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -270,7 +270,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Inizialmente il componente Loading verrà mostrato quando l'applicazione viene eseguita, poiché facciamo una richeista nel metodo `componentDidMount()`. Non c'è componente Table, poiché la lista è vuota. Quando si ottiene la risposta dall'API di Hacker News, il risultato è mostrato, lo stato loading è settato a false e il componente Loading sparisce. Il bottone "More" per cercare altri dati appare, se si ricerca altro il bottone sparirà di nuovo e il componente Loading farà la sua comparsa.
+Inizialmente il componente Loading verrà mostrato quando l'applicazione viene eseguita, poiché facciamo una richiesta nel metodo `componentDidMount()`. Non c'è componente Table, poiché la lista è vuota. Quando si ottiene la risposta dall'API di Hacker News, il risultato è mostrato, lo stato loading è settato a false e il componente Loading sparisce. Il bottone "More" per cercare altri dati appare, se si ricerca altro il bottone sparirà di nuovo e il componente Loading farà la sua comparsa.
 
 ### Esercizi:
 
@@ -278,11 +278,11 @@ Inizialmente il componente Loading verrà mostrato quando l'applicazione viene e
 
 ## Componenti di ordine superiore
 
-I componenti di ordine superiore (higher-order components, HOC) sono un argomento avanzato di React. Sono una specie di equivalente delle funzioni di ordine superiore. Questi prendono un input, di solito un componente, ma anche argomenti opzionali, e restituiscono un componente in output. Il componente restituito è un versione arricchita di funzionalità del componente di input, che può essere usato nel JSX.
+I componenti di ordine superiore (higher-order components, spesso abbreviati HOC) sono un argomento avanzato di React. Sono una specie di equivalente delle funzioni di ordine superiore. Questi prendono un input, di solito un componente, ma anche argomenti opzionali, e restituiscono un componente in output. Il componente restituito è una versione arricchita di funzionalità del componente di input, che può essere usato nel JSX.
 
 Gli HOC sono usati in diversi casi. Possono preparare proprietà, gestire stati, alterare la rappresentazione di un componente. Una use case è quella di usare gli HOC come helper per del conditional rendering. Immagina di avere una componente List che renderizza una lista di oggetti o nulla se la lista è vuota o nulla. L'HOC potrebbe mascherare il non renderizzare niente quando non c'è una lista. D'altra parte il componente List semplice (non HOC) non ha più bisogno di fare controlli su una lista non esistente e si preoccuperà quindi solo di renderizzare una lista.
 
-Implementiamo un semplice HOC che prende in input un componente e restituisce un componente. Possiamo metterlo sempre nel file *src/App.js*.
+Implementiamo un semplice HOC che prende in input un componente e restituisce un altro componente. Possiamo metterlo sempre nel file *src/App.js*.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -325,7 +325,7 @@ const { firstname, lastname } = props;
 <UserProfile { ...props } />
 ~~~~~~~~
 
-Abbiamo passato tutte le props inclusa la proprietà `isLoading` facendo lo spreading dell'oggetto come input del componente. Al componente di output potrebbe non interessare della proprietà `isLoading`. Possiamo usare la funzionalità di rest destructuring di ES6 per evitarlo:
+Abbiamo passato tutte le props inclusa la proprietà `isLoading` facendo lo spreading dell'oggetto come input del componente. Al componente di output potrebbe non interessare della proprietà `isLoading`. Possiamo usare la funzionalità di rest destructuring di ES6 per non passargliela:
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -337,7 +337,7 @@ const withLoading = (Component) => ({ isLoading, ...rest }) =>
 # leanpub-end-insert
 ~~~~~~~~
 
-Questo estrare una proprietà dall'oggetto ma mantiene le restanti, e funziona anche con più di una proprietà. Puoi leggerne di più sul [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) di Mozilla.
+Questo estrae una proprietà dall'oggetto ma mantiene le restanti, e funziona anche con più di una proprietà. Puoi leggere di più sul [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) sul sito di Mozilla.
 
 Ora possiamo usare l'HOC nel JSX. Magari vuoi mostrare o il bottone "More" o il componente Loading. Il componente Loading è già racchiuso nell'HOC, ma manca un componente di input. Per mostrare o un componente Button o un componente Loading il Button sarà il componente di input dell'HOC. Il componente di output arricchito di funzionalità sarà il componente ButtonWithLoading.
 
@@ -420,7 +420,7 @@ Gli higher-order components sono un pattern avanzato di React. Questi hanno molt
 
 ### Esercizi:
 
-* Leggere questa [leggera introduzione ai componenti di ordine superiore](https://www.robinwieruch.de/gentle-introduction-higher-order-components/)
+* Leggi questa [leggera introduzione ai componenti di ordine superiore](https://www.robinwieruch.de/gentle-introduction-higher-order-components/)
 * Sperimenta con gli HOC che abbiamo creato
 * Pensa ad un altro caso in cui un HOC avrebbe senso
   * Implementa l'HOC in questione
@@ -646,7 +646,7 @@ const Table = ({
   </div>
 ~~~~~~~~
 
-Ogni componente Sort prendere una specifica `sortKey` e la funzione generale `onSort()`. Internamente chiama il metodo con la `sortKey` settata alla specifica chiave.
+Ogni componente Sort prende una specifica `sortKey` e la funzione generale `onSort()`. Internamente chiama il metodo con la `sortKey` settata alla specifica chiave.
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -656,7 +656,7 @@ const Sort = ({ sortKey, onSort, children }) =>
   </Button>
 ~~~~~~~~
 
-Come puoi notare il componente Sort riusa il componente Button. Al click di ogni bottone ogni `sortKey` è settato dal metodo `onSort()`, quindi la lista viene ordinata quando gli header di colonna sono selezionati.
+Come puoi notare il componente Sort riutilizza il componente Button. Al click di ogni bottone ogni `sortKey` è settato dal metodo `onSort()`, quindi la lista viene ordinata quando gli header di colonna sono selezionati.
 
 Adesso rifiniremo l'aspetto del bottone nell'header di colonna. Assegniamoli uno specifico `className`:
 
@@ -744,7 +744,7 @@ class App extends Component {
 }
 ~~~~~~~~
 
-Table deve avere un blocco body per l'arrow function dove eseguire i dati adesso:
+Table deve avere un blocco body per l'arrow function dove calcolare i dati adesso:
 
 {title="src/App.js",lang="javascript"}
 ~~~~~~~~
@@ -933,7 +933,7 @@ const Sort = ({
 }
 ~~~~~~~~
 
-Noterai test falliti sia per snapshot che unit test per quanto riguarda il componente Table. Siccome abbiamo consapevolmente cambiato nuovamente la rappresentazione del componente, accetteremo la nuova snapshot, ma avremo comunque bisogno di fixare lo unit test. In *src/App.test.js*, forniamo una `sortKey` e il booleano `isSortReverse` al componente Table.
+Noterai test falliti, sia per snapshot che unit test, per quanto riguarda il componente Table. Siccome abbiamo consapevolmente cambiato nuovamente la rappresentazione del componente, accetteremo la nuova snapshot, ma avremo comunque bisogno di fixare lo unit test. In *src/App.test.js*, forniamo una `sortKey` e il booleano `isSortReverse` al componente Table.
 
 {title="src/App.test.js",lang="javascript"}
 ~~~~~~~~
@@ -961,8 +961,8 @@ Potremmo dover accettare ancora una snapshot per un test che fallisce sul compon
 
 ### Esercizi:
 
-* Utilizza una libreria come [Font Awesome](https://fontawesome.com/) per indiciare l'ordinamento, inverso o no. Potrebbe essere l'icona di una freccia verso l'alto o il basso accanto all'header Sort
-* Leggi sulla [libreria classnames](https://github.com/JedWatson/classnames)
+* Utilizza una libreria come [Font Awesome](https://fontawesome.com/) per indicare l'ordinamento, inverso o no. Potrebbe essere l'icona di una freccia verso l'alto o il basso accanto all'header Sort
+* Leggi di più sulla [libreria classnames](https://github.com/JedWatson/classnames)
 
 {pagebreak}
 
