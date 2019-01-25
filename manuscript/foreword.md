@@ -1,6 +1,6 @@
 # Prefazione
 
-The Road to learn React insegna le basi di React. Realizzerai un'applicazione reale con il solo React senza complicazioni di tool. Tutto dal setup del progetto al deploy su un server sarà spiegato. Il libro fornisce anche riferimenti a materiale aggiuntivo da leggere ed esercizi in ogni capitolo. Dopo aver letto il libro sarai in grado di realizzare le tue applicazioni in React. Il materiale è mantenuto aggiornato da me e dalla community.
+The Road to learn React insegna le basi di React. Realizzerai un'applicazione reale con il solo React, senza complicazioni di tool. Tutto, dal setup del progetto al deploy su un server ti verrà spiegato. Il libro fornisce anche riferimenti a materiale aggiuntivo da leggere ed esercizi in ogni capitolo. Dopo aver letto il libro sarai in grado di realizzare le tue applicazioni in React. Il materiale è mantenuto aggiornato da me e dalla community.
 
 In The Road to lean React offro le basi prima di approfondire il vasto ecosistema React. I concetti avranno meno focus sui tool e gestione esterna dello stato, ma molte informazioni su React stesso. Verranno spiegati concetti generali, pattern, e best practice in un'applicazione reale React.
 
